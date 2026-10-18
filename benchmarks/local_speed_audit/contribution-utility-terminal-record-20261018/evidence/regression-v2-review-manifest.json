@@ -1,0 +1,75 @@
+{
+  "directories": [],
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 1247,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "2aa1e07d3c0a84b723ac06d1ad8cb634ffd7482023be2f0ada3f42a0b4ac588e"
+    },
+    {
+      "bytes": 4071,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "8367e2395017f0acd1a53fab0c92bb8c42a42a1b067084723fe33244cf432199"
+    },
+    {
+      "bytes": 1019,
+      "mode": 292,
+      "path": "evidence-bindings.json",
+      "sha256": "5bff4c47b9b901a10554dd982c236b289f11bd25edf2691e5d8cd0c5914ad5aa"
+    },
+    {
+      "bytes": 327,
+      "mode": 292,
+      "path": "input-bindings.json",
+      "sha256": "669f93c7a8489d9675bf3293dc24348fc9999e6d8ff1bb253cf20f3d8f1bd037"
+    },
+    {
+      "bytes": 2907,
+      "mode": 292,
+      "path": "prepare_and_seal.py",
+      "sha256": "d6538f642dba5b7f0abb3c8d033b548d9acf29d27b32de6874576cb868d6e71f"
+    },
+    {
+      "bytes": 819,
+      "mode": 292,
+      "path": "result.json",
+      "sha256": "89334104ee0b06b251d7cc2de4491a33fb63b7773bc4ef20149cb20b8b5accc5"
+    },
+    {
+      "bytes": 10979,
+      "mode": 292,
+      "path": "review_data.py",
+      "sha256": "b05c44076e9bccc553db37a0c94f4cf87687d2c760af087d5fc1ad21ea72ab9e"
+    },
+    {
+      "bytes": 6158,
+      "mode": 292,
+      "path": "runner-reviewed-source.py",
+      "sha256": "9404cb106888a7d7a2fe505966bd01244428a32aa16c9a6daed45a836b6f44fb"
+    },
+    {
+      "bytes": 2070,
+      "mode": 292,
+      "path": "source-data-result.json",
+      "sha256": "689136f643721f9091bf0ee51e0fe2f0762352221b3ed8b3fdab0d83666d0a17"
+    },
+    {
+      "bytes": 258,
+      "mode": 292,
+      "path": "source-data-tool-result.json",
+      "sha256": "e7fcf9a04252d6c863b04f53ee2a0441cc34e078211984f8bc2b9f44b89ebf10"
+    }
+  ],
+  "file_count": 10,
+  "kind": "INDEPENDENT_UTILITY_REGRESSION_DELTA_REVIEW_V2",
+  "root_mode": 365,
+  "runtime_authority": false,
+  "schema": 1,
+  "subject_executed": false,
+  "thread_or_loop_started": false,
+  "total_bytes": 29855,
+  "verdict": "PASS_NARROW_SOURCE_DATA_RUNTIME_HELD"
+}

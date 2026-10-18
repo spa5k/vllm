@@ -1,0 +1,153 @@
+# Utility future after EngineCore death
+
+## Decision
+
+`QUALIFIED_SOURCE_COUNTEREXAMPLE_RUNTIME_UNVERIFIED`
+
+Exact current upstream source at
+`371745ebd6c12f314402c6c319de2e7ef82c2981` contains a reachable state in
+which a frontend-registered utility call can wait without a terminal result
+after its EngineCore dies. A completed send only proves frontend transport
+completion. It does not prove that EngineCore executed or admitted the call.
+The source proof covers the offline synchronous client and
+the asynchronous client used by public sleep-mode routes. No vLLM method body
+or target process was run, so this packet does not claim a measured hang.
+
+## Supported paths
+
+The synchronous public path is:
+
+`LLM.sleep` -> `LLMEngine.sleep` -> `SyncMPClient.sleep` ->
+`SyncMPClient.call_utility`.
+
+The asynchronous public paths are `/sleep`, `/release_kv_cache_memory`,
+`/wake_up`, and `/is_sleeping`. They call `AsyncLLM`, then an
+`AsyncMPClient` utility wrapper. `/is_sleeping` uses consensus, all engines,
+and one future per engine. These paths do not need an active generation
+request.
+
+The source also has direct utility waiters for DPLB and elastic expert
+parallel reconfiguration. The fixed EEP notification future uses the same
+`utility_results` map. A repair must preserve its special lifecycle.
+
+## Exact counterexample
+
+### Synchronous client
+
+1. `call_utility` creates a `concurrent.futures.Future` and inserts it into
+   `utility_results`.
+2. `_send_input` returns successfully.
+3. `call_utility` waits with `future.result()` and has no timeout.
+4. EngineCore dies before it sends `UtilityOutput`.
+5. The monitor marks `engine_dead` and calls `shutdown`.
+6. Cleanup closes the sockets and wakes the output thread. It does not remove
+   or fail the registered future.
+
+The waiting caller has no remaining source path that completes its future.
+
+### Asynchronous client
+
+1. `_call_utility_async` creates an `asyncio.Future` and inserts it into the
+   same map.
+2. The input send completes.
+3. The output task is installed, and the caller awaits the future directly.
+4. EngineCore death or receiver failure terminates `process_outputs_socket`.
+5. The receiver places an exception in `outputs_queue`. It does not settle
+   utility futures.
+6. `AsyncLLM._run_output_handler` consumes request-output errors only. It does
+   not touch the utility map.
+
+The API watchdog later asks the server to exit. Current vLLM source does not
+directly cancel or settle the route's utility future. Uvicorn shutdown may
+cancel the route from outside this source. That behavior is not proved here.
+The direct async client case also remains pending when no output handler drains
+the separate output queue.
+
+## Failure and race boundaries
+
+- A send error occurs after map registration in both clients. The caller gets
+  that error, but the map row remains. A repair must remove only that call and
+  must not replace the original send error.
+- Future cleanup cannot bound an input send that itself never completes.
+- Cancelling an async caller cancels its future. The existing test expects a
+  later normal response to be harmless. Fatal cleanup must also remove the
+  cancelled row.
+- `_process_utility_output` uses strict `pop(call_id)`. If fatal cleanup drains
+  the map, a late reply can otherwise raise `KeyError` in the receiver.
+- Sync callers and the sync receiver use different threads. Async futures must
+  be settled on their owning event loop. The engine monitor thread must not
+  call `asyncio.Future.set_exception` directly.
+- `call_utility_all_async` gathers one future per engine. A failure path must
+  settle all registered siblings.
+- A generic receiver failure can leave `engine_dead` false while the output
+  task is already done. A later utility call can register a new future and
+  wait on a receiver that will never restart because the task field is not
+  `None`.
+- Normal shutdown must define the same terminal behavior for pending utility
+  calls. It must not leave them waiting.
+
+## Timeout review
+
+No client utility waiter has a local timeout. `collective_rpc(timeout)` sends
+the timeout as worker-method data. It does not bound the frontend future.
+`shutdown(timeout)` only bounds manager shutdown. The saved sleep API test's
+HTTP timeout is external and does not settle the server-side utility future.
+
+## Existing tests
+
+`tests/v1/engine/test_engine_core_client.py` covers normal utility results,
+utility exceptions, and cancellation followed by a late normal result. It does
+not join a pending utility call with EngineCore death. The whole module is
+CUDA-gated and loads a model, so it is not the cheapest first regression seam.
+
+`tests/v1/shutdown/test_forward_error.py` covers request-generation failure.
+It does not cover utility calls. The sleep route test uses an `AsyncMock`.
+
+The proposed test design is in `TEST_DESIGN.md`. It starts with a CPU-safe
+client-state unit seam. A later existing integration test can confirm the real
+process boundary after the unit contract is accepted.
+
+## Repair shape for later review
+
+No patch is included. A sound design needs these properties:
+
+1. Register and remove a single call safely around send errors.
+2. Settle all pending sync futures from an allowed sync failure path.
+3. Settle async futures on their owning loop when the receiver reaches a
+   terminal failure or shutdown state.
+4. Preserve the fixed EEP notification future rules.
+5. Make late utility outputs safe after terminal settlement.
+6. Prevent new registrations when the receiver task is terminal.
+7. Preserve the original exception or cancellation where it already reached
+   the caller.
+
+A timeout alone does not close map ownership, late-response, and normal
+shutdown behavior.
+
+## Ownership and duplicate checks
+
+Fresh exact searches found no open issue or PR that directly settles pending
+`utility_results` after EngineCore death.
+
+- Issue 40244 concerns free-block queue restore for RLHF. It does not own this
+  mechanism, and it has no linked open PR.
+- PRs 60505, 59179, and 46811 add readiness or health checks. They are adjacent
+  to EngineCore failure detection but do not settle generic utility futures.
+- PR 59939 releases DeepEP buffers during sleep. It does not change utility
+  future ownership.
+
+The searches are bounded. They do not prove that no private or differently
+worded work exists.
+
+## Limits
+
+- No vLLM import or method body ran.
+- No thread, event loop, process, model, GPU, container, or network service ran.
+- The result is source reachability, not a wall-clock hang measurement.
+- Uvicorn route cancellation during server shutdown is not proved.
+- ZMQ send-stall behavior is not bounded by this result.
+- The correct production seam and the final CPU-safe test file still need
+  maintainer review.
+- A unit test of a new settlement helper alone would not prove that the real
+  receiver, monitor, and shutdown paths call it.
+

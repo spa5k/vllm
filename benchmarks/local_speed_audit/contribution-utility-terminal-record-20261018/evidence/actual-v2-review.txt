@@ -1,0 +1,52 @@
+# Saved receiver comparison review
+
+Verdict: `PASS_ACTUAL_SELECTED_AST_RECEIVER_COMPARISON_ONLY`.
+The sealed V2 data supports the six paired receiver cases. No subject was
+rerun or imported by this reviewer.
+
+Actual manifest:
+`ae9cae8e1119e487c02534b39490b95e35b069a627280de35b464c1185b83edd`.
+All four payload files / 7,269 bytes passed closed-set, hash, single-link and
+0444 checks. Root mode is 0555. Complete stdout is 5,175 bytes, SHA256
+`581f502d472678db2c424b570847c817d32808143bdef2cb541dba52ed9df119`.
+Stderr is empty. Strict JSON rejects duplicate keys and nonfinite numbers.
+
+| Saved case | Baseline snapshot | Candidate snapshot |
+|---|---|---|
+| Sync death | pending; one registry row | EngineDeadError; empty registry |
+| Sync shutdown | pending; one registry row | EngineDeadError; empty registry |
+| Async death | pending; one registry row | EngineDeadError; empty registry |
+| Async generic receiver error | pending; request error retained | EngineDeadError; request error retained |
+| Async pre-start cancellation | pending; zero receive calls | EngineDeadError; zero receive calls |
+| Async resource shutdown | pending; one registry row | EngineDeadError; empty registry |
+
+The twelve ordered rows have exact typed schemas. Every owned sync caller
+reports successful final cleanup join. Every async row reports both owned
+tasks done and same-loop Future ownership. Generic request errors are retained
+in both variants. Baseline pending is a bounded snapshot, not proof of an
+infinite hang. Its fixture cleanup is later successful.
+
+All 12 baseline and 16 candidate definition hashes were independently
+recomputed from the exact named source ASTs. They match the saved selections.
+The source length/full hashes, exception source, V2 fixture85e52fa1,
+proposal7e3d7f86 and runner9404cb10 also match actual bytes. Production remains
+85f47eaa. No author validator or fixture body ran during this audit. Three own
+inert data mutations reject a boolean retained count, failed thread cleanup
+and an incorrect pre-start receive count.
+
+The runner receipt binds the exact direct-Python argv, one attempt, no retry,
+100000-byte cap per stream, ten-second normal budget and two-second reap
+allowance. It records complete EOFs, exit0, no first error, PID71501 reaped,
+and elapsed0.4700675418134779 seconds. That is the runner's monotonic scope,
+not a kernel event timestamp, outer tool wall time or hard startup guarantee.
+The four-file packet has no original parent native-tool object. Root's reported
+4e7522 completion is separate trusted testimony; this review does not invent
+an original capture for it or claim independent retrospective OS observation.
+
+V1 remains failed at2c87c844 and is not overwritten. V2 changes the fixture's
+callback observation boundary; it does not change production. This actual
+evidence executes selected original/candidate client and receiver bodies with
+explicit transport/state stand-ins and real stdlib futures/tasks/caller
+threads. It does not run the 23 normal pytest rows, either EEP commit handler,
+real ZMQ/EngineCore processes, monitor-thread affinity, public server/model,
+device, ABI or performance tests. No further runtime authority follows.

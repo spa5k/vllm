@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "kind": "ACTUAL_LOCAL_EXTRACTED_RECEIVER_COMPARISON",
+  "entries": [
+    {
+      "path": "receipt.json",
+      "bytes": 1218,
+      "mode": 292,
+      "sha256": "cb05f6e9bd170d93f050a24bb2d5cd30e5093c064367e03ef7e0336854c86ad2"
+    },
+    {
+      "path": "stderr.raw",
+      "bytes": 0,
+      "mode": 292,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "stdout.raw",
+      "bytes": 5394,
+      "mode": 292,
+      "sha256": "cc71a13cd6632d91c0fe2805350f9a846a52373a3aff59efb45f0d7c96792f13"
+    }
+  ],
+  "subject_runtime_scope": "Selected AST bodies and controlled fake transport only",
+  "root_mode": 365
+}

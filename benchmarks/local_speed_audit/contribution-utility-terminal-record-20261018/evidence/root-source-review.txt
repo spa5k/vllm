@@ -1,0 +1,64 @@
+# Root source review: utility terminal cleanup
+
+Date: 18 October 2026. This review approves source preparation only.
+
+Base: `371745ebd6c12f314402c6c319de2e7ef82c2981`.
+Production candidate manifest:
+`85580018c57481b2d9a078da560e4d6ba8d7d4cdf468cf7c91c3f4443e33e588`.
+Candidate source:
+`85f47eaa802dcf4df4a05ae3bcb0fcdcce6dd7bcd7208d49cec10b1175d93b75`.
+Patch:
+`c74d6aee0331d557bf3ecc6ff4d954f98910dca5df81f4ac9f8642ee851bd287`.
+Independent source review manifest:
+`78046986895a8fd164f694eb98c0ab3f33ade24b9769b039d0e587d8bf268c31`.
+
+Root read the complete final patch, including the resource cleanup order,
+registration lock, terminal event, async loop dispatch, receiver task callback,
+late reply handling, and both EEP commit error paths. Root closed all 12 author
+payloads and all 10 independent-review payloads. Native command `248b41`
+verified sizes, hashes, file modes, directory modes, regular files and one link
+per file. This did not execute a target method or an author checker.
+
+The terminal event is set before draining. Registration checks it while holding
+the registry lock. Completion occurs after the lock is released. Caller cleanup
+removes only its own future. Sync waiters can be completed by the receiver or
+resource cleanup. Async resource cleanup dispatches to the existing owning
+loop. A receiver task done callback covers cancellation before its first step.
+No remaining concrete source blocker was found within this scope.
+
+The original manager/coordinator/socket cleanup order remains. Utility cleanup
+runs before a manager can raise. A failed send and caller cancellation retain
+their own exception. The EEP callback captures the map and lock rather than the
+client. Both EEP handlers retrieve an already-failed notification future before
+re-raising a sibling error. No request-output queue error is replaced by a
+finished-task guard in `get_output_async`.
+
+Root applied only the production patch in the isolated attached worktree
+`/Users/pacific/.codex/worktrees/vllm-utility-terminal/vllm`, branch
+`feat/utility-terminal-cleanup`. Its base remains the source SHA above.
+Native apply-check `ffdfa9` and apply `618178` passed. Native source hash
+`7a318a` equals the candidate hash above. No ordinary test, target import,
+receiver method, thread, device, paid compute, commit or push ran for this fix
+at this checkpoint.
+
+The ordinary test design uses the existing CPU-marked wake-up contract suite.
+Root found one draft test gap: cleanup and manager-error rows drove the receiver
+before checking caller settlement. The receiver could hide a missing cleanup
+entry callback. The test author is correcting these assertions to run before
+the receiver. That finding is in an unsealed draft, not an observed product
+failure or a defect in the production candidate.
+
+Next gates are exact sealed regression/fixture review, one bounded local
+stdlib baseline/candidate comparison, source hooks, and review of the final
+two-file diff. Normal pytest remains held by the known ancestor-conftest
+cpuinfo denial. Do not retry it or change that denial through this review.
+
+An extracted source result will not prove real ZMQ, process death, HTTP,
+distributed EEP, model output or performance. A send can still be pending before
+the caller awaits a failed future. Async settlement needs its existing owning
+loop to run. This change does not create send timeouts, loop restart support,
+or general cross-loop client support.
+
+At the real isolated production path, Ruff0.14.0 check passed with no rule
+ignore (`0a217a`). Ruff format check also passed (`36cff8`). Both commands
+were static checks. They left the candidate source bytes unchanged.

@@ -1,0 +1,107 @@
+# Utility terminal candidate source review
+
+Decision: `PASS_SOURCE_DATA_RUNTIME_HELD`.
+
+This is an independent review of one production-file candidate. It grants
+source approval only. The candidate still needs real regression tests and human
+review. No candidate method, target import, future, event, lock, task, thread,
+socket, engine, or resource operation ran in this review.
+
+## Bound source
+
+The original is exact upstream `371745ebd6c12f314402c6c319de2e7ef82c2981`.
+Its `vllm/v1/engine/core_client.py` is 88,184 bytes with SHA-256
+`17167b8151c9f3389fa1d76ce1d11bf67d136b6ed837ed77945817aa4e5cd77d`.
+The prior independent proof review verified the Git blob, captured upstream
+bytes, public administrative call paths, and bounded ownership searches. That
+work is retained. It was not repeated here.
+
+The final candidate is 93,711 bytes with SHA-256
+`85f47eaa802dcf4df4a05ae3bcb0fcdcce6dd7bcd7208d49cec10b1175d93b75`.
+`input-bindings.json` gives the exact sealed subject manifest. The independent
+source-data result gives the final patch hash and hunk count. The patch was
+applied to the original bytes in memory by this reviewer's own parser. Its
+result equals the complete candidate bytes. The shared checkout was not changed.
+
+## Findings
+
+No concrete blocking defect remains in the reviewed source scope.
+
+The candidate sets the terminal event before it drains the map. Registration
+checks that event while it holds the same map lock. A registration that precedes
+terminal state is included in the locked snapshot and clear. A later
+registration is rejected. The drain releases the map lock before it completes
+futures. This also permits the identity-based done callback to remove its row.
+
+Both explicit shutdown and resource finalization invoke utility settlement
+before fallible manager cleanup. Apart from that added entry call, their bodies
+match the original AST. Manager ownership, manager and coordinator cleanup order,
+socket cleanup, and their error propagation remain as before.
+
+The sync receiver settles remaining utility rows when it ends. The async
+receiver uses its owning loop for settlement. External-thread cleanup schedules
+the operation with `call_soon_threadsafe`. Its task done callback sets terminal
+state and drains the map. This callback is installed by the creator. It does
+not depend on the receiver coroutine having started. Thus the source also
+covers cancellation before the coroutine's first instruction.
+
+The async utility path ensures a receiver before registration. It rejects a
+terminal or finished receiver. It does not add a finished-task guard to the
+ordinary request-output path. The ordinary request queue still receives the
+receiver's original error. Source comparisons also preserve the request-output,
+send, all-engine gather, and consensus methods.
+
+Sync and async callers remove only their own map row on exit. A cancelled
+async caller can leave a late reply. The reply path now uses a locked optional
+pop, so a missing row does not stop the receiver. The async early-exit handler
+retrieves an already-failed private future's exception while it re-raises the
+original send or cancellation error.
+
+The fixed EEP future uses the same registry and terminal check. Its done
+callback captures the map and lock, with no new client capture. Both EEP commit
+handlers retrieve an already-failed fixed future if a sibling gather fails
+first. Otherwise they cancel that pending future. They re-raise the original
+error. All three production utility-output sites pass the registry lock.
+
+## Early review feedback
+
+`DRAFT_NOTES.md` preserves findings from unsealed drafts. They are not defects
+in the sealed candidate.
+
+- The early EEP callback captured the client. The final callback uses locals.
+- The early cleanup order could skip utility settlement after a manager error.
+  The final source settles at cleanup entry and preserves original cleanup.
+- The next draft could abandon a failed fixed EEP future if a sibling gather
+  failed first. Both final handlers now retrieve that exception.
+
+These were source-order findings. No hang, exception warning, manager failure,
+or runtime reference cycle was observed.
+
+## Evidence and limits
+
+The review closed the subject's declared files and modes. It parsed source as
+AST data, applied the patch in memory, and checked named wiring predicates.
+Five inert source mutations test the reviewer predicates. These are static
+controls. They are not five runtime scenarios and do not test concurrency.
+The author checker and author fixtures were not run.
+
+The source supports a repair for pending utility futures after receiver death
+or explicit shutdown. It does not give a send timeout. A caller can still be
+blocked in a transport send before it awaits its settled future. Completion of
+a send still does not prove EngineCore admission or execution.
+
+Async settlement requires the existing owning loop to run. The callback
+returns if that loop is closed. This review does not add or prove cross-loop
+client use. A stopped loop also cannot execute queued settlement. These are
+explicit bounds, not observed failures.
+
+Required tests include real receiver and shutdown wiring; pre-start task
+cancellation; registration against terminal drain; an early send error while a
+future has already failed; caller cancellation and a late reply; preservation
+of the original request-queue error; all-engine siblings; and fixed EEP
+notification-future ownership. The separate regression design and any later
+extracted or ordinary test result need their own review.
+
+There is no new native, ZMQ, multiprocessing, distributed EEP, HTTP, model,
+device, ABI, memory, throughput, or public-request runtime result. The narrow
+ownership evidence remains that of the sealed proof. No issue or PR was posted.

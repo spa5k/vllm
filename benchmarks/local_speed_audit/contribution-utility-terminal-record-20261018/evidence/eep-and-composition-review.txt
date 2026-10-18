@@ -1,0 +1,56 @@
+# EEP and final combined test source review
+
+Verdict: `PASS_SOURCE_DATA_RUNTIME_HELD`. No blocker was found in sealed EEP
+test proposal d75b3f73 or the exact final two-file worktree composition. No test,
+Future, method, loop, thread, target import or resource ran in this review.
+
+The exact EEP manifest is
+`d75b3f73952615f0e09f1243bb1c7ec9d2d835778e2141ba6bab8cb2a811ce50`.
+All ten payload files / 22,839 bytes, closed paths, hashes and single-link
+0444 files / 0555 directories passed independent checks. Named input hashes
+match actual saved bytes. The proposed complete test diff equals an independent
+stdlib diff from its retained baseline.
+
+The four declared rows select both real commit methods and RuntimeError versus
+CancelledError. The injected failed notification is a real asyncio.Future
+subclass. Its observers delegate to the base methods. The test sets an actual
+EngineDeadError on that future before the sibling gather fails. It requires
+one exception retrieval, no cancel of a completed future, the exact normal
+sibling error object, and the cancellation type/message. Finally calls the
+base Future.exception method directly. This clears any failed fixture future
+without adding to the observer count. These are source-derived test contracts,
+not measured results.
+
+Both exact candidate commit bodies create the reserved wait future before
+their failing gather and use the reviewed BaseException handler to retrieve a
+done noncancelled exception before re-raising. The scale-up pause is a stand-in.
+The scale-down state reaches the real manager removal method before the error.
+Its five supplied fields exactly match that method's field use. The named
+utils source matches e80 Git blob 96df5f14eb4a4d58636bed8c00b4612fa79a213f.
+That manager class has no destructor. No Ray manager initialization, actor,
+socket or engine process is established by this seam. Successful EEP commit,
+the production reserved-future registry path and closed-loop behavior remain
+outside it.
+
+The final worktree test is 17,886 bytes, SHA256
+`381fd6160e0ec48752423d41dc0c11c52a529078b5f0c5d31c122cbd22a909b9`.
+Independent AST/import-binding comparison matches the full Serving receiver
+V2 test plus exactly the three EEP definitions and manager import. Only the
+three recorded annotations are normalized: self.messages, outcome and sibling.
+Other differences are formatting and import statement grouping. Production is
+still `85f47eaa802dcf4df4a05ae3bcb0fcdcce6dd7bcd7208d49cec10b1175d93b75`.
+Read-only Git confirms exact base e80b6c64 and only core_client.py plus
+test_wake_up_contract.py changed. This is named-file source evidence, not an
+atomic checkout snapshot or hook/test rerun.
+
+There are 23 source-declared normal parameter rows: four old and 19 new.
+None ran here. Normal conftest cpuinfo denial remains unchanged. The separate
+12-row extracted receiver comparison does not execute either commit handler.
+Its actual result needs its own saved-data audit. No real transport, server,
+model, device, ABI or performance result follows.
+
+Two own harness errors are retained. The first tried literal_eval on exception
+class names when counting source rows. The second compared whole import
+statements, although Ruff split an alias into a separate statement. The final
+check counts inert AST elements and compares exact individual bindings. Both
+failures occurred in reviewer data checks and are not subject failures.

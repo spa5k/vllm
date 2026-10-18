@@ -1,0 +1,56 @@
+{
+  "directories": [],
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 744,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "08dd98b4e80f0c9b8e210d00d00b25947a4f6caca6098689df13b3987e750bdd"
+    },
+    {
+      "bytes": 3195,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "aa2fbb585d54008d91f31c3422c2d8621bca018c86e49dc2373ee000a18cb712"
+    },
+    {
+      "bytes": 7878,
+      "mode": 292,
+      "path": "audit_data.py",
+      "sha256": "8a599e06b44b85b380ba6c23faafd2ea0981b87cca3a15622b14509fceea64c5"
+    },
+    {
+      "bytes": 1065,
+      "mode": 292,
+      "path": "data-result.json",
+      "sha256": "392ba87ef680488f22c8c9b742d99e58deed494f7bbfa80b6b8ea0ae28f4b467"
+    },
+    {
+      "bytes": 260,
+      "mode": 292,
+      "path": "data-tool-result.json",
+      "sha256": "276ab9a945eab648f16e505392de6229d9e7250070371f16746866fb21938575"
+    },
+    {
+      "bytes": 1037,
+      "mode": 292,
+      "path": "input-bindings.json",
+      "sha256": "05696e2e3fe4755d08b5d7be7099ccfc3b6d70085e86b7a56fad70a94f17aff7"
+    },
+    {
+      "bytes": 2053,
+      "mode": 292,
+      "path": "seal_review.py",
+      "sha256": "ede0db3e5aaaff3b9231e18e707e4f8945258d6c71fb1f8cca44561b3911e749"
+    }
+  ],
+  "file_count": 7,
+  "kind": "INDEPENDENT_ACTUAL_SELECTED_RECEIVER_COMPARISON_REVIEW",
+  "root_mode": 365,
+  "runtime_authority": false,
+  "schema": 1,
+  "subject_rerun": false,
+  "total_bytes": 16232,
+  "verdict": "PASS_ACTUAL_SELECTED_AST_RECEIVER_COMPARISON_ONLY"
+}

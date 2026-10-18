@@ -1,0 +1,46 @@
+# Utility waiters after receiver termination
+
+The source mechanism is qualified for a small repair design. It is not a runtime reproduction or an accepted patch. The exact source pin is `371745ebd6c12f314402c6c319de2e7ef82c2981`.
+
+The independent data check closes all 11 named source files against their saved GitHub Contents responses. It decodes the saved base64, verifies the size and Git blob SHA-1, then compares the local bytes and records SHA-256. It parses source without importing or executing it. Nine AST facts and five AST mutation controls passed. These are source checks, not nine runtime scenarios.
+
+## Supported waiter and failure mechanism
+
+`GET /is_sleeping` in `api_router.py:58` awaits `AsyncLLM.is_sleeping` (`async_llm.py:1218`). This calls `AsyncMPClient.is_sleeping_async` (`core_client.py:1392`), then consensus/all-engine utility dispatch. Each `_call_utility_async` registers a future, awaits the send, and directly awaits that future (`1316–1329`). No generation request or malformed input is needed for this public call path.
+
+The sync path is also public. `LLM.sleep` (`llm.py:836`) calls `LLMEngine.sleep` (`llm_engine.py:418`) and `SyncMPClient.sleep` (`core_client.py:1107`). `call_utility` registers a concurrent future, sends, and calls `future.result()` without a timeout (`1047–1053`). The sleep API has its normal no-active-request requirements. The failure question does not require a caller to break them.
+
+The two result channels are distinct. `_process_utility_output` pops a utility future and completes it (`929–945`). Receiver exceptions instead enter `outputs_queue`: sync at `1008–1009`, async at `1255–1258`. The utility call does not read this queue. `BackgroundResources.__call__`, `MPClient.shutdown`, and the process-death monitor do not settle utility futures. The monitor marks the client dead and shuts it down (`818–843`). Async shutdown cancels the receiver; its cancellation handler queues `EngineDeadError`, again on the other channel. Sync shutdown signals the receiver thread to exit.
+
+Thus, after a successful utility send and before its response, receiver termination can remove the only source-level response path while the utility future stays pending. This is a source counterexample. No actual engine death, HTTP hang, worker failure, or native execution was observed in this review. An external request timeout or server shutdown can end a real request; that does not provide settlement in this client code.
+
+## Repair risks and required boundaries
+
+| State | Exact source result | Requirement for a later repair |
+|---|---|---|
+| Pending result; receiver exits | No utility future settlement | Fail each still-pending utility waiter at terminal receiver cleanup. Include explicit shutdown. |
+| New call after known engine death | Send guard raises; registration already occurred | Remove that call's registration on send/encoding error. Preserve the original exception. |
+| New call after generic receiver error | `engine_dead` need not be true; async task remains non-None even when done | Reject new calls to a terminal receiver. Do not silently reuse the dead task or invent transparent restart. |
+| Caller cancellation after send | Awaited asyncio future can be cancelled; row remains until reply | Preserve existing late-reply safety and do not report cancellation as a new engine failure. |
+| Reply after row removal | Current `pop(call_id)` has no default | Define terminal cleanup/late-reply ordering. Blind deletion during normal caller cancellation can kill the receiver with `KeyError`. |
+| Monitor thread and async futures | Monitor is a thread; futures belong to the event loop | Schedule settlement on the owning loop. Do not directly call asyncio completion methods from the monitor thread. |
+| Receiver task cancelled before its first step | The task can exist before its coroutine starts | Do not rely only on an exception handler or `finally` inside that coroutine. The explicit shutdown/terminal path must also own settlement. |
+| Concurrent sync response and shutdown | Map/result access spans caller and receiver threads | Give registration, terminal transition and settlement one safe ordering. Avoid double-set and changed-dictionary iteration. A `done()` check alone is not an atomic sync claim. |
+| Pending send | Send precedes the result wait | Future cleanup alone does not bound a blocked sync send or an awaited async send. Keep that transport problem outside the claim unless separately proved. |
+| Elastic-EP notification | Fixed `EEP_NOTIFICATION_CALL_ID` future shares this map (`1950–1960`) | Keep its existing notification and cancellation semantics. Avoid treating it as a normal unique-ID RPC or ignoring it during terminal cleanup. |
+
+Normal explicit shutdown should also end already pending waiters. This does not require an engine-crash assertion. Preserve successful utility return values and failure messages. Do not add retries or a new public timeout policy as a substitute for terminal cleanup.
+
+## Existing tests and the cheapest next proof
+
+The existing sync and async utility tests cover success and utility failure. `test_engine_core_client_asyncio:976–990` also cancels an echo call and then confirms that a later call still works. These exact semantics must remain. The module imports Torch, constructs model inputs and has a CUDA-like platform skip; this review did not collect it or claim a cheap local CPU pytest pass. The forward-error test covers generation waiters and explicit shutdown, not an in-flight utility waiter.
+
+A later reviewed test should first exercise the real client cleanup/receiver code with controlled transport, using no model or GPU. Cover pending sync and async utility calls, explicit shutdown, generic receiver failure, send error, cancellation followed by a late reply, and multiple pending engine calls. Also cover cancellation before the receiver's first step, registration racing with terminal cleanup, and the fixed EEP notification future. The sync terminal flag and map drain must form one safe transition relative to new registration. Assert the public call ends with the selected terminal exception; do not assert only that a stand-in future can be completed. A bounded real engine-death test in the existing suite remains useful after the small logic test. No executable proposal or test body is provided here.
+
+## Ownership and limits
+
+Ownership is limited to Core's sealed primary evidence, when bound in `input-bindings.json`. The saved narrow issue searches return one adjacent issue (#40244, allocation order) and two zero-result searches. The issue-linked query is empty. The saved narrow utility PR searches are empty; the broader sleep/death search returns four adjacent open PRs. These searches do not prove global absence.
+
+The read diffs of #46811 (`f69793c76ebf1a8f02bb8252c0db868ecd98c254`), #59179 (`9dc9bef253d4905ee18711d178eaddf6b11ce1ca`) and #60505 (`4460e8c24452225ac7d0acfda6c9b8f18751a6ae`) add readiness/progress features. They do not add pending-map settlement on receiver exit in the saved diffs. #59939 is a DeepEP sleep-buffer change. No direct same-fix ownership was shown in this bounded evidence. No new live issue search was run by this reviewer.
+
+There is no source patch approval, publication approval, runtime authority, GPU proof, model result, throughput result or ABI claim. Exact source and closure checks do not establish an atomic snapshot of the live system. Root must review any executable proposal before use.

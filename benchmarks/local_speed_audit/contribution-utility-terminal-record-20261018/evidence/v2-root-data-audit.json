@@ -1,0 +1,21 @@
+{
+  "decision": "PASS_SELECTED_AST_RECEIVER_COMPARISON",
+  "ordinary_pytest_executed": false,
+  "rows": 12,
+  "baseline_pending": 6,
+  "candidate_terminal": 6,
+  "selected_definition_bindings": {
+    "baseline": 12,
+    "candidate": 16
+  },
+  "all_sync_threads_joined": true,
+  "all_async_owned_tasks_done": true,
+  "both_generic_request_errors_preserved": true,
+  "both_prestart_receivers_not_entered": true,
+  "complete_and_reaped": true,
+  "stderr_bytes": 0,
+  "raw_stdout_sha256": "581f502d472678db2c424b570847c817d32808143bdef2cb541dba52ed9df119",
+  "prior_failed_v1_preserved": "2c87c8449ef3bc7d6b91fc8272cca89db287424ad4278a06337aa82f9d8d2086",
+  "production_unchanged_from_v1": true,
+  "runtime_scope": "Selected original/candidate client and receiver AST methods; fake transport; no project import, real engine, ZMQ, monitor-thread, EEP commit, HTTP, model or device proof."
+}

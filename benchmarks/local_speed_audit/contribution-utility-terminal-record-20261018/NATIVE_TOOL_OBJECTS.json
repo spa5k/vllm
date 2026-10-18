@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "kind": "ACTUAL_NATIVE_TOOL_OBJECTS_FROM_ROOT",
+  "entries": {
+    "utility_actual_invocation": {
+      "chunk_id": "0614e6",
+      "wall_time_seconds": 0.244952875,
+      "exit_code": 1,
+      "original_token_count": 274,
+      "output": "{\"argv\": [\"/Users/pacific/Developer/vllm/.venv/bin/python\", \"-B\", \"-I\", \"-S\", \"/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/core/utility-future-regression-design-v1/extracted_receiver_fixture.py\"], \"attempts\": 1, \"complete\": true, \"elapsed_seconds\": 0.28747354215011, \"eof\": {\"stderr\": true, \"stdout\": true}, \"first_error\": \"nonzero exit\", \"passed\": false, \"pid\": 93178, \"proposal_manifest_sha256\": \"833981296936c0fdbab708240cef1bdfe928d46a96bb90f81af1a4f4eec635a1\", \"raw\": {\"stderr\": {\"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdout\": {\"bytes\": 5394, \"sha256\": \"cc71a13cd6632d91c0fe2805350f9a846a52373a3aff59efb45f0d7c96792f13\"}}, \"reap_allowance_seconds\": 2, \"reaped\": true, \"retries\": 0, \"returncode\": 70, \"scope\": \"selected client/receiver AST bodies with fake transport and bounded real futures/tasks/caller thread; no target imports, engine process or device\", \"script_sha256\": \"03bdb93f0559d0a8fb6dc82c9f6261eb0f88a2ba24a28402e0522d646964dc19\", \"stream_cap_bytes\": 100000, \"timeout_seconds\": 10}\n"
+    },
+    "utility_actual_v2_invocation": {
+      "chunk_id": "4e7522",
+      "wall_time_seconds": 0.433351333,
+      "exit_code": 0,
+      "original_token_count": 272,
+      "output": "{\"argv\": [\"/Users/pacific/Developer/vllm/.venv/bin/python\", \"-B\", \"-I\", \"-S\", \"/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/core/utility-future-regression-design-v2/extracted_receiver_fixture.py\"], \"attempts\": 1, \"complete\": true, \"elapsed_seconds\": 0.4700675418134779, \"eof\": {\"stderr\": true, \"stdout\": true}, \"first_error\": null, \"passed\": true, \"pid\": 71501, \"proposal_manifest_sha256\": \"7e3d7f8655f9222428c4b3b5f7e478b600084ad3ec37c557d91297d33270a792\", \"raw\": {\"stderr\": {\"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdout\": {\"bytes\": 5175, \"sha256\": \"581f502d472678db2c424b570847c817d32808143bdef2cb541dba52ed9df119\"}}, \"reap_allowance_seconds\": 2, \"reaped\": true, \"retries\": 0, \"returncode\": 0, \"scope\": \"selected client/receiver AST bodies with fake transport and bounded real futures/tasks/caller thread; no target imports, engine process or device\", \"script_sha256\": \"85e52fa12704c8eb1487a2e49fe14f8b73541c1eeb86c8fb8898f40f78a32b92\", \"stream_cap_bytes\": 100000, \"timeout_seconds\": 10}\n"
+    },
+    "utility_v2_actual_data_audit": {
+      "chunk_id": "3c95ce",
+      "wall_time_seconds": 0.000015708,
+      "exit_code": 0,
+      "original_token_count": 246,
+      "output": "{\"audit\": {\"all_async_owned_tasks_done\": true, \"all_sync_threads_joined\": true, \"baseline_pending\": 6, \"both_generic_request_errors_preserved\": true, \"both_prestart_receivers_not_entered\": true, \"candidate_terminal\": 6, \"complete_and_reaped\": true, \"decision\": \"PASS_SELECTED_AST_RECEIVER_COMPARISON\", \"ordinary_pytest_executed\": false, \"prior_failed_v1_preserved\": \"2c87c8449ef3bc7d6b91fc8272cca89db287424ad4278a06337aa82f9d8d2086\", \"production_unchanged_from_v1\": true, \"raw_stdout_sha256\": \"581f502d472678db2c424b570847c817d32808143bdef2cb541dba52ed9df119\", \"rows\": 12, \"runtime_scope\": \"Selected original/candidate client and receiver AST methods; fake transport; no project import, real engine, ZMQ, monitor-thread, EEP commit, HTTP, model or device proof.\", \"selected_definition_bindings\": {\"baseline\": 12, \"candidate\": 16}, \"stderr_bytes\": 0}, \"manifest_sha256\": \"ae9cae8e1119e487c02534b39490b95e35b069a627280de35b464c1185b83edd\", \"payload_bytes\": 7269, \"payload_files\": 4}\n"
+    },
+    "utility_source_commit": {
+      "chunk_id": "6ec5ba",
+      "wall_time_seconds": 0.00001025,
+      "exit_code": 0,
+      "original_token_count": 38,
+      "output": "[feat/utility-terminal-cleanup 6b80689e42] fix: settle utility waiters when engine receivers stop\n 2 files changed, 667 insertions(+), 28 deletions(-)\n"
+    },
+    "utility_source_push": {
+      "chunk_id": "cb526e",
+      "wall_time_seconds": 1.000929542,
+      "session_id": 24158,
+      "original_token_count": 0,
+      "output": ""
+    },
+    "utility_source_push_completion": {
+      "chunk_id": "22eca6",
+      "wall_time_seconds": 0.000014583,
+      "exit_code": 0,
+      "original_token_count": 77,
+      "output": "remote: \nremote: Create a pull request for 'feat/utility-terminal-cleanup' on GitHub by visiting:        \nremote:      https://github.com/spa5k/vllm/pull/new/feat/utility-terminal-cleanup        \nremote: \nTo https://github.com/spa5k/vllm.git\n * [new branch]            HEAD -> feat/utility-terminal-cleanup\n"
+    },
+    "utility_source_remote_verified": {
+      "chunk_id": "cbdaa4",
+      "wall_time_seconds": 0.75457,
+      "exit_code": 0,
+      "original_token_count": 21,
+      "output": "6b80689e4263f918946729083bdd54781733e1ad\trefs/heads/feat/utility-terminal-cleanup\n"
+    },
+    "utility_final_hooks": {
+      "chunk_id": "22d59d",
+      "wall_time_seconds": 1.001695667,
+      "session_id": 69627,
+      "original_token_count": 487,
+      "output": "ruff check..........................................................................................Passed\nruff format.........................................................................................Passed\ntypos...............................................................................................Passed\nclang-format....................................................................(no files to check)Skipped\nmarkdownlint-cli2...............................................................(no files to check)Skipped\nLint GitHub Actions workflow files..............................................(no files to check)Skipped\nshellcheck......................................................................(no files to check)Skipped\npip-compile.....................................................................(no files to check)Skipped\npip-compile-rocm................................................................(no files to check)Skipped\npip-compile-xpu.................................................................(no files to check)Skipped\npip-compile-cpu.................................................................(no files to check)Skipped\npip-compile-docs................................................................(no files to check)Skipped\ncheck json......................................................................(no files to check)Skipped\nreformat test/nightly-torch.txt to be in sync with test/cuda.in.................(no files to check)Skipped\nCheck auto-label rules still match real files...................................(no files to check)Skipped\nCheck agent instruction files and skills........................................(no files to check)Skipped\n- hook id: check-agent-files\nCheck every Buildkite step declares an explicit key.............................(no files to check)Skipped\nCheck new tests are wired into Buildkite CI........................................................."
+    },
+    "utility_final_hooks_completion": {
+      "chunk_id": "549de6",
+      "wall_time_seconds": 0.000012042,
+      "exit_code": 0,
+      "original_token_count": 514,
+      "output": "Passed\n- hook id: check-test-tethering\n- duration: 1.82s\nRun mypy for the oldest supported Python version....................................................Passed\nLint PNG exports from excalidraw................................................(no files to check)Skipped\nCheck SPDX headers..................................................................................Passed\nCheck root lazy imports.............................................................................Passed\nCheck for spaces in all filenames...................................................................Passed\nUpdate Dockerfile dependency graph..................................................................Passed\nTest non-root entrypoint wrapper................................................(no files to check)Skipped\nCheck for forbidden imports.........................................................................Passed\nPrevent new 'torch.cuda' APIs call..................................................................Passed\nValidate configuration has default values and that each field has a docstring.......................Passed\nValidate docker/versions.json matches Dockerfile................................(no files to check)Skipped\nCheck .dockerignore does not exclude tracked files..................................................Passed\nCheck for boolean ops in with-statements............................................................Passed\nRust - Normalize Cargo manifests with autoinherit...............................(no files to check)Skipped\nRust - Sort Cargo manifest sections.............................................(no files to check)Skipped\nRust - Format code..............................................................(no files to check)Skipped\nSuggestion..........................................................................................Passed\n- hook id: suggestion\n- duration: 0s\n\nTo bypass all the pre-commit hooks, add --no-verify to git commit. To skip a specific hook, prefix the commit command with SKIP=<hook-id>.\n\n"
+    },
+    "utility_final_composition_audit": {
+      "chunk_id": "f5e954",
+      "wall_time_seconds": 0.00001325,
+      "exit_code": 0,
+      "original_token_count": 139,
+      "output": "{\"base\": \"e80b6c642f21fd5b24439825592f5b9ced36add8\", \"composition\": \"ServingV2 full test + exact3CoreEEPV2 definitions + managerimport +3Rootannotations; formatting/importorderonly\", \"decision\": \"PASS_COMBINED_SOURCE_AST_EQUIVALENCE\", \"method_bodies_executed_by_audit\": false, \"new_rows\": 19, \"normal_tests_executed\": false, \"ordinary_test_rows_declared\": 23, \"production_sha256\": \"85f47eaa802dcf4df4a05ae3bcb0fcdcce6dd7bcd7208d49cec10b1175d93b75\", \"test_bytes\": 17886, \"test_sha256\": \"381fd6160e0ec48752423d41dc0c11c52a529078b5f0c5d31c122cbd22a909b9\"}\n"
+    }
+  }
+}

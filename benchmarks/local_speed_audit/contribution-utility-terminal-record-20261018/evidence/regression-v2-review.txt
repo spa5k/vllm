@@ -1,0 +1,66 @@
+# Receiver callback observation source review
+
+Verdict: `PASS_NARROW_SOURCE_DATA_RUNTIME_HELD`. No blocker was found in the
+exact two-function observation correction or the four-literal runner
+successor. No V2 subject, fixture, loop, thread or runner ran in this review.
+Root must admit any new execution. V1 remains failed actual evidence.
+
+Subject manifest:
+`7e3d7f8655f9222428c4b3b5f7e478b600084ad3ec37c557d91297d33270a792`,
+3,657 bytes, 18 payload files / 92,899 bytes. Independent closed-set checks
+verified every payload hash, single-link regular identity and 0444 file mode,
+plus the complete 0555 directory/root set. All five source descriptors still
+match actual bytes. INPUTS and production source are byte-identical to V1.
+The exact candidate remains `85f47eaa802dcf4df4a05ae3bcb0fcdcce6dd7bcd7208d49cec10b1175d93b75`.
+
+The extracted fixture is 16,077 bytes,
+`85e52fa12704c8eb1487a2e49fe14f8b73541c1eeb86c8fb8898f40f78a32b92`.
+Removing its three added observer statements reconstructs V1 exactly. The
+ordinary file is 15,060 bytes,
+`efaac0ce12cebfad298a6c2a6be55f21bf5c75ef2ae5913d1178f4d4def2fde2`.
+Replacing only its new `_receiver_done` body reconstructs V1 exactly. All
+other top-level function/class ASTs match. The complete two-hunk test patch
+also reconstructs this file independently from the saved baseline bytes.
+
+Each changed function now registers an Event setter on the receiver task and
+awaits that Event with a one-second limit before shield handling and state
+observation. The observer only changes its own Event. It neither settles the
+utility Future nor drains the registry. Two inert source controls remove the
+wait; both are rejected by the independent AST check.
+
+The selected production `_ensure_output_queue_task` installs its settlement
+done callback before publishing the task on resources. The observed fixture
+reaches that setup before its send boundary. The production callback calls the
+drain synchronously without await. Under the documented FIFO done-callback /
+call_soon contract, the later observer callback therefore marks a boundary
+after that drain. This also covers an already-done task: the new Event wait
+does not treat immediate shield cancellation as proof that callbacks ran.
+This is a source argument under the trusted stdlib-loop contract, not an
+observed callback trace or local loop-runtime test. The source packet cites
+the primary Python 3.12 documents checked by Root. This reviewer did not
+repeat that network fetch.
+
+The baseline has no production drain callback. Its observer can run while the
+utility Future stays pending. Candidate state assertions are unchanged, so a
+missing drain still fails. Unexpected callback failures also require Root's
+complete stderr inspection. Sync cleanup-before-receiver, join failure,
+source selection, 12 proposed rows, 19 ordinary parameter rows and output
+claims are unchanged. No sleep or fixed event-loop-turn count is introduced.
+
+The new outer runner is 6,158 bytes,
+`9404cb106888a7d7a2fe505966bd01244428a32aa16c9a6daed45a836b6f44fb`.
+Four single-occurrence substitutions from the reviewed b7ad8be2 parent change
+only proposal/output roles and the two input hashes. The direct Python child,
+nonblocking dual 100000-byte captures, ten-second normal budget, owned-child
+kill and additional two-second reap algorithm are byte-identical. Popen /
+interpreter startup, scheduling and local file I/O still have no absolute
+hard-wall guarantee here. No hard memory or native-syscall containment claim
+is made. No future output role was created by this review.
+
+V1 source review `7413d4ff...` is historical provenance. Root's failed V1
+actual `2c87c844...` is retained and is not changed into a pass. Only its
+manifest descriptor was checked here; this packet is not an independent
+actual-result audit. V2 has no measured rows. No new call authority follows.
+Normal pytest remains subject to the unchanged cpuinfo denial. Both EEP
+commit handlers, real ZMQ/EngineCore death, monitor-thread loop affinity,
+public server/model/device/ABI/performance remain outside this review.

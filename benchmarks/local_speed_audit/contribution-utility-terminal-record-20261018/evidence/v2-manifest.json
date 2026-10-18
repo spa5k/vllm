@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "kind": "ACTUAL_LOCAL_EXTRACTED_RECEIVER_COMPARISON_V2",
+  "entries": [
+    {
+      "path": "receipt.json",
+      "bytes": 1208,
+      "mode": 292,
+      "sha256": "1e4379c5a2f195dd35bb6308361089fbd888a36591ecf35d2a7247470b869328"
+    },
+    {
+      "path": "root-data-audit.json",
+      "bytes": 886,
+      "mode": 292,
+      "sha256": "7923c3e636fe5a0b3ee2aab625cc192a726fe3ae436b5933c6b8abd8be29137f"
+    },
+    {
+      "path": "stderr.raw",
+      "bytes": 0,
+      "mode": 292,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "stdout.raw",
+      "bytes": 5175,
+      "mode": 292,
+      "sha256": "581f502d472678db2c424b570847c817d32808143bdef2cb541dba52ed9df119"
+    }
+  ],
+  "root_mode": 365
+}

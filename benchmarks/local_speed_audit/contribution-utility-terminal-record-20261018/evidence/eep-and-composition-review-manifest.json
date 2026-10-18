@@ -1,0 +1,68 @@
+{
+  "directories": [],
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 811,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "a7214a067b945f777070b71ee48b52675d67b7f369e1235333a5b920a5e85529"
+    },
+    {
+      "bytes": 3416,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "02ae28cb3c0ab9ff61192c774caacbad9231fd0ec8233aef857a17b517dce86e"
+    },
+    {
+      "bytes": 8531,
+      "mode": 292,
+      "path": "audit_data.py",
+      "sha256": "93b4ac83256880608a9d1c6b37b7041d76f1d3e013823926d5d357653775c635"
+    },
+    {
+      "bytes": 850,
+      "mode": 292,
+      "path": "import-grouping-reviewer-failure.json",
+      "sha256": "8d8ef26a9dc6b51adc2f205002abd9525cbea104bb5e9281a7be706216858dd9"
+    },
+    {
+      "bytes": 2156,
+      "mode": 292,
+      "path": "initial-reviewer-failure.json",
+      "sha256": "f67d7c91a7d942197faab42294f74390493bcbda8631a948b2092266082cd74d"
+    },
+    {
+      "bytes": 675,
+      "mode": 292,
+      "path": "input-bindings.json",
+      "sha256": "0980424fc013db99459e978400540f566086c668e8f66309ebc727bf57b8f22b"
+    },
+    {
+      "bytes": 1924,
+      "mode": 292,
+      "path": "seal_review.py",
+      "sha256": "1318e06f294dfadff7e1198110ca99c40f9d926891a5538cfa8b0a09fe7433cc"
+    },
+    {
+      "bytes": 1869,
+      "mode": 292,
+      "path": "source-data-result.json",
+      "sha256": "ae4eecd6baf262e647375e28f316cef1121305d5ccc72f2fdf9360f16d1bd4fc"
+    },
+    {
+      "bytes": 223,
+      "mode": 292,
+      "path": "source-data-tool-result.json",
+      "sha256": "41849c798e320b1064735f92c692ecd36e3490a6cb6ba46c79dea47b5683a53d"
+    }
+  ],
+  "file_count": 9,
+  "kind": "INDEPENDENT_EEP_COMMIT_AND_COMBINED_TEST_SOURCE_REVIEW",
+  "root_mode": 365,
+  "runtime_authority": false,
+  "schema": 1,
+  "subject_executed": false,
+  "total_bytes": 20455,
+  "verdict": "PASS_SOURCE_DATA_RUNTIME_HELD"
+}

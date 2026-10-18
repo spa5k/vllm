@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "/Users/pacific/Developer/vllm/.venv/bin/python",
+    "-B",
+    "-I",
+    "-S",
+    "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/core/utility-future-regression-design-v1/extracted_receiver_fixture.py"
+  ],
+  "attempts": 1,
+  "retries": 0,
+  "script_sha256": "03bdb93f0559d0a8fb6dc82c9f6261eb0f88a2ba24a28402e0522d646964dc19",
+  "proposal_manifest_sha256": "833981296936c0fdbab708240cef1bdfe928d46a96bb90f81af1a4f4eec635a1",
+  "timeout_seconds": 10,
+  "reap_allowance_seconds": 2,
+  "stream_cap_bytes": 100000,
+  "scope": "selected client/receiver AST bodies with fake transport and bounded real futures/tasks/caller thread; no target imports, engine process or device",
+  "complete": true,
+  "reaped": true,
+  "first_error": "nonzero exit",
+  "pid": 93178,
+  "returncode": 70,
+  "elapsed_seconds": 0.28747354215011,
+  "eof": {
+    "stdout": true,
+    "stderr": true
+  },
+  "raw": {
+    "stdout": {
+      "bytes": 5394,
+      "sha256": "cc71a13cd6632d91c0fe2805350f9a846a52373a3aff59efb45f0d7c96792f13"
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "passed": false
+}

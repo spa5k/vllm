@@ -1,0 +1,58 @@
+{
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 1421,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "1c21f46c28f5ad69273682aaccea5bf8789609f49c9eae4a4a8fcae43ed62d27"
+    },
+    {
+      "bytes": 7529,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "8a7b9a341ad5bdc034cb417975ea916111e3bcde9eb2b9533c3f05207f924b78"
+    },
+    {
+      "bytes": 164,
+      "mode": 292,
+      "path": "input-bindings.json",
+      "sha256": "045d9bd714770ec917200686db0b48b4f1e8360177b0c53649816e5e8719008d"
+    },
+    {
+      "bytes": 733,
+      "mode": 292,
+      "path": "result.json",
+      "sha256": "4f992aeface929b88966548393bdfb75690c77f9cc36764bd24af7bd455b3f17"
+    },
+    {
+      "bytes": 592,
+      "mode": 292,
+      "path": "review-command-receipt.json",
+      "sha256": "20fd76ca488917fa25b964f0ed4b50b64f49014a2fdc48f9acf33d03bd8ac628"
+    },
+    {
+      "bytes": 6363,
+      "mode": 292,
+      "path": "review_source.py",
+      "sha256": "2782470df5f616550ce72100b4d96474be144927442b44c80c5a20a7046afab6"
+    },
+    {
+      "bytes": 5421,
+      "mode": 292,
+      "path": "seal_review.py",
+      "sha256": "bae59fdbb42d3e0fcfc5a4599f5f8ade9909bfc954d2864a82c9393d7fce8d84"
+    },
+    {
+      "bytes": 7069,
+      "mode": 292,
+      "path": "source-data-result.json",
+      "sha256": "c94b7a49bb435e39bdf5655316aaa6dbe73d64e9ac4c5371486e90b7ad34c1ec"
+    }
+  ],
+  "file_count": 8,
+  "kind": "INDEPENDENT_UTILITY_FUTURE_SOURCE_RISK_REVIEW",
+  "root_mode": 365,
+  "schema": 1,
+  "total_bytes": 29292
+}

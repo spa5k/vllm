@@ -1,0 +1,93 @@
+# Utility terminal ownership and current-source refresh
+
+## Decision
+
+`NO_DIRECT_DUPLICATE_CURRENT_SOURCE_UNCHANGED_ONE_TEST_GAP`
+
+The exact current main is
+`e80b6c642f21fd5b24439825592f5b9ced36add8`. The complete GitHub compare from
+the candidate base `371745ebd6c12f314402c6c319de2e7ef82c2981` is one commit and
+two changed files. Both files are unrelated DeepSeek V4 AMD model tests or
+model code.
+
+`vllm/v1/engine/core_client.py` is byte-identical at both commits:
+
+- Git blob SHA-1: `0c87c9a0521a211bc60e6caf1a123186ce1d5927`
+- SHA-256: `17167b8151c9f3389fa1d76ce1d11bf67d136b6ed837ed77945817aa4e5cd77d`
+- Size: 88,184 bytes
+
+`tests/v1/engine/test_wake_up_contract.py` is also byte-identical:
+
+- Git blob SHA-1: `1369cece95e9f9f19b85a349acf6b58923c3823e`
+- SHA-256: `72f7afb1126c5e0942951abed0cdc1b081ab853af91190fd3df0099b8c318dbf`
+- Size: 956 bytes
+
+The production candidate base therefore matches current main exactly. The
+current unrun test patch also applies to the exact current test bytes in a
+stdlib in-memory patch check.
+
+## Ownership refresh
+
+The earlier adjacent issue #40244 remains open with the same 11 comment IDs.
+It still concerns allocation-order restore. It has no linked open PR.
+
+The narrow current searches found no open issue for `utility_results` or the
+`is_sleeping`/`EngineDead` combination. The `call_utility` issue search still
+returns only #40244.
+
+The area PR searches return two additional utility consumers:
+
+- #51974 forwards profiling options through existing utility calls.
+- #55274 adds bounded in-flight queue diagnostics through utility calls.
+
+Their complete current diffs do not add terminal state, registry drain, late
+result handling, or pending future settlement. They are adjacent consumers, not
+the same fix. The four previously reviewed adjacent PR heads (#46811, #59179,
+#59939, and #60505) are unchanged. No direct same-fix ownership was found in
+this bounded refresh.
+
+This is not a global absence claim. Differently worded, private, draft, or
+newer work can exist.
+
+## Manager error test review
+
+The reviewed test snapshot calls public `MPClient.shutdown(timeout=2)` while a
+real synchronous utility call waits. It installs the real constructor callback.
+The row checks the exact manager error object, the exact timeout, and manager
+identity. It requires the caller to settle before the receiver body is driven
+during fixture cleanup. This prevents the receiver's `finally` block from
+masking a missing cleanup-entry settlement callback.
+
+This is a sound source-level regression for the manager-error boundary. It has
+not run. The manager and transport are stand-ins, so it does not prove a real
+manager, socket, or process shutdown.
+
+## Concrete remaining test gap
+
+The sealed regression proposal is
+`core/utility-future-regression-design-v1`, manifest
+`833981296936c0fdbab708240cef1bdfe928d46a96bb90f81af1a4f4eec635a1`.
+Its EEP test covers terminal drain of sibling ordinary utility futures and the
+fixed EEP notification future. It does not call either
+`_commit_scale_up_elastic_ep` or `_commit_scale_down_elastic_ep`.
+
+It therefore does not test the two new branches where terminal drain fails the
+fixed future, a sibling gather error wins before `await wait_future`, and the
+handler must retrieve the fixed future exception before it re-raises the
+sibling error. The production source and its independent review cover these
+branches statically. They remain untested production branches. Serving records
+the same limit in the current test design instead of adding a large EEP fixture.
+
+No other concrete source concern was found in the manager-error or current EEP
+test snapshot.
+
+## Limits
+
+- No vLLM module, test, helper, candidate function, thread, event loop, socket,
+  process, model, container, or resource operation ran.
+- The test snapshot was copied before its manifest was sealed. Its four copied
+  files exactly match the corresponding files in the sealed regression packet.
+- The normal test environment and conftest import boundary remain separate.
+- No publication or message to an upstream person occurred.
+- The research skill requested a background agent. All collaboration slots were
+  occupied, so this packet uses direct primary GitHub source and API records.

@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": {
+    "branch": "feat/utility-terminal-cleanup",
+    "commit": "6b80689e4263f918946729083bdd54781733e1ad",
+    "base": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+    "remote": "https://github.com/spa5k/vllm.git",
+    "remote_ref_verified": true,
+    "worktree_clean": true,
+    "production_sha256": "85f47eaa802dcf4df4a05ae3bcb0fcdcce6dd7bcd7208d49cec10b1175d93b75",
+    "test_sha256": "381fd6160e0ec48752423d41dc0c11c52a529078b5f0c5d31c122cbd22a909b9"
+  },
+  "report_branch": "feat/vllm-contribution-research-20261018",
+  "report_parent_commit": "0913b8102a48bd5784d50999d4a6a59dbdda2a8c",
+  "source_manual_applicable_hooks_passed": true,
+  "controlled_original_candidate_rows_passed": 12,
+  "normal_pytest_rows_declared": 23,
+  "normal_pytest_executed": false,
+  "normal_pytest_hold": "Research ancestor conftest cpuinfo denial remains. No bypass or new attempt.",
+  "real_transport_engine_or_model_validation": false,
+  "upstream_publication": false,
+  "new_paid_compute": 0,
+  "ledger_estimate_with_guard_usd": 2.9192748,
+  "ledger_estimate_is_invoice_or_balance": false,
+  "deadline_utc": "2026-10-19T12:28:00Z"
+}
