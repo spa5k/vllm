@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "kind": "ORIGINAL_STREAM_KV_BASELINE3_ACTUAL_EVIDENCE",
+  "files": [
+    {
+      "path": "prepare_stream_kv_baseline3_root_invocation_v1.py",
+      "bytes": 2670,
+      "sha256": "27469a73fa9dd8a47c07284e399af2d9cd01391c9e72c54127ec82c9b0c86a8d",
+      "mode": 292
+    },
+    {
+      "path": "root-after-host-tool-receipt.json",
+      "bytes": 371,
+      "sha256": "2fd16baf5c81703877651432a9b90d70b1e7a9f7f9ab8f3a48e8484db8f018c4",
+      "mode": 292
+    },
+    {
+      "path": "root-after-host.json",
+      "bytes": 241,
+      "sha256": "a0a4696beda89aaaf5d151572e7cdf4e33ad6e286cfb7e54c579180229d049ff",
+      "mode": 292
+    },
+    {
+      "path": "root-after-tool-object-provenance.json",
+      "bytes": 364,
+      "sha256": "4c1c8a4f129ad4b51c50d3b63e7561fa7625a7a0f91735e2f573ff22b437f61e",
+      "mode": 292
+    },
+    {
+      "path": "root-before-host.json",
+      "bytes": 200,
+      "sha256": "6b95b2fef3029d3c2c77d1c3fd5fbdd7e73867999481780039bbf66b7c9bd1d1",
+      "mode": 292
+    },
+    {
+      "path": "root-before-preparation-tool-receipt.json",
+      "bytes": 622,
+      "sha256": "737238306331d2a228d6b84d0d4c823cd4d98493b08e76419eef7a2108cf9e98",
+      "mode": 292
+    },
+    {
+      "path": "root-completion-prerequisite-failure-tool-receipt.json",
+      "bytes": 1642,
+      "sha256": "bbc02705f4c1fbc30fe13fae36e45fd691b00b68d2521ecee1bb9ae71e198be5",
+      "mode": 292
+    },
+    {
+      "path": "root-completion-prerequisite-note.json",
+      "bytes": 335,
+      "sha256": "43454e1610d30f129b2db7a7a8ec6264b46f136ef7cb72b21e73eac885c0f327",
+      "mode": 292
+    },
+    {
+      "path": "root-completion-tool-receipt.json",
+      "bytes": 397,
+      "sha256": "6746afeb2d0055076fee1e078c37a31de186563e3128ce3e6391002296e77d9e",
+      "mode": 292
+    },
+    {
+      "path": "root-host-command.json",
+      "bytes": 668,
+      "sha256": "cfee6900994ad46d92468cc36570c5935a74952dc7ff1f0180d0897dce8f9d45",
+      "mode": 292
+    },
+    {
+      "path": "root-host-tool-receipts.json",
+      "bytes": 431,
+      "sha256": "2eda4f890aa879fc573feb4e13c3ec45c6bee665ee17cbf29dc3149a362d57d1",
+      "mode": 292
+    },
+    {
+      "path": "root-host.stderr.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 292
+    },
+    {
+      "path": "root-host.stdout.raw",
+      "bytes": 1245,
+      "sha256": "342b127425aae6d21a557e415093564bda045ee2ecf1c9251bedde6bb9fde756",
+      "mode": 292
+    },
+    {
+      "path": "root-preflight-merged.raw",
+      "bytes": 203,
+      "sha256": "9fc2ef27ad6011ec5c0b9218281a47e2cf47be5e5d3482b0e04a5b000caaf035",
+      "mode": 292
+    },
+    {
+      "path": "root-preflight-observations.json",
+      "bytes": 9629,
+      "sha256": "6f878be9660d7eae4debbc72e9c1ac0f7169a9bc92eacdb4f420fb16c395b9aa",
+      "mode": 292
+    },
+    {
+      "path": "root-preflight-tool-receipts.json",
+      "bytes": 655,
+      "sha256": "ea931469b8ac03884d205254ecfa7118f7bfe050089f3e2b8b35f69e287e0f8c",
+      "mode": 292
+    },
+    {
+      "path": "root-sealer-prerequisite-note.json",
+      "bytes": 496,
+      "sha256": "f32c9afe630fdf1ad378c9a35989cc644dd529471b10345c3f69993125c62b97",
+      "mode": 292
+    },
+    {
+      "path": "root-stream-kv-baseline3-approval-v1.json",
+      "bytes": 9633,
+      "sha256": "e98814087aa2460c692b613974de5987a9f4b38d89398609ae2ac543d6ad3107",
+      "mode": 292
+    },
+    {
+      "path": "root-stream-kv-baseline3-input-closure-v1.json",
+      "bytes": 23698,
+      "sha256": "5ffa08536d0b150812225ccd8b9b0df6416d70533cd524a967decc0ee9637466",
+      "mode": 292
+    },
+    {
+      "path": "root-stream-kv-baseline3-source-review-v1.json",
+      "bytes": 2767,
+      "sha256": "44b12b2bce96d9bc86b90f178720332c426f23e07cf861fd3efdc3c747ddcc6d",
+      "mode": 292
+    },
+    {
+      "path": "root-strict-checker-tool-receipts.json",
+      "bytes": 5072,
+      "sha256": "898393964e7b736e60556cf3ea876674fe16cebb127bd4d05fbf5a29d52b8bfc",
+      "mode": 292
+    },
+    {
+      "path": "root-strict-checker.stdout.raw",
+      "bytes": 4560,
+      "sha256": "eed689345ecaee6bbcc2202d44f3809d1f48eebbb954aefc5789f01093789b15",
+      "mode": 292
+    },
+    {
+      "path": "seal_stream_kv_baseline3_actual_v1.py",
+      "bytes": 6317,
+      "sha256": "35f02213148f39af893c177e3092a4a55902f267927df1d6e1502d148010ab05",
+      "mode": 292
+    }
+  ],
+  "directories": [],
+  "root_mode": 365
+}

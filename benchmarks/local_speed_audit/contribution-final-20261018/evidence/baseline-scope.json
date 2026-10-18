@@ -1,0 +1,18 @@
+{
+  "baseline_expected_missing_notice_failures": 3,
+  "normal_suite_success": false,
+  "pytest_exit_code": 1,
+  "guest_contract_exit": 0,
+  "host_exit": 0,
+  "strict_root_checker_exit": 0,
+  "guest_elapsed_seconds": 116.20118776099997,
+  "host_lifecycle_seconds": 121.79221445904113,
+  "exact_container_removed": true,
+  "empty_absence_checks": 3,
+  "independent_saved_data_audit_pending": true,
+  "transport_mocked": true,
+  "model_or_device_or_real_engine_validated": false,
+  "paid": false,
+  "scope": "Three selected unchanged regression tests with original production bytes, normal conftests and pytest plugins. Each fails at its pinned missing-notice await assertion. Experiment success means these expected failures and exact cleanup were verified. It does not mean baseline tests passed. Engine and transport are mocked.",
+  "root_data_binding_limit": "The first completion helper call failed before writing files because Root had not yet saved host tool receipts. Original receipts were then saved. The same data-only helper succeeded. No subject or container was rerun. The after-clock tool object was copied from its displayed native response and is labelled as such."
+}

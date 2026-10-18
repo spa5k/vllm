@@ -1,0 +1,57 @@
+{
+  "decision": "PASS_SAVED_DATA_AUDIT_WITH_UNSAVED_TOOL_OBJECT_LIMIT",
+  "directories": [],
+  "files": [
+    {
+      "bytes": 605,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "5bdb948f7048f96d9ba32054d019a1911a269b4b06cf1e99c5d79a57f6d57474"
+    },
+    {
+      "bytes": 6194,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "52744ed4809e253ff4230d6b9bf560124e5dbbed100399df5967c5eb59fd4189"
+    },
+    {
+      "bytes": 1068,
+      "mode": 292,
+      "path": "TEST_DESIGN.md",
+      "sha256": "94206c414346e2c531b684ac808f7667c01f6ecf1d9a57c5f9eaa0321188867a"
+    },
+    {
+      "bytes": 1363,
+      "mode": 292,
+      "path": "audit-result.json",
+      "sha256": "4d29a90f2bcb98514634ef87a4141e1b735b278d783d48dd1d626c5a364e4833"
+    },
+    {
+      "bytes": 31424,
+      "mode": 292,
+      "path": "audit_saved.py",
+      "sha256": "02a1f401cbd15870706f8b3db2e327053eb0ec5b84b7ec427a04c6e81fb4892e"
+    },
+    {
+      "bytes": 509,
+      "mode": 292,
+      "path": "evidence-bindings.json",
+      "sha256": "37b80ea19aa3b9e4af4586fda9ca60923ee1c76d909daebff80796fd8645a2ef"
+    },
+    {
+      "bytes": 330,
+      "mode": 292,
+      "path": "input-bindings.json",
+      "sha256": "5740703684342d3e965479ca07b223e35fa2a6309e8864b7fbd9a31768be1adf"
+    },
+    {
+      "bytes": 1496,
+      "mode": 292,
+      "path": "seal.py",
+      "sha256": "2ebbdb47f7c3f6e41298953ac2a0eb320189101243d68c66fb18daaf8e763ec0"
+    }
+  ],
+  "role": "control/utility23-normal-actual-review-v1",
+  "runtime_authority": false,
+  "schema": 1
+}

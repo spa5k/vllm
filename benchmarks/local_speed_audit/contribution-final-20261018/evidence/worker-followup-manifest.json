@@ -1,0 +1,220 @@
+{
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 1696,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "0db9aec5f951462ab421a56ada442246224495f232cd1a07b9b8aae0a097ae19"
+    },
+    {
+      "bytes": 6210,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "7bf76100adfa9e0a384f89e0f36f29ec4d4677c0c8dd5bb451ff7783edab74de"
+    },
+    {
+      "bytes": 8744,
+      "mode": 292,
+      "path": "check_source_data.py",
+      "sha256": "058fe04fa14bb0ba6fb13a178bc9f0f59b5677f8addf85ca51b6048261adf6ba"
+    },
+    {
+      "bytes": 1149,
+      "mode": 292,
+      "path": "input-bindings.json",
+      "sha256": "478fd1cf7532cfb26f25a0369ad477e75374648012a4676268033b5ab628c5a9"
+    },
+    {
+      "bytes": 11883,
+      "mode": 292,
+      "path": "raw/async_worker.py.metadata.json",
+      "sha256": "af6007aac14b9ebc4a664919ebeceec0baa015a11797d171b13d56b91e251e14"
+    },
+    {
+      "bytes": 1803,
+      "mode": 292,
+      "path": "raw/audit-native-objects.json",
+      "sha256": "11e6be4d1da51de3b99e1fdb48b1161c3b57e2efb1fc6a5351ede12b4268c6fb"
+    },
+    {
+      "bytes": 3654,
+      "mode": 292,
+      "path": "raw/compare-api-primary-doc-tool.json",
+      "sha256": "6de1602ebe023772795bd25c14a0d56417d012e84feb8fd5df3212fd42782cd9"
+    },
+    {
+      "bytes": 31018,
+      "mode": 292,
+      "path": "raw/compare-fe8-ff01-page1.http",
+      "sha256": "8de2eb51c4e65c3fd51a6720a20c159d768c0c85a1a51c7c00d01c72b8367226"
+    },
+    {
+      "bytes": 29390,
+      "mode": 292,
+      "path": "raw/compare-fe8-ff01-page1.json",
+      "sha256": "29e94953874986cf3fe52835115eb44c5ded436aac30b42a18ec0e40a400d2fb"
+    },
+    {
+      "bytes": 11853,
+      "mode": 292,
+      "path": "raw/compare-fe8-ff01-page2.http",
+      "sha256": "fdca7cb70cc10c733130fa2e6231187bc676a8ee40b2084ac3f8d93f3809731d"
+    },
+    {
+      "bytes": 79934,
+      "mode": 292,
+      "path": "raw/eplb_state.py.metadata.json",
+      "sha256": "4963ded9a7bd85035785fb4a7559293bb8c48dfbc28702b658801eb5ab11e727"
+    },
+    {
+      "bytes": 7067,
+      "mode": 292,
+      "path": "raw/eplb_utils.py.metadata.json",
+      "sha256": "c47b95a2261ace12a083d5608dc0b509f1b987ac65e13156b73dc53e78ba4336"
+    },
+    {
+      "bytes": 11889,
+      "mode": 292,
+      "path": "raw/gpu_eplb_utils.py.metadata.json",
+      "sha256": "1987d96ce8f98946a31ef0ee491b05c1042a0414b5bc7991d232e5d2c3bbbb1f"
+    },
+    {
+      "bytes": 4093,
+      "mode": 292,
+      "path": "raw/issue-57883-comments.json",
+      "sha256": "5f28f12db100fe158d21d4585e4084116cef5c6774a7579df3df6d5ecaff1d4d"
+    },
+    {
+      "bytes": 19295,
+      "mode": 292,
+      "path": "raw/issue-57883.json",
+      "sha256": "3d6d6a7710a79ef45b290c3fb90f79b13247f943932e07332c0fa6a9cfab5a77"
+    },
+    {
+      "bytes": 19391,
+      "mode": 292,
+      "path": "raw/main.json",
+      "sha256": "cdd7f118a5cbee148b9939f25b8ab033bbc1437d76806cb19f56db64f2af8a2d"
+    },
+    {
+      "bytes": 85587,
+      "mode": 292,
+      "path": "raw/native-tool-objects.json",
+      "sha256": "c9f07b99bd98914f14137d00f0d1d6fad5092e9c14586ff99ebde14f5dca9842"
+    },
+    {
+      "bytes": 8300,
+      "mode": 292,
+      "path": "raw/pr-57905-files.json",
+      "sha256": "0be80e11c793ea57324aee66c9e23e00ae1a42fd44b3eb5bb4703dc196f859b7"
+    },
+    {
+      "bytes": 16227,
+      "mode": 292,
+      "path": "raw/pr-57905.json",
+      "sha256": "44ab1929ecc7e22504e8e5d2093fee662acf2ce49643a6b60f01194c7b172b93"
+    },
+    {
+      "bytes": 923883,
+      "mode": 292,
+      "path": "raw/prs-area-eplb-async.json",
+      "sha256": "b7f39fd4f5a6f796ddab6c5b2875df7e4ceb690f47586fcbd9fa1a0e205af64f"
+    },
+    {
+      "bytes": 2751,
+      "mode": 292,
+      "path": "raw/prs-linked-57883.json",
+      "sha256": "6fd8874028af9a3fca26053441a004ecf961d93d954a55da80f4b99714886ab1"
+    },
+    {
+      "bytes": 485315,
+      "mode": 292,
+      "path": "raw/search-collective-hang.json",
+      "sha256": "fc23d288d4ff1131ac85bf8c41ee4c7237f1e63b4bc2b55f43a3a71b584f17f9"
+    },
+    {
+      "bytes": 553994,
+      "mode": 292,
+      "path": "raw/search-executor-failure.json",
+      "sha256": "9aca715fa3114f2cec2022b96a46959191a733154e7014062e782492fe3c9be3"
+    },
+    {
+      "bytes": 706272,
+      "mode": 292,
+      "path": "raw/search-worker-shutdown.json",
+      "sha256": "1575f7c0b039f2bcc1d738f50ee5634d2f4a212a207b5c212002b2cfc516a476"
+    },
+    {
+      "bytes": 5279,
+      "mode": 292,
+      "path": "raw/test_eplb_events.py.metadata.json",
+      "sha256": "695d4aae2a77c56f6465063bc75981549f734352e9808a237c93b9e7d981937a"
+    },
+    {
+      "bytes": 466,
+      "mode": 292,
+      "path": "result.json",
+      "sha256": "7342369996bb77de7a90d2989d6e1239cefbbaca8059371d351fe890a17aa093"
+    },
+    {
+      "bytes": 3423,
+      "mode": 292,
+      "path": "seal.py",
+      "sha256": "dfa38b82fdea7e4d5d676bf7a0f5b932f95e36c202a6184cf83f374a6535d7e0"
+    },
+    {
+      "bytes": 3319,
+      "mode": 292,
+      "path": "selected-source-transfer.json",
+      "sha256": "f5e7e23fb3ad4c0b7ace27a4f09a3e917e6b35bf9bbd073ca7fe2e98abb878c7"
+    },
+    {
+      "bytes": 7815,
+      "mode": 292,
+      "path": "source/async_worker.py",
+      "sha256": "b1b10db5181fb5a704c8656a6a4a35af7e79b8fb4721183b8f2548fb72c5b042"
+    },
+    {
+      "bytes": 57214,
+      "mode": 292,
+      "path": "source/eplb_state.py",
+      "sha256": "b52e8fe96b83184aaef04e2303cf1de24056bcceed9fc50803351da970cb8b55"
+    },
+    {
+      "bytes": 4329,
+      "mode": 292,
+      "path": "source/eplb_utils.py",
+      "sha256": "f3215b17d6073b77079e9b0369404153d68753e1d86a1bec296c43ee7c8cc57a"
+    },
+    {
+      "bytes": 7840,
+      "mode": 292,
+      "path": "source/gpu_eplb_utils.py",
+      "sha256": "1ef1e111cf9752fb90020884017e2460b3ba3922634cde2d79022bd05e784a53"
+    },
+    {
+      "bytes": 3017,
+      "mode": 292,
+      "path": "source/test_eplb_events.py",
+      "sha256": "75425f294e418460a7a56892ec0486e6f64a29eef88a44383497d5a785a44d57"
+    },
+    {
+      "bytes": 1510,
+      "mode": 292,
+      "path": "source-data-audit.json",
+      "sha256": "69e0157b094a491a9ab65b3fb7a5507469bc1c843d352c0eb1bed4c6099464f1"
+    },
+    {
+      "bytes": 1450,
+      "mode": 292,
+      "path": "source-identities.json",
+      "sha256": "fbe74e8f7e36095edcf02e9a86330979d02b27ab4be826e80f27554d98761086"
+    }
+  ],
+  "file_count": 35,
+  "kind": "source-data-research-packet",
+  "root_mode": 365,
+  "schema_version": 1,
+  "total_bytes": 3127060
+}

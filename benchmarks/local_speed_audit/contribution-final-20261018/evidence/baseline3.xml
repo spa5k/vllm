@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="2.676" timestamp="2026-10-18T17:19:16.526201+00:00" hostname="f59fea8ba13b"><testcase classname="tests.entrypoints.openai.chat_completion.test_serving_chat" name="test_late_chat_queue_rejection_notifies_remote_prefill_once[1-True-QueueOverflowError-True]" time="0.968"><failure message="AssertionError: Expected notify_kv_transfer_request_rejected to have been awaited once. Awaited 0 times.">tests/entrypoints/openai/chat_completion/test_serving_chat.py:1625: in test_late_chat_queue_rejection_notifies_remote_prefill_once
+    engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
+/usr/local/lib/python3.12/unittest/mock.py:2362: in assert_awaited_once_with
+    raise AssertionError(msg)
+E   AssertionError: Expected notify_kv_transfer_request_rejected to have been awaited once. Awaited 0 times.</failure></testcase><testcase classname="tests.entrypoints.openai.completion.test_completion_error" name="test_late_completion_queue_rejection_notifies_remote_prefill_once[False-QueueOverflowError-True]" time="0.820"><failure message="AssertionError: Expected notify_kv_transfer_request_rejected to have been awaited once. Awaited 0 times.">tests/entrypoints/openai/completion/test_completion_error.py:885: in test_late_completion_queue_rejection_notifies_remote_prefill_once
+    engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
+/usr/local/lib/python3.12/unittest/mock.py:2362: in assert_awaited_once_with
+    raise AssertionError(msg)
+E   AssertionError: Expected notify_kv_transfer_request_rejected to have been awaited once. Awaited 0 times.</failure></testcase><testcase classname="tests.entrypoints.openai.responses.test_serving_responses" name="test_responses_queue_rejection_notice_only_before_first_engine_output[False-QueueOverflowError-True]" time="0.007"><failure message="AssertionError: Expected notify_kv_transfer_request_rejected to have been awaited once. Awaited 0 times.">tests/entrypoints/openai/responses/test_serving_responses.py:1579: in test_responses_queue_rejection_notice_only_before_first_engine_output
+    notice.assert_awaited_once_with(
+/usr/local/lib/python3.12/unittest/mock.py:2362: in assert_awaited_once_with
+    raise AssertionError(msg)
+E   AssertionError: Expected notify_kv_transfer_request_rejected to have been awaited once. Awaited 0 times.</failure></testcase></testsuite></testsuites>

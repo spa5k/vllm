@@ -1,0 +1,43 @@
+{
+  "state": "STOPPED_AT_USER_REQUEST_USAGE_OVER",
+  "updated_utc": "2026-10-18T17:25:33.972849+00:00",
+  "automation_id": "vllm-contribution-research-for-48-hours",
+  "automation_status": "PAUSED",
+  "automation_sha256": "bec2ee7d917ad9facf255cf6cf39aaca7a04c42739975eec4510ebeb18324948",
+  "goal": "No active goal returned by get_goal; no successor created.",
+  "agents": "All three research agents interrupted; no new agent work.",
+  "new_research_or_paid_launches_after_stop": 0,
+  "new_paid_compute_in_deep_fix_phase": 0,
+  "guarded_saved_cost_estimate_usd": 2.9192748,
+  "cost_limit_usd": 10,
+  "cost_is_invoice_or_balance": false,
+  "cost_ledger_sha256": "4b9b4eec4c3c63c5a059d79cebe0d743634f2d48b4b45f7b46d8e6dfa11c8de4",
+  "ssd_free_bytes": 67502338048,
+  "local_targets": "Every completed research container has exact removal and three empty absence checks. Latest baseline CID f59fea8ba13bb0f2e7881a084093502caafd2ebcb9c1bb52d6ff030e558d8263. No target rerun after stop.",
+  "modal": "No new remote resource in this phase. Last retained inventory: 26 owned apps STOPPED with zero containers at 2026-10-17T23:28:35Z. No fresh remote inventory claim.",
+  "paid_ownership_hold": "Unchanged; no runtime adoption of proposed launcher repair.",
+  "source_versions": {
+    "main": "ff01a6b14f329ccd4162fce309913542e2abcd5b",
+    "scope": "Selected source transfer only; no whole current-main build or native ABI claim."
+  },
+  "utility": {
+    "normal_passes": 23,
+    "host_exit": 0,
+    "strict_checker_exit": 0,
+    "independent_data_audit": "PASS_WITH_UNSAVED_TOOL_OBJECT_LIMIT",
+    "checks": 1154,
+    "negative_controls": 3,
+    "engine_transport_mocked": true
+  },
+  "kv_baseline": {
+    "tests": 3,
+    "expected_missing_notice_failures": 3,
+    "pytest_exit": 1,
+    "host_exit": 0,
+    "strict_checker_exit": 0,
+    "normal_suite_success": false,
+    "separate_independent_actual_audit": "NOT_COMPLETED_BEFORE_USER_STOP",
+    "engine_and_rpc_mocked": true
+  },
+  "upstream_publication": false
+}

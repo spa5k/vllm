@@ -1,0 +1,15 @@
+{
+  "normal_cases_passed": 23,
+  "source_commit": "6b80689e4263f918946729083bdd54781733e1ad",
+  "guest_elapsed_seconds": 94.195394418,
+  "host_lifecycle_seconds": 99.78526670788415,
+  "host_exit": 0,
+  "strict_root_checker_exit": 0,
+  "exact_container_removed": true,
+  "empty_absence_checks": 3,
+  "independent_saved_data_audit_pending": true,
+  "model_or_device_or_real_engine_validated": false,
+  "transport_mocked": true,
+  "paid": false,
+  "scope": "Normal pytest with root and engine conftests. Real futures/tasks and bounded caller threads. Mocked engine transport. No public API, real ZMQ/Ray engine, current native ABI, model or performance claim."
+}

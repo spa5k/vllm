@@ -1,0 +1,37 @@
+{
+  "utility_run": {
+    "absolute_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/utility23-normal-v1-run",
+    "manifest_sha256": "58c99b63cc31a30483db405418c2c713c7e436e5e699bf80a5bae31661057e58",
+    "verified_payload_files": 78
+  },
+  "utility_invocation": {
+    "absolute_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/root-utility23-host-invocation-v1",
+    "manifest_sha256": "39796d3e8d7767ce0983e6d4a0df999980b274f5f66e0fe4a27c3039a0b03a61",
+    "verified_payload_files": 20
+  },
+  "utility_independent_audit": {
+    "absolute_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/utility23-normal-actual-review-v1",
+    "manifest_sha256": "eafc2110e76be558107ca793093bf73c1e06a8519a522c1c8eb9bea33b24ff8e",
+    "verified_payload_files": 8
+  },
+  "baseline_run": {
+    "absolute_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/stream-kv-baseline3-normal-v1-run",
+    "manifest_sha256": "2b4aab4fb4eacdc3cfd1d6aad0eb42d95841d32bd9f560ca1c51b0c8f97b7164",
+    "verified_payload_files": 84
+  },
+  "baseline_invocation": {
+    "absolute_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/root-stream-kv-baseline3-host-invocation-v1",
+    "manifest_sha256": "a1f8c707865b7a0d5c3a4d01504d30a6b8a79857c39d54c8deff93836c6d14fc",
+    "verified_payload_files": 23
+  },
+  "worker_followup": {
+    "absolute_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/gpu/deep-worker-followup-20261018T1710",
+    "manifest_sha256": "e18e20963f543d07f0cdfe3eceb647a1d3f5549441cdf223f7085c5e6e5c03c2",
+    "verified_payload_files": 35
+  },
+  "adapter_negative": {
+    "absolute_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/gpu/deep-adapter-lifecycle-20261018T1720",
+    "manifest_sha256": "a3af0809f407d031ef7e9ca2d46f2f5d47f7333fb9b5fe288fc7aebc0a732352",
+    "verified_payload_files": 58
+  }
+}
