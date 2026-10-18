@@ -1096,16 +1096,20 @@ class OpenAIServingResponses(GenerateBaseServing):
         *args,
         **kwargs,
     ):
-        response = await self.responses_full_generator(request, *args, **kwargs)
+        response_id = request.request_id
+        try:
+            response = await self.responses_full_generator(request, *args, **kwargs)
+        except Exception:
+            logger.exception("Background response %s failed", response_id)
+        else:
+            if not isinstance(response, ErrorResponse):
+                return
 
-        if isinstance(response, ErrorResponse):
-            # If the request has failed, update the status to "failed".
-            response_id = request.request_id
-            async with self.response_store_lock:
-                stored_response = self.response_store.get(response_id)
-                assert stored_response is not None
-                if stored_response.status not in ("completed", "cancelled"):
-                    stored_response.status = "failed"
+        async with self.response_store_lock:
+            stored_response = self.response_store.get(response_id)
+            assert stored_response is not None
+            if stored_response.status in ("queued", "in_progress"):
+                stored_response.status = "failed"
 
     async def responses_background_stream_generator(
         self,
