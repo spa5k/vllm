@@ -1,0 +1,22 @@
+{
+  "observed_utc": "2026-10-18T18:00:54.968863+00:00",
+  "scope": "Read-only local saved automation state before the authorized report commit. No status or schedule was changed.",
+  "automations": [
+    {
+      "id": "vllm-contribution-research-for-48-hours",
+      "name": "vLLM deep fixes until 19 October",
+      "status": "PAUSED",
+      "updated_at": 1792344266440,
+      "source_path": "/Users/pacific/.codex/automations/vllm-contribution-research-for-48-hours/automation.toml",
+      "source_sha256": "bec2ee7d917ad9facf255cf6cf39aaca7a04c42739975eec4510ebeb18324948"
+    },
+    {
+      "id": "dynamo-contribution-research-two-days",
+      "name": "Dynamo \u2014 substantial fixes and validation",
+      "status": "PAUSED",
+      "updated_at": 1792343907939,
+      "source_path": "/Users/pacific/.codex/automations/dynamo-contribution-research-two-days/automation.toml",
+      "source_sha256": "4dfb28f723e11d7a7caec47e73e03479d1a5f0c72394b9b45fc8b21745d5e291"
+    }
+  ]
+}

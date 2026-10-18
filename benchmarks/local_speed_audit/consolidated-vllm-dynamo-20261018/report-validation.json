@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-10-18T18:00:54.968863+00:00",
+  "scope": "Report, HTML and saved-record checks only. No product experiments, model runs, paid jobs or upstream PR action.",
+  "result": "PASS",
+  "report_count": 3,
+  "local_citations_checked": 161,
+  "remote_links_present_not_http_checked": 36,
+  "historical_source_files_hashed": 64,
+  "historical_inventory_hash_mismatches": [],
+  "missing_local_targets": [],
+  "out_of_range_cited_lines": [],
+  "unresolved_reference_links": [],
+  "public_prs_checked": 15,
+  "public_pr_states": {
+    "OPEN": 8,
+    "MERGED": 4,
+    "CLOSED": 3
+  },
+  "automations_paused": true,
+  "independent_source_review": {
+    "dynamo": "No material correction.",
+    "vllm": "Three clarifications applied: fallback copy mechanism; PCP policy-port warning; existing FP8 dispatch PR."
+  },
+  "source_index_sha256": "e6a6f771352ba80c258dd63dca215552e09c8e8064e9bb9b7acb32aaef8a08be",
+  "consolidated_file_sha256": "5b9aa664980a010bd93e04b9e7cd37886262c827dd588b31a0e3ad2828d9b6bf",
+  "historical_results_reproduced_for_this_report": false,
+  "html_sha256": "eb78994c362c55179e6db4d5be26ce1a0d22bf035740705a7851511f07de2e49",
+  "html_browser_checks": {
+    "desktop_viewport": [
+      1440,
+      1000
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "page_overflow_at_either_viewport": false,
+    "public_pr_rows": 15,
+    "vllm_filter_rows": 6,
+    "dynamo_merged_filter_rows": 3,
+    "empty_search_state": true,
+    "reset_restores_15_rows": true,
+    "embedded_full_reports": 3,
+    "unique_element_ids": true,
+    "broken_internal_anchor_count": 0,
+    "print_expands_and_restores_details": true,
+    "deep_link_opens_appendix": true,
+    "console_errors_or_warnings": 0,
+    "external_assets": 0,
+    "screenshots_visually_reviewed": true
+  },
+  "repository_checks": {
+    "pre_commit_selected_authored_files": "PASS on corrected second run",
+    "initial_findings_fixed": [
+      "Markdown table spacing",
+      "Ruff formatting",
+      "Remove forbidden re import"
+    ],
+    "json_parser": "All packet JSON parsed",
+    "product_tests": "Not applicable to this report update"
+  }
+}

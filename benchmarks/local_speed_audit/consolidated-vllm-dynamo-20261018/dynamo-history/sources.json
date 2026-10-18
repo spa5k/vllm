@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "synthesized_utc": "2026-10-18T17:39:03.746324+00:00",
+  "period_requested": "about two weeks through 18 October 2026",
+  "period_supported_by_this_dynamo_inventory": "9\u201318 October 2026",
+  "thread_ids": [
+    "01a149d4-7366-7500-8720-f9ea53d2a6f6",
+    "01a11fa5-feee-7600-8c33-4583643552d3"
+  ],
+  "scope": "Historical read-only synthesis. No product runs, installs, builds, paid launches, resource queries, automation changes or publishing by this subagent. Current public status file was supplied by the parent coordinator. Existing records are not independently rerun.",
+  "report": {
+    "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/dynamo-history/REPORT.md",
+    "bytes": 32198,
+    "sha256": "9e1527d58168388f4a4d37fc03288b775aae2fbb923eb5e642aa1b4b926a4ca5"
+  },
+  "source_count": 27,
+  "sources": [
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/DETAILED-RESEARCH-REPORT.md",
+      "bytes": 55477,
+      "sha256": "f6bd4a82b062efe95198949858c43c21baa4d53b328a21f81b7a116e4e19f5c6",
+      "line_count": 323,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/IMPLEMENTATION-RECORD.md",
+      "bytes": 17287,
+      "sha256": "4c3ef659aaa44795a819e1c221909c51688a00c593b3412ebf47f31ba02be027",
+      "line_count": 113,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/IMPLEMENTATION-STATUS.md",
+      "bytes": 9963,
+      "sha256": "35dd364faaa3f4f9cf40d507443587c15cbacf6cfa984304be120ab76866c42b",
+      "line_count": 55,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/budget.json",
+      "bytes": 18439,
+      "sha256": "46f8da8aa185e16d86cbd2d7f06579bb11297fc47efc5e9334c0fe42482c5f62",
+      "line_count": 405,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/checkpoints/20261018T141034Z/artifact-manifest.json",
+      "bytes": 2445,
+      "sha256": "4198d8980aed21fbf9020299e5f63ed17a3acba480353a9ee76a01227a6050e5",
+      "line_count": 66,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/continuation-status.json",
+      "bytes": 349337,
+      "sha256": "3c1b87e3768d75b9de52d53c97d1383dfe3061a21872eab1681a81f973a55c98",
+      "line_count": 7593,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/frontend-context-test-plan-9530/result.json",
+      "bytes": 781,
+      "sha256": "532bc2ba4f6b03fca33b4db9fb4bd0eaee7cb161e2a5d4a10131cddc4a3c2a68",
+      "line_count": 33,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/notes/deep-owner-followup-9620.md",
+      "bytes": 4312,
+      "sha256": "74433c1cc091aa3791210853e8df489826c6d2008fae0305ebe4be2df5e56263",
+      "line_count": 21,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/notes/frontend-context-result-review-9539.md",
+      "bytes": 4030,
+      "sha256": "0af947e331b170f8be0eccd502210306044597fbea8981e33778e05f1ba76878",
+      "line_count": 24,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/notes/profiler-artifact-provenance-review-9545.md",
+      "bytes": 4320,
+      "sha256": "3bcd60c9817a1b1e6ee15cf9c5e442e4b2789f675de69d4f94e407ae40cdd218",
+      "line_count": 19,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/REPORT.json",
+      "bytes": 11107,
+      "sha256": "c42d2a97f05de2bf2eae4394557ba24f21d74e8c3902a46e59c02ff4ed3a7617",
+      "line_count": 204,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/extended-core/report.json",
+      "bytes": 36192,
+      "sha256": "bf1670ec9009f5ce14f8084baecd8dae41fa08e396212c3e5703d3fce314b46c",
+      "line_count": 646,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/fixes/cpu-probe-review.md",
+      "bytes": 5936,
+      "sha256": "4a508935fd2025a31e475c3e4d08b36d26e636a875882eb8294c8a6145710081",
+      "line_count": 35,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/submission-review/report.json",
+      "bytes": 63346,
+      "sha256": "2448da9f7c3c1881ea9a0c21ee402047e4eab716afb845beb372ce6e66a01148",
+      "line_count": 1919,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261010/core-bug-research/REPORT.txt",
+      "bytes": 4748,
+      "sha256": "fd1f198ef52c27ccfc2b9969286ebd4534ce2cb3a59c0af8b958a49b5932009b",
+      "line_count": 36,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261010/core-implementation/report.json",
+      "bytes": 112726,
+      "sha256": "e1078e7a64daa8af2f443a73cf2abb8c7307f39f5d4e8b922f12bf4c4cefa016",
+      "line_count": 2445,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261010/pr-worthiness/REPORT.txt",
+      "bytes": 17519,
+      "sha256": "f5661c3cc21928d658087d8b1d88e6f3ed749829f50b79d80d0f37063e5e7a45",
+      "line_count": 169,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261012/base-refresh/REPORT.txt",
+      "bytes": 2890,
+      "sha256": "8fb969e30a4ea8b4d10153dc108d2c7d7a8674e6ffc7f024399702dc8a5a8f53",
+      "line_count": 26,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261013/prefill-review-nits/REPORT.txt",
+      "bytes": 2234,
+      "sha256": "2e436bb77a38f87e6de858b9ab15fb7b69fc0c369f0c8f51df16f9ffc4fc3aa8",
+      "line_count": 19,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261013/submitted-pr-review-check/REPORT.txt",
+      "bytes": 7187,
+      "sha256": "6e9ea2f5e899403f6b91b44928714aa63fc80ee849a40431ea5ab29ba9c75de2",
+      "line_count": 66,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/codec-ingress/REPORT.md",
+      "bytes": 8991,
+      "sha256": "fa94fc55de30ae604037003c57d57a9abd7f7a8305cc0d0d6b653500b5f2b3a5",
+      "line_count": 105,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/core-fixes/REPORT.md",
+      "bytes": 9936,
+      "sha256": "49d3a2e7357079ade590ac01a93bf80a8a40b460d7443e5752e5503a15728ffd",
+      "line_count": 116,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/core-gpu-followup/REPORT.md",
+      "bytes": 13972,
+      "sha256": "aa533e623dc21d939ad15d106078ac7de3b37770026b9a02197e7c215e45ffc2",
+      "line_count": 62,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/next-core/REPORT.md",
+      "bytes": 7905,
+      "sha256": "7883c1e4af42cd9e4d24994653dee415577868664a5a46076f16a16d1bdf27d4",
+      "line_count": 89,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/deep-core-five-hour/REPORT.md",
+      "bytes": 18745,
+      "sha256": "093ec6d3a6bdc4460caa2d935c7db531250554aa664989cdb1a6ceae2b7d8263",
+      "line_count": 264,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261017/pr-15973-review/REVIEW.md",
+      "bytes": 5496,
+      "sha256": "edd6ca4b520f24e737d53e1e9a5cbc81902ed541b1d4653183fb935eea7c5432",
+      "line_count": 57,
+      "role": "saved_historical_evidence"
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/public-pr-state.json",
+      "bytes": 92205,
+      "sha256": "dda92dc874933bea0944b96d00208f6e49f1072e0f59d825503eaa097ad30797",
+      "line_count": 3392,
+      "role": "coordinator_current_read_only_public_state"
+    }
+  ],
+  "limitations": [
+    "No saved evidence before 9 October was selected for Dynamo; do not imply a complete two-week period.",
+    "Original source work and experiment counts overlap; do not sum tests or component gains.",
+    "Current upstream state is only the coordinator dated public metadata capture, not a current integration test.",
+    "Dynamo private record head is last saved push evidence, not a fresh remote ref query.",
+    "Costs are non-comparable reservations, partial meter data and requested-rate estimates; no complete combined invoice is established.",
+    "Old saved continuation says active; current coordinator check says both schedules PAUSED.",
+    "Read-only missing snapshot-manifest filename corrected to actual artifact-manifest.json; broad clipped outputs were replaced with exact reads. These are not product failures."
+  ]
+}

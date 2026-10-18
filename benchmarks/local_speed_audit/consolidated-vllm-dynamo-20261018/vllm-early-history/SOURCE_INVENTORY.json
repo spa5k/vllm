@@ -1,0 +1,352 @@
+{
+  "created_utc": "2026-10-18T17:37:44.749547+00:00",
+  "scope": "Historical saved first-party research records, mainly8\u201315October2026. No new runtime, upstream-status verification, cloud job or publication. All source links resolve locally.",
+  "earliest_record_scope": "Public PR bodies retain preceding6\u20137October work; main dated source reports8\u201315October.",
+  "source_count": 33,
+  "local_link_count": 79,
+  "sources": [
+    {
+      "path": "benchmarks/local_speed_audit/compiler-heavy-audit-20261008/REPORT.md",
+      "bytes": 9603,
+      "sha256": "74832b30a2bea71e60de7eb0f630b73e1d61e1892cc990cf19482a926b1ce6e0",
+      "lines": 86,
+      "cited_lines": [
+        11,
+        71
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/compiler-heavy-audit-20261008/frontend/REPORT.md",
+      "bytes": 6525,
+      "sha256": "b2dd623937aa0d69b957702aed6d58ecc477bfc04ef1abe45fec0dd770ebfa84",
+      "lines": 53,
+      "cited_lines": [
+        9
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-budget-validation-5h-20261015/COMPLETED.json",
+      "bytes": 1656,
+      "sha256": "30a70654bc2b447731daa1cc2209bc5c18dba3290fb8f3f39b7cc988dd457e70",
+      "lines": 34,
+      "cited_lines": []
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-budget-validation-5h-20261015/FINAL_BRANCH_VERIFICATION.json",
+      "bytes": 1497,
+      "sha256": "3a17239e3f0e4c2fa1826f920a0a9a052705069fee426f0f09a4d8a3f98dd11b",
+      "lines": 33,
+      "cited_lines": []
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-budget-validation-5h-20261015/REPORT.md",
+      "bytes": 19262,
+      "sha256": "64331c74872a1a75c10a19f826acbcc790e4dcf7d0e8a2a62aef9568e4d54083",
+      "lines": 119,
+      "cited_lines": [
+        20,
+        42,
+        48,
+        59,
+        75,
+        81,
+        85,
+        87,
+        89,
+        97
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-continue-20261010/REPORT.md",
+      "bytes": 17351,
+      "sha256": "73334079cb7887e21a89700f851cfe107de3a29384c8b696162bbb060f61b5c8",
+      "lines": 100,
+      "cited_lines": [
+        77
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md",
+      "bytes": 15211,
+      "sha256": "b54f1835912268e4a9adfb3edf9594616d748de575add41e7ea4f911afd15565",
+      "lines": 90,
+      "cited_lines": [
+        9,
+        39,
+        80,
+        82
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-finalize-20261014/REVIEW_QUEUE.json",
+      "bytes": 17797,
+      "sha256": "00cd6d996308719537306464549c370199a700a7ae9a241f9d86739ce56d4c05",
+      "lines": 282,
+      "cited_lines": []
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-implementation-20261010/REPORT.md",
+      "bytes": 13911,
+      "sha256": "9198346cca900cc3b0363683d4c8ffe9273fe89a40825ee91877d5959a8ff647",
+      "lines": 117,
+      "cited_lines": [
+        11
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-local-followup-20261015/REPORT.md",
+      "bytes": 9504,
+      "sha256": "32f73f79ed4ee24ab6b5b27c87cc1f84f5bb81b05387928e97503a2f0ad8e760",
+      "lines": 86,
+      "cited_lines": [
+        16
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-next-20261010/REPORT.md",
+      "bytes": 17104,
+      "sha256": "e917f33bc3783a00d37e06efe41180926506ce14a3441841fbaa0086fad64d45",
+      "lines": 115,
+      "cited_lines": [
+        55,
+        83,
+        89,
+        99
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-production-20261015/REPORT.md",
+      "bytes": 9994,
+      "sha256": "5f69e820879e1d9f359cf653b463c3233b697a48e2e93a6822fc2adc295afa2e",
+      "lines": 82,
+      "cited_lines": [
+        7,
+        13,
+        34
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-radical-20261015/REPORT.md",
+      "bytes": 40622,
+      "sha256": "0a766475c256611220b5921161a1d73e7c8988b62478d13513697dcbb9a5db00",
+      "lines": 178,
+      "cited_lines": [
+        21,
+        27,
+        31,
+        37,
+        41,
+        66,
+        90,
+        102,
+        122,
+        132,
+        136,
+        144,
+        148,
+        158,
+        170
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-ready-20261010/REPORT.md",
+      "bytes": 5956,
+      "sha256": "9a6bb99c45e1427629e047227b291af24fc16111506961e8b4b6d9a14a3b322f",
+      "lines": 43,
+      "cited_lines": [
+        35
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-research-20261009/REPORT.md",
+      "bytes": 21351,
+      "sha256": "0638112ee2e912a706a1bd789ed2fcd2d6f7c991397a80eda06ea0a23d23308f",
+      "lines": 158,
+      "cited_lines": [
+        138,
+        152
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-speed-next-20261014/REPORT.md",
+      "bytes": 11425,
+      "sha256": "4f6de1ea99047d4dc04b645daf15e771b1ffe9cff394c608aba6d0cc0cf8d376",
+      "lines": 105,
+      "cited_lines": [
+        74
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-validation-4h-20261010/REPORT.md",
+      "bytes": 25773,
+      "sha256": "96c5b9e52e6deb298eb32880166ab16f40a73a0f08a6da7d2fa33d58618ef1b1",
+      "lines": 412,
+      "cited_lines": [
+        16,
+        29,
+        45,
+        257
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/core-validation-4h-20261010/public-review/REPORT.md",
+      "bytes": 9715,
+      "sha256": "434e674f8412b42842248344fd97d7f941b8e8347bca2e3ffbf87b1ef1b5a01d",
+      "lines": 56,
+      "cited_lines": [
+        20
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/generic-startup-audit-20261008/REPORT.md",
+      "bytes": 12010,
+      "sha256": "621276bdd812565e2b6752596503df5ee26e2f6fd947274d1de6f32193984fb7",
+      "lines": 105,
+      "cited_lines": [
+        46,
+        67
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/generic-startup-audit-20261008/final-validation/REPORT.md",
+      "bytes": 12359,
+      "sha256": "05681696dcfabee2e7209bae32039c8cc011cd941e02b491fbe3571077a01f12",
+      "lines": 96,
+      "cited_lines": [
+        5,
+        51,
+        65
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/postgrad-generic-audit-20261008/source-review/REPORT.md",
+      "bytes": 10120,
+      "sha256": "851f78429403a0f75f8477eca4ebd29b8095e54ecb5ab157cc49e81a12a591f5",
+      "lines": 61,
+      "cited_lines": [
+        25
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-actions-20261009/REPORT.md",
+      "bytes": 5179,
+      "sha256": "81febe6299e52cc2accc184548d84f6ce34dffa6101d75c8fa4c9ae8c0e31d4c",
+      "lines": 43,
+      "cited_lines": []
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-main-refresh-20261012/REPORT.md",
+      "bytes": 8633,
+      "sha256": "0df16c4a1a94d28c4ea33707aff0576cd80fa44e11e389ee242013c9a7979643",
+      "lines": 142,
+      "cited_lines": [
+        18,
+        78,
+        103
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60143-body-ready.md",
+      "bytes": 4924,
+      "sha256": "2bb1b853f26529c5a8253b46879e5c7af023078b882996df12871def7b40bd1f",
+      "lines": 68,
+      "cited_lines": [
+        3,
+        13
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60227-body-ready.md",
+      "bytes": 5087,
+      "sha256": "1b64d7114f7527ce92715d633f06d4bece4cd5dae1c24ec9cd732b84daa07460",
+      "lines": 66,
+      "cited_lines": [
+        3,
+        13
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60228-body-ready.md",
+      "bytes": 5390,
+      "sha256": "18503e86cc8c2c300c67b8edea2ff01f9a51b6227a8f10f091badbc0466c5c13",
+      "lines": 72,
+      "cited_lines": [
+        3,
+        13
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60688-body-ready.md",
+      "bytes": 4040,
+      "sha256": "4732183efd3b01f08eb26bd462b1eba20ac8b7419bfdb92cbccb68f12cdc98e0",
+      "lines": 56,
+      "cited_lines": [
+        3
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-refresh-20261008/REPORT.md",
+      "bytes": 4984,
+      "sha256": "381e2fadfdf0db6f3d547fe5514e8dfd5c5929d46d7c3bb03a1406ab31aecff9",
+      "lines": 52,
+      "cited_lines": []
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-refresh-20261008/pr-60497-description.md",
+      "bytes": 4651,
+      "sha256": "7289cd524b9a81f7b9649e73199d123e240ff0fa9b8b2197c3ad7d0b8e36a3ba",
+      "lines": 65,
+      "cited_lines": [
+        3
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr-review-push-20261012/REPORT.md",
+      "bytes": 8280,
+      "sha256": "7f5e116dddddbf66ec9a7addca80e632da7314d336c37c9f270e2772093181b4",
+      "lines": 62,
+      "cited_lines": []
+    },
+    {
+      "path": "benchmarks/local_speed_audit/pr60497-ci-fix-20261009/REPORT.md",
+      "bytes": 5150,
+      "sha256": "77700b3443160feb9ba3dd49f97d34fab795b96e88fe108116f3ce08ce06422b",
+      "lines": 56,
+      "cited_lines": []
+    },
+    {
+      "path": "benchmarks/local_speed_audit/submission-preparation-20261008/METRICS_PR_DESCRIPTION.md",
+      "bytes": 5255,
+      "sha256": "58fdc4267e79f3c9efb9a47163269ef32b1d94703e7aab41a5b75e400a8891c4",
+      "lines": 68,
+      "cited_lines": [
+        3
+      ]
+    },
+    {
+      "path": "benchmarks/local_speed_audit/two-gpu-profile-20261008/REPORT.md",
+      "bytes": 19458,
+      "sha256": "dfb8d3c6b409fe50ca52741b1228871d9bb70a8bf05e8e70d65eb49a5d21bdbd",
+      "lines": 198,
+      "cited_lines": [
+        17,
+        53,
+        69,
+        143,
+        167
+      ]
+    }
+  ],
+  "report": {
+    "path": "benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/vllm-early-history/REPORT.md",
+    "bytes": 39888,
+    "sha256": "9a2b90060d1bd0695d399b41c27cd94b4289fec031c271f8b0565bdd1bbf7335"
+  },
+  "status_limits": [
+    "Historical PR states are not current GitHub states.",
+    "Successive versions and repeated cases overlap; do not sum counts.",
+    "Device/native, source/mocked, synthetic-model and trained-quality proof stay separate.",
+    "Resource estimates use different boundaries and may reuse earlier resource snapshots; no all-project dollar total.",
+    "No goal or schedule changed."
+  ]
+}

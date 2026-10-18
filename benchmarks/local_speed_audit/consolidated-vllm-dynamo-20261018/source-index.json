@@ -1,0 +1,564 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-18T18:00:54.968863+00:00",
+  "period_india": "6–18 October 2026",
+  "scope": "Checksums for the historical records and local consolidation. These checks verify file identity, not the underlying experiment. No models, build targets, credentials, environment trees or binaries were copied.",
+  "source_file_count": 64,
+  "sources": [
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/DETAILED-RESEARCH-REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 55477,
+      "sha256": "f6bd4a82b062efe95198949858c43c21baa4d53b328a21f81b7a116e4e19f5c6",
+      "line_count": 323
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/IMPLEMENTATION-PLAN.md",
+      "role": "historical_primary_record",
+      "bytes": 7997,
+      "sha256": "bd2f1dc8d1c9849db5135b1e1c97f094485d383f91d5c2a46d6b42b7c2aca3cc",
+      "line_count": 55
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/IMPLEMENTATION-RECORD.md",
+      "role": "historical_primary_record",
+      "bytes": 17287,
+      "sha256": "4c3ef659aaa44795a819e1c221909c51688a00c593b3412ebf47f31ba02be027",
+      "line_count": 113
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/IMPLEMENTATION-STATUS.md",
+      "role": "historical_primary_record",
+      "bytes": 9963,
+      "sha256": "35dd364faaa3f4f9cf40d507443587c15cbacf6cfa984304be120ab76866c42b",
+      "line_count": 55
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/budget.json",
+      "role": "historical_primary_record",
+      "bytes": 18439,
+      "sha256": "46f8da8aa185e16d86cbd2d7f06579bb11297fc47efc5e9334c0fe42482c5f62",
+      "line_count": 405
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/checkpoints/20261018T141034Z/artifact-manifest.json",
+      "role": "historical_primary_record",
+      "bytes": 2445,
+      "sha256": "4198d8980aed21fbf9020299e5f63ed17a3acba480353a9ee76a01227a6050e5",
+      "line_count": 66
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/continuation-status.json",
+      "role": "historical_primary_record",
+      "bytes": 349337,
+      "sha256": "3c1b87e3768d75b9de52d53c97d1383dfe3061a21872eab1681a81f973a55c98",
+      "line_count": 7593
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/frontend-context-test-plan-9530/result.json",
+      "role": "historical_primary_record",
+      "bytes": 781,
+      "sha256": "532bc2ba4f6b03fca33b4db9fb4bd0eaee7cb161e2a5d4a10131cddc4a3c2a68",
+      "line_count": 33
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/notes/deep-owner-followup-9620.md",
+      "role": "historical_primary_record",
+      "bytes": 4312,
+      "sha256": "74433c1cc091aa3791210853e8df489826c6d2008fae0305ebe4be2df5e56263",
+      "line_count": 21
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/notes/frontend-context-result-review-9539.md",
+      "role": "historical_primary_record",
+      "bytes": 4030,
+      "sha256": "0af947e331b170f8be0eccd502210306044597fbea8981e33778e05f1ba76878",
+      "line_count": 24
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/notes/profiler-artifact-provenance-review-9545.md",
+      "role": "historical_primary_record",
+      "bytes": 4320,
+      "sha256": "3bcd60c9817a1b1e6ee15cf9c5e442e4b2789f675de69d4f94e407ae40cdd218",
+      "line_count": 19
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-final-20261018/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 10738,
+      "sha256": "a7391612c5c4e3dfcbe3fcd14575d75aa4c160c446c4b984d51fa325bc1fc24f",
+      "line_count": 182
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-record-20261018/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 20787,
+      "sha256": "39a660d318ad1b787e4dcfd138e0294fdbabf39341e18132549be5e42d2de5ff",
+      "line_count": 402
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/REPORT.json",
+      "role": "historical_primary_record",
+      "bytes": 11107,
+      "sha256": "c42d2a97f05de2bf2eae4394557ba24f21d74e8c3902a46e59c02ff4ed3a7617",
+      "line_count": 204
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/extended-core/report.json",
+      "role": "historical_primary_record",
+      "bytes": 36192,
+      "sha256": "bf1670ec9009f5ce14f8084baecd8dae41fa08e396212c3e5703d3fce314b46c",
+      "line_count": 646
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/fixes/cpu-probe-review.md",
+      "role": "historical_primary_record",
+      "bytes": 5936,
+      "sha256": "4a508935fd2025a31e475c3e4d08b36d26e636a875882eb8294c8a6145710081",
+      "line_count": 35
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261009/submission-review/report.json",
+      "role": "historical_primary_record",
+      "bytes": 63346,
+      "sha256": "2448da9f7c3c1881ea9a0c21ee402047e4eab716afb845beb372ce6e66a01148",
+      "line_count": 1919
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261010/core-bug-research/REPORT.txt",
+      "role": "historical_primary_record",
+      "bytes": 4748,
+      "sha256": "fd1f198ef52c27ccfc2b9969286ebd4534ce2cb3a59c0af8b958a49b5932009b",
+      "line_count": 36
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261010/core-implementation/report.json",
+      "role": "historical_primary_record",
+      "bytes": 112726,
+      "sha256": "e1078e7a64daa8af2f443a73cf2abb8c7307f39f5d4e8b922f12bf4c4cefa016",
+      "line_count": 2445
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261010/pr-worthiness/REPORT.txt",
+      "role": "historical_primary_record",
+      "bytes": 17519,
+      "sha256": "f5661c3cc21928d658087d8b1d88e6f3ed749829f50b79d80d0f37063e5e7a45",
+      "line_count": 169
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261012/base-refresh/REPORT.txt",
+      "role": "historical_primary_record",
+      "bytes": 2890,
+      "sha256": "8fb969e30a4ea8b4d10153dc108d2c7d7a8674e6ffc7f024399702dc8a5a8f53",
+      "line_count": 26
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261013/prefill-review-nits/REPORT.txt",
+      "role": "historical_primary_record",
+      "bytes": 2234,
+      "sha256": "2e436bb77a38f87e6de858b9ab15fb7b69fc0c369f0c8f51df16f9ffc4fc3aa8",
+      "line_count": 19
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261013/submitted-pr-review-check/REPORT.txt",
+      "role": "historical_primary_record",
+      "bytes": 7187,
+      "sha256": "6e9ea2f5e899403f6b91b44928714aa63fc80ee849a40431ea5ab29ba9c75de2",
+      "line_count": 66
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/codec-ingress/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 8991,
+      "sha256": "fa94fc55de30ae604037003c57d57a9abd7f7a8305cc0d0d6b653500b5f2b3a5",
+      "line_count": 105
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/core-fixes/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 9936,
+      "sha256": "49d3a2e7357079ade590ac01a93bf80a8a40b460d7443e5752e5503a15728ffd",
+      "line_count": 116
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/core-gpu-followup/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 13972,
+      "sha256": "aa533e623dc21d939ad15d106078ac7de3b37770026b9a02197e7c215e45ffc2",
+      "line_count": 62
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261014/next-core/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 7905,
+      "sha256": "7883c1e4af42cd9e4d24994653dee415577868664a5a46076f16a16d1bdf27d4",
+      "line_count": 89
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/deep-core-five-hour/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 18745,
+      "sha256": "093ec6d3a6bdc4460caa2d935c7db531250554aa664989cdb1a6ceae2b7d8263",
+      "line_count": 264
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 8058,
+      "sha256": "53e9c4a7f1644b043f0541fedd0193280acb7e8f3856565f33f6da32fb651f9e",
+      "line_count": 81
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261017/pr-15973-review/REVIEW.md",
+      "role": "historical_primary_record",
+      "bytes": 5496,
+      "sha256": "edd6ca4b520f24e737d53e1e9a5cbc81902ed541b1d4653183fb935eea7c5432",
+      "line_count": 57
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/compiler-heavy-audit-20261008/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 9603,
+      "sha256": "74832b30a2bea71e60de7eb0f630b73e1d61e1892cc990cf19482a926b1ce6e0",
+      "line_count": 86
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/compiler-heavy-audit-20261008/frontend/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 6525,
+      "sha256": "b2dd623937aa0d69b957702aed6d58ecc477bfc04ef1abe45fec0dd770ebfa84",
+      "line_count": 53
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/public-pr-state.json",
+      "role": "historical_primary_record",
+      "bytes": 92205,
+      "sha256": "dda92dc874933bea0944b96d00208f6e49f1072e0f59d825503eaa097ad30797",
+      "line_count": 3392
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-budget-validation-5h-20261015/COMPLETED.json",
+      "role": "historical_primary_record",
+      "bytes": 1656,
+      "sha256": "30a70654bc2b447731daa1cc2209bc5c18dba3290fb8f3f39b7cc988dd457e70",
+      "line_count": 34
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-budget-validation-5h-20261015/FINAL_BRANCH_VERIFICATION.json",
+      "role": "historical_primary_record",
+      "bytes": 1497,
+      "sha256": "3a17239e3f0e4c2fa1826f920a0a9a052705069fee426f0f09a4d8a3f98dd11b",
+      "line_count": 33
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-budget-validation-5h-20261015/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 19262,
+      "sha256": "64331c74872a1a75c10a19f826acbcc790e4dcf7d0e8a2a62aef9568e4d54083",
+      "line_count": 119
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-continue-20261010/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 17351,
+      "sha256": "73334079cb7887e21a89700f851cfe107de3a29384c8b696162bbb060f61b5c8",
+      "line_count": 100
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 15211,
+      "sha256": "b54f1835912268e4a9adfb3edf9594616d748de575add41e7ea4f911afd15565",
+      "line_count": 90
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REVIEW_QUEUE.json",
+      "role": "historical_primary_record",
+      "bytes": 17797,
+      "sha256": "00cd6d996308719537306464549c370199a700a7ae9a241f9d86739ce56d4c05",
+      "line_count": 282
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-implementation-20261010/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 13911,
+      "sha256": "9198346cca900cc3b0363683d4c8ffe9273fe89a40825ee91877d5959a8ff647",
+      "line_count": 117
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-local-followup-20261015/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 9504,
+      "sha256": "32f73f79ed4ee24ab6b5b27c87cc1f84f5bb81b05387928e97503a2f0ad8e760",
+      "line_count": 86
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-next-20261010/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 17104,
+      "sha256": "e917f33bc3783a00d37e06efe41180926506ce14a3441841fbaa0086fad64d45",
+      "line_count": 115
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-production-20261015/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 9994,
+      "sha256": "5f69e820879e1d9f359cf653b463c3233b697a48e2e93a6822fc2adc295afa2e",
+      "line_count": 82
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-radical-20261015/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 40622,
+      "sha256": "0a766475c256611220b5921161a1d73e7c8988b62478d13513697dcbb9a5db00",
+      "line_count": 178
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-ready-20261010/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 5956,
+      "sha256": "9a6bb99c45e1427629e047227b291af24fc16111506961e8b4b6d9a14a3b322f",
+      "line_count": 43
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-research-20261009/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 21351,
+      "sha256": "0638112ee2e912a706a1bd789ed2fcd2d6f7c991397a80eda06ea0a23d23308f",
+      "line_count": 158
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-speed-next-20261014/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 11425,
+      "sha256": "4f6de1ea99047d4dc04b645daf15e771b1ffe9cff394c608aba6d0cc0cf8d376",
+      "line_count": 105
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-validation-4h-20261010/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 25773,
+      "sha256": "96c5b9e52e6deb298eb32880166ab16f40a73a0f08a6da7d2fa33d58618ef1b1",
+      "line_count": 412
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-validation-4h-20261010/public-review/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 9715,
+      "sha256": "434e674f8412b42842248344fd97d7f941b8e8347bca2e3ffbf87b1ef1b5a01d",
+      "line_count": 56
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/generic-startup-audit-20261008/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 12010,
+      "sha256": "621276bdd812565e2b6752596503df5ee26e2f6fd947274d1de6f32193984fb7",
+      "line_count": 105
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/generic-startup-audit-20261008/final-validation/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 12359,
+      "sha256": "05681696dcfabee2e7209bae32039c8cc011cd941e02b491fbe3571077a01f12",
+      "line_count": 96
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/postgrad-generic-audit-20261008/source-review/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 10120,
+      "sha256": "851f78429403a0f75f8477eca4ebd29b8095e54ecb5ab157cc49e81a12a591f5",
+      "line_count": 61
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-actions-20261009/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 5179,
+      "sha256": "81febe6299e52cc2accc184548d84f6ce34dffa6101d75c8fa4c9ae8c0e31d4c",
+      "line_count": 43
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-main-refresh-20261012/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 8633,
+      "sha256": "0df16c4a1a94d28c4ea33707aff0576cd80fa44e11e389ee242013c9a7979643",
+      "line_count": 142
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60143-body-ready.md",
+      "role": "historical_primary_record",
+      "bytes": 4924,
+      "sha256": "2bb1b853f26529c5a8253b46879e5c7af023078b882996df12871def7b40bd1f",
+      "line_count": 68
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60227-body-ready.md",
+      "role": "historical_primary_record",
+      "bytes": 5087,
+      "sha256": "1b64d7114f7527ce92715d633f06d4bece4cd5dae1c24ec9cd732b84daa07460",
+      "line_count": 66
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60228-body-ready.md",
+      "role": "historical_primary_record",
+      "bytes": 5390,
+      "sha256": "18503e86cc8c2c300c67b8edea2ff01f9a51b6227a8f10f091badbc0466c5c13",
+      "line_count": 72
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-main-refresh-20261012/pr-60688-body-ready.md",
+      "role": "historical_primary_record",
+      "bytes": 4040,
+      "sha256": "4732183efd3b01f08eb26bd462b1eba20ac8b7419bfdb92cbccb68f12cdc98e0",
+      "line_count": 56
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-refresh-20261008/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 4984,
+      "sha256": "381e2fadfdf0db6f3d547fe5514e8dfd5c5929d46d7c3bb03a1406ab31aecff9",
+      "line_count": 52
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-refresh-20261008/pr-60497-description.md",
+      "role": "historical_primary_record",
+      "bytes": 4651,
+      "sha256": "7289cd524b9a81f7b9649e73199d123e240ff0fa9b8b2197c3ad7d0b8e36a3ba",
+      "line_count": 65
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr-review-push-20261012/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 8280,
+      "sha256": "7f5e116dddddbf66ec9a7addca80e632da7314d336c37c9f270e2772093181b4",
+      "line_count": 62
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/pr60497-ci-fix-20261009/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 5150,
+      "sha256": "77700b3443160feb9ba3dd49f97d34fab795b96e88fe108116f3ce08ce06422b",
+      "line_count": 56
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/submission-preparation-20261008/METRICS_PR_DESCRIPTION.md",
+      "role": "historical_primary_record",
+      "bytes": 5255,
+      "sha256": "58fdc4267e79f3c9efb9a47163269ef32b1d94703e7aab41a5b75e400a8891c4",
+      "line_count": 68
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/two-gpu-profile-20261008/REPORT.md",
+      "role": "historical_primary_record",
+      "bytes": 19458,
+      "sha256": "dfb8d3c6b409fe50ca52741b1228871d9bb70a8bf05e8e70d65eb49a5d21bdbd",
+      "line_count": 198
+    }
+  ],
+  "report_artifact_count": 12,
+  "report_artifacts": [
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/README.md",
+      "packet_relative_path": "README.md",
+      "role": "consolidated_report_artifact",
+      "bytes": 1617,
+      "sha256": "628c58ab92eedc65f1d092c3be36da31c5144d328e07ae9256404ab77a9e8a90",
+      "line_count": 33
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/REPORT.md",
+      "packet_relative_path": "REPORT.md",
+      "role": "consolidated_report_artifact",
+      "bytes": 48475,
+      "sha256": "5b9aa664980a010bd93e04b9e7cd37886262c827dd588b31a0e3ad2828d9b6bf",
+      "line_count": 666
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/automation-state.json",
+      "packet_relative_path": "automation-state.json",
+      "role": "consolidated_report_artifact",
+      "bytes": 981,
+      "sha256": "bedc5642574a2930330af988ab6c9617078e8fee95c4ef6f7f00ae4265960adc",
+      "line_count": 22
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/dynamo-history/REPORT.md",
+      "packet_relative_path": "dynamo-history/REPORT.md",
+      "role": "consolidated_report_artifact",
+      "bytes": 32199,
+      "sha256": "5b109f832e3faef233b8c2405eecf9da6fa4e992370a728083e810c09302b51a",
+      "line_count": 145
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/dynamo-history/sources.json",
+      "packet_relative_path": "dynamo-history/sources.json",
+      "role": "consolidated_report_artifact",
+      "bytes": 9362,
+      "sha256": "59015248fdeaf13ae1824a02d68be9d2b68b9ee8ce556af82fab75b1ebc73750",
+      "line_count": 217
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/public-pr-state.json",
+      "packet_relative_path": "public-pr-state.json",
+      "role": "consolidated_report_artifact",
+      "bytes": 92205,
+      "sha256": "dda92dc874933bea0944b96d00208f6e49f1072e0f59d825503eaa097ad30797",
+      "line_count": 3392
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/render_report.py",
+      "packet_relative_path": "render_report.py",
+      "role": "consolidated_report_artifact",
+      "bytes": 4023,
+      "sha256": "deba0daa6f5e934890790ca02f47a200b2271094860d00fa9ce716fb9da461bc",
+      "line_count": 98
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/report.html",
+      "packet_relative_path": "report.html",
+      "role": "consolidated_report_artifact",
+      "bytes": 185135,
+      "sha256": "eb78994c362c55179e6db4d5be26ce1a0d22bf035740705a7851511f07de2e49",
+      "line_count": 1712
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/report_template.html",
+      "packet_relative_path": "report_template.html",
+      "role": "consolidated_report_artifact",
+      "bytes": 26063,
+      "sha256": "3baab0a5b8757e4f4eb9900cbc16cf60f93485a7ebaae64fe5bf8723ef46af19",
+      "line_count": 154
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/thread-coverage.json",
+      "packet_relative_path": "thread-coverage.json",
+      "role": "consolidated_report_artifact",
+      "bytes": 26187,
+      "sha256": "be6550d39d74ad3d2446f090b3582f46d624f943e2afbb75048bcd6439d21a01",
+      "line_count": 463
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/vllm-early-history/REPORT.md",
+      "packet_relative_path": "vllm-early-history/REPORT.md",
+      "role": "consolidated_report_artifact",
+      "bytes": 39922,
+      "sha256": "2ae96ec0d2806a22b331818b05a720d578a195344bd581cf4a555b54235bbc72",
+      "line_count": 147
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/vllm-early-history/SOURCE_INVENTORY.json",
+      "packet_relative_path": "vllm-early-history/SOURCE_INVENTORY.json",
+      "role": "consolidated_report_artifact",
+      "bytes": 10354,
+      "sha256": "f105e86dd42d7e074c0dcceb92c1f2112d47a534cc460f485bd92973321fa6e8",
+      "line_count": 352
+    }
+  ],
+  "self_hash_excluded": true,
+  "publication": {
+    "authorized_by": "Kamran's request in this chat",
+    "repository": "spa5k/vllm",
+    "branch": "feat/vllm-contribution-research-20261018",
+    "parent_commit": "c154d7216b8724d74ffbff12e4f1f326ff041e07",
+    "scope": "Report packet only. No raw Dynamo archive, model, build, or experiment trees."
+  }
+}

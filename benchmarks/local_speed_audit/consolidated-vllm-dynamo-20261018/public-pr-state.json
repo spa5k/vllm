@@ -1,0 +1,3392 @@
+{
+  "observed_utc": "2026-10-18T17:32:05.221907+00:00",
+  "scope": "Read-only current public PR state. No CI rerun or write.",
+  "prs": [
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "codex/startup-plan-memory-budget",
+      "headRefOid": "e36c80ffdcb1f453812251d8c4f28aa2d2e164c3",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 60143,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "title": "[Bugfix] Invalidate startup plans on GPU budget changes",
+      "updatedAt": "2026-10-12T10:53:25Z",
+      "url": "https://github.com/vllm-project/vllm/pull/60143",
+      "checks": [
+        {
+          "name": "pre-run-check",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE"
+        },
+        {
+          "name": "Check format",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Meta Internal-Only Changes Check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Summary",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "docs/readthedocs.org:vllm",
+          "status": null,
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "vllm-project/vllm",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "codex/startup-plan-mm-profile",
+      "headRefOid": "a640b8b82b30027298ba0172949292f799efb02a",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 60228,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "title": "[Bugfix] Invalidate stale multimodal startup plans",
+      "updatedAt": "2026-10-12T10:53:25Z",
+      "url": "https://github.com/vllm-project/vllm/pull/60228",
+      "checks": [
+        {
+          "name": "pre-run-check",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE"
+        },
+        {
+          "name": "Check format",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Meta Internal-Only Changes Check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Summary",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "docs/readthedocs.org:vllm",
+          "status": null,
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "vllm-project/vllm",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "codex/bounded-pt-loader",
+      "headRefOid": "896523bc13910936f3213f9ff16e9583631c6631",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 60227,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "title": "[Bugfix] Bound threaded PT shard retention",
+      "updatedAt": "2026-10-12T10:53:25Z",
+      "url": "https://github.com/vllm-project/vllm/pull/60227",
+      "checks": [
+        {
+          "name": "pre-run-check",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE"
+        },
+        {
+          "name": "Check format",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Meta Internal-Only Changes Check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Summary",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "docs/readthedocs.org:vllm",
+          "status": null,
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "vllm-project/vllm",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "feat/norm-fake-metadata",
+      "headRefOid": "fb6d17d9f465fb44d66d0a127b72075cda21c3a1",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 60688,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "title": "[Perf] Reduce RMSNorm metadata work",
+      "updatedAt": "2026-10-12T10:53:25Z",
+      "url": "https://github.com/vllm-project/vllm/pull/60688",
+      "checks": [
+        {
+          "name": "pre-run-check",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE"
+        },
+        {
+          "name": "Check format",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Meta Internal-Only Changes Check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Summary",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "docs/readthedocs.org:vllm",
+          "status": null,
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "vllm-project/vllm",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "feat/skip-zero-metric-counters",
+      "headRefOid": "2e92119f6732ae87032c9b46641d1da9606a3320",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 60498,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "title": "[Perf] Reduce multiprocess decode logging CPU by 28%",
+      "updatedAt": "2026-10-12T10:53:25Z",
+      "url": "https://github.com/vllm-project/vllm/pull/60498",
+      "checks": [
+        {
+          "name": "pre-run-check",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE"
+        },
+        {
+          "name": "Check format",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Meta Internal-Only Changes Check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Summary",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "docs/readthedocs.org:vllm",
+          "status": null,
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "vllm-project/vllm",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": "2026-10-08T21:42:57Z",
+      "headRefName": "feat/fallback-detokenizer-window",
+      "headRefOid": "50f09de18684ec2d0881dd29c185136d88dbcaca",
+      "isDraft": false,
+      "mergedAt": "2026-10-08T21:42:57Z",
+      "number": 60497,
+      "reviewDecision": "APPROVED",
+      "state": "MERGED",
+      "title": "[Perf] Reduce fallback decode CPU by 69% at 32K",
+      "updatedAt": "2026-10-08T22:22:48Z",
+      "url": "https://github.com/vllm-project/vllm/pull/60497",
+      "checks": [
+        {
+          "name": "Check format",
+          "status": "COMPLETED",
+          "conclusion": "CANCELLED"
+        },
+        {
+          "name": "Check format",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-run-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Meta Internal-Only Changes Check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Summary",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/amd-docker-build-test-image-and-artifacts",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/amd-docker-ensure-ci-base",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/amd-docker-refresh-rocm-base",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/amd-mi355-dpx-async-engine-inputs-utils-worke",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/bootstrap",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/computer-cpu-multimodal-processor-shard-1",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/computer-cpu-multimodal-processor-shard-2",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/computer-cpu-multimodal-processor-shard-3",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/computer-cpu-multimodal-processor-shard-4",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/docker-build-cpu-image",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/docker-build-image",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/github-github-pre-commit-check",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/nvidia-h200-mig-18gb-multimodal-processor-shard",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/nvidia-h200-mig-35gb-entrypoints-integration-ap",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/nvidia-h200-mig-35gb-entrypoints-integration-po",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/nvidia-h200-mig-35gb-v1-kv-connectors-shard-1",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/nvidia-h200-mig-35gb-v1-kv-connectors-shard-2",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/nvidia-h200-mig-35gb-v1-kv-connectors-shard-3",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "buildkite/ci/pr/nvidia-h200-mig-35gb-v1-kv-connectors-shard-4",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "docs/readthedocs.org:vllm",
+          "status": null,
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "vllm-project/vllm",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "perf/completions-batch-copies",
+      "headRefOid": "aae6302bb3a627e4149f27f4d41c46264a816a1a",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 15973,
+      "reviewDecision": "",
+      "state": "OPEN",
+      "title": "perf(frontend): avoid copying the prompt batch for each child",
+      "updatedAt": "2026-10-17T13:26:57Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/15973",
+      "checks": [
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "feat/tcp-admission-ownership",
+      "headRefOid": "601df227b6de75054be82b543ca3a0336c4a7736",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 16344,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "title": "fix(runtime): keep TCP admission until ACK",
+      "updatedAt": "2026-10-13T19:39:46Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/16344",
+      "checks": [
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pr_reminder",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": null,
+      "headRefName": "feat/tcp-tombstone-pruning",
+      "headRefOid": "50c86892cbe67114b079d61bd9c7d29614e194c3",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 16346,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "title": "perf(runtime): skip early TCP tombstone scans",
+      "updatedAt": "2026-10-13T20:01:51Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/16346",
+      "checks": [
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pr_reminder",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:05.221907+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": "2026-10-13T04:08:13Z",
+      "headRefName": "perf/dispatch-discovery-copies",
+      "headRefOid": "348b86fa5ef540c4f98d178c7e598e646b9d9daa",
+      "isDraft": false,
+      "mergedAt": "2026-10-13T04:08:13Z",
+      "number": 15974,
+      "reviewDecision": "APPROVED",
+      "state": "MERGED",
+      "title": "perf(runtime): avoid discovery copies in prepared dispatch",
+      "updatedAt": "2026-10-13T04:08:14Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/15974",
+      "checks": [
+        {
+          "name": "team-request / request",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "guard",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Release Version to docs-website",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Preview or publish docs",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Helm Chart Tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "xpu-ci-vllm",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Power Agent",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "dynamo-sidecar",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-runtime / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "xpu-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-runtime / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Build multi-arch cuda13.1",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "triton-runtime / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "trtllm-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "planner / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / image / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / rust-gpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / mypy",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / parallel cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / parallel cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / sequential cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / sequential cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / gpu cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "deploy-operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vLLM Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-runtime / Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Test cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / 2-GPU Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Copy to ACR cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Test cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / 2-GPU Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Copy to ACR cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Test cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Test cuda13.1, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / 2-GPU Test cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Copy to ACR cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "triton-runtime / CPU Test cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Operator Integration",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "planner / CPU Test cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / CPU Test cpu, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / Compliance cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / Compliance cpu, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "frontend (amd64)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend (arm64)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Copy to ACR cuda, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vLLM Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "DGDR Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Clean K8s builder if exists",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "backend-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "trtllm Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vLLM Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "deploy-cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vLLM Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "allure-report",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "deploy-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:54.928380+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": "2026-10-13T17:58:46Z",
+      "headRefName": "perf/15983-sparse-eligibility",
+      "headRefOid": "f1a996ca244e861ea592080177f8974bfb5d909f",
+      "isDraft": false,
+      "mergedAt": "2026-10-13T17:58:46Z",
+      "number": 15992,
+      "reviewDecision": "APPROVED",
+      "state": "MERGED",
+      "title": "perf(router): avoid full scans for sparse worker eligibility",
+      "updatedAt": "2026-10-13T18:00:50Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/15992",
+      "checks": [
+        {
+          "name": "team-request / request",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "guard",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Release Version to docs-website",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Preview or publish docs",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Helm Chart Tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "xpu-ci-vllm",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Power Agent",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "dynamo-sidecar",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-runtime / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "xpu-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-runtime / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Build multi-arch cuda13.1",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "triton-runtime / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "trtllm-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "planner / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / image / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / rust-gpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / mypy",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / parallel cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / parallel cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / sequential cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / sequential cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / gpu cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "deploy-operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vLLM Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-runtime / Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Test cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / 2-GPU Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Copy to ACR cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Test cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / 2-GPU Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Copy to ACR cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Test cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Test cuda13.1, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / 2-GPU Test cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Copy to ACR cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "triton-runtime / CPU Test cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Operator Integration",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "planner / CPU Test cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / CPU Test cpu, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / Compliance cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / Compliance cpu, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "frontend (amd64)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend (arm64)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Copy to ACR cuda, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vLLM Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "DGDR Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Clean K8s builder if exists",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "backend-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "trtllm Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vLLM Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "deploy-cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vLLM Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "allure-report",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "deploy-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:54.928380+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": "2026-10-15T03:22:20Z",
+      "headRefName": "perf/15980-prefill-order",
+      "headRefOid": "62bcfbbc240f329021938aa0e7b5f1f24abbb276",
+      "isDraft": false,
+      "mergedAt": "2026-10-15T03:22:20Z",
+      "number": 15993,
+      "reviewDecision": "APPROVED",
+      "state": "MERGED",
+      "title": "perf(router): remove completed prefills without queue scans",
+      "updatedAt": "2026-10-15T10:50:53Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/15993",
+      "checks": [
+        {
+          "name": "team-request / request",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "guard",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Release Version to docs-website",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Preview or publish docs",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Helm Chart Tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "xpu-ci-vllm",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Power Agent",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "dynamo-sidecar",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-runtime / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "xpu-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-runtime / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Build multi-arch cuda13.1",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-local-dev",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "triton-runtime / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "trtllm-runtime-efa",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "planner / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Build multi-arch cpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / image / Build multi-arch cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / rust-gpu",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / mypy",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / parallel cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / parallel cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / sequential cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / sequential cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-runtime / test / gpu cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "deploy-operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vLLM Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Operator Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vllm-runtime / Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Test cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / 2-GPU Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm-runtime / Copy to ACR cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Test cuda13.0, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / 2-GPU Test cuda13.0, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "sglang-runtime / Copy to ACR cuda13.0",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Test cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Test cuda13.1, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / 2-GPU Test cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "trtllm-runtime / Copy to ACR cuda13.1, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "triton-runtime / CPU Test cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Operator Integration",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "planner / CPU Test cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / CPU Test cpu, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / Compliance cpu, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner / Compliance cpu, arm64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "planner",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "frontend (amd64)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend (arm64)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Compliance audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "frontend / Copy to ACR cuda, amd64",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dynamo-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vLLM Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Agent Setup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "DGDR Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Clean K8s builder if exists",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "backend-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vllm Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "sglang Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "trtllm Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "vLLM Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Deploy Test",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "deploy-cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "vLLM Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "SGLang Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "TRTLLM Snapshot Cleanup",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "allure-report",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "deploy-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:54.928380+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": "2026-10-13T02:48:28Z",
+      "headRefName": "perf/15987-connector-single-id",
+      "headRefOid": "d625d8dbd040fdbf19d463eee4551da4c197613a",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 15994,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "CLOSED",
+      "title": "perf(kvbm): avoid a set build for one new block",
+      "updatedAt": "2026-10-13T02:48:28Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/15994",
+      "checks": [
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:54.928380+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": "2026-10-13T02:48:24Z",
+      "headRefName": "perf/15982-cache-alias-removal",
+      "headRefOid": "1bd47f8049c406581627ddc61575894582667095",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 15995,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "CLOSED",
+      "title": "perf(kvbm): avoid full alias scans on block removal",
+      "updatedAt": "2026-10-13T02:48:24Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/15995",
+      "checks": [
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:54.928380+00:00"
+    },
+    {
+      "baseRefName": "main",
+      "closedAt": "2026-10-09T11:01:01Z",
+      "headRefName": "perf/two-part-owned-decode",
+      "headRefOid": "95880506952b18631db607bd1e4a12f917da60d5",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 15976,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "CLOSED",
+      "title": "perf(runtime): reduce copies in ingress envelope decoding",
+      "updatedAt": "2026-10-09T11:01:49Z",
+      "url": "https://github.com/ai-dynamo/dynamo/pull/15976",
+      "checks": [
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Require an issue link",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "copyright-checks",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "dco-comment",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "lychee",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Validate PR title and add label",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "changed-files",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "ok-to-test",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "codeowners",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Unit tests",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Check for broken markdown links",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-commit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "Docs Lint",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Planner Gym CPU, adapters excluded (Python ${{ matrix.python }})",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Recipe Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Generated API References",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Configuration Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Docs Website Composition Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "Fern Broken Links Check",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "operator",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED"
+        },
+        {
+          "name": "rust-tests (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-tests (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (.)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/python)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/runtime/examples)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "rust-clippy (lib/bindings/kvbm)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "pre-merge-status-check",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "CodeRabbit",
+          "status": null,
+          "conclusion": "SUCCESS"
+        },
+        {
+          "name": "DCO",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "repo": "ai-dynamo/dynamo",
+      "observed_utc": "2026-10-18T17:32:54.928380+00:00"
+    }
+  ],
+  "last_observed_utc": "2026-10-18T17:32:54.928380+00:00"
+}
