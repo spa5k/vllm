@@ -1,0 +1,107 @@
+{
+  "directories": [
+    "source"
+  ],
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 211,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "c34182600466b7f11a3316ddb22faad23873987ea7572b549959339f2312eb3b"
+    },
+    {
+      "bytes": 550,
+      "mode": 292,
+      "path": "INPUTS.json",
+      "sha256": "d2beb2b9aee6106b02caabfa9bd6fab99fe0afe3588156e8bcec42c206e0cb87"
+    },
+    {
+      "bytes": 8940,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "567058cd23590eeed1b368e634ab8894847fc4526d75510b2e8978c5ae6b5665"
+    },
+    {
+      "bytes": 1427,
+      "mode": 292,
+      "path": "TEST_DESIGN.md",
+      "sha256": "4792826d60da35737ff5b53036d77e5f362b45670d0cbfc4057c28159a05db57"
+    },
+    {
+      "bytes": 281,
+      "mode": 292,
+      "path": "review-failure-v1.json",
+      "sha256": "99f0f58b7d2e546f7dfd0cb5770f8e4a1b8fe7d9494c8fb4956ed14455b89e4e"
+    },
+    {
+      "bytes": 262,
+      "mode": 292,
+      "path": "review-result.json",
+      "sha256": "621a55355e6aeb0b169d2e0713b8631e98aab3bbc85a036e942880241f606057"
+    },
+    {
+      "bytes": 13086,
+      "mode": 292,
+      "path": "review_source_data.py",
+      "sha256": "210e4a74fcbd00ec7a1efcbfd57c384a1595519220510321dc0e47fb8d2a9876"
+    },
+    {
+      "bytes": 1527,
+      "mode": 292,
+      "path": "seal.py",
+      "sha256": "84e08a2021aab602d94192f2f26b55e716c8be5a037ba33023226ba551dc9bee"
+    },
+    {
+      "bytes": 59436,
+      "mode": 292,
+      "path": "source/async_llm.py",
+      "sha256": "f714da90a854e7dba477d8d3430053485a7f3e858e007818011d41c172b487fa"
+    },
+    {
+      "bytes": 1010,
+      "mode": 292,
+      "path": "source/engine_exceptions.py",
+      "sha256": "224e3a105def180e437c7c40bbc5c1b95de8f1cc597c2fa6364a3d8021864532"
+    },
+    {
+      "bytes": 37320,
+      "mode": 292,
+      "path": "source/protocol.py",
+      "sha256": "8e7bbbdafa9aa6238e40e46feeaaafdec4fb9be0e0011be5af38f9065bd80014"
+    },
+    {
+      "bytes": 4310,
+      "mode": 292,
+      "path": "source/router.py",
+      "sha256": "cffe4bb3cd4cfa2bfd71039c0125b68ad730f1d302a37e128f1055a335c503a3"
+    },
+    {
+      "bytes": 56542,
+      "mode": 292,
+      "path": "source/serving.py",
+      "sha256": "4f9cacf4d4c4137d5aca65bc93d4f9936e057ee673687eeb5db2dbc5d724c501"
+    },
+    {
+      "bytes": 82018,
+      "mode": 292,
+      "path": "source/test_serving_responses.py",
+      "sha256": "621f150210187bd6f7be7989b1b1677035de18c8c3912edee975514cf5cd4fb6"
+    },
+    {
+      "bytes": 1204,
+      "mode": 292,
+      "path": "source-bindings.json",
+      "sha256": "b6283549952f420479b55f16e960054ac440d7fb56ce3e2629b78f39552efdd2"
+    }
+  ],
+  "file_count": 15,
+  "kind": "BACKGROUND_RESPONSE_LIFECYCLE_INDEPENDENT_SOURCE_REVIEW",
+  "root_mode": 365,
+  "runtime_authority": false,
+  "schema": 1,
+  "subject_method_executed": false,
+  "target_imported": false,
+  "total_bytes": 268124,
+  "verdict": "QUALIFIED_SOURCE_BUG_SMALL_FIX_RUNTIME_HELD"
+}

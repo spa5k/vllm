@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "/Users/pacific/Developer/vllm/.venv/bin/python",
+    "-B",
+    "-I",
+    "-S",
+    "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-comparison-design-v1/fixture/background_terminal_fixture.py"
+  ],
+  "attempts": 1,
+  "retries": 0,
+  "script_sha256": "daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142",
+  "proposal_manifest_sha256": "f5e0d3d235d7d88715208228cb72bed8c6148e7435d89485a13927922e5ddaad",
+  "timeout_seconds": 10,
+  "reap_allowance_seconds": 2,
+  "stream_cap_bytes": 100000,
+  "scope": "selected background worker/retrieve/cancel AST bodies with fake producer and real bounded asyncio tasks/locks; no full create, HTTP, target import, engine process or device",
+  "complete": true,
+  "reaped": true,
+  "first_error": null,
+  "pid": 66296,
+  "returncode": 0,
+  "elapsed_seconds": 0.07971587497740984,
+  "eof": {
+    "stdout": true,
+    "stderr": true
+  },
+  "raw": {
+    "stdout": {
+      "bytes": 11460,
+      "sha256": "122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d"
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "passed": true
+}

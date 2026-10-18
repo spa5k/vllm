@@ -1,0 +1,252 @@
+{
+  "authored_report": "REPORT.md is human-review prose, not an immutable raw copy.",
+  "copies": [
+    {
+      "bytes": 7346,
+      "copy": "patches/background-terminal-fix.patch",
+      "sha256": "e226f86530a4e32bf5838134d7e3ac077d51d0277c7495822799fb08c9885538",
+      "source": "serving/background-terminal-fix-v1/candidate.patch"
+    },
+    {
+      "bytes": 11460,
+      "copy": "evidence/selected-method-stdout.json",
+      "sha256": "122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d",
+      "source": "control/root-background-terminal-comparison-invocation-v1/stdout.raw"
+    },
+    {
+      "bytes": 0,
+      "copy": "evidence/selected-method-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "control/root-background-terminal-comparison-invocation-v1/stderr.raw"
+    },
+    {
+      "bytes": 1254,
+      "copy": "evidence/selected-method-receipt.json",
+      "sha256": "cffd601d6ef536ba8a17be63330861d10fa403d0f7fa4e6014941737d3676b2e",
+      "source": "control/root-background-terminal-comparison-invocation-v1/receipt.json"
+    },
+    {
+      "bytes": 2787,
+      "copy": "evidence/selected-method-native-objects.json",
+      "sha256": "0974eaa0dee8e9108ab9053cfcfd5affd7f01cb9998f7f131b40d5b275f3b1a2",
+      "source": "control/root-background-terminal-comparison-invocation-v1/native-tool-objects.json"
+    },
+    {
+      "bytes": 3479,
+      "copy": "evidence/selected-method-grant.json",
+      "sha256": "38ec7fcedc071ef1ea7114c3e4a3dd8a37293845c56991f6cb629be94c199bb8",
+      "source": "control/root-background-terminal-comparison-invocation-v1/root-background-terminal-comparison-grant-v1.json"
+    },
+    {
+      "bytes": 12722,
+      "copy": "evidence/selected-method-root-auditor.py.txt",
+      "sha256": "d533fac4a0da00f14876866095dfacac3194b9c3cf151540bf9cc93af6dafb6a",
+      "source": "control/root-background-terminal-comparison-invocation-v1/audit_background_terminal_actual_v1.py"
+    },
+    {
+      "bytes": 1436,
+      "copy": "evidence/selected-method-manifest.json",
+      "sha256": "4243f5c1fd6d59a2b1d2c259a8504a41871b46ecba8571522186c4db8733e5e7",
+      "source": "control/root-background-terminal-comparison-invocation-v1/manifest.json"
+    },
+    {
+      "bytes": 1694,
+      "copy": "evidence/selected-method-root-report.txt",
+      "sha256": "d1c10888c5222cb3ca1cbe49d1e85caf17958cac185ad685bb36ba34004659ff",
+      "source": "control/root-background-terminal-comparison-invocation-v1/REPORT.md"
+    },
+    {
+      "bytes": 4507,
+      "copy": "evidence/candidate-source.txt",
+      "sha256": "8a13fe6075d508d019539ef1bba34d6c29d91b343d35d522e70351ccdc6108ba",
+      "source": "serving/background-terminal-fix-v1/REPORT.md"
+    },
+    {
+      "bytes": 8761,
+      "copy": "evidence/candidate-source-manifest.json",
+      "sha256": "1b480ee1fb8822baec1c7266ca3f90f334ff466680b2a4aaf69cfd59ccdce478",
+      "source": "serving/background-terminal-fix-v1/manifest.json"
+    },
+    {
+      "bytes": 8940,
+      "copy": "evidence/candidate-source-review.txt",
+      "sha256": "567058cd23590eeed1b368e634ab8894847fc4526d75510b2e8978c5ae6b5665",
+      "source": "core/background-response-lifecycle-review-v1/REPORT.md"
+    },
+    {
+      "bytes": 2960,
+      "copy": "evidence/candidate-source-review-manifest.json",
+      "sha256": "8d87090a2a5a004508a205953f1f2131fcfa90ffe14d9a9bfd225a978cbced2a",
+      "source": "core/background-response-lifecycle-review-v1/manifest.json"
+    },
+    {
+      "bytes": 4133,
+      "copy": "evidence/comparison-design.txt",
+      "sha256": "7c07afc1a184799f8eb0005ca724692c24f3cff33266542bf4231ffbe01e753b",
+      "source": "serving/background-terminal-comparison-design-v1/REPORT.md"
+    },
+    {
+      "bytes": 3737,
+      "copy": "evidence/comparison-design-manifest.json",
+      "sha256": "78ebb25b63bc4a1f81658ecc1ee5680ee3d06aa17d71ce969627b147bc161b8a",
+      "source": "serving/background-terminal-comparison-design-v1/manifest.json"
+    },
+    {
+      "bytes": 4460,
+      "copy": "evidence/comparison-design-review.txt",
+      "sha256": "e96d0d124d83f8ddced11893968de8cb9ebfc9cfcbb7be891696c769837a724d",
+      "source": "core/background-terminal-comparison-review-v1/REPORT.md"
+    },
+    {
+      "bytes": 1899,
+      "copy": "evidence/comparison-design-review-manifest.json",
+      "sha256": "77843a21c1a8ae582179fa93ce7cb02e40a484728d2c52c46999cf836c5e4796",
+      "source": "core/background-terminal-comparison-review-v1/manifest.json"
+    },
+    {
+      "bytes": 2990,
+      "copy": "evidence/comparison-actual-review.txt",
+      "sha256": "d7d093d0877dc56f073d97e256239b23fa7395462b4cd8ef3c17c9785713ae91",
+      "source": "core/background-terminal-actual-review-v1/REPORT.md"
+    },
+    {
+      "bytes": 1464,
+      "copy": "evidence/comparison-actual-review-manifest.json",
+      "sha256": "3684e28bd9611b81b6dc79a52b0da17a7674d189982d56fbeefa6ba539c8f767",
+      "source": "core/background-terminal-actual-review-v1/manifest.json"
+    },
+    {
+      "bytes": 5351,
+      "copy": "evidence/selected-source-currency.txt",
+      "sha256": "8858ced6d6d0e3925222ee3a20103a70659657df12b781e5f4029510821fb558",
+      "source": "serving/deep-serving-followup-20261018T1530/REPORT.md"
+    },
+    {
+      "bytes": 8280,
+      "copy": "evidence/selected-source-currency-manifest.json",
+      "sha256": "1ec5aee385d77088fdfda8c135bb3b16a070fbdc10eb046501abbdcf652888b8",
+      "source": "serving/deep-serving-followup-20261018T1530/manifest.json"
+    },
+    {
+      "bytes": 2387,
+      "copy": "evidence/adjacent-ownership.txt",
+      "sha256": "85dffdc3f813e664934682fbf1eb5e56f1360967a442c38dc8e777638377478a",
+      "source": "control/background-terminal-additional-ownership-v1/REPORT.md"
+    },
+    {
+      "bytes": 2742,
+      "copy": "evidence/adjacent-ownership-manifest.json",
+      "sha256": "e45de68b95350092b7233f8b16fc7eb828ce1a5336ae8887b672bbc866671c50",
+      "source": "control/background-terminal-additional-ownership-v1/manifest.json"
+    },
+    {
+      "bytes": 6676,
+      "copy": "evidence/gpu-negative-result.txt",
+      "sha256": "7184d97383dbb428ec6b4422ca2a5aab65615ab8b15369f23c4fd1603d394d3f",
+      "source": "gpu/deep-kernel-lifecycle-20261018T1510/REPORT.md"
+    },
+    {
+      "bytes": 9190,
+      "copy": "evidence/gpu-negative-result-manifest.json",
+      "sha256": "854659bfb6592d41957c53b39d3122875bed27fc95cf21a974270f2bf336f853",
+      "source": "gpu/deep-kernel-lifecycle-20261018T1510/manifest.json"
+    },
+    {
+      "bytes": 2045,
+      "copy": "evidence/selected-source-currency.json",
+      "sha256": "2620cce304cc05f0d8a29806ea1a2ac908287368a26d7a932bc4ab770cefbc4b",
+      "source": "serving/deep-serving-followup-20261018T1530/background-e80-to-fe8-currency.json"
+    },
+    {
+      "bytes": 8040,
+      "copy": "evidence/delivery-native-objects.json",
+      "sha256": "765a68223aaa07521f6af34612bbe8bd62a819d4ea35dd679f266f0d2602feb5",
+      "source": "control/background-terminal-delivery-native-objects-v1.json"
+    },
+    {
+      "bytes": 49986,
+      "copy": "evidence/root-documentation-observations.json",
+      "sha256": "035fbcf067f3f16b4b6c8b3cc39beadaee62abf61bc156958b8197df7191925c",
+      "source": "control/background-terminal-root-doc-observations-v1.json"
+    },
+    {
+      "bytes": 384,
+      "copy": "evidence/source-commit-message.txt",
+      "sha256": "41d13b15ea4986ca9c81995bdf892ac48f4ad921f9fe54019fb6d755f16d0844",
+      "source": "control/background-terminal-commit-message.txt"
+    }
+  ],
+  "fixed_supplemental_inputs": {
+    "control/background-terminal-commit-message.txt": "41d13b15ea4986ca9c81995bdf892ac48f4ad921f9fe54019fb6d755f16d0844",
+    "control/background-terminal-delivery-native-objects-v1.json": "765a68223aaa07521f6af34612bbe8bd62a819d4ea35dd679f266f0d2602feb5",
+    "control/background-terminal-root-doc-observations-v1.json": "035fbcf067f3f16b4b6c8b3cc39beadaee62abf61bc156958b8197df7191925c"
+  },
+  "full_packet_root": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017",
+  "full_packets": [
+    {
+      "closed": true,
+      "manifest_sha256": "1b480ee1fb8822baec1c7266ca3f90f334ff466680b2a4aaf69cfd59ccdce478",
+      "path": "serving/background-terminal-fix-v1",
+      "payload_bytes": 1182366,
+      "payload_files": 47
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "8d87090a2a5a004508a205953f1f2131fcfa90ffe14d9a9bfd225a978cbced2a",
+      "path": "core/background-response-lifecycle-review-v1",
+      "payload_bytes": 268124,
+      "payload_files": 15
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "78ebb25b63bc4a1f81658ecc1ee5680ee3d06aa17d71ce969627b147bc161b8a",
+      "path": "serving/background-terminal-comparison-design-v1",
+      "payload_bytes": 72700,
+      "payload_files": 20
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "77843a21c1a8ae582179fa93ce7cb02e40a484728d2c52c46999cf836c5e4796",
+      "path": "core/background-terminal-comparison-review-v1",
+      "payload_bytes": 24575,
+      "payload_files": 9
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "4243f5c1fd6d59a2b1d2c259a8504a41871b46ecba8571522186c4db8733e5e7",
+      "path": "control/root-background-terminal-comparison-invocation-v1",
+      "payload_bytes": 33396,
+      "payload_files": 7
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "3684e28bd9611b81b6dc79a52b0da17a7674d189982d56fbeefa6ba539c8f767",
+      "path": "core/background-terminal-actual-review-v1",
+      "payload_bytes": 17458,
+      "payload_files": 6
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "1ec5aee385d77088fdfda8c135bb3b16a070fbdc10eb046501abbdcf652888b8",
+      "path": "serving/deep-serving-followup-20261018T1530",
+      "payload_bytes": 1527057,
+      "payload_files": 44
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "e45de68b95350092b7233f8b16fc7eb828ce1a5336ae8887b672bbc866671c50",
+      "path": "control/background-terminal-additional-ownership-v1",
+      "payload_bytes": 766567,
+      "payload_files": 15
+    },
+    {
+      "closed": true,
+      "manifest_sha256": "854659bfb6592d41957c53b39d3122875bed27fc95cf21a974270f2bf336f853",
+      "path": "gpu/deep-kernel-lifecycle-20261018T1510",
+      "payload_bytes": 1215975,
+      "payload_files": 50
+    }
+  ],
+  "schema": 1,
+  "scope": "Packaging copies reviewed data only. It does not run tests, imports, targets, resources, or network operations."
+}

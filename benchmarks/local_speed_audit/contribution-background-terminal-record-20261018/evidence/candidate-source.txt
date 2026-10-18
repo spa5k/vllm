@@ -1,0 +1,68 @@
+# Nonstream background Responses can retain queued after producer failure
+
+Verdict: source-supported narrow candidate; runtime unrun. The current primary
+main observation is e80b6c642f21fd5b24439825592f5b9ced36add8. Six selected
+production/test files are byte-identical to the prior371 source. The exact
+Contents receipts, decoded files, Git blob identities and SHA256 descriptors
+are retained. The separate env source confirms that server storage defaults
+to false. The supported witness explicitly enables it.
+
+POST /v1/responses with background=true, stream=false and stored output returns
+a queued resource before consuming its lazy engine generator. A later queue
+admission error or ordinary generation error escapes responses_full_generator.
+The old _run_background_request only handles an ErrorResponse returned normally.
+Its task-removal callback still runs. GET reads the stored response alone, so it
+can return queued after no producer task remains. This is a reachable source
+sequence. No exact public reporter reproduction or real server failure was
+observed for this flow in the bounded searches.
+
+The one-method candidate logs ordinary exceptions and commits failed under the
+existing lock only when the stored status is queued/in_progress. It preserves
+terminal states and stored identity, then completes normally so the existing
+task callback can remove the entry. The unchanged error-return path uses the
+same guard. REPAIR_CONTRACT.md gives the cancellation and terminal-race bounds.
+
+Official compatibility evidence is reused from the sealed lead de737858....
+The [background guide](https://developers.openai.com/api/docs/guides/background)
+polls while queued/in_progress and stops on a terminal state. Pinned official
+SDK553703e2 includes failed in ResponseStatus and a nullable error field.
+evidence-bindings.json rehashes these exact retained sources. The old OpenAPI
+view is a retained live observation, not a complete pinned OpenAPI body. This
+candidate does not implement richer typed error details or assert complete
+OpenAI compatibility.
+
+Ownership refresh is bounded and primary. Full current issue22341 comments,
+its linked open-PR query, the exact worker-name query, and the short area query
+are retained. They return1,2,13 rows respectively, each below100. Their number
+sets are unchanged. Seven previously reviewed PR heads remain unchanged/open.
+Their exact bodies/comments/files/diffs remain bound from the prior packet.
+No direct same terminal-status fix was found in this scope. This is not global
+absence proof. #49721 owns background stream termination, which is excluded.
+#48454 owns retention, #35662 cancel wording, and #38190/#40418/#47184 own nearby
+error schema/serialization. Integration and human coordination are required;
+no competing typed schema, issue, PR or message was published.
+
+The candidate has one production method change and three new existing-suite
+test functions:12 declared rows. They cover public late admission/generation
+failure followed by retrieve and task cleanup, terminal-state preservation for
+raised and returned errors, and public cancellation before first engine output.
+They reuse _make_serving_instance and real create/full-generator/worker/retrieve/
+cancel methods. Engine and renderer behavior is mocked. The four design
+questions are answered in TEST_DESIGN.md. No tests ran. There is no claim that
+these fixture seams or model behavior passed at runtime.
+
+Own source/data checks pass: independent in-memory application of the complete
+two-file patch reproduces both candidate files; all existing test/helper ASTs
+and all production AST outside the one worker body remain exact. Five negative
+controls reject broad catch, terminal overwrite, wrong transition, wrong base
+and wrong patch destination. These checks do not execute parsed methods.
+source-data-checks.json records115 checks and five negatives.
+
+Validation still missing: independent source review; cached lint/apply checks;
+the normal existing-suite run with real conftests; public HTTP polling after a
+real admission/generation failure; and human review of every changed line.
+The prior normal-conftest cpuinfo denial remains unchanged and blocks reuse of
+that observer gate. No package or environment change is proposed. The optional
+selected-method comparison is a design only and uses fake producer outcomes;
+Root must review its exact source and bounds before any execution. No model
+evaluation or native/engine cleanup claim is made. No PR body was prepared.

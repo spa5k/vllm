@@ -1,0 +1,88 @@
+# Background terminal comparison independent review
+
+## Decision
+
+`PASS_SOURCE_DATA_RUNTIME_HELD`
+
+The sealed proposal at
+`serving/background-terminal-comparison-design-v1/manifest.json` is a bounded
+selected-method comparison. It does not import vLLM. It does not run a server,
+engine, model, HTTP request, or full create path. This review did not execute
+the fixture, parent, selected methods, event loop, or child process.
+
+## Source selection
+
+The fixture reads exact 0444, single-link baseline and candidate serving files.
+It checks byte length and SHA-256 before parsing. It selects only
+`_run_background_request`, `retrieve_responses`, and `cancel_responses`. It
+also copies the exact `add_done_callback` statement from `_create_responses`.
+The retrieve, cancel, and callback AST hashes are equal between variants. Only
+the background worker AST differs.
+
+Annotations are removed before the selected methods are compiled. The supplied
+namespace contains only the standard-library asyncio object, a local
+`ErrorResponse`, and the local logger recorder. This is a source-extracted
+comparison with fake response records and a fake producer. It is not a real
+OpenAIServingResponses instance.
+
+## Ordering and ownership
+
+Each row creates one owned task and one pending sibling task. The exact copied
+cleanup callback is installed before a later observation callback. The later
+callback must fire before the fixture checks that the owned task left
+`background_tasks`. The sibling object and task must retain identity and stay
+pending until fixture cleanup.
+
+The producer starts before retrieve, release, or public cancel. Public cancel
+uses the selected real method. That method writes `cancelled` before it cancels
+and awaits the task. One producer returns a local `ErrorResponse` after it sees
+`CancelledError`. One producer propagates `CancelledError`. The fixture records
+type, arguments, count, return identity, and logger identity relation.
+
+Every exact owned task is cancelled when needed and awaited in `finally`.
+There is no sleep-based callback inference. Standard asyncio can use local
+event-loop wakeup descriptors; this is not a no-file-descriptor claim.
+
+## Expected result
+
+There are 11 cases per variant and 22 rows total. The supported nonstream state
+is `queued`. The `in_progress` row is synthetic compatibility coverage.
+
+- Baseline raised producer errors escape by identity and leave status unchanged.
+- Candidate raised producer errors do not escape. They reach the logger recorder
+  by identity. Active states become failed. Inactive states stay unchanged.
+- A returned error changes queued to failed in both variants.
+- For incomplete plus returned error, baseline changes it to failed. Candidate
+  preserves incomplete.
+- Success changes queued to completed in both variants.
+- Both public cancel rows retain cancelled and return the same response object.
+
+The fixture asserts state, ownership, ordinary error identity, and cleanup. It
+emits cancellation facts but does not assert every emitted cancellation field.
+A saved-data acceptance must therefore require the exact cancellation facts in
+`RESULT_CONTRACT.md`. Parent exit zero and complete capture alone are not a
+semantic pass.
+
+## Parent lifecycle
+
+The parent reverses byte-for-byte to the previously reviewed utility V2 parent
+after seven fixed literal substitutions: proposal path, output path, fixture
+hash, fixture-manifest hash, the script name twice, and scope text. The child,
+capture, deadline, cap, EOF, reap, and cleanup code is unchanged.
+
+The parent allows one exact direct child, one attempt, no retry, a ten-second
+capture/completion deadline, a two-second reap allowance, and 100000 bytes per
+stream. It sends kill only to its exact child if needed. It does not use a
+process-group signal. It writes stdout, stderr, and receipt with exclusive
+creation under an exclusive output directory.
+
+## Limits
+
+- Parent success proves only bounded child completion and full raw capture.
+- A later independent audit must parse one JSON line, require empty stderr, and
+  apply every field in `RESULT_CONTRACT.md`.
+- The fixture does not execute full create, renderer, engine admission, HTTP,
+  store configuration, retention, or public serialization.
+- The comparison does not prove connector cleanup or public error detail.
+- The normal pytest and prior import-denial boundaries remain unchanged.
+- No OS startup, scheduler, filesystem latency, or RSS maximum is claimed.

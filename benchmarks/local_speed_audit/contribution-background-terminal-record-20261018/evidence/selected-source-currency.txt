@@ -1,0 +1,36 @@
+# Online beam-search sibling lifetime audit
+
+Verdict: **rejected as exact open-PR duplicate**. No new candidate, patch, test, or fixture is justified.
+
+The selected source is current upstream main `fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de`, observed through the retained GitHub commit object. The ten selected source/test files total 305,855 bytes. SOURCE_IDENTITIES.json binds full bytes, sizes, SHA256 and Git blob identities. These are current primary snapshots, not the older shared checkout.
+
+## Distinct state invariant and exact owner
+
+The selected flow is the supported online beam-search extension on Chat/Completions. The request schemas expose use_beam_search and construct BeamSearchParams. The serving methods call BeamSearchOnlineMixin.beam_search. Completion explicitly rejects streaming beam search; a nonstream request is sufficient for this source path.
+
+The online method creates one task for collect_from_async_generator(engine_client.generate(...)) per active beam. At the second or a later beam step, there can be two or more children. It directly awaits asyncio.gather(*tasks) without a local try/finally. A child admission/generation exception can therefore reach that boundary while another child is still active. The admitted child's AsyncLLM.generate cancellation path has an owned abort(q.request_id, internal=True) and collector closure. Losing the candidate task handles would prevent this layer from explicitly joining that cleanup before returning the error. This is source reasoning, not an observed engine leak or permanent resource-retention claim.
+
+[Open PR #60550](https://github.com/vllm-project/vllm/pull/60550), exact head `f8c27a3900ef7ded627152df7f0095cad9ff402a`, addresses exactly this boundary. Its complete two-file diff adds try/except BaseException around the same gather, cancels each candidate task, awaits gather(return_exceptions=True), then re-raises. It adds a nearby existing-suite test parameterized over RuntimeError and CancelledError. Its event-controlled sibling deliberately yields during cleanup, so the test distinguishes cancellation from joined cleanup.
+
+The current primary method still contains the exact unguarded gather line. Thus the active fix has not become redundant merely because main advanced. This is direct same-fix ownership, not an adjacent overlap. Stop this lead. No competing repair is prepared.
+
+The PR's body reports isolated CPU and real-engine checks. Those are author claims. This packet does not independently reproduce or validate them. Its one retained PR comment is the project bot notice. No person was contacted.
+
+## Search and coverage bounds
+
+The saved commands include full issue-style comments for #60550, the full PR body/head/file metadata, complete raw diff, and an open PR query for `60550 in:body`. The latter returned #62253 and #62072, which cite this work; they do not remove #60550 ownership. Area queries returned 27 rows (beam search cancel), 8 (beam search gather), 3 (beam search admission), and 2 (quoted online beam cleanup), each below its 100-row limit. An initial all-state issue query returned 8 of a 30-row cap. Broad text results include unrelated hits; no global absence claim follows.
+
+Saved STATUS.json, REPORT.md, PLAN.json, NEXT_PHASE.md and the named completed serving audits were read first. Earlier embedding cancellation, lazy KV notice cleanup, terminal stream behavior and nonstream background failure work are excluded. This batch stops after this bounded distinct lifetime area. It does not pad the result with another speculative lead.
+
+TraceDecay's saved project coverage remains possibly stale with no served generation for this scout scope. Direct exact source is used. No graph absence is inferred. The research skill's parallel-agent step could not run because all four team slots were active. No new external API compatibility rule is asserted: beam search is a vLLM extension. No new library documentation question or Context7 call was needed for this source/PR duplicate decision.
+
+## Separate background draft currency record
+
+Root requested a selected-source currency check while it validates the existing background candidate. `background-e80-to-fe8-currency.json` closes three fresh GitHub Contents receipts at exact fe8: Responses serving.py, test_serving_responses.py and envs.py. All three full byte strings and Git blobs are identical to the immutable e80 baseline in candidate packet `1b480ee1fb8822baec1c7266ca3f90f334ff466680b2a4aaf69cfd59ccdce478`.
+
+This supports current-head selected-source applicability for that draft. It is not a whole-repository, dependency, build or runtime equivalence statement. The old candidate and all results remain untouched. Root's separate actual comparison result is not audited or accepted by this scout packet.
+
+## Checks and limits
+
+The own source/data checker passed 111 assertions. It decodes retained base64, verifies declared sizes and Git blob SHA1, hashes all ten selected files, parses AST without execution, checks direct duplicate source/diff identity, and compares the three background preimages. No subject body, async fixture, target import, server, engine, test, timer, container, model, compiler, package installation or paid work ran. No publication occurred. The useful result is an exact duplicate rejection plus three-file currency evidence.
+

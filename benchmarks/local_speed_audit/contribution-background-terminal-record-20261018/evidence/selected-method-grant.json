@@ -1,0 +1,69 @@
+{
+  "authority": "Root one-attempt local selected-method comparison only",
+  "proposal_and_review_pins": {
+    "serving/background-terminal-comparison-design-v1": "78ebb25b63bc4a1f81658ecc1ee5680ee3d06aa17d71ce969627b147bc161b8a",
+    "core/background-terminal-comparison-review-v1": "77843a21c1a8ae582179fa93ce7cb02e40a484728d2c52c46999cf836c5e4796",
+    "serving/background-terminal-fix-v1": "1b480ee1fb8822baec1c7266ca3f90f334ff466680b2a4aaf69cfd59ccdce478"
+  },
+  "closed_packets": {
+    "serving/background-terminal-comparison-design-v1": {
+      "payload_files": 20,
+      "payload_bytes": 72700
+    },
+    "core/background-terminal-comparison-review-v1": {
+      "payload_files": 9,
+      "payload_bytes": 24575
+    },
+    "serving/background-terminal-fix-v1": {
+      "payload_files": 47,
+      "payload_bytes": 1182366
+    }
+  },
+  "parent_sha256": "a43692edb26438043e72bc5fe5a4a07497e459ba16570f191e732a683d344e85",
+  "fixture_sha256": "daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142",
+  "source_bindings": {
+    "baseline": {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-fix-v1/source/serving.py",
+      "bytes": 56542,
+      "sha256": "4f9cacf4d4c4137d5aca65bc93d4f9936e057ee673687eeb5db2dbc5d724c501"
+    },
+    "candidate": {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-fix-v1/candidate/vllm/entrypoints/openai/responses/serving.py",
+      "bytes": 56604,
+      "sha256": "aad988091fb7397c7a81a8e3dbf67e5305b2900c7c1948ca9d7481bba5c98927"
+    }
+  },
+  "selected_ast_sha256": {
+    "baseline": {
+      "_run_background_request": "8ff27c9fea4140f6915419a5ae399a311297f167a75e09276874252468b1581c",
+      "retrieve_responses": "29d12489bbe951bf44762f8099dc4aade27ad655366b454984d902ca0dde5fcf",
+      "cancel_responses": "cc3d4c95c468f5658da42344b8fd9f43d28a9893d3e9c2fcaf851ee94338295b",
+      "create_cleanup_callback": "875a49ae4fa0a0e29bf923e86f78311482b6dff2a2de6c4d1291c23845a2122a"
+    },
+    "candidate": {
+      "_run_background_request": "324f8852e683a6eb942b69e8937017216fb0786ccc1e68e6f9ffb502c2e7603d",
+      "retrieve_responses": "29d12489bbe951bf44762f8099dc4aade27ad655366b454984d902ca0dde5fcf",
+      "cancel_responses": "cc3d4c95c468f5658da42344b8fd9f43d28a9893d3e9c2fcaf851ee94338295b",
+      "create_cleanup_callback": "875a49ae4fa0a0e29bf923e86f78311482b6dff2a2de6c4d1291c23845a2122a"
+    }
+  },
+  "command": "uv run --offline --no-project .venv/bin/python -B -I -S benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-comparison-design-v1/run_once.py",
+  "resources": {
+    "direct_children_max": 1,
+    "capture_completion_seconds": 10,
+    "exact_child_reap_allowance_seconds": 2,
+    "stream_cap_bytes_each": 100000,
+    "retries": 0,
+    "external_network": false,
+    "paid_compute": false,
+    "target_import": false,
+    "fixture_children": 0,
+    "fixture_threads": 0,
+    "fixture_live_tasks_max": 8,
+    "local_asyncio_wakeup_descriptors": "owned by asyncio.run",
+    "absolute_os_startup_or_rss_bound_claimed": false
+  },
+  "acceptance": "All 22 exact ordered rows and 15 strict row fields; cancellation type, args, logger identity and returned-object identity checked after capture. Parent zero is capture only.",
+  "historical_runtime_denials_changed": false,
+  "normal_pytest_or_real_engine_authority": false
+}

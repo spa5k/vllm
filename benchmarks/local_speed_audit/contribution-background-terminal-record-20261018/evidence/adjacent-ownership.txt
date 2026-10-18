@@ -1,0 +1,39 @@
+# Additional background Responses ownership review
+
+Root checked three adjacent open PRs before applying the local draft.
+The exact current PR metadata, complete comments, complete diffs and serving
+source at each saved head are retained here.
+
+- PR51892 head4510410c bounds input lookup, completed stream replay and include
+  parsing. Its serving diff does not add the nonstream producer transition.
+- PR56963 head3271068a adds an opt-in token session store and persistence after
+  response completion. Its serving changes retain the original nonstream worker.
+- PR42883 head5695a6e9 signs responses before persistence. It also retains the
+  original nonstream worker.
+
+Root decoded each exact-head Contents response and verified its Git blob hash.
+All three complete `_run_background_request` ASTs equal the e80 original AST.
+Each still awaits the full generator outside an exception handler. The exact
+methods are in source-comparison.json. These three saved heads do not fix this
+ordinary producer exception transition. Their other changes remain integration
+boundaries. This is a bounded check; it is not global absence proof.
+
+Root read the complete proposed two-file patch e226f865 and closed the author
+47-file packet at1b480ee1 and the independent15-file packet at8d87090a.
+Only one production method changes. Catching ordinary Exception, logging and
+changing only queued/in_progress under the existing lock preserves terminal
+states and the current cancellation boundary. The current source inserts the
+store row before starting its task and has no deletion path. The retained
+missing-row assertion follows that current contract.
+
+The official OpenAI background guide treats queued/in_progress as polling
+states and all other states as terminal. Root confirmed this in a fresh live
+Web observation. The official SDK status type includes failed. These are live
+documentation observations, not a new pinned OpenAPI body. The earlier exact
+SDK evidence remains in the sealed author packet. Context7 again returned its
+monthly quota error. No purchase or upgrade was made.
+
+Source and ordinary test design are accepted for an isolated fork draft.
+All12 proposed pytest rows remain unrun. No selected-method fixture is approved
+by this review. No real HTTP, engine admission, model, device, storage retention
+or connector release result follows. No upstream PR or message was sent.

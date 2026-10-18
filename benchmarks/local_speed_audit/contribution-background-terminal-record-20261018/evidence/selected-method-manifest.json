@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "kind": "ACTUAL_SELECTED_BACKGROUND_TERMINAL_COMPARISON",
+  "entries": [
+    {
+      "path": "REPORT.md",
+      "bytes": 1694,
+      "sha256": "d1c10888c5222cb3ca1cbe49d1e85caf17958cac185ad685bb36ba34004659ff",
+      "mode": 292
+    },
+    {
+      "path": "audit_background_terminal_actual_v1.py",
+      "bytes": 12722,
+      "sha256": "d533fac4a0da00f14876866095dfacac3194b9c3cf151540bf9cc93af6dafb6a",
+      "mode": 292
+    },
+    {
+      "path": "native-tool-objects.json",
+      "bytes": 2787,
+      "sha256": "0974eaa0dee8e9108ab9053cfcfd5affd7f01cb9998f7f131b40d5b275f3b1a2",
+      "mode": 292
+    },
+    {
+      "path": "receipt.json",
+      "bytes": 1254,
+      "sha256": "cffd601d6ef536ba8a17be63330861d10fa403d0f7fa4e6014941737d3676b2e",
+      "mode": 292
+    },
+    {
+      "path": "root-background-terminal-comparison-grant-v1.json",
+      "bytes": 3479,
+      "sha256": "38ec7fcedc071ef1ea7114c3e4a3dd8a37293845c56991f6cb629be94c199bb8",
+      "mode": 292
+    },
+    {
+      "path": "stderr.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 292
+    },
+    {
+      "path": "stdout.raw",
+      "bytes": 11460,
+      "sha256": "122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d",
+      "mode": 292
+    }
+  ],
+  "root_mode": 365,
+  "normal_pytest_executed": false,
+  "real_engine_executed": false,
+  "paid_launches": 0
+}

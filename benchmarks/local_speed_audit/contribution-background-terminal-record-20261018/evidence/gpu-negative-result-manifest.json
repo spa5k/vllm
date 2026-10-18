@@ -1,0 +1,312 @@
+{
+  "kind": "independent-bounded-gpu-kernel-source-research",
+  "schema": 1,
+  "main": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+  "decision": "NO_NEW_QUALIFIED_GPU_KERNEL_LEAD",
+  "file_count": 50,
+  "total_bytes": 1215975,
+  "root_mode": 365,
+  "directory_mode": 365,
+  "entries": [
+    {
+      "path": "COMMANDS.md",
+      "bytes": 3271,
+      "sha256": "68c698b201548ac8edf637f85b87f898dc0f29842986b310e8383c87305fa603",
+      "mode": 292
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6676,
+      "sha256": "7184d97383dbb428ec6b4422ca2a5aab65615ab8b15369f23c4fd1603d394d3f",
+      "mode": 292
+    },
+    {
+      "path": "analyze_data.py",
+      "bytes": 6911,
+      "sha256": "686effa76e30c0eb37a4c1cba820c5d3c9844d3e02aaf27903020dbde344d455",
+      "mode": 292
+    },
+    {
+      "path": "context-bindings.json",
+      "bytes": 1007,
+      "sha256": "9dde68d50379422a556ea93bcaf046229e7171b9fbdd7626974c00b33cf6b7e2",
+      "mode": 292
+    },
+    {
+      "path": "raw/all-fresh-issues.json",
+      "bytes": 51865,
+      "sha256": "6c8bbb9e2301f269451c9f0ac055491223d20f02b7bbed2b7322d057ce53647d",
+      "mode": 292
+    },
+    {
+      "path": "raw/allreduce-workspace-open-prs.json",
+      "bytes": 6646,
+      "sha256": "fa8e17eca45100d43fbb7520820dff0f3ba76b7307b6215277bb20fee73c11a7",
+      "mode": 292
+    },
+    {
+      "path": "raw/fresh-gpu-issues.json",
+      "bytes": 51865,
+      "sha256": "6c8bbb9e2301f269451c9f0ac055491223d20f02b7bbed2b7322d057ce53647d",
+      "mode": 292
+    },
+    {
+      "path": "raw/fresh-worker-issues.json",
+      "bytes": 51865,
+      "sha256": "6c8bbb9e2301f269451c9f0ac055491223d20f02b7bbed2b7322d057ce53647d",
+      "mode": 292
+    },
+    {
+      "path": "raw/issue30546-comments.json",
+      "bytes": 13623,
+      "sha256": "32a5836e6abaf1f4698149c1cc06041be0a08b18e6466cdea9ed6ff769e42e47",
+      "mode": 292
+    },
+    {
+      "path": "raw/issue30546-linked-open-prs.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "mode": 292
+    },
+    {
+      "path": "raw/issue30546.json",
+      "bytes": 5905,
+      "sha256": "e3e9e2010df391d321caba2dfa4eeb88e670230fd24032c5ecdde70f92160e1c",
+      "mode": 292
+    },
+    {
+      "path": "raw/issue51986-comments.json",
+      "bytes": 207539,
+      "sha256": "49096a597487a88998840645ab812d8db7f749753d498bb7209f13c8d5f52794",
+      "mode": 292
+    },
+    {
+      "path": "raw/issue51986-linked-open-prs.json",
+      "bytes": 257,
+      "sha256": "7562b68621298e68104b515a4b271378d96b86c89b940440a3e6aa652951de56",
+      "mode": 292
+    },
+    {
+      "path": "raw/issue51986.json",
+      "bytes": 18913,
+      "sha256": "1e89da265159e4a5dafb6ce31b845d030f4e849312dfa0191aae18a94a58df55",
+      "mode": 292
+    },
+    {
+      "path": "raw/main-final.json",
+      "bytes": 10351,
+      "sha256": "e50a3da08b49fa4e15dc8813770c55a072a7432b4eda8944460a4c9160fdee8c",
+      "mode": 292
+    },
+    {
+      "path": "raw/main.json",
+      "bytes": 10351,
+      "sha256": "e50a3da08b49fa4e15dc8813770c55a072a7432b4eda8944460a4c9160fdee8c",
+      "mode": 292
+    },
+    {
+      "path": "raw/mnnvl-open-prs.json",
+      "bytes": 7337,
+      "sha256": "fc9b0bf10565bbcf81b1eea6bf36b0443aaf8a6d30ed07b10bb229ba1e9ea7a3",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr30610-files.json",
+      "bytes": 2798,
+      "sha256": "d3fca480fc48a1c18a4cd73f84f73cf9016df8f2512bb93bbe74f8ebad32fbf8",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr30610.json",
+      "bytes": 18884,
+      "sha256": "52bbc0dc6d90802530218f3348611c3afe9639e27743df879755e0bbbfe6a85f",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr53377-files.json",
+      "bytes": 10928,
+      "sha256": "850dfeda79fc57af86914574b66ebd873488700db9cfd8ce885c75f4aec2b36b",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr53377.json",
+      "bytes": 19178,
+      "sha256": "40076947fe2fe97201d9f24693cc6457923ea27c610eff642bf08f32afc4aca9",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr55835-files.json",
+      "bytes": 6693,
+      "sha256": "9bb30a4fd775a963e7916085676be844102693ef6a47342989d2a6129cf06203",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr55835.json",
+      "bytes": 23416,
+      "sha256": "2fe68917e7a07522b85d591953fb4a3cbdc948dd5542f200c2293c2c4a9ae2f0",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr61138-files.json",
+      "bytes": 1591,
+      "sha256": "0a52348244fbb3ee84b01a3955f0f57498960c957208ed5d1284f45b3fd3ebe6",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr61138.json",
+      "bytes": 20587,
+      "sha256": "6aaba0020738c6fd1e0a31223023cd6f4cfbf7c2582d2296b33f4d250d4bbb6b",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr61140-files.json",
+      "bytes": 1614,
+      "sha256": "3bb2ba0d5de154c50f55103345ba5032389aefa2eaf0f8a991e9c015a819c4c4",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr61140.json",
+      "bytes": 19588,
+      "sha256": "70a7dfa405e486b4eb004c33f54e3cfab966cfe53cb59a07dbbfe91d47ca378a",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr61512-files.json",
+      "bytes": 14277,
+      "sha256": "3dcabf5f0c425234040f2cacbec7d4a0b2e9736bec35f3ac1d20b9cc79984f47",
+      "mode": 292
+    },
+    {
+      "path": "raw/pr61512.json",
+      "bytes": 22357,
+      "sha256": "5759d5170f1adbc3bee3f14b0e77ecd0b24c6d675df7d23174f1e3e4a307f8e9",
+      "mode": 292
+    },
+    {
+      "path": "raw/reduce-scatter-callsite-lines.txt",
+      "bytes": 10252,
+      "sha256": "bf40ffa66cf48b410fc8c8a9e978e326ee473a854f5ca5398837259097dd6729",
+      "mode": 292
+    },
+    {
+      "path": "raw/reduce-scatter-dim-prs.json",
+      "bytes": 463,
+      "sha256": "b4a511b0142286c1fd55a05bd655d11ceacfc5051cf84970ac02f4d47170af61",
+      "mode": 292
+    },
+    {
+      "path": "raw/reduce-scatter-issues.json",
+      "bytes": 115439,
+      "sha256": "c4fac0e281ceadbf6c0950872d380fecbbb2461cd3acceb1310c9553aff184d8",
+      "mode": 292
+    },
+    {
+      "path": "raw/reduce-scatter-movedim-prs.json",
+      "bytes": 528,
+      "sha256": "bec1b22364ce724d66f759963ed4f67d3a819c576773ed5126fabaa1b34e1f86",
+      "mode": 292
+    },
+    {
+      "path": "raw/selected-git-tree.txt",
+      "bytes": 556,
+      "sha256": "efcd3dec859abdfbf3e9ef4a1f39c3843fb4586cf3efe4dde832e9719b45d14d",
+      "mode": 292
+    },
+    {
+      "path": "raw/source-cuda-communicator.json",
+      "bytes": 61703,
+      "sha256": "7c17dfb50e905a64b02fac8d04c85a6d5e3bcf0c8ae8aa00d0ef2548afa11da4",
+      "mode": 292
+    },
+    {
+      "path": "raw/source-custom-all-reduce.json",
+      "bytes": 43019,
+      "sha256": "e958d838ff3b2a968a261aeea310341dd9297ad7fa1ded3cb4dbcab13cb3bfaf",
+      "mode": 292
+    },
+    {
+      "path": "raw/source-flashinfer-all-reduce.json",
+      "bytes": 26931,
+      "sha256": "0184250d0f6f7c8ef7b043716b582fd25f2e75c06e18e5390273813a0e14619b",
+      "mode": 292
+    },
+    {
+      "path": "result.json",
+      "bytes": 2055,
+      "sha256": "7691015499bdea948116985c87add781eb4979998d65c0152dcbd91b9e563f06",
+      "mode": 292
+    },
+    {
+      "path": "seal.py",
+      "bytes": 2256,
+      "sha256": "8b9adb5fd263e5a206dab81bacea623e7ee780e143edb15b2a2ae537b89d305a",
+      "mode": 292
+    },
+    {
+      "path": "source/base_device_communicator.py",
+      "bytes": 16684,
+      "sha256": "e50d348c1818cd3ef4fc6451ccbcd23ee269226b6ef71dac705c48c7dac85715",
+      "mode": 292
+    },
+    {
+      "path": "source/communication_op.py",
+      "bytes": 1323,
+      "sha256": "3c3f8ac60db38ece891d39dc1e2f6f1947ad438685893d2e5777d072320bd1b8",
+      "mode": 292
+    },
+    {
+      "path": "source/cuda_communicator.py",
+      "bytes": 43877,
+      "sha256": "2f5368d6ca1856a7b2b49fc423cc4728483d0c9289f913a7bc7cbe0baa040ec0",
+      "mode": 292
+    },
+    {
+      "path": "source/custom_all_reduce.py",
+      "bytes": 30317,
+      "sha256": "d3ad720ac93e0b94f9ff032dbda8a41308929d68c674f8bad85343d64f1b823b",
+      "mode": 292
+    },
+    {
+      "path": "source/dcp.py",
+      "bytes": 54895,
+      "sha256": "f76296c841363f26c83908229eaddabfce665a9a39b7e802d252885d6d15353e",
+      "mode": 292
+    },
+    {
+      "path": "source/flashinfer_all_reduce.py",
+      "bytes": 18621,
+      "sha256": "a568184b2209e3679cc3d385518825452c38de0ca3c2d1c9ce416e2c995f95dc",
+      "mode": 292
+    },
+    {
+      "path": "source/inkling_nvidia_model.py",
+      "bytes": 27922,
+      "sha256": "a29cd2b83922a5eae50590dc52607888ee17f58fcc6abf28aead499d15166a8c",
+      "mode": 292
+    },
+    {
+      "path": "source/parallel_state.py",
+      "bytes": 102239,
+      "sha256": "4868c55bf8e29cb5ee20cb072aab793fa0532624b742ec1a86eb8338af8ca672",
+      "mode": 292
+    },
+    {
+      "path": "source/test_comm_ops.py",
+      "bytes": 27209,
+      "sha256": "b88225c794e22af8506367fb023fa2290fe7703cb4541efe735b5c97c9a09079",
+      "mode": 292
+    },
+    {
+      "path": "source-identities.json",
+      "bytes": 2672,
+      "sha256": "b528153588d2b02a4676dd2e13b6b01c924066182e1817efaa8ce7aa99a9e2bb",
+      "mode": 292
+    },
+    {
+      "path": "tool-receipts.json",
+      "bytes": 10718,
+      "sha256": "c73e531d69184e4182f3ba91c53f46c1bd00ff8d558a462b508438e5b7ac9439",
+      "mode": 292
+    }
+  ]
+}

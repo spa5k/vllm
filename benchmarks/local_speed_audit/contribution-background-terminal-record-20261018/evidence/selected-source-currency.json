@@ -1,0 +1,39 @@
+{
+  "scope": "Three selected whole source files only; no build/runtime transfer",
+  "current_main": "fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de",
+  "baseline_manifest_sha256": "1b480ee1fb8822baec1c7266ca3f90f334ff466680b2a4aaf69cfd59ccdce478",
+  "rows": [
+    {
+      "path": "vllm/entrypoints/openai/responses/serving.py",
+      "current_ref": "fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de",
+      "current_git_blob": "ba9d95b428732380506d2a5f4cf4c23a58cf752c",
+      "bytes": 56542,
+      "sha256": "4f9cacf4d4c4137d5aca65bc93d4f9936e057ee673687eeb5db2dbc5d724c501",
+      "baseline_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-fix-v1/source/serving.py",
+      "baseline_ref": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+      "byte_identical": true
+    },
+    {
+      "path": "tests/entrypoints/openai/responses/test_serving_responses.py",
+      "current_ref": "fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de",
+      "current_git_blob": "67b9dd4e4fadc2a492d8f2fac47ce68112e41c2b",
+      "bytes": 82018,
+      "sha256": "621f150210187bd6f7be7989b1b1677035de18c8c3912edee975514cf5cd4fb6",
+      "baseline_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-fix-v1/source/test_serving_responses.py",
+      "baseline_ref": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+      "byte_identical": true
+    },
+    {
+      "path": "vllm/envs.py",
+      "current_ref": "fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de",
+      "current_git_blob": "0492c5a59d949ea075717a9c808d86ac2809712b",
+      "bytes": 118586,
+      "sha256": "5bf1b76a957f1690989267a0b81f425a6b3706ef50703aa66df57f159a3150d4",
+      "baseline_path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-fix-v1/source/envs.py",
+      "baseline_ref": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+      "byte_identical": true
+    }
+  ],
+  "target_executed": false,
+  "runtime_authority": false
+}

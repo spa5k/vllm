@@ -1,0 +1,48 @@
+# Deep kernel lifecycle batch
+
+Decision: **NO_NEW_QUALIFIED_GPU_KERNEL_LEAD**. No patch or execution is proposed.
+
+Both fresh primary main reads returned `e80b6c642f21fd5b24439825592f5b9ced36add8`. This commit is available in the local Git object store. Nine selected source/test files are closed by actual Git blob identity, byte length and SHA-256 in `source-identities.json`. Three also have independent GitHub contents responses. These pins establish selected source identity. They do not establish native build or runtime identity.
+
+## Fresh activity
+
+The bounded open-issue query uses `updated:>=2026-10-18T14:10:00Z`. It returns four results, with `incomplete_results=false`, below its limit30. The two GPU/worker keyword queries return the same four rows. This is query coverage, not a global absence claim.
+
+| Report | Decision |
+| --- | --- |
+| #51986 | New multi-node triage is substantive. Existing and claimed work prevents a competing contribution. Details follow. |
+| #62130 | Existing grammar/EAGLE feature prototype and proposal. Body triage only; no new kernel correctness mechanism selected. |
+| #62145 | Existing auxiliary-head RFC with its own implementation plan. Body triage only; no independent defect selected. |
+| #61604 | Reporter has a local prefix-walk optimization and asks about its value. Body triage only; no new correctness lead selected. |
+
+The latter three did not receive a full comments/PR ownership investigation here. No fix is accepted from them. Prior finished or rejected ARM, MeanPool, fusion, tiny-logit, width, loader, CMake, INT8, SiLU, rotary, AutoRound, cache-LoRA and MRV2 row-lifetime work was not reopened.
+
+## MNNVL: reject competing work
+
+All six current comments and the full issue object are retained. The latest comment, `6251324423`, reports two earlier rendezvous failures on two B300 hosts. It also states that its author will prepare the separate CustomAllreduce/Kimi-tail change. Those hardware and backport observations belong to that author. This audit did not repeat them.
+
+The exact issue-linked open-PR query returns #53377, head `af0032bade6324f1ad5ade242697604655d33b8e`. Its complete two-file patch adds the group capability check before FlashInfer workspace construction. Current `flashinfer_all_reduce.py` still constructs the workspace before checking its multicast pointer. The current source is consistent with the reported gate location. It does not independently prove the reported hang or leak.
+
+The broader MNNVL list reaches its limit30 and is capped. The allreduce/workspace list is also bounded. Exact heads and full changed-file responses for nearby #55835 and #61512 were read. #55835 changes cross-node CUDA IPC eligibility and graph-buffer registration. #61512 changes when the multimem reduce-scatter buffer is mapped. These are distinct from #53377. The new comment claims additional CustomAllreduce/Kimi topology work; this is a coordination hold, not evidence that #55835 fixes that new claim. No new fix is selected.
+
+## Separate source boundary: reduce-scatter axes
+
+The narrow question was whether the input and output axis moves are inverses for supported production calls. Both current base and CUDA `reduce_scatter` use `movedim(0, dim)` on entry and exit. Their group wrapper accepts a dimension in the tensor's rank range.
+
+Own list-axis arithmetic identifies a discrepancy for rank3 last-axis inputs. With shape `(2,3,8)`, axis2 and world2, the modeled entry shape is `(3,8,2)` and the leading-axis divisibility assertion rejects it although axis2 is divisible. With `(2,4,8)`, the modeled returned shape is `(8,2,2)` instead of `(2,4,4)`. These are five scalar shape models, including three passing controls. They are not distributed, Torch or native tests.
+
+This is exactly the old mechanism in closed issue #30546. Its five comments link the closed, unmerged #30610, head `04f98368481b6b74c7c0e8bce8ffd31476cacdb0`. That patch makes the same entry-axis correction. The issue-linked open-PR query is empty. Open #61138 and #61140, with exact heads/diffs retained, optimize dim0 in the same methods; they retain the old nonzero-axis expression. This is adjacent same-method work, not a claim that those PRs fix the rank3 case.
+
+The saved complete lexical search is limited to literal `reduce_scatter(` and `tensor_model_parallel_reduce_scatter` in current `vllm/`. The named production callers found use axis0, DCP axis1, or Inkling's last axis. The DCP contract is rank3 `[B,H,D]`, but axis1 is an adjacent swap and the shape model passes. Inkling's NVIDIA model explicitly flattens hidden states to rank2 before its layers; its last-axis use is therefore not new rank3 proof. No supported production rank3 last-axis trigger was established. Dynamic aliases or external callers are not exhaustively excluded.
+
+Decision: retain the old API source discrepancy as **rejected for this contribution batch**, with no supported new production trigger. Do not manufacture an artificial input regression or reopen the old report on this evidence alone. No native bug, crash, out-of-bounds access, model effect or performance result is claimed.
+
+## Method and limits
+
+`analyze_data.py` is reviewer-owned stdlib data code. It verifies nine saved Git blobs, parses ASTs without execution, binds the named axis operations and call sites, checks exact issue/PR records, and runs the five independent list-shape models. It ran once successfully (native receipt `39cc50`, exit0). These checks are not test-suite or runtime scenarios.
+
+The current STATUS/PLAN, prior GPU rejection report and named historical manifests were read for scope. `context-bindings.json` records their observed identities. Historical whole-packet audits were not repeated. TraceDecay coverage is stale/partial for the saved source trees, so exact named source is authoritative. Kernel/research/TraceDecay guidance was read. Context7's retained quota block remains; primary GitHub source was used.
+
+One initial comment command failed because an unquoted `?` was treated as a zsh glob. It made no API request. The exact error is retained in `tool-receipts.json`; the quoted request then succeeded. Some console displays of public environment/log text were truncated. The saved API files are complete. No failed command or display limit is treated as product evidence.
+
+No target body, Torch/vLLM/Triton/native import, fixture, package install, environment copy, Docker, GPU, Modal, controller, resource call or paid operation ran. This packet grants source research authority only. All files are sealed0444 and directories, including the packet root, are0555; the closed set and final modes are checked after sealing.

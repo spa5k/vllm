@@ -1,0 +1,54 @@
+{
+  "directories": [],
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 247,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "57f2b18a9c11b722c5eb1d2fc34313ace9a75491b82f484235dfde3101283f17"
+    },
+    {
+      "bytes": 520,
+      "mode": 292,
+      "path": "INPUTS.json",
+      "sha256": "f8128abe78e2635d5714828d8de1e67e087e6a28401cdf2d6a28a3f470675168"
+    },
+    {
+      "bytes": 2990,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "d7d093d0877dc56f073d97e256239b23fa7395462b4cd8ef3c17c9785713ae91"
+    },
+    {
+      "bytes": 11549,
+      "mode": 292,
+      "path": "audit_data.py",
+      "sha256": "275bd25b2df59ad75acef77f0e58432d322713aa4509b68773feb25cc2086c7f"
+    },
+    {
+      "bytes": 519,
+      "mode": 292,
+      "path": "review-result.json",
+      "sha256": "f9bab4fb4a722d1e56568436fdb80b2f48cd2d3bf1b3e03a6c05cb5c56bca0a8"
+    },
+    {
+      "bytes": 1633,
+      "mode": 292,
+      "path": "seal.py",
+      "sha256": "1cc8b70cbd8356663b8018a34df7d71434e471a789ee3c832857a9cc21573459"
+    }
+  ],
+  "file_count": 6,
+  "fixture_invoked_by_reviewer": false,
+  "kind": "BACKGROUND_TERMINAL_ACTUAL_INDEPENDENT_DATA_REVIEW",
+  "normal_pytest_executed": false,
+  "real_engine_executed": false,
+  "root_mode": 365,
+  "runtime_authority": false,
+  "schema": 1,
+  "selected_methods_invoked_by_reviewer": false,
+  "target_imported": false,
+  "total_bytes": 17458,
+  "verdict": "PASS_SELECTED_METHOD_COMPARISON"
+}

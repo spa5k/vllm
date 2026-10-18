@@ -1,0 +1,27 @@
+# Background Responses selected-method comparison
+
+Root executed the reviewed parent once. The exact child exited zero and was
+reaped. Both output streams reached EOF. There was no retry or cleanup signal.
+The measured execution and capture time was 0.07971587497740984 seconds.
+Stdout is 11,460 bytes. Stderr is empty.
+
+The strict saved-data audit passed 22 ordered rows with 15 fields per row.
+It also verified eight original AST bindings and both complete source hashes.
+The baseline leaves queued or synthetic in_progress responses active after an
+ordinary producer exception. The candidate changes those states to failed.
+The candidate preserves completed, cancelled, incomplete and failed states.
+Both public cancellation paths retain cancellation type, arguments, response
+identity and the expected logger identity. All owned tasks were awaited.
+The exact task cleanup callback ran before its completion observer. A healthy
+sibling task and response retained their identity until fixture cleanup.
+
+The fixture selects three methods and one cleanup callback. It uses a fake
+producer and local record types. It does not execute the complete create path,
+HTTP handling, real admission, the engine, target imports, model or device.
+The in_progress case is synthetic compatibility coverage. The returned-error
+incomplete case explicitly changes the baseline overwrite to preservation.
+Normal pytest remains unrun. Parent exit zero alone proves complete capture;
+the separate saved-data audit establishes the stated 22-row result.
+
+Original tool results are retained in native-tool-objects.json. The Root grant
+and data-only auditor are copied here. Historical observer denials are unchanged.

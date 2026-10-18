@@ -1,0 +1,234 @@
+"""Root source closure and saved-data audit. Does not execute target code."""
+
+import ast
+import hashlib
+import json
+from pathlib import Path
+import stat
+import sys
+
+ROOT = Path('/Users/pacific/Developer/vllm')
+BASE = ROOT / 'benchmarks/local_speed_audit/contribution-scout-20261017'
+PROPOSAL = BASE / 'serving/background-terminal-comparison-design-v1'
+ACTUAL = BASE / 'control/root-background-terminal-comparison-invocation-v1'
+GRANT = BASE / 'control/root-background-terminal-comparison-grant-v1.json'
+PINS = {
+    'serving/background-terminal-comparison-design-v1':
+        '78ebb25b63bc4a1f81658ecc1ee5680ee3d06aa17d71ce969627b147bc161b8a',
+    'core/background-terminal-comparison-review-v1':
+        '77843a21c1a8ae582179fa93ce7cb02e40a484728d2c52c46999cf836c5e4796',
+    'serving/background-terminal-fix-v1':
+        '1b480ee1fb8822baec1c7266ca3f90f334ff466680b2a4aaf69cfd59ccdce478',
+}
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def pairs(rows):
+    result = {}
+    for key, value in rows:
+        assert key not in result, key
+        result[key] = value
+    return result
+
+
+def reject_constant(value):
+    raise ValueError(value)
+
+
+def parse(raw):
+    return json.loads(raw, object_pairs_hook=pairs, parse_constant=reject_constant)
+
+
+def closed_file(path, expected_sha=None, expected_size=None):
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1, str(path)
+    assert stat.S_IMODE(before.st_mode) == 0o444, str(path)
+    raw = path.read_bytes()
+    after = path.lstat()
+    fields = ('st_dev', 'st_ino', 'st_size', 'st_mode', 'st_mtime_ns', 'st_ctime_ns')
+    assert all(getattr(before, x) == getattr(after, x) for x in fields)
+    if expected_sha is not None:
+        assert sha(raw) == expected_sha, str(path)
+    if expected_size is not None:
+        assert len(raw) == expected_size, str(path)
+    return raw
+
+
+def close_packet(path, expected_sha):
+    raw = closed_file(path / 'manifest.json', expected_sha)
+    manifest = parse(raw)
+    entries = manifest['entries']
+    expected = {'manifest.json'} | {r['path'] for r in entries}
+    assert len(expected) == len(entries) + 1
+    actual = set()
+    for item in path.rglob('*'):
+        assert not item.is_symlink()
+        if item.is_dir():
+            assert stat.S_IMODE(item.stat().st_mode) == 0o555
+        else:
+            actual.add(str(item.relative_to(path)))
+    assert actual == expected, str(path)
+    assert stat.S_IMODE(path.stat().st_mode) == 0o555
+    for row in entries:
+        p = Path(row['path'])
+        assert not p.is_absolute() and '..' not in p.parts
+        closed_file(path / p, row['sha256'], row['bytes'])
+    return {'payload_files': len(entries), 'payload_bytes': sum(x['bytes'] for x in entries)}
+
+
+def source_closure():
+    closure = {name: close_packet(BASE / name, pin) for name, pin in PINS.items()}
+    close_packet(PROPOSAL / 'fixture', 'f5e0d3d235d7d88715208228cb72bed8c6148e7435d89485a13927922e5ddaad')
+    template = closed_file(PROPOSAL / 'template_parent.py.txt',
+                          '9404cb106888a7d7a2fe505966bd01244428a32aa16c9a6daed45a836b6f44fb')
+    substitutions = (
+        (b'core/utility-future-regression-design-v2', b'serving/background-terminal-comparison-design-v1/fixture', 1),
+        (b'control/root-utility-future-receiver-comparison-invocation-v2', b'control/root-background-terminal-comparison-invocation-v1', 1),
+        (b'85e52fa12704c8eb1487a2e49fe14f8b73541c1eeb86c8fb8898f40f78a32b92', b'daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142', 1),
+        (b'7e3d7f8655f9222428c4b3b5f7e478b600084ad3ec37c557d91297d33270a792', b'f5e0d3d235d7d88715208228cb72bed8c6148e7435d89485a13927922e5ddaad', 1),
+        (b'extracted_receiver_fixture.py', b'background_terminal_fixture.py', 2),
+        (b'selected client/receiver AST bodies with fake transport and bounded real futures/tasks/caller thread; no target imports, engine process or device',
+         b'selected background worker/retrieve/cancel AST bodies with fake producer and real bounded asyncio tasks/locks; no full create, HTTP, target import, engine process or device', 1),
+    )
+    for old, new, count in substitutions:
+        assert template.count(old) == count
+        template = template.replace(old, new)
+    assert template == closed_file(PROPOSAL / 'run_once.py',
+                                  'a43692edb26438043e72bc5fe5a4a07497e459ba16570f191e732a683d344e85')
+    inputs = parse(closed_file(PROPOSAL / 'fixture/INPUTS.json'))
+    expected = parse(closed_file(PROPOSAL / 'SOURCE_SELECTIONS.json'))
+    selections = {}
+    for variant, row in inputs.items():
+        raw = closed_file(Path(row['path']), row['sha256'], row['bytes'])
+        cls = next(n for n in ast.parse(raw).body if isinstance(n, ast.ClassDef) and n.name == 'OpenAIServingResponses')
+        values = {}
+        for name in ('_run_background_request', 'retrieve_responses', 'cancel_responses'):
+            node = next(n for n in cls.body if isinstance(n, ast.AsyncFunctionDef) and n.name == name)
+            values[name] = sha(ast.dump(node, include_attributes=False).encode())
+        create = next(n for n in cls.body if isinstance(n, ast.AsyncFunctionDef) and n.name == '_create_responses')
+        callback = [n for n in ast.walk(create) if isinstance(n, ast.Expr) and isinstance(n.value, ast.Call) and isinstance(n.value.func, ast.Attribute) and n.value.func.attr == 'add_done_callback']
+        assert len(callback) == 1
+        values['create_cleanup_callback'] = sha(ast.dump(callback[0], include_attributes=False).encode())
+        selections[variant] = values
+    assert selections == expected
+    return closure, inputs, selections
+
+
+def prepare():
+    closure, inputs, selections = source_closure()
+    assert not ACTUAL.exists()
+    record = {
+        'authority': 'Root one-attempt local selected-method comparison only',
+        'proposal_and_review_pins': PINS, 'closed_packets': closure,
+        'parent_sha256': 'a43692edb26438043e72bc5fe5a4a07497e459ba16570f191e732a683d344e85',
+        'fixture_sha256': 'daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142',
+        'source_bindings': inputs, 'selected_ast_sha256': selections,
+        'command': 'uv run --offline --no-project .venv/bin/python -B -I -S benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-comparison-design-v1/run_once.py',
+        'resources': {
+            'direct_children_max': 1, 'capture_completion_seconds': 10,
+            'exact_child_reap_allowance_seconds': 2, 'stream_cap_bytes_each': 100000,
+            'retries': 0, 'external_network': False, 'paid_compute': False,
+            'target_import': False, 'fixture_children': 0, 'fixture_threads': 0,
+            'fixture_live_tasks_max': 8,
+            'local_asyncio_wakeup_descriptors': 'owned by asyncio.run',
+            'absolute_os_startup_or_rss_bound_claimed': False,
+        },
+        'acceptance': 'All 22 exact ordered rows and 15 strict row fields; cancellation type, args, logger identity and returned-object identity checked after capture. Parent zero is capture only.',
+        'historical_runtime_denials_changed': False,
+        'normal_pytest_or_real_engine_authority': False,
+    }
+    with GRANT.open('x') as handle:
+        json.dump(record, handle, indent=2)
+        handle.write('\n')
+    GRANT.chmod(0o444)
+    print(json.dumps({'prepared': True, 'grant_sha256': sha(GRANT.read_bytes()), 'closed_packets': closure}, sort_keys=True))
+
+
+def audit():
+    closure, inputs, selections = source_closure()
+    closed_file(GRANT)
+    receipt = parse((ACTUAL / 'receipt.json').read_bytes())
+    assert receipt['argv'] == [str(ROOT / '.venv/bin/python'), '-B', '-I', '-S', str(PROPOSAL / 'fixture/background_terminal_fixture.py')]
+    for key, value in {'attempts': 1, 'retries': 0, 'timeout_seconds': 10, 'reap_allowance_seconds': 2, 'stream_cap_bytes': 100000, 'returncode': 0}.items():
+        assert type(receipt[key]) is int and receipt[key] == value, key
+    for key in ('complete', 'reaped', 'passed'):
+        assert receipt[key] is True, key
+    assert receipt['first_error'] is None and not receipt.get('cleanup_errors')
+    assert 'owned_child_kill' not in receipt
+    assert receipt['eof'] == {'stdout': True, 'stderr': True}
+    assert type(receipt['pid']) is int and receipt['pid'] > 0
+    assert type(receipt['elapsed_seconds']) in (int, float) and 0 <= receipt['elapsed_seconds'] < 10
+    assert receipt['script_sha256'] == 'daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142'
+    assert receipt['proposal_manifest_sha256'] == 'f5e0d3d235d7d88715208228cb72bed8c6148e7435d89485a13927922e5ddaad'
+    for stream in ('stdout', 'stderr'):
+        raw = (ACTUAL / (stream + '.raw')).read_bytes()
+        assert len(raw) <= 100000
+        assert receipt['raw'][stream] == {'bytes': len(raw), 'sha256': sha(raw)}
+    assert (ACTUAL / 'stderr.raw').read_bytes() == b''
+    raw = (ACTUAL / 'stdout.raw').read_bytes()
+    assert raw.endswith(b'\n') and raw.count(b'\n') == 1
+    result = parse(raw)
+    assert set(result) == {'scope', 'rows', 'selected_ast_sha256', 'source_bindings', 'all_owned_tasks_awaited', 'target_imported', 'real_engine_executed'}
+    assert result['scope'] == 'selected methods, fake producer, no full create/HTTP/engine'
+    assert result['all_owned_tasks_awaited'] is True
+    assert result['target_imported'] is False and result['real_engine_executed'] is False
+    assert result['source_bindings'] == inputs and result['selected_ast_sha256'] == selections
+    cases = (
+        ('queued_raise', 'queued', 'raise'),
+        ('in_progress_raise', 'in_progress', 'raise'),
+        ('returned_error', 'queued', 'return_error'),
+        ('success', 'queued', 'success'),
+        ('completed_preserved', 'completed', 'raise'),
+        ('cancelled_preserved', 'cancelled', 'raise'),
+        ('incomplete_preserved', 'incomplete', 'raise'),
+        ('failed_preserved', 'failed', 'raise'),
+        ('incomplete_returned_error', 'incomplete', 'return_error'),
+        ('public_cancel_returned_error', 'queued', 'cancel_return_error'),
+        ('public_cancel_propagated', 'queued', 'cancel_propagate'),
+    )
+    assert type(result['rows']) is list and len(result['rows']) == 22
+    for row, (variant, (label, status, outcome)) in zip(result['rows'], [(v, c) for v in ('baseline', 'candidate') for c in cases], strict=True):
+        expected = {
+            'variant': variant, 'case': label, 'before_status': status,
+            'after_status': status, 'retrieved_same_object': True,
+            'healthy_sibling_preserved': True, 'owned_task_removed': True,
+            'escaped_type': None, 'producer_error_identity_retained': False,
+            'producer_error_logged_by_identity': False,
+            'cancel_seen': 0, 'cancel_type': None, 'cancel_args': None,
+            'cancel_identity_logged': None, 'cancel_returned_same_object': False,
+        }
+        if outcome == 'raise':
+            if variant == 'baseline':
+                expected.update(escaped_type='ProducerError', producer_error_identity_retained=True)
+            else:
+                expected['producer_error_logged_by_identity'] = True
+                if status in ('queued', 'in_progress'):
+                    expected['after_status'] = 'failed'
+        elif outcome == 'return_error':
+            if status == 'queued' or variant == 'baseline':
+                expected['after_status'] = 'failed'
+        elif outcome == 'success':
+            expected['after_status'] = 'completed'
+        else:
+            expected.update(after_status='cancelled', cancel_seen=1,
+                            cancel_type='CancelledError', cancel_args=[],
+                            cancel_identity_logged=outcome == 'cancel_propagate',
+                            cancel_returned_same_object=True)
+            if outcome == 'cancel_propagate':
+                expected['escaped_type'] = 'CancelledError'
+        assert set(row) == set(expected)
+        for key, value in expected.items():
+            assert type(row[key]) is type(value) and row[key] == value, (variant, label, key, row[key], value)
+    print(json.dumps({'verdict': 'PASS_SELECTED_METHOD_COMPARISON', 'rows': 22,
+                      'strict_row_fields': 15, 'ast_bindings': 8,
+                      'normal_pytest': 'unrun', 'real_engine': False,
+                      'raw_sha256': sha(raw), 'receipt_sha256': sha((ACTUAL / 'receipt.json').read_bytes()),
+                      'closed_packets': closure}, sort_keys=True))
+
+
+if __name__ == '__main__':
+    assert len(sys.argv) == 2 and sys.argv[1] in ('--prepare', '--audit')
+    prepare() if sys.argv[1] == '--prepare' else audit()

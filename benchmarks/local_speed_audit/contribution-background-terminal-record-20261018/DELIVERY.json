@@ -1,0 +1,38 @@
+{
+  "controlled_selected_method_assertions": 447,
+  "controlled_selected_method_negative_controls": 10,
+  "controlled_selected_method_rows_passed": 22,
+  "deadline_utc": "2026-10-19T12:28:00Z",
+  "full_create_http_admission_or_native_proven": false,
+  "latest_ssd_free_bytes": 73555218432,
+  "ledger": {
+    "bytes": 55271,
+    "sha256": "4b9b4eec4c3c63c5a059d79cebe0d743634f2d48b4b45f7b46d8e6dfa11c8de4"
+  },
+  "ledger_estimate_is_invoice_or_balance": false,
+  "ledger_estimate_with_guard_usd": 2.9192748,
+  "new_paid_compute": 0,
+  "normal_pytest_executed": false,
+  "normal_pytest_rows_declared": 12,
+  "owner_coordination_messages_sent": false,
+  "physical_disk_reclamation_claimed": false,
+  "public_serving_model_evaluation_executed": false,
+  "public_serving_model_evaluation_status": "PENDING",
+  "schema": 1,
+  "source": {
+    "base": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+    "branch": "feat/background-response-terminal",
+    "commit": "ce0e01324cd451ed985fa8b39ce071e5b8ac3f07",
+    "patch_sha256": "e226f86530a4e32bf5838134d7e3ac077d51d0277c7495822799fb08c9885538",
+    "production_sha256": "aad988091fb7397c7a81a8e3dbf67e5305b2900c7c1948ca9d7481bba5c98927",
+    "remote": "https://github.com/spa5k/vllm.git",
+    "remote_ref_verified": true,
+    "selected_current_main": "fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de",
+    "selected_source_currency_only": true,
+    "signature_status": "G",
+    "test_sha256": "6463ee688eef79b3d35a0d8813b74e84845d3978dcaae86f681717abb6c5722a",
+    "worktree_clean": true
+  },
+  "source_hooks_passed": true,
+  "upstream_publication": false
+}

@@ -1,0 +1,70 @@
+{
+  "directories": [],
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 244,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "a5294c05c7709dfd560b3996403bb7c06a1fa4653528fc2e93301fea7126e172"
+    },
+    {
+      "bytes": 420,
+      "mode": 292,
+      "path": "INPUTS.json",
+      "sha256": "05490d1cdec9420f71955d5108cf00e56eabf47eaf7f72b7edf77bb18eb24999"
+    },
+    {
+      "bytes": 4460,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "e96d0d124d83f8ddced11893968de8cb9ebfc9cfcbb7be891696c769837a724d"
+    },
+    {
+      "bytes": 1576,
+      "mode": 292,
+      "path": "RESULT_CONTRACT.md",
+      "sha256": "506ffcfc2d917199e84bc3828de29a349400a4e80b57813636bc957c62e7f21f"
+    },
+    {
+      "bytes": 277,
+      "mode": 292,
+      "path": "review-failure-v1.json",
+      "sha256": "db38135931865f33dd437a621e35571a151e5adf7d1b17030411b73562592881"
+    },
+    {
+      "bytes": 265,
+      "mode": 292,
+      "path": "review-failure-v2.json",
+      "sha256": "f38537c79e7561fd6869771c1a39caccb138554266f3dab0d0db53b8b5e7fc09"
+    },
+    {
+      "bytes": 3638,
+      "mode": 292,
+      "path": "review-result.json",
+      "sha256": "d3b45efc3778721ca4b9320c5a5e610a9dea87c7857f4dbba33005f74018d817"
+    },
+    {
+      "bytes": 12162,
+      "mode": 292,
+      "path": "review_source_data.py",
+      "sha256": "a18f4cc79809b2b85908750d577f8cff71f4692cf9ed30f325e0655e7319dc64"
+    },
+    {
+      "bytes": 1533,
+      "mode": 292,
+      "path": "seal.py",
+      "sha256": "c374bace78023c12f53e63190fcf6b044dc6c4a6fc34507b75aefe6fa5d0927b"
+    }
+  ],
+  "file_count": 9,
+  "fixture_executed": false,
+  "kind": "BACKGROUND_TERMINAL_COMPARISON_INDEPENDENT_SOURCE_REVIEW",
+  "parent_executed": false,
+  "root_mode": 365,
+  "runtime_authority": false,
+  "schema": 1,
+  "target_imported": false,
+  "total_bytes": 24575,
+  "verdict": "PASS_SOURCE_DATA_RUNTIME_HELD"
+}

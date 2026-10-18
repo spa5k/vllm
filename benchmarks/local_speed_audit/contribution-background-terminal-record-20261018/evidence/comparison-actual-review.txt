@@ -1,0 +1,67 @@
+# Background terminal comparison actual review
+
+## Decision
+
+`PASS_SELECTED_METHOD_COMPARISON`
+
+The saved comparison is complete, reaped, and semantically accepted at its
+selected-method scope. The parent started one exact child once. It captured one
+JSON line and empty stderr. All 22 ordered rows and all 15 fields per row match
+the independent result contract.
+
+## Observed baseline
+
+For raised ordinary producer errors, the baseline worker lets the exact
+`ProducerError` escape. Queued and in-progress states remain active. Completed,
+cancelled, incomplete, and failed states retain their status. The producer
+error does not reach the local logger recorder.
+
+The baseline returned-error path changes queued to failed. It also changes an
+incomplete response to failed. The success row changes queued to completed.
+
+## Observed candidate
+
+For raised ordinary producer errors, the candidate worker does not let the
+error escape. The same error object reaches the logger recorder. Queued and
+in-progress states become failed. Completed, cancelled, incomplete, and failed
+states remain unchanged.
+
+The returned-error row still changes queued to failed. The candidate preserves
+incomplete for a returned error. Success still changes queued to completed.
+
+The exact candidate AST catches `Exception`. It does not catch
+`BaseException` or name `CancelledError`. The selected cancel comparison shows
+that the cancellation path remains distinct.
+
+## Cancellation and ownership
+
+Both variants pass both public cancel rows:
+
+- the fake producer sees one `CancelledError` with empty arguments;
+- cancel returns the same response object with status cancelled;
+- the returned-error cancellation is not logged by cancellation identity;
+- propagated cancellation is logged by exact identity;
+- the owned task leaves the task map;
+- the healthy sibling object and task retain identity until cleanup.
+
+Every row reports the same retrieved object, preserved sibling identity, and
+owned-task removal. The fixture reports all owned tasks awaited.
+
+## Process and capture
+
+The original receipt reports one attempt, no retry, PID 66296, return code 0,
+complete and reaped true, both EOF flags true, no first error, and elapsed
+0.07971587497740984 seconds. Stdout is 11460 bytes with SHA-256
+`122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d`.
+Stderr is empty. No kill was recorded.
+
+## Limits
+
+- The run compiled selected AST bodies with fake records and a fake producer.
+- It did not import vLLM or execute full create, renderer, HTTP, queue
+  admission, engine, model, connector, retention, or public serialization.
+- It did not run normal pytest or the proposed existing-suite tests.
+- It does not prove public error detail or connector resource cleanup.
+- `in_progress` is synthetic compatibility coverage for this nonstream worker.
+- Parent completion and Root's audit are retained evidence. This independent
+  review replays the raw JSON instead of treating either as semantic authority.

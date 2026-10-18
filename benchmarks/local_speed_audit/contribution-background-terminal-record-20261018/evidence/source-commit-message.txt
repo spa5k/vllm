@@ -1,0 +1,8 @@
+fix: terminate failed background Responses requests
+
+Mark an active stored response failed when its nonstream background producer
+raises an ordinary exception. Preserve existing terminal and cancel states.
+Add existing-suite failure, terminal-state and cancellation regressions.
+
+Co-authored-by: Codex <codex@openai.com>
+Signed-off-by: spa5k <79936503+spa5k@users.noreply.github.com>

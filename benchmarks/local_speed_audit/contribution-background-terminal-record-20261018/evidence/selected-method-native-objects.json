@@ -1,0 +1,23 @@
+{
+  "preflight": {
+    "chunk_id": "817b57",
+    "wall_time_seconds": 0.281017875,
+    "exit_code": 0,
+    "original_token_count": 101,
+    "output": "{\"closed_packets\": {\"core/background-terminal-comparison-review-v1\": {\"payload_bytes\": 24575, \"payload_files\": 9}, \"serving/background-terminal-comparison-design-v1\": {\"payload_bytes\": 72700, \"payload_files\": 20}, \"serving/background-terminal-fix-v1\": {\"payload_bytes\": 1182366, \"payload_files\": 47}}, \"grant_sha256\": \"38ec7fcedc071ef1ea7114c3e4a3dd8a37293845c56991f6cb629be94c199bb8\", \"prepared\": true}\n"
+  },
+  "invocation": {
+    "chunk_id": "2a601e",
+    "wall_time_seconds": 0.021790667,
+    "exit_code": 0,
+    "original_token_count": 283,
+    "output": "{\"argv\": [\"/Users/pacific/Developer/vllm/.venv/bin/python\", \"-B\", \"-I\", \"-S\", \"/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-comparison-design-v1/fixture/background_terminal_fixture.py\"], \"attempts\": 1, \"complete\": true, \"elapsed_seconds\": 0.07971587497740984, \"eof\": {\"stderr\": true, \"stdout\": true}, \"first_error\": null, \"passed\": true, \"pid\": 66296, \"proposal_manifest_sha256\": \"f5e0d3d235d7d88715208228cb72bed8c6148e7435d89485a13927922e5ddaad\", \"raw\": {\"stderr\": {\"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdout\": {\"bytes\": 11460, \"sha256\": \"122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d\"}}, \"reap_allowance_seconds\": 2, \"reaped\": true, \"retries\": 0, \"returncode\": 0, \"scope\": \"selected background worker/retrieve/cancel AST bodies with fake producer and real bounded asyncio tasks/locks; no full create, HTTP, target import, engine process or device\", \"script_sha256\": \"daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142\", \"stream_cap_bytes\": 100000, \"timeout_seconds\": 10}\n"
+  },
+  "strict_saved_data_audit": {
+    "chunk_id": "690df3",
+    "wall_time_seconds": 0.000010709,
+    "exit_code": 0,
+    "original_token_count": 155,
+    "output": "{\"ast_bindings\": 8, \"closed_packets\": {\"core/background-terminal-comparison-review-v1\": {\"payload_bytes\": 24575, \"payload_files\": 9}, \"serving/background-terminal-comparison-design-v1\": {\"payload_bytes\": 72700, \"payload_files\": 20}, \"serving/background-terminal-fix-v1\": {\"payload_bytes\": 1182366, \"payload_files\": 47}}, \"normal_pytest\": \"unrun\", \"raw_sha256\": \"122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d\", \"real_engine\": false, \"receipt_sha256\": \"cffd601d6ef536ba8a17be63330861d10fa403d0f7fa4e6014941737d3676b2e\", \"rows\": 22, \"strict_row_fields\": 15, \"verdict\": \"PASS_SELECTED_METHOD_COMPARISON\"}\n"
+  }
+}

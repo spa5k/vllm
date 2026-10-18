@@ -1,0 +1,63 @@
+# Selected background terminal comparison proposal
+
+This is an unexecuted source proposal. It binds candidate packet1b480ee1 and
+Core's source review8d87090a. The candidate updates one nonstream background
+worker. This fixture can compare its state transition without target imports.
+It cannot prove real admission, engine execution, HTTP serialization or model
+behavior. Root approval remains required before this source can run.
+
+The fixture selects only _run_background_request, retrieve_responses and
+cancel_responses from the exact baseline/candidate source files. It removes
+annotations and supplies a small ErrorResponse record, request/response records,
+a logger recorder and a fake full producer. No module imports, class setup or
+other target methods are executed by the proposed fixture. It also extracts
+the exact add_done_callback statement from _create_responses. That callback is
+installed before a separate task-done observer. The full create method is not
+executed. SOURCE_SELECTIONS.json closes each original AST selection.
+
+The22 declared rows are11 per variant: queued/in_progress raised failure,
+queued returned error, success, four terminal statuses after a raised error,
+incomplete after a returned error, and two public cancel paths. Queued is the
+supported nonstream create state. In_progress is synthetic compatibility
+coverage; the selected nonstream path does not write it. The returned-error
+incomplete row explicitly expects the baseline's overwrite to failed and the
+candidate's preservation of incomplete. It is not silently called unchanged.
+
+Each row uses real asyncio tasks, Event barriers and a Lock. Retrieve must
+return the same owned object. A healthy sibling task and resource must retain
+identity and remain pending until fixture cleanup. The exact owned task must
+leave its dictionary after the copied callback. Ordinary producer exceptions
+are retained by object identity if they escape or reach the logger recorder.
+The recorder is not a real server logging handler.
+
+Public cancel is called after the fake producer starts and before its failure
+commit. One producer converts cancellation to ErrorResponse, like the existing
+full-generator boundary. One propagates the actual CancelledError. The public
+cancel method must retain cancelled and return the same response object. The
+fixture retains cancellation type/args and its identity relation to the logger
+when raised. It does not assume that separate awaits on a cancelled Task return
+the same CancelledError object. This is not an ordinary-error-versus-cancel
+lock-acquisition race or proof of engine-owned resource cleanup.
+
+All exact owned tasks are cancelled if still pending and awaited in finally.
+No sleeps infer callback completion. No fixture-authored subprocess, thread,
+socket, network, target/native/model/package/device call is present. Standard
+asyncio may use its local event-loop wakeup descriptors; asyncio.run owns their
+cleanup. No external network access is requested.
+
+The parent derives from the accepted utility V2 parent9404cb10. Its exact
+reverse-byte proof changes six kinds of string literal in seven occurrences:
+proposal path, output role, fixture SHA, fixture manifest SHA, script filename
+twice, and scope text. All process, deadline, cap, capture and exact-child cleanup
+code stays byte-identical. It starts at most one direct child. It retains a
+ten-second original capture/completion deadline, two-second reap allowance,
+100000-byte cap per stream, no retry and no process-group signals. It kills
+only its exact child when cleanup is needed. These are local bounds, not an
+absolute OS startup, scheduler, filesystem or RSS proof.
+
+To avoid a hash cycle, fixture/ is a closed two-file source subpacket. The
+parent pins its real manifest. The outer proposal closes both parent and that
+subpacket. No actual result manifest, success receipt or review hash is invented.
+Source-only checks parse ASTs, compare source hashes and reconstruct the exact
+parent. They do not start an event loop or execute selected methods. The normal
+suite, ASGI/HTTP and real server/engine remain unrun. Prior denials remain.

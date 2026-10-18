@@ -1,0 +1,58 @@
+{
+  "background_source_hooks_first": {
+    "chunk_id": "7a0a84",
+    "wall_time_seconds": 1.002953041,
+    "session_id": 76928,
+    "original_token_count": 487,
+    "output": "ruff check..........................................................................................Passed\nruff format.........................................................................................Passed\ntypos...............................................................................................Passed\nclang-format....................................................................(no files to check)Skipped\nmarkdownlint-cli2...............................................................(no files to check)Skipped\nLint GitHub Actions workflow files..............................................(no files to check)Skipped\nshellcheck......................................................................(no files to check)Skipped\npip-compile.....................................................................(no files to check)Skipped\npip-compile-rocm................................................................(no files to check)Skipped\npip-compile-xpu.................................................................(no files to check)Skipped\npip-compile-cpu.................................................................(no files to check)Skipped\npip-compile-docs................................................................(no files to check)Skipped\ncheck json......................................................................(no files to check)Skipped\nreformat test/nightly-torch.txt to be in sync with test/cuda.in.................(no files to check)Skipped\nCheck auto-label rules still match real files...................................(no files to check)Skipped\nCheck agent instruction files and skills........................................(no files to check)Skipped\n- hook id: check-agent-files\nCheck every Buildkite step declares an explicit key.............................(no files to check)Skipped\nCheck new tests are wired into Buildkite CI........................................................."
+  },
+  "background_source_hooks_first_completion": {
+    "chunk_id": "b830a1",
+    "wall_time_seconds": 0.000007458,
+    "exit_code": 0,
+    "original_token_count": 515,
+    "output": "Passed\n- hook id: check-test-tethering\n- duration: 1.55s\nRun mypy for the oldest supported Python version....................................................Passed\nLint PNG exports from excalidraw................................................(no files to check)Skipped\nCheck SPDX headers..................................................................................Passed\nCheck root lazy imports.............................................................................Passed\nCheck for spaces in all filenames...................................................................Passed\nUpdate Dockerfile dependency graph..................................................................Passed\nTest non-root entrypoint wrapper................................................(no files to check)Skipped\nCheck for forbidden imports.........................................................................Passed\nPrevent new 'torch.cuda' APIs call..................................................................Passed\nValidate configuration has default values and that each field has a docstring.......................Passed\nValidate docker/versions.json matches Dockerfile................................(no files to check)Skipped\nCheck .dockerignore does not exclude tracked files..................................................Passed\nCheck for boolean ops in with-statements............................................................Passed\nRust - Normalize Cargo manifests with autoinherit...............................(no files to check)Skipped\nRust - Sort Cargo manifest sections.............................................(no files to check)Skipped\nRust - Format code..............................................................(no files to check)Skipped\nSuggestion..........................................................................................Passed\n- hook id: suggestion\n- duration: 0.01s\n\nTo bypass all the pre-commit hooks, add --no-verify to git commit. To skip a specific hook, prefix the commit command with SKIP=<hook-id>.\n\n"
+  },
+  "background_actual_invocation": {
+    "chunk_id": "2a601e",
+    "wall_time_seconds": 0.021790667,
+    "exit_code": 0,
+    "original_token_count": 283,
+    "output": "{\"argv\": [\"/Users/pacific/Developer/vllm/.venv/bin/python\", \"-B\", \"-I\", \"-S\", \"/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/serving/background-terminal-comparison-design-v1/fixture/background_terminal_fixture.py\"], \"attempts\": 1, \"complete\": true, \"elapsed_seconds\": 0.07971587497740984, \"eof\": {\"stderr\": true, \"stdout\": true}, \"first_error\": null, \"passed\": true, \"pid\": 66296, \"proposal_manifest_sha256\": \"f5e0d3d235d7d88715208228cb72bed8c6148e7435d89485a13927922e5ddaad\", \"raw\": {\"stderr\": {\"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdout\": {\"bytes\": 11460, \"sha256\": \"122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d\"}}, \"reap_allowance_seconds\": 2, \"reaped\": true, \"retries\": 0, \"returncode\": 0, \"scope\": \"selected background worker/retrieve/cancel AST bodies with fake producer and real bounded asyncio tasks/locks; no full create, HTTP, target import, engine process or device\", \"script_sha256\": \"daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142\", \"stream_cap_bytes\": 100000, \"timeout_seconds\": 10}\n"
+  },
+  "background_actual_root_data_audit": {
+    "chunk_id": "690df3",
+    "wall_time_seconds": 0.000010709,
+    "exit_code": 0,
+    "original_token_count": 155,
+    "output": "{\"ast_bindings\": 8, \"closed_packets\": {\"core/background-terminal-comparison-review-v1\": {\"payload_bytes\": 24575, \"payload_files\": 9}, \"serving/background-terminal-comparison-design-v1\": {\"payload_bytes\": 72700, \"payload_files\": 20}, \"serving/background-terminal-fix-v1\": {\"payload_bytes\": 1182366, \"payload_files\": 47}}, \"normal_pytest\": \"unrun\", \"raw_sha256\": \"122865aa058fffd64aa5f78482e1b00748cd2c5f0e0095d7d82e7293718d704d\", \"real_engine\": false, \"receipt_sha256\": \"cffd601d6ef536ba8a17be63330861d10fa403d0f7fa4e6014941737d3676b2e\", \"rows\": 22, \"strict_row_fields\": 15, \"verdict\": \"PASS_SELECTED_METHOD_COMPARISON\"}\n"
+  },
+  "background_source_commit": {
+    "chunk_id": "7bf2d1",
+    "wall_time_seconds": 0.000013583,
+    "exit_code": 0,
+    "original_token_count": 38,
+    "output": "[feat/background-response-terminal ce0e01324c] fix: terminate failed background Responses requests\n 2 files changed, 139 insertions(+), 9 deletions(-)\n"
+  },
+  "background_source_push": {
+    "chunk_id": "a3f039",
+    "wall_time_seconds": 1.003253083,
+    "session_id": 58714,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "background_source_push_completion": {
+    "chunk_id": "860582",
+    "wall_time_seconds": 0.000005375,
+    "exit_code": 0,
+    "original_token_count": 113,
+    "output": "remote: \nremote: Create a pull request for 'feat/background-response-terminal' on GitHub by visiting:        \nremote:      https://github.com/spa5k/vllm/pull/new/feat/background-response-terminal        \nremote: \nTo https://github.com/spa5k/vllm.git\n * [new branch]            feat/background-response-terminal -> feat/background-response-terminal\nbranch 'feat/background-response-terminal' set up to track 'fork/feat/background-response-terminal'.\n"
+  },
+  "background_source_remote_verify": {
+    "chunk_id": "7aeec2",
+    "wall_time_seconds": 0.661521792,
+    "exit_code": 0,
+    "original_token_count": 22,
+    "output": "ce0e01324cd451ed985fa8b39ce071e5b8ac3f07\trefs/heads/feat/background-response-terminal\n"
+  }
+}

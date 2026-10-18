@@ -1,0 +1,132 @@
+{
+  "directory_mode": 365,
+  "entries": [
+    {
+      "bytes": 1208,
+      "mode": 292,
+      "path": "COMMANDS.md",
+      "sha256": "abdbaad23d74215a47006e75cbe6275c8e329a362e86c34be5fa7393e44288d6"
+    },
+    {
+      "bytes": 924,
+      "mode": 292,
+      "path": "FAILURES.md",
+      "sha256": "135dccc00a900bd9f0faea1fa231cd0a15bdcb34e1ac2eb32ae7d0a3c8c3e84a"
+    },
+    {
+      "bytes": 4133,
+      "mode": 292,
+      "path": "REPORT.md",
+      "sha256": "7c07afc1a184799f8eb0005ca724692c24f3cff33266542bf4231ffbe01e753b"
+    },
+    {
+      "bytes": 970,
+      "mode": 292,
+      "path": "RESOURCE_CONTRACT.json",
+      "sha256": "7050bdb981ee6b61faab814c5c010b6d3fc93bc77fc6dadfced43b6bf0f7ad27"
+    },
+    {
+      "bytes": 812,
+      "mode": 292,
+      "path": "SOURCE_SELECTIONS.json",
+      "sha256": "522fde2d144bd432334e4e9e7512e74ef522ecce7772be0d2f174a1b8c9fc2be"
+    },
+    {
+      "bytes": 1552,
+      "mode": 292,
+      "path": "TEST_DESIGN.md",
+      "sha256": "f0ca86c63620696ccea65d6b058e1526e6c08c055d6e2aa4e8da920b4980f7ba"
+    },
+    {
+      "bytes": 4778,
+      "mode": 292,
+      "path": "audit_source.py",
+      "sha256": "d3092626bc03cbbb7f7a0bf7755db23bdc93db1aec795d6c8e19ece8aa88efd4"
+    },
+    {
+      "bytes": 714,
+      "mode": 292,
+      "path": "author-audit.json",
+      "sha256": "72e0538baad837587598aed14ebad3c3c7878f42ab48cddcdbb88ee47974f53a"
+    },
+    {
+      "bytes": 1000,
+      "mode": 292,
+      "path": "evidence-bindings.json",
+      "sha256": "81ecebff5eee9b6b94b69ee75be8bb79079a9e7eee8b7fbbcdfd55232f0dfd69"
+    },
+    {
+      "bytes": 595,
+      "mode": 292,
+      "path": "fixture/INPUTS.json",
+      "sha256": "c07a79661e1759f6ac566b5f0dc174d2ab50a95cdaae806eade142d9d5127ca6"
+    },
+    {
+      "bytes": 9477,
+      "mode": 292,
+      "path": "fixture/background_terminal_fixture.py",
+      "sha256": "daa3d8a416694203181952212ef0b9ed9acb9d83a79d1d5aa0ec0222e6c02142"
+    },
+    {
+      "bytes": 547,
+      "mode": 292,
+      "path": "fixture/manifest.json",
+      "sha256": "f5e0d3d235d7d88715208228cb72bed8c6148e7435d89485a13927922e5ddaad"
+    },
+    {
+      "bytes": 2333,
+      "mode": 292,
+      "path": "parent-literal-delta.patch",
+      "sha256": "5167598783e63c785c6b5f7183dfdcbb5894d0ddc9ac988b82b89b7482709074"
+    },
+    {
+      "bytes": 7725,
+      "mode": 292,
+      "path": "prepare_check_proposal.py",
+      "sha256": "c63f9b4f024cf47b27e3e1b5fab0e8c700344d5e87f4c2b2eef448d260712223"
+    },
+    {
+      "bytes": 1127,
+      "mode": 292,
+      "path": "raw/native-author-audit.json",
+      "sha256": "90c5804d14cf92ebadfd61eafe868e36497a51c4d3f3f6714b5e5a741dced5e7"
+    },
+    {
+      "bytes": 18153,
+      "mode": 292,
+      "path": "raw/native-preparation.json",
+      "sha256": "3e305f857a7616845b9b36933df89fc5b95e0d97aae8f7547fc57cb29423f021"
+    },
+    {
+      "bytes": 6199,
+      "mode": 292,
+      "path": "run_once.py",
+      "sha256": "a43692edb26438043e72bc5fe5a4a07497e459ba16570f191e732a683d344e85"
+    },
+    {
+      "bytes": 2242,
+      "mode": 292,
+      "path": "seal_proposal.py",
+      "sha256": "76addd34730f81059430fc585566b01b5dcde8af8bb0b3e828750f2f0e031b77"
+    },
+    {
+      "bytes": 2053,
+      "mode": 292,
+      "path": "source-data-checks.json",
+      "sha256": "23012e77405f3a352ea4a10113c564c825f467bcc1b0cfe78bf0ec400c643ab9"
+    },
+    {
+      "bytes": 6158,
+      "mode": 292,
+      "path": "template_parent.py.txt",
+      "sha256": "9404cb106888a7d7a2fe505966bd01244428a32aa16c9a6daed45a836b6f44fb"
+    }
+  ],
+  "fixture_executed": false,
+  "kind": "UNEXECUTED_SELECTED_BACKGROUND_COMPARISON_AND_PARENT",
+  "parent_executed": false,
+  "root_mode": 365,
+  "runtime_authority": false,
+  "schema": 1,
+  "target_executed": false
+}

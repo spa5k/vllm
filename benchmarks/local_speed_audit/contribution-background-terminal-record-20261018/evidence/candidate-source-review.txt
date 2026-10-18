@@ -1,0 +1,178 @@
+# Background Responses terminal-state challenge review
+
+## Decision
+
+`QUALIFIED_SOURCE_BUG_SMALL_FIX_RUNTIME_HELD`
+
+The sealed candidate at
+`serving/background-terminal-fix-v1/manifest.json` passes this independent
+source and test-design review. Its manifest SHA-256 is
+`1b480ee1fb8822baec1c7266ca3f90f334ff466680b2a4aaf69cfd59ccdce478`.
+No test or subject body ran.
+
+The selected behavior is a concrete state-machine defect. With the Responses
+store enabled, a public request with `background=true`, `stream=false`, and
+`store=true` can return a stored `queued` response. If its nonstream producer
+later raises an ordinary exception, the producer task ends and its task entry
+is removed. The stored response is not updated. A later public retrieve can
+continue to return `queued` after there is no producer that can complete it.
+
+This is not a schema-only defect. It is a missing terminal transition between
+the background producer and the existing response store.
+
+## Supported reachability
+
+The request model defaults `store` to true and `stream` to false. Background
+defaults to false, so the witness explicitly sets it to true. Server-side
+storage is disabled by default and must be enabled with
+`VLLM_ENABLE_RESPONSES_API_STORE=1`. The selected witness uses that supported
+configuration. It does not claim this flow works with storage disabled.
+
+`_create_responses` performs its early preflight, renders the request, builds a
+lazy engine generator, stores a new `ResponsesResponse` with status `queued`,
+and starts `_run_background_request`. It then returns the queued response. The
+nonstream task runs independently from the HTTP response body.
+
+The following ordinary exception paths are source-reachable:
+
+- A late admission check in `AsyncLLM.generate` can raise
+  `QueueOverflowError` or `MaxQueuedTokensError`. The generator body runs only
+  when the background producer advances it. Earlier preflight is not a queue
+  reservation.
+- `AsyncLLM.generate` converts an unexpected request-level generation failure
+  to the explicitly recoverable `EngineGenerateError`.
+- Responses processing raises `GenerationError` when a real output has
+  `finish_reason="error"`.
+
+`responses_full_generator` catches `CancelledError` only. Each ordinary error
+above leaves it before the final stored-response update. The background worker
+has no exception handler. Its existing failed transition handles only a
+returned `ErrorResponse`.
+
+## Task and store ordering
+
+The task done callback always removes only its response ID from
+`background_tasks`. It does not inspect or reconcile the response store. A task
+exception therefore leaves the task registry clean but the response queued.
+The callback also does not retrieve the exception.
+
+A narrow worker catch can restore a useful invariant: before an ordinary
+background producer failure completes normally and its callback removes the
+task, it changes the same stored response from `queued` or `in_progress` to
+`failed` under `response_store_lock`.
+
+The handler should log the retained exception and then return. Re-raising would
+retain the unhandled task exception while gaining no HTTP delivery path. It
+must catch `Exception`, not `BaseException`.
+
+## Terminal races
+
+The store lock gives a clear order for failure and public cancellation.
+
+- If cancellation commits first, status is `cancelled`. The failure handler
+  must preserve it.
+- If failure commits first, status is `failed`. Current cancel-on-terminal
+  behavior remains unchanged.
+- `completed`, `incomplete`, `failed`, and `cancelled` must never be rewritten.
+- A retrieve concurrent with the transition can observe queued before the
+  commit or failed after it. Once the caught producer task completes, the store
+  must already be terminal.
+
+Public cancellation marks the store before it cancels the task. A cancellation
+in the main generator is already converted to `ErrorResponse`, and the current
+worker preserves cancelled status. A `CancelledError` that escapes another
+part of response assembly must not be converted to failed by the new handler.
+
+No other current source site cancels an individual stored background task. A
+server shutdown is outside the persistent polling claim because this store is
+in-process and ephemeral.
+
+## Ownership boundaries
+
+The sealed discovery packet retains full evidence for the closest work.
+
+- PRs #38190 and #40418 add typed error and streaming failure behavior. A new
+  error schema is outside this fix.
+- PR #47184 concerns a successful JSON response error field.
+- PR #49721 adds producer completion for replayed background streams. This
+  review concerns nonstream polling and does not change SSE or replay.
+- PRs #35662 and #48454 concern cancellation presentation and retention.
+
+No retained diff adds this nonstream exception-to-store transition. This is a
+bounded ownership result, not a global absence claim.
+
+The separate lazy-stream KV rejection cleanup candidate addresses connector
+notification and temporary lease retention. This fix must not claim that
+marking a response failed releases connector state. The terminal-state fix is
+still needed for `EngineGenerateError` and `GenerationError`, where the
+response can be stranded independently of a late admission lease.
+
+## Small repair and test seam
+
+The production change can remain inside Responses serving. Catch ordinary
+exceptions at `_run_background_request`, log with the response ID, and update
+only `queued` or `in_progress` under the existing lock. Reuse the same status
+update rule for the returned `ErrorResponse` branch if that makes the code
+clearer. Do not change protocol types, routes, stream events, retention, or
+cancel semantics.
+
+The cheapest real regression is in the existing
+`tests/entrypoints/openai/responses/test_serving_responses.py` suite with its
+`_make_serving_instance` helper. Directly call the real background worker while
+mocking only `responses_full_generator` outcomes. Cover:
+
+1. `QueueOverflowError`, `EngineGenerateError`, and `GenerationError` changing
+   the same queued object to failed without escaping;
+2. completed, incomplete, failed, and cancelled objects remaining unchanged;
+3. `CancelledError` remaining cancellation and preserving cancelled state;
+4. an unrelated stored object remaining identical.
+
+The unchanged callback ordering is source-proven. A full `_create_responses`
+unit would need broad renderer and request setup and would dwarf this repair.
+Public HTTP polling is a later integration level, not the cheapest regression.
+
+## Candidate review
+
+The production patch changes only `_run_background_request`. It catches
+`Exception`, records the response ID in the server log, and joins the returned
+`ErrorResponse` path to one lock-protected transition. It changes only
+`queued` or `in_progress` to `failed`. It does not catch `BaseException` or
+change the protocol, router, generator, callback, retention, or cancel code.
+
+The missing-store assertion is supported by the exact reviewed source.
+`_create_responses` inserts the response before it creates the task. The
+reviewed source has no response-store removal path. This is a current-source
+fact, not a new lifetime guarantee.
+
+The returned `ErrorResponse` behavior remains correct. Active states become
+failed. Completed, cancelled, incomplete, and failed states remain unchanged.
+Public cancellation stores `cancelled` before it cancels the task. The full
+generator converts that cancellation to an `ErrorResponse`, and the active-only
+guard preserves `cancelled`.
+
+The proposed tests use the real create, worker, retrieve, cancel, and cleanup
+callback paths with a mocked engine generator. Three rows cover late admission
+and recoverable generation exceptions. Eight compact parameter rows cover four
+preserved states for raised and returned failures. One public cancel row checks
+the existing task cleanup path. These rows test observable store and task
+behavior. They do not add a copied production helper.
+
+The nonstream worker currently creates responses as `queued`; it does not set
+`in_progress`. The production guard retains `in_progress` for compatibility,
+but the proposed normal tests do not establish a real nonstream path that
+reaches that status. This is a test limit, not a blocker for the observed
+queued defect.
+
+## Limits
+
+- No subject method, target import, event loop, task, fixture, server, model,
+  process, container, or paid resource ran.
+- The retained extracted fixture remains unexecuted and uses fake outcomes.
+- No real queue race, engine failure, SDK poll, or HTTP request was observed.
+- The review does not authorize a schema change or a connector cleanup change.
+- The current normal conftest admission boundary remains separate.
+- The 12 proposed pytest rows are unrun. Fixture, import, and async cleanup
+  behavior remains runtime validation.
+- The review does not claim that a stored failure contains public error detail.
+  The exception remains in server logs only.
+
