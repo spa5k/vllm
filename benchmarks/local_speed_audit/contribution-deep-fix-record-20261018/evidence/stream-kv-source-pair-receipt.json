@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "/Users/pacific/Developer/vllm/.venv/bin/python",
+    "-B",
+    "-I",
+    "-S",
+    "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/gpu/stream-kv-cleanup-extracted-pair-proposal-v1/extracted_pair.py"
+  ],
+  "attempts": 1,
+  "retries": 0,
+  "script_sha256": "917736a5f6a62e976f54f57fbb96ad17833630a3d3fead9e6a3fd03f4be6488a",
+  "proposal_manifest_sha256": "ccd648488f5aaa5984954a1b9ec27cd01349d4006ba59973dfc333fb4056c84c",
+  "timeout_seconds": 10,
+  "reap_allowance_seconds": 2,
+  "stream_cap_bytes": 100000,
+  "scope": "extracted AST bodies with explicit fakes; no imported vLLM, ASGI, connector or device",
+  "complete": true,
+  "reaped": true,
+  "first_error": null,
+  "pid": 8701,
+  "returncode": 0,
+  "elapsed_seconds": 0.779753667069599,
+  "eof": {
+    "stdout": true,
+    "stderr": true
+  },
+  "raw": {
+    "stdout": {
+      "bytes": 21640,
+      "sha256": "716d232f603bb69bdfefe10570b67e981636986d30e06b9ef621557d30842813"
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "passed": true
+}

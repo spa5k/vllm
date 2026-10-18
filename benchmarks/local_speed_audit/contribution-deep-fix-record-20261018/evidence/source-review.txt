@@ -1,0 +1,110 @@
+# Independent review: stream admission KV cleanup candidate
+
+## Decision
+
+`PASS_SOURCE_DATA_RUNTIME_HELD`.
+
+The final seven-file candidate is coherent with the qualified source defect and
+its safe ownership boundary. I found no production source blocker. I did not run
+the serving tests or import vLLM. Normal pytest and a real connector observation
+remain required before contribution acceptance.
+
+The reviewed packet is
+`serving/stream-kv-cleanup-candidate-v1/manifest.json`, SHA256
+`bfe1ecd5cd3f90299a730aaf50fcbea54a3cd95a567da7860e9a2f5e0f426250`.
+The final patch is 24,573 bytes, SHA256
+`4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4`.
+Its complete 41-file packet closure, hashes, regular-file types and sealed modes
+passed independent checks. An isolated source-only `git apply --check` and apply
+reconstructed all seven declared final files from the saved preimages.
+
+## Production behavior
+
+`GenerateBaseServing` creates one private request-local cleanup object. The
+create-time wrapper and lazy iterator receive the same object. `notify_once`
+sets `attempted=True` before awaiting the existing connector RPC. A failed or
+cancelled RPC therefore cannot cause a second notice attempt from the outer
+wrapper. RPC exceptions keep the prior warning-and-continue behavior.
+
+The iterator catches only `QueueOverflowError` and `MaxQueuedTokensError`. These
+are the two admission checks that occur before local registration for the
+reviewed request. It re-raises the original error after the notice attempt, so
+existing response formatting stays in control. `CancelledError`, generator
+close, arbitrary backend errors and normal completion do not enter this new
+notice path.
+
+The guard scope matches the ownership review:
+
+- Chat has one engine generator. Its `n > 1` admission check runs before any
+  child registration.
+- Completion uses the guard only for one non-beam engine input. Multi-prompt
+  requests keep the old behavior because one sibling cannot release another
+  sibling's request-level transfer ownership.
+- Responses uses the guard only for `sub_request == 0`. Later built-in-tool
+  turns cannot send the original pre-admission notice.
+
+The positive `RequestOutput` flag suppresses the existing broad create-time
+notice after an earlier turn produced engine output. It is not used to claim
+that first output is the admission boundary. Accepted-before-output failures
+retain the prior create-time policy. This candidate does not solve that separate
+ownership question.
+
+The wrapper uses `aclosing` on the immediate engine iterator. This preserves
+cleanup when that wrapper unwinds. It does not establish a new ASGI, outer
+formatter, native syscall or immediate child-close contract. Cancellation
+before the stream starts still has no new notice and can wait for the configured
+lease cleanup.
+
+## Test review
+
+The candidate extends three existing suites. It uses public serving create
+methods and mocks the engine and notice RPC. It does not import or assert against
+the private cleanup class.
+
+The six selected test functions declare 39 parameter rows:
+
+- eager Chat rejection now covers both queue errors and one notice;
+- late Chat rejection covers stream/full, both queue errors, remote metadata
+  present/absent, and `n=1`/`n=2`;
+- an unfinished Chat `RequestOutput` followed by `GenerationError` checks that
+  an admitted/output request does not send an old-prefix notice;
+- single-input Completion covers both queue errors, stream/full and successful
+  or failed notice RPCs while preserving the original queue result;
+- multi-prompt Completion makes one sibling produce output before another
+  rejects and verifies no whole-request notice;
+- Responses covers initial rejection and a later tool-turn rejection after
+  first output, for stream/full and both queue errors.
+
+The Responses test replaces only the Harmony context and response formatter
+seams needed to drive two engine turns. It does not test Harmony parsing or SSE
+serialization. The Completion sibling test uses a source-local event to make the
+accepted sibling observable before rejection. These are focused ownership tests,
+not connector or model tests.
+
+## Independent checks
+
+`review_checks.py` completed 348 source, AST, closure and saved-data assertions.
+It verified the exact changed existing-method sets in all four production files,
+all seven final identities, the once-only ordering, scope conditions, public test
+entrypoints and the external final static receipt.
+
+Root's saved Ruff receipt for this exact patch reports `ruff check` success and
+seven files already formatted. That receipt has `target_execution=false`. I did
+not rerun Ruff, the author's checker, pytest, a helper, an HTTP server, NIXL, a
+model or any candidate function.
+
+## Residual limits
+
+- Multi-prompt Completion remains unresolved when every sibling rejects. The
+  safe partial fix sends no per-sibling request-level notice.
+- Responses later turns and unstarted-stream cancellation remain outside the
+  immediate notice path.
+- Notice RPC failure has no retry, as before. Lease expiry remains the fallback.
+- The tests mock admission and notice delivery. They do not prove producer
+  release, actual queue timing, unrelated-request isolation or the default
+  30-second lease interval.
+- Beam search is excluded from the lazy iterator guard.
+- Exact source applicability was shown for the selected current files. No whole
+  build, runtime, ABI or model compatibility claim follows.
+- Ownership still overlaps merged PR #41269 and open issue #50425. Human
+  coordination and fresh duplicate checks remain required before publication.

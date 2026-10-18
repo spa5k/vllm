@@ -1,0 +1,151 @@
+# Imported serving-unit validation plan
+
+Status: `SERVING43_SOURCE_FEASIBLE_CACHE_VIEW_AND_ROOT_GATE_PENDING`.
+Runtime authority is false. No target import or test ran here. The separate
+NIXL scheduler row is blocked by missing dependencies. That block does not
+block the serving rows.
+
+## Smallest useful selection
+
+`SELECTORS.json` lists nine function selectors. The first eight select **43
+serving rows**: all 39 declared candidate rows, two existing render-time notice
+rows, and two existing Completion first-error rows. The ninth is the separate
+one-row NIXL scheduler check. Counts come from literal parameter lists in the
+saved AST. They are not observed pytest collection.
+
+The 39 rows cover early rejection, lazy Chat rejection with n=1/2, remote and
+nonremote requests, an ordinary post-output engine error, lazy Completion
+rejection with RPC failure, an admitted sibling in multi-prompt streaming, and
+first versus later Responses tool turns. The render-time rows check that the
+same metadata dictionary remains visible after mutation. The existing
+Completion rows check the real formatter's first error output. Do not add
+unrelated server/model fixtures. Do not remove normal conftests or alter the
+three test modules.
+
+Candidate acceptance requires exactly 43 unique collection IDs and 43 passing
+direct JUnit cases, with zero failure/error/skip. Keep exact phase argv and all
+bounded raw stdout/stderr and XML. An import, cache, fixture, observer or
+collection failure is a failed environment gate. It is not a regression result.
+No baseline rerun is needed for this first imported candidate check. The saved
+extracted red/green check is separate evidence, not an imported-suite result.
+
+## Exact source view without a full copy
+
+The seven final candidate files are bound by manifest
+`bfe1ecd5cd3f90299a730aaf50fcbea54a3cd95a567da7860e9a2f5e0f426250`
+and patch `4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4`.
+Root's selected-source delta `cf50e122…` proves the named 072 preimages also
+match selected current 371. Full candidate source review `e2238383…` passed;
+its tests remain unrun.
+
+Reuse the existing complete V7 candidate parent with manifest `ba3f1f5d…`.
+Add eight exact existing-destination read-only file overrides: four production
+files, three full test files, and **base371 Responses context.py**. The last is
+required because the parent contains the unrelated cumulative-budget patch.
+The retained context copy is 072/371-identical, SHA-256
+`463fc3283a1873756d9efd7d333e587ea7a327544e2d50f0a6c90fb27b118dbf`.
+Do not use the compact Responses test override or its budget production files.
+All eight destination files already exist. There is no absent nested mount
+target and no new writable source bind. `source-overrides.json` gives exact
+bytes and hashes. The logical source manifest must replace those eight rows,
+not silently accept any changed file.
+
+The source audit examined 152 direct project-import rows across seven files
+(60 distinct modules). Every module exists in the cached source. The direct
+module differences are the intended serving files, the old budget context,
+and the already applied final Chat test imported by the Responses test.
+Twelve named conftest/NIXL/tokenizer/registry/CPU-support files are byte-equal
+between the cached tree and the isolated current worktree. This is a named
+source comparison, not a full transitive import or whole-current-main proof.
+
+Using the prepared 837 native provider for this **serving-only** gate is a
+reasonable bounded test setup: the repair adds Python state/iterator handling,
+not an extension call or binary layout. It keeps the native provider and
+unchanged support sources pinned. A pass would validate these imported Python
+paths in this mixed source/runtime view. It would not validate a 371 native
+build, ABI compatibility in general, CPUWorker, real queue admission, NIXL
+transport, producer block release, model output or performance.
+
+## Cached runtime and tokenizer inputs
+
+Use only cached Linux AArch64 image
+`sha256:e5b65587bce7de595f299855d7385fe7fca39b8a74baa261ba1b7147afa78e58`.
+The venv is `/freeze/python-env`; its `python` link targets
+`/usr/local/bin/python3.12`. Saved toolchain evidence pins Python **3.12.12**,
+SHA `7863a4d5…`, and guest uv 0.9.30, SHA `39d70eb8…`. Launch through that uv
+and that venv. Host Python 3.12.13 is not the guest interpreter.
+
+Reuse the exact freeze `0ec9e248…`, old API wheel overlay `b7bdd52e…`, seven-wheel
+overlay `b1db1cce…`, and native `_C.abi3.so` (35,998,848 B,
+`acf122dde16999627ff616ba9c1d671968d372c9ea79697e8a593a4a96a91ee2`).
+Keep existing metadata uniqueness, 19 package origins, seven added metadata
+hashes, two added native origins, and LD_LIBRARY_PATH checks. The saved versions
+include Torch 2.14.0+cpu, Transformers 5.19.0, Hub 2.2.0, tokenizers 0.23.3,
+pytest 9.1.0, pytest-asyncio 1.4.0, OpenAI 3.31.0 and Harmony 0.0.11.
+`SOURCE_DATA.json` retains full existing command and origin contracts.
+
+Chat and Completion call the real `_build_renderer` and
+`cached_tokenizer_from_config` for `openai-community/gpt2`. These calls cannot
+use an empty scratch Hub cache. Five cached payloads plus `refs/main` are
+present at revision `607a30d783dfa663caf39e06633721c8d4cfcd7e` (about 2.86 MB).
+Exact bodies, hashes and internal links are recorded. No weight is required.
+The selected Responses fixture uses mocked renderer/context and does not need
+a real GPT-OSS tokenizer instance; its module still imports the real suites.
+
+Before a run, Root must approve and close a small read-only Hub view of these
+already cached files at the actual `HF_HOME` path, with the same ref/snapshot
+resolution. Local cache names/hashes are not new official provenance proof.
+Do not acquire files, mount the entire mutable host cache, fabricate metadata,
+change the fixture's model ID, or replace the tokenizer with a mock. The old
+gate uses `HF_HOME=/scratch/hf` and does **not** expose these host assets.
+
+## Denials and finite gate
+
+Keep offline flags, inherited HOME, normal ancestor conftests, real
+pytest-asyncio, and the accepted namespace/resource checks. Install the reviewed
+Python denial observer before each phase's first target import. Keep cpuinfo,
+CPUWorker, CPUModelRunner, Python process events and socket events denied;
+keep a caught denial fatal. Do not exempt the origin probe or pre-import a
+forbidden module. The controller's declared immediate phase children are
+separate from target-created processes. Observer coverage is Python audit
+coverage, not all native syscalls. Its exact new paths/hash and raw records need
+source review before use; this plan does not install it.
+
+The CPUWorker V4 failure `9cad492b…` and its independent audit remain failures.
+They observed denied socket.bind and a cpuinfo→platform.architecture→Popen
+attempt before worker import completed. They do not prove an attempted process
+would be safe. Normal Compact18 actual `2d919632…` proves prior imported normal
+Responses cases, not this new observer or all current fixtures.
+
+Reuse the successful one-candidate normal-suite lifecycle envelope: 1 CPU,
+4 GiB RAM with equal total swap limit, 128 PIDs, read-only root/inputs, network
+none, 2 GiB no-exec scratch. Proposed phases are origin 30 s, normal collection
+120 s, tests 240 s (390 total), PID1 timeout 420+5 s, host target window 480 s,
+original batch 1500 s with 120 s reserved cleanup. Keep 60 bounded polls,
+82 metadata calls including seven cleanup slots and one 1 MiB/30+3 s log call,
+with original-deadline clipping and the parent's actual cleanup admission.
+This is a proposed envelope, not a sum-of-all-call-caps completion guarantee.
+Use the retained conservative 7 GiB SSD peak and require 20 GiB free after it.
+No full source/environment copy or new dependency tree is needed.
+
+Root must first close the eight-row source transform, approved GPT-2 view,
+exact observer adaptation and strict 43-row result contract. Then a fresh
+preflight, one exact owned CID, full typed config/mounts, one start, bounded
+capture, exact removal, three complete absence inventories and separate Root
+completion/reap receipt are required. No executable host command is authored
+while those inputs are unsealed. Stable per-file checks are non-atomic.
+
+## Separate NIXL row
+
+`test_abort_immediately_remote_prefill_enqueues_empty_recv` is the right existing
+scheduler unit control. It checks an empty receive notification and consumed
+remote-prefill flag. It does not validate native NIXL transport. Its module
+imports **ray** at top level. Ray is absent from the saved 100 distributions and
+all three exact proposed package roots. The real helper also constructs
+`ModelConfig(facebook/opt-125m)`; its config and authentic source-matched OPT
+model-info record are not in fresh scratch. A cache miss requests a forbidden
+registry child. The host has named cached OPT data, but no accepted view is
+prepared here. Keep this row blocked until exact cached compatible Ray and
+model metadata are found and reviewed. No install, model-class mock or denial
+relaxation is proposed. A separate data/access decision is needed if they do
+not exist. This does not reduce the 43-row serving selection.

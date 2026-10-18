@@ -1,0 +1,642 @@
+--- a/vllm/entrypoints/generate/base/serving.py
++++ b/vllm/entrypoints/generate/base/serving.py
+@@ -2,10 +2,11 @@
+ # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+ import json
+ import time
+-from collections.abc import Awaitable
++from collections.abc import AsyncGenerator, Awaitable
++from contextlib import aclosing
+ from dataclasses import dataclass, field
+ from http import HTTPStatus
+-from typing import ClassVar, Generic, TypeVar
++from typing import Any, ClassVar, Generic, TypeVar
+ 
+ from fastapi import Request
+ from pydantic import ConfigDict
+@@ -25,7 +26,11 @@
+ from vllm.entrypoints.serve.engine.serving import BaseServing
+ from vllm.entrypoints.serve.engine.typing import AnyRequest
+ from vllm.entrypoints.serve.utils.request_logger import RequestLogger
+-from vllm.exceptions import GenerationError
++from vllm.exceptions import (
++    GenerationError,
++    MaxQueuedTokensError,
++    QueueOverflowError,
++)
+ from vllm.inputs import EngineInput
+ from vllm.logger import init_logger
+ from vllm.logprobs import Logprob, PromptLogprobs
+@@ -124,6 +129,46 @@
+     lora_request: LoRARequest | None = None
+     engine_inputs: list[EngineInput] | None = None
+     model_config = ConfigDict(arbitrary_types_allowed=True)
++
++
++@dataclass
++class _KVTransferRejectionCleanup:
++    engine_client: EngineClient
++    request_id: str
++    kv_transfer_params: dict[str, Any]
++    data_parallel_rank: int | None
++    attempted: bool = False
++    engine_output_observed: bool = False
++
++    async def notify_once(self) -> None:
++        if self.attempted or self.engine_output_observed:
++            return
++        self.attempted = True
++        try:
++            await self.engine_client.notify_kv_transfer_request_rejected(
++                self.request_id,
++                self.kv_transfer_params,
++                data_parallel_rank=self.data_parallel_rank,
++            )
++        except Exception:
++            logger.warning(
++                "Failed to notify KV connector about rejected request %s",
++                self.request_id,
++                exc_info=True,
++            )
++
++    async def guard_initial_admission(
++        self, iterator: AsyncGenerator[RequestOutput, None]
++    ) -> AsyncGenerator[RequestOutput, None]:
++        async with aclosing(iterator):
++            try:
++                async for output in iterator:
++                    if isinstance(output, RequestOutput):
++                        self.engine_output_observed = True
++                    yield output
++            except (QueueOverflowError, MaxQueuedTokensError):
++                await self.notify_once()
++                raise
+ 
+ 
+ class GenerateBaseServing(BaseServing, BeamSearchOnlineMixin):
+@@ -268,17 +313,35 @@
+                     pass
+         return request.priority
+ 
++    def _create_kv_transfer_rejection_cleanup(
++        self,
++        request: ChatCompletionRequest | CompletionRequest | ResponsesRequest,
++        raw_request: Request | None,
++    ) -> _KVTransferRejectionCleanup | None:
++        params = self.has_kv_connector and request.kv_transfer_params
++        if not params or not params.get("do_remote_prefill"):
++            return None
++        return _KVTransferRejectionCleanup(
++            self.engine_client,
++            request.request_id,
++            params,
++            self._get_data_parallel_rank(raw_request),
++        )
++
+     async def _with_kv_transfer_rejection_cleanup(
+         self,
+         awaitable: Awaitable[_T],
+         request: ChatCompletionRequest | CompletionRequest | ResponsesRequest,
+         raw_request: Request | None,
++        *,
++        kv_cleanup: _KVTransferRejectionCleanup | None = None,
+     ) -> _T:
+-        """Wrap a `create_*` coroutine so that, if it raises or returns an
+-        ErrorResponse (i.e. the request never reached the engine), the KV
+-        connector is notified to free any pinned remote-prefill blocks."""
+-        kv_transfer_params = self.has_kv_connector and request.kv_transfer_params
+-        if not kv_transfer_params or not kv_transfer_params.get("do_remote_prefill"):
++        """Notify once for rejection unless engine output was observed."""
++        if kv_cleanup is None:
++            kv_cleanup = self._create_kv_transfer_rejection_cleanup(
++                request, raw_request
++            )
++        if kv_cleanup is None:
+             return await awaitable
+ 
+         notify = True
+@@ -289,18 +352,7 @@
+             return result
+         finally:
+             if notify:
+-                try:
+-                    await self.engine_client.notify_kv_transfer_request_rejected(
+-                        request.request_id,
+-                        kv_transfer_params,
+-                        data_parallel_rank=self._get_data_parallel_rank(raw_request),
+-                    )
+-                except Exception:
+-                    logger.warning(
+-                        "Failed to notify KV connector about rejected request %s",
+-                        request.request_id,
+-                        exc_info=True,
+-                    )
++                await kv_cleanup.notify_once()
+ 
+     @staticmethod
+     def _get_decoded_token(
+--- a/vllm/entrypoints/openai/chat_completion/serving.py
++++ b/vllm/entrypoints/openai/chat_completion/serving.py
+@@ -21,6 +21,7 @@
+ )
+ from vllm.entrypoints.generate.base.serving import (
+     GenerateBaseServing,
++    _KVTransferRejectionCleanup,
+     build_per_request_timing_metrics,
+     build_spec_decoding_metrics,
+     chat_top_logprobs_limit,
+@@ -292,14 +293,20 @@
+         for the API specification. This API mimics the OpenAI
+         Chat Completion API.
+         """
++        kv_cleanup = self._create_kv_transfer_rejection_cleanup(request, raw_request)
+         return await self._with_kv_transfer_rejection_cleanup(
+-            self._create_chat_completion(request, raw_request), request, raw_request
++            self._create_chat_completion(request, raw_request, kv_cleanup=kv_cleanup),
++            request,
++            raw_request,
++            kv_cleanup=kv_cleanup,
+         )
+ 
+     async def _create_chat_completion(
+         self,
+         request: ChatCompletionRequest,
+         raw_request: Request | None = None,
++        *,
++        kv_cleanup: _KVTransferRejectionCleanup | None = None,
+     ) -> AsyncGenerator[str, None] | ChatCompletionResponse | ErrorResponse:
+         # Streaming response
+         tokenizer = self.renderer.tokenizer
+@@ -407,6 +414,8 @@
+ 
+         assert len(generators) == 1
+         (result_generator,) = generators
++        if kv_cleanup is not None and not request.use_beam_search:
++            result_generator = kv_cleanup.guard_initial_admission(result_generator)
+ 
+         if request.stream:
+             return self.chat_completion_stream_generator(
+--- a/vllm/entrypoints/openai/completion/serving.py
++++ b/vllm/entrypoints/openai/completion/serving.py
+@@ -17,6 +17,7 @@
+ )
+ from vllm.entrypoints.generate.base.serving import (
+     GenerateBaseServing,
++    _KVTransferRejectionCleanup,
+     build_per_request_timing_metrics,
+     build_spec_decoding_metrics,
+     clamp_prompt_logprobs,
+@@ -120,14 +121,20 @@
+ 
+         NOTE: suffix is only supported by models that implement FIM rendering.
+         """
++        kv_cleanup = self._create_kv_transfer_rejection_cleanup(request, raw_request)
+         return await self._with_kv_transfer_rejection_cleanup(
+-            self._create_completion(request, raw_request), request, raw_request
++            self._create_completion(request, raw_request, kv_cleanup=kv_cleanup),
++            request,
++            raw_request,
++            kv_cleanup=kv_cleanup,
+         )
+ 
+     async def _create_completion(
+         self,
+         request: CompletionRequest,
+         raw_request: Request | None = None,
++        *,
++        kv_cleanup: _KVTransferRejectionCleanup | None = None,
+     ) -> AsyncGenerator[str, None] | CompletionResponse | ErrorResponse:
+         if request.stream and request.use_beam_search:
+             return self.create_error_response(
+@@ -215,6 +222,12 @@
+ 
+             generators.append(generator)
+ 
++        if (
++            kv_cleanup is not None
++            and len(generators) == 1
++            and not request.use_beam_search
++        ):
++            generators[0] = kv_cleanup.guard_initial_admission(generators[0])
+         result_generator = merge_async_iterators(*generators)
+ 
+         model_name = self.models.model_name(lora_request)
+--- a/vllm/entrypoints/openai/responses/serving.py
++++ b/vllm/entrypoints/openai/responses/serving.py
+@@ -29,6 +29,7 @@
+ )
+ from vllm.entrypoints.generate.base.serving import (
+     GenerateBaseServing,
++    _KVTransferRejectionCleanup,
+     build_per_request_timing_metrics,
+ )
+ from vllm.entrypoints.mcp.tool_server import ToolServer
+@@ -320,12 +321,20 @@
+         | ResponsesResponse
+         | ErrorResponse
+     ):
++        kv_cleanup = self._create_kv_transfer_rejection_cleanup(request, raw_request)
+         return await self._with_kv_transfer_rejection_cleanup(
+-            self._create_responses(request, raw_request), request, raw_request
++            self._create_responses(request, raw_request, kv_cleanup=kv_cleanup),
++            request,
++            raw_request,
++            kv_cleanup=kv_cleanup,
+         )
+ 
+     async def _create_responses(
+-        self, request: ResponsesRequest, raw_request: Request | None = None
++        self,
++        request: ResponsesRequest,
++        raw_request: Request | None = None,
++        *,
++        kv_cleanup: _KVTransferRejectionCleanup | None = None,
+     ) -> (
+         AsyncGenerator[StreamingResponsesResponse, None]
+         | ResponsesResponse
+@@ -527,6 +536,7 @@
+                 session_id=session_id,
+                 reasoning_parser_kwargs=reasoning_parser_kwargs,
+                 reasoning_ended=True if request._grammar_from_parser else None,
++                kv_cleanup=kv_cleanup,
+             )
+             generators.append(generator)
+ 
+@@ -649,6 +659,7 @@
+         session_id: str | None = None,
+         reasoning_parser_kwargs: dict[str, Any] | None = None,
+         reasoning_ended: bool | None = None,
++        kv_cleanup: _KVTransferRejectionCleanup | None = None,
+     ):
+         max_model_len = self.model_config.max_model_len
+         cache_salt = cast(str | None, engine_input.get("cache_salt"))
+@@ -677,6 +688,9 @@
+                 reasoning_parser_kwargs=reasoning_parser_kwargs,
+                 reasoning_ended=reasoning_ended,
+             )
++
++            if sub_request == 0 and kv_cleanup is not None:
++                generator = kv_cleanup.guard_initial_admission(generator)
+ 
+             async for res in generator:
+                 context.request_metrics = res.metrics
+--- a/tests/entrypoints/openai/chat_completion/test_serving_chat.py
++++ b/tests/entrypoints/openai/chat_completion/test_serving_chat.py
+@@ -44,7 +44,12 @@
+ from vllm.entrypoints.openai.parser.harmony_utils import get_encoding
+ from vllm.entrypoints.serve.engine.protocol import ErrorResponse
+ from vllm.entrypoints.serve.utils.tool_calls_utils import resolve_finish_reason
+-from vllm.exceptions import GenerationError, QueueOverflowError, VLLMValidationError
++from vllm.exceptions import (
++    GenerationError,
++    MaxQueuedTokensError,
++    QueueOverflowError,
++    VLLMValidationError,
++)
+ from vllm.inputs import TokensPrompt
+ from vllm.logprobs import Logprob
+ from vllm.multimodal.inputs import PlaceholderRange
+@@ -1545,7 +1550,8 @@
+ 
+ @pytest.mark.asyncio
+ @pytest.mark.parametrize("stream", [True, False])
+-async def test_admission_rejection_escapes_before_response_starts(stream):
++@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
++async def test_admission_rejection_escapes_before_response_starts(stream, error_type):
+     """Overload rejections must propagate out of create_chat_completion.
+ 
+     For streaming this is the only chance to return a real HTTP status: once
+@@ -1557,19 +1563,103 @@
+     mock_engine.model_config = MockModelConfig()
+     mock_engine.input_processor = MagicMock()
+     mock_engine.renderer = _build_renderer(mock_engine.model_config)
+-    mock_engine.check_admission.side_effect = QueueOverflowError()
++    mock_engine.check_admission.side_effect = error_type()
++    mock_engine.notify_kv_transfer_request_rejected = AsyncMock()
+ 
+     serving_chat = _build_serving_chat(mock_engine)
++    serving_chat.has_kv_connector = True
+     req = ChatCompletionRequest(
+         model=MODEL_NAME,
+         messages=[{"role": "user", "content": "what is 1+1?"}],
+         stream=stream,
+-    )
+-
+-    with pytest.raises(QueueOverflowError):
++        kv_transfer_params={"do_remote_prefill": True},
++    )
++
++    with pytest.raises(error_type):
+         await serving_chat.create_chat_completion(req)
+ 
+     mock_engine.generate.assert_not_called()
++
++    mock_engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
++        req.request_id, req.kv_transfer_params, data_parallel_rank=None
++    )
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize("stream", [True, False])
++@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
++@pytest.mark.parametrize("remote_prefill", [True, False])
++@pytest.mark.parametrize("n", [1, 2])
++async def test_late_chat_queue_rejection_notifies_remote_prefill_once(
++    stream, error_type, remote_prefill, n
++):
++    """Lazy queue rejection releases remote prefill, including parallel sampling."""
++    engine = _build_mock_engine()
++    engine.notify_kv_transfer_request_rejected = AsyncMock()
++    serving = _build_serving_chat(engine)
++    serving.has_kv_connector = True
++
++    async def reject(*args, **kwargs):
++        raise error_type()
++        yield
++
++    engine.generate.side_effect = reject
++    request = ChatCompletionRequest(
++        model=MODEL_NAME,
++        messages=[{"role": "user", "content": "hi"}],
++        stream=stream,
++        n=n,
++        kv_transfer_params={"do_remote_prefill": True} if remote_prefill else None,
++    )
++    if stream:
++        response = await serving.create_chat_completion(request)
++        chunks = [chunk async for chunk in response]
++        assert any('"error"' in chunk for chunk in chunks)
++        assert chunks[-1] == "data: [DONE]\n\n"
++    else:
++        with pytest.raises(error_type):
++            await serving.create_chat_completion(request)
++
++    engine.generate.assert_called_once()
++    if remote_prefill:
++        engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
++            request.request_id, request.kv_transfer_params, data_parallel_rank=None
++        )
++    else:
++        engine.notify_kv_transfer_request_rejected.assert_not_awaited()
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize("stream", [True, False])
++async def test_chat_engine_output_prevents_rejection_notice(stream):
++    """An error after engine output must not release its remote prefix again."""
++    engine = _build_mock_engine()
++    engine.notify_kv_transfer_request_rejected = AsyncMock()
++    serving = _build_serving_chat(engine)
++    serving.has_kv_connector = True
++
++    async def generate_then_fail(*args, **kwargs):
++        output = _make_metrics_request_output(metrics=None)
++        output.finished = False
++        output.outputs[0].finish_reason = None
++        yield output
++        raise GenerationError("backend failed")
++
++    engine.generate.side_effect = generate_then_fail
++    request = ChatCompletionRequest(
++        model=MODEL_NAME,
++        messages=[{"role": "user", "content": "hi"}],
++        stream=stream,
++        kv_transfer_params={"do_remote_prefill": True},
++    )
++    if stream:
++        response = await serving.create_chat_completion(request)
++        chunks = [chunk async for chunk in response]
++        assert chunks[-1] == "data: [DONE]\n\n"
++    else:
++        with pytest.raises(GenerationError):
++            await serving.create_chat_completion(request)
++    engine.notify_kv_transfer_request_rejected.assert_not_awaited()
+ 
+ 
+ @pytest.mark.asyncio
+--- a/tests/entrypoints/openai/completion/test_completion_error.py
++++ b/tests/entrypoints/openai/completion/test_completion_error.py
+@@ -1,6 +1,7 @@
+ # SPDX-License-Identifier: Apache-2.0
+ # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+ 
++import asyncio
+ import json
+ from dataclasses import dataclass, field
+ from typing import Any
+@@ -16,7 +17,12 @@
+ from vllm.entrypoints.openai.models.serving import OpenAIServingModels
+ from vllm.entrypoints.scale_out.render.serving import ServingRender
+ from vllm.entrypoints.serve.engine.protocol import ErrorResponse
+-from vllm.exceptions import GenerationError, VLLMValidationError
++from vllm.exceptions import (
++    GenerationError,
++    MaxQueuedTokensError,
++    QueueOverflowError,
++    VLLMValidationError,
++)
+ from vllm.logprobs import Logprob
+ from vllm.outputs import CompletionOutput, RequestOutput, WeightVersionSpan
+ from vllm.renderers.deepseek_v4 import DeepseekV4Renderer
+@@ -837,6 +843,89 @@
+     assert chunks[-1] == "data: [DONE]\n\n"
+ 
+ 
++@pytest.mark.asyncio
++@pytest.mark.parametrize("stream", [True, False])
++@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
++@pytest.mark.parametrize("notice_fails", [False, True])
++async def test_late_completion_queue_rejection_notifies_remote_prefill_once(
++    stream, error_type, notice_fails
++):
++    """A single completion input keeps cleanup across lazy engine iteration."""
++    engine = MagicMock(spec=AsyncLLM)
++    engine.errored = False
++    engine.model_config = MockModelConfig()
++    engine.input_processor = MagicMock()
++    engine.renderer = _build_renderer(engine.model_config)
++    engine.notify_kv_transfer_request_rejected = AsyncMock(
++        side_effect=RuntimeError("notice failed") if notice_fails else None
++    )
++    serving = _build_serving_completion(engine)
++    serving.has_kv_connector = True
++
++    async def reject(*args, **kwargs):
++        raise error_type()
++        yield
++
++    engine.generate.side_effect = reject
++    request = CompletionRequest(
++        model=MODEL_NAME,
++        prompt="hi",
++        max_tokens=10,
++        stream=stream,
++        kv_transfer_params={"do_remote_prefill": True},
++    )
++    if stream:
++        response = await serving.create_completion(request)
++        chunks = [chunk async for chunk in response]
++        assert any('"error"' in chunk for chunk in chunks)
++        assert chunks[-1] == "data: [DONE]\n\n"
++    else:
++        with pytest.raises(error_type):
++            await serving.create_completion(request)
++    engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
++        request.request_id, request.kv_transfer_params, data_parallel_rank=None
++    )
++
++
++@pytest.mark.asyncio
++async def test_multi_prompt_completion_does_not_use_single_input_rejection_notice():
++    """One rejected branch cannot establish ownership of another prompt's KV."""
++    engine = MagicMock(spec=AsyncLLM)
++    engine.errored = False
++    engine.model_config = MockModelConfig()
++    engine.input_processor = MagicMock()
++    engine.renderer = _build_renderer(engine.model_config)
++    engine.notify_kv_transfer_request_rejected = AsyncMock()
++    serving = _build_serving_completion(engine)
++    serving.has_kv_connector = True
++
++    admitted = asyncio.Event()
++
++    async def generate(engine_input, sampling_params, request_id, **kwargs):
++        if request_id.endswith("-0"):
++            admitted.set()
++            yield _make_metrics_request_output(metrics=None)
++            return
++        await admitted.wait()
++        raise QueueOverflowError()
++
++    engine.generate.side_effect = generate
++    request = CompletionRequest(
++        model=MODEL_NAME,
++        prompt=["one", "two"],
++        max_tokens=10,
++        stream=True,
++        kv_transfer_params={"do_remote_prefill": True},
++    )
++    response = await serving.create_completion(request)
++    chunks = [chunk async for chunk in response]
++    assert admitted.is_set()
++    assert engine.generate.call_count == 2
++    assert any('"error"' in chunk for chunk in chunks)
++    assert chunks[-1] == "data: [DONE]\n\n"
++    engine.notify_kv_transfer_request_rejected.assert_not_awaited()
++
++
+ def test_json_schema_response_format_missing_schema():
+     """When response_format type is 'json_schema' but the json_schema field
+     is not provided, request construction should raise a validation error
+--- a/tests/entrypoints/openai/responses/test_serving_responses.py
++++ b/tests/entrypoints/openai/responses/test_serving_responses.py
+@@ -67,6 +67,7 @@
+     StreamingState,
+ )
+ from vllm.entrypoints.serve.engine.protocol import ErrorResponse
++from vllm.exceptions import MaxQueuedTokensError, QueueOverflowError
+ from vllm.inputs import tokens_input
+ from vllm.logprobs import Logprob as SampleLogprob
+ from vllm.outputs import CompletionOutput, RequestOutput
+@@ -1483,6 +1484,101 @@
+         tool_parser=tool_parser,
+         enable_per_request_metrics=enable_per_request_metrics,
+     )
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize("stream", [True, False])
++@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
++@pytest.mark.parametrize("reject_after_output", [False, True])
++async def test_responses_queue_rejection_notice_only_before_first_engine_output(
++    stream, error_type, reject_after_output, monkeypatch: pytest.MonkeyPatch
++):
++    """A later tool turn cannot release the first turn's already used prefix."""
++
++    class ToolCallingContext(HarmonyContext):
++        def __init__(self, *args, **kwargs):
++            self._messages = []
++            self.request = kwargs["request"]
++            self._needs_tool_call = reject_after_output
++
++        def append_output(self, output):
++            pass
++
++        def need_builtin_tool_call(self):
++            return self._needs_tool_call
++
++        async def call_tool(self):
++            self._needs_tool_call = False
++            return []
++
++        def append_tool_output(self, output):
++            pass
++
++    monkeypatch.setattr(
++        "vllm.entrypoints.openai.responses.serving.HarmonyContext",
++        ToolCallingContext,
++    )
++    serving = _make_serving_instance()
++    serving.use_harmony = True
++    serving.has_kv_connector = True
++    serving.engine_client.errored = False
++    serving.engine_client.notify_kv_transfer_request_rejected = AsyncMock()
++    serving.models.model_name.return_value = "test-model"
++    serving._check_model = AsyncMock(return_value=None)
++    serving._maybe_get_adapters = MagicMock(return_value=None)
++    serving._make_response_parser = MagicMock(return_value=None)
++    serving.online_renderer.validate_chat_template.return_value = None
++    serving._render_resolved_response_inputs = AsyncMock(
++        return_value=SimpleNamespace(messages=[], engine_input=tokens_input([7, 8]))
++    )
++    serving.online_renderer.render_responses_harmony_messages.return_value = (
++        tokens_input([7, 8, 9])
++    )
++
++    async def consume_full(request, sampling_params, result_generator, *args):
++        async for _ in result_generator:
++            pass
++
++    async def consume_stream(request, sampling_params, result_generator, *args):
++        async for context in result_generator:
++            yield context
++
++    serving.responses_full_generator = consume_full
++    serving.responses_stream_generator = consume_stream
++    calls = 0
++
++    async def generate(*args, **kwargs):
++        nonlocal calls
++        calls += 1
++        if reject_after_output and calls == 1:
++            output = _make_request_output("hello", [10], finish_reason="stop")
++            output.finished = True
++            yield output
++            return
++        raise error_type()
++
++    serving.engine_client.generate.side_effect = generate
++    request = ResponsesRequest(
++        input="hi",
++        tools=[],
++        stream=stream,
++        store=False,
++        kv_transfer_params={"do_remote_prefill": True},
++    )
++    with pytest.raises(error_type):
++        response = await serving.create_responses(request)
++        if stream:
++            async for _ in response:
++                pass
++
++    assert calls == (2 if reject_after_output else 1)
++    notice = serving.engine_client.notify_kv_transfer_request_rejected
++    if reject_after_output:
++        notice.assert_not_awaited()
++    else:
++        notice.assert_awaited_once_with(
++            request.request_id, request.kv_transfer_params, data_parallel_rank=None
++        )
+ 
+ 
+ async def _empty_context_generator():

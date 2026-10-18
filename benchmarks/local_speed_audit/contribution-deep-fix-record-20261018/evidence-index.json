@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "scout_directory": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017",
+  "source_sha": "371745ebd6c12f314402c6c319de2e7ef82c2981",
+  "patch_sha256": "4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4",
+  "source_packets": [
+    {
+      "directory_relative_to_scout": "serving/stream-kv-cleanup-candidate-v1",
+      "manifest_sha256": "bfe1ecd5cd3f90299a730aaf50fcbea54a3cd95a567da7860e9a2f5e0f426250",
+      "verified_payload_files": 41
+    },
+    {
+      "directory_relative_to_scout": "core/stream-kv-cleanup-candidate-review-v1",
+      "manifest_sha256": "e2238383b0f724bf181e449cf3b89052f9790315d82c0ec410a99ee3de814910",
+      "verified_payload_files": 5
+    },
+    {
+      "directory_relative_to_scout": "core/stream-kv-ownership-refresh-20261018T1400",
+      "manifest_sha256": "3a41564889dfa7b6b5ed9bd63aee233c7acd9e0aaa2eae2822d1c2b911f9f57f",
+      "verified_payload_files": 34
+    },
+    {
+      "directory_relative_to_scout": "gpu/stream-kv-cleanup-extracted-runner-review-v1",
+      "manifest_sha256": "fc9e4b019bad0b66bb2ebfb4d649c3dce45df99748dd9c5ab2177e2756becbb3",
+      "verified_payload_files": 9
+    },
+    {
+      "directory_relative_to_scout": "gpu/stream-kv-extracted-pair-result-review-v1",
+      "manifest_sha256": "e0f493a09b291dd258b0a6893652c7e79cf67415c59cf5f9ea0b9f798632dd07",
+      "verified_payload_files": 12
+    },
+    {
+      "directory_relative_to_scout": "serving/stream-kv-native-validation-plan-v1",
+      "manifest_sha256": "bb610fb0e1f2c22a73fd514ad21399187476ad52411f6b7ebb67d38c0fe48e1f",
+      "verified_payload_files": 13
+    },
+    {
+      "directory_relative_to_scout": "control/stream-kv-pair-checkpoint-20261018T1352",
+      "manifest_sha256": "f1c02f8d41e861403fbf19df1c29ec608655f3574e266996e533357b6f7fbae4",
+      "verified_payload_files": 11
+    },
+    {
+      "directory_relative_to_scout": "serving/stream-kv-serving43-gate-proposal-v1",
+      "manifest_sha256": "21ef5baf14d5686e816de4ff738668afd63d123b6f4557187077a4403da25828",
+      "verified_payload_files": 9
+    }
+  ],
+  "copied_exact_evidence": [
+    {
+      "path": "patches/stream-kv-admission-cleanup-draft.patch",
+      "scout_source": "serving/stream-kv-cleanup-candidate-v1/candidate.patch",
+      "bytes": 24573,
+      "sha256": "4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4"
+    },
+    {
+      "path": "evidence/stream-kv-source-pair.json",
+      "scout_source": "control/stream-kv-pair-checkpoint-20261018T1352/stdout.raw",
+      "bytes": 21640,
+      "sha256": "716d232f603bb69bdfefe10570b67e981636986d30e06b9ef621557d30842813"
+    },
+    {
+      "path": "evidence/stream-kv-source-pair-receipt.json",
+      "scout_source": "control/stream-kv-pair-checkpoint-20261018T1352/receipt.json",
+      "bytes": 1143,
+      "sha256": "9d2a7eda14f37240a3f2a74f2ee4b6658425245a728bfd5a0fd94703d2b2ad19"
+    },
+    {
+      "path": "evidence/source-review.txt",
+      "scout_source": "core/stream-kv-cleanup-candidate-review-v1/REPORT.md",
+      "bytes": 5622,
+      "sha256": "fed8f86817fefa3b32e968b2498820af83420f0a168b83496e49468f2dc8aaae"
+    },
+    {
+      "path": "evidence/result-review.txt",
+      "scout_source": "gpu/stream-kv-extracted-pair-result-review-v1/REPORT.md",
+      "bytes": 4420,
+      "sha256": "6d851449af67e5e29c9b063d9d495862e3e97daedc20a4f1fe48f718f7624d9e"
+    },
+    {
+      "path": "evidence/ownership-review.txt",
+      "scout_source": "core/stream-kv-ownership-refresh-20261018T1400/REPORT.md",
+      "bytes": 7439,
+      "sha256": "edfab745ab5b495ad74f5a9ad0df3bdb54ba2e5ef34b902a7185c1c4ba31ca07"
+    },
+    {
+      "path": "evidence/normal-test-plan.txt",
+      "scout_source": "serving/stream-kv-native-validation-plan-v1/REPORT.md",
+      "bytes": 9210,
+      "sha256": "72e31508bef67d0392f8705f017ec902e0c55133113e08b4bfdff1a4ff6dc0ab"
+    },
+    {
+      "path": "evidence/static-checks.json",
+      "scout_source": "control/stream-kv-final-candidate-4053-static.json",
+      "bytes": 1020,
+      "sha256": "28f913a9fb50469c223bae9a3653c789df298564309482ff2afdf5f7654df7cc"
+    },
+    {
+      "path": "evidence/normal-test-blocker.txt",
+      "scout_source": "serving/stream-kv-serving43-gate-proposal-v1/REPORT.md",
+      "bytes": 5872,
+      "sha256": "afe62b66df7ffeceda1fe1d1f68194140b2c4cbd70b63561d466ecbf58d9ca27"
+    },
+    {
+      "path": "evidence/draft-fix-delivery.json",
+      "scout_source": "control/stream-kv-git-delivery-input.json",
+      "bytes": 1883,
+      "sha256": "a83bb416c2f98dca5751634f0a35980512751028ade543e02f5d00cbc0a79e8c"
+    }
+  ],
+  "normal_tests_executed": false,
+  "upstream_published": false,
+  "normal_test_state": "BLOCKED_NORMAL_CONFTEST_CPUINFO_DENIAL",
+  "normal_plan_superseded_by": "serving/stream-kv-serving43-gate-proposal-v1",
+  "cache_view": {
+    "directory_relative_to_scout": "serving/stream-kv-serving43-gpt2-cache-v1",
+    "manifest_sha256": "55f7275b1336ab0f9b7ddfc7974ba68d68860f3cf80e35c3d9d08d3c83519b07",
+    "entries_verified": 17,
+    "target_executed": false
+  },
+  "draft_source_commit": "c72c801883a1eb9355b9ea8863464a6b74c59482",
+  "raw_review_text_files": true
+}

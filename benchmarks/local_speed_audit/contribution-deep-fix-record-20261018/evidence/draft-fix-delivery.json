@@ -1,0 +1,56 @@
+{
+  "commit": "c72c801883a1eb9355b9ea8863464a6b74c59482",
+  "branch": "feat/stream-kv-admission-cleanup",
+  "base": "371745ebd6c12f314402c6c319de2e7ef82c2981",
+  "remote": "https://github.com/spa5k/vllm.git",
+  "verification_tools": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "827f8b",
+        "wall_time_seconds": 0.669381791,
+        "exit_code": 0,
+        "original_token_count": 22,
+        "output": "c72c801883a1eb9355b9ea8863464a6b74c59482\trefs/heads/feat/stream-kv-admission-cleanup\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "a7d1a5",
+        "wall_time_seconds": 0.000008167,
+        "exit_code": 0,
+        "original_token_count": 68,
+        "output": "Good \"git\" signature for 79936503+spa5k@users.noreply.github.com with ED25519 key SHA256:bnH/S3tr+6oBsV5Yrfufi2IJSVS7X1YcKeLw6zcvX4M\nc72c801883a1eb9355b9ea8863464a6b74c59482\n371745ebd6c12f314402c6c319de2e7ef82c2981\nG\nfix: retain KV rejection cleanup during lazy admission\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "1e06b8",
+        "wall_time_seconds": 0.000009125,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "current_time": "2026-10-18 14:00:47 UTC"
+      }
+    }
+  ],
+  "precommit": {
+    "start_chunk": "35d19d",
+    "completion_chunk": "3bb741",
+    "exit_code": 0,
+    "scope": "All seven exact files; all applicable hooks passed; source hashes unchanged at181099",
+    "transport_note": "Chunk references transcribed from completed calls; these are not copies of original tool transport objects"
+  },
+  "commit_chunk": "1175ec",
+  "push_start_chunk": "1d3a25",
+  "push_completion_chunk": "0b7eb5",
+  "normal_pytest_executed": false,
+  "upstream_pr_created": false
+}

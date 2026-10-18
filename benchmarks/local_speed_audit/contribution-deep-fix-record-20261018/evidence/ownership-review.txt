@@ -1,0 +1,153 @@
+# Lazy-stream KV cleanup ownership refresh
+
+## Decision
+
+**No open PR directly implements candidate `4053b1c3`. One active draft needs
+coordination before a contribution can be proposed.**
+
+The candidate remains a substantive residual fix for a remote-prefill request
+that passes the early serving call and then fails admission when its lazy result
+iterator is first consumed. The current evidence supports delayed producer-lease
+release until connector cleanup. It does not prove a permanent leak. It also
+does not make the preflight capacity problem in #58192 a KV-capacity leak.
+
+Open draft PR #59343 changes the same
+`GenerateBaseServing._with_kv_transfer_rejection_cleanup` method. Its change
+tracks engine admission with a context variable. Its focused tests consume
+`AsyncLLM.generate()` while the outer cleanup wrapper is still active. Its file
+diff does not add guards to the lazy Chat, Completion, or Responses iterators
+after their `create_*` methods return. Candidate `4053b1c3` instead passes one
+request-local guard into those endpoint methods and catches only
+`QueueOverflowError` and `MaxQueuedTokensError` during initial iterator
+consumption. This is a material implementation and behavior difference. It is
+not safe to claim that #59343 owns the same fix. It is also not safe to ignore
+the overlap: both patches edit the same base wrapper, so a human contribution
+must explain the residual lazy path and coordinate or rebase if #59343 moves.
+
+## Exact subject
+
+- Current `main`: `371745ebd6c12f314402c6c319de2e7ef82c2981`.
+- The initial and final ref reads returned the same SHA.
+- Candidate manifest: `bfe1ecd5cd3f90299a730aaf50fcbea54a3cd95a567da7860e9a2f5e0f426250`.
+- Candidate patch: `4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4`.
+- Candidate source review: `e2238383b0f724bf181e449cf3b89052f9790315d82c0ec410a99ee3de814910`.
+- Independent production source review:
+  `c9b3cf20a436a805c4897e4d39e3b1048aa83021757e02fb0ee927ff2e271530`.
+- Repair-shape risk review:
+  `63bc1faa78ba63cb0ca4f6a0fafb00b88283a2daa1d7d33d9973140afa6e9f37`.
+- Original source/ownership evidence:
+  `db5cd561311ad0c8b848f44388af887bc9c3183a22e495e09b6a496c4046c9ed`.
+
+The candidate changes four production files and three existing test files:
+
+- `vllm/entrypoints/generate/base/serving.py`
+- `vllm/entrypoints/openai/chat_completion/serving.py`
+- `vllm/entrypoints/openai/completion/serving.py`
+- `vllm/entrypoints/openai/responses/serving.py`
+- `tests/entrypoints/openai/chat_completion/test_serving_chat.py`
+- `tests/entrypoints/openai/completion/test_completion_error.py`
+- `tests/entrypoints/openai/responses/test_serving_responses.py`
+
+## Named ownership threads
+
+### #50425
+
+Issue #50425 remains open. It has no newer comment after 2026-07-31. The last
+comment says the originally reported v0.18.0 Mooncake cancellation problem
+appears fixed indirectly by merged PR #41269. That conclusion is about cleanup
+before engine admission in the tested create-time cancellation path. It does
+not include a queue rejection raised when a lazy endpoint iterator is first
+advanced.
+
+Two open PRs still mention #50425:
+
+- #50565, head `d84bcca15fc0c4543ca419bd0742a0a8f38da8d3`, prevents stale
+  Mooncake receive completion after early abort.
+- #57529, head `1a37b8d4d29373287e65dbda8c72e965ea45aa72`, adds a Mooncake
+  failure ledger.
+
+Both heads equal the prior closed evidence. Neither changes the candidate's
+four serving modules. Neither is a direct duplicate.
+
+### #42442
+
+PR #42442 remains open at head
+`4fbb6652db12098887ae7223c760dbb2650cd575`. It adds `abort()` when a
+`ValueError` or `VLLMValidationError` propagates after `add_request()` created a
+queue. It changes only `vllm/v1/engine/async_llm.py` and its focused test. This
+is post-registration engine cleanup. Candidate `4053b1c3` handles two queue
+admission errors before engine registration. The ownership and files differ.
+
+### #58192
+
+Issue #58192 remains open. Its latest comments point to #58477 and #58478.
+Both PRs are closed. They reserved `max_num_queued_reqs` capacity at preflight
+so requests could be rejected before expensive rendering. They changed
+`AsyncLLM` admission accounting and its tests. They did not change the four
+candidate serving modules and did not add remote-prefill rejection cleanup.
+
+This is an adjacent capacity-admission design. It is not evidence that a lazy
+queue rejection sends the connector notice. The candidate report must not call
+the #58192 preflight behavior a KV-capacity leak.
+
+## Narrow open-PR searches
+
+The exact candidate class and method searches returned no open PR:
+
+- `_KVTransferRejectionCleanup in:body`: 0.
+- `guard_initial_admission in:body`: 0.
+- `QueueOverflowError kv_transfer in:body`: 0.
+
+The existing cleanup method searches returned two open security PRs:
+
+- #51137 bounds untrusted transfer topology sizes. It changes protocol
+  validation, connector internals, and `AsyncLLM`; it does not change a
+  candidate serving file.
+- #56780 handles a missing LMCache MP tracker for an unscheduled cleanup
+  marker. It changes the LMCache connector and its unit test only.
+
+The narrow semantic searches also returned broader KV work. Two results touch
+`vllm/entrypoints/generate/base/serving.py` and were inspected at the patch
+level:
+
+- Draft #59343 adds in-flight NIXL prefix-load sharing and changes the exact
+  cleanup wrapper. This is the active same-method coordination item described
+  above. It does not change the three OpenAI endpoint serving files.
+- #51488 rejects new requests while generation is paused. Its base-serving
+  hunk only changes `GenerationError` streaming serialization. It is unrelated
+  to remote-prefill rejection cleanup.
+
+No inspected open PR has the candidate's seven-file shape or its three
+endpoint iterator guards.
+
+## Contribution ownership conclusion
+
+The duplicate check does not require rejecting candidate `4053b1c3` as already
+implemented. A human contribution must still do all of the following:
+
+1. Coordinate with #50425 because that issue owns the reported cleanup area and
+   its last comment says current main fixed the known create-time case.
+2. Explain that the residual case occurs after a lazy endpoint returns but
+   before the request is registered with the engine.
+3. Mention draft #59343 as an exact same-method overlap and explain why its
+   wrapper-scoped admission test does not exercise the endpoint iterator path.
+4. Rebase and reassess the guard design if #59343 changes or merges.
+5. Keep the effect statement limited to earlier producer-lease release. The
+   retained source evidence gives a configured default cleanup interval of 30
+   seconds. It does not prove permanent resource retention.
+
+## Search limits
+
+- All GitHub reads were first-party `gh` API or repository PR/issue data.
+- Issue bodies and complete saved comment arrays were read for #50425, #42442,
+  and #58192.
+- Linked-open searches were capped at 100 results per issue.
+- Exact method searches were capped at 50 results.
+- Narrow semantic searches were capped at 50 results. One returned 21 broad
+  KV results. Only results with a candidate production-file overlap or an
+  exact cleanup-method match received patch-level inspection.
+- GitHub text search is indexed and bounded. This packet does not claim global
+  duplicate absence.
+- No issue, PR, comment, review, or message was published.
+- No vLLM code, tests, imports, model, connector, or runtime action ran.
+

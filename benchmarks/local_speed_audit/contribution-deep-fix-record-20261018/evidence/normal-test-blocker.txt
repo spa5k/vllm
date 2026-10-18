@@ -1,0 +1,103 @@
+# Serving43 preparation is blocked by the import policy
+
+Verdict: **BLOCKED_IMPORT_DENIAL**. Runtime authority is false. No guest runner,
+Docker host, preflight, target import, pytest or resource was prepared or run
+in this packet. Only approved source/data preparation ran.
+
+The frozen plan `bb610fb0e1f2c22a73fd514ad21399187476ad52411f6b7ebb67d38c0fe48e1f`
+labels the 43-row gate source-feasible with cache/view work pending. That
+operational status is too strong. This report supersedes that status. Its
+43-row selection, eight source descriptors and source/native claim limits
+remain useful source data. The frozen plan is unchanged.
+
+## Exact conflict
+
+Normal root conftest loading imports `LLM` at `tests/conftest.py:50`.
+`vllm/__init__.py` maps `LLM` to `.entrypoints.llm:LLM` and resolves that module
+through `import_module`. `vllm/entrypoints/llm.py:49` imports `UsageContext`.
+`vllm/usage/usage_lib.py:16` imports `cpuinfo` at module scope. These are exact
+cached parent bytes. The plan already compared the named conftest and
+usage_lib files with current source. None of the eight proposed overrides
+changes these imports.
+
+This is one unconditional source path. It is not a claim that this is the
+first import route taken. The saved earlier renderer failure records a longer
+route through EngineArgs, logits processing, sampling parameters,
+serial_utils and v1/utils. Both routes reach the same import.
+
+The renderer V4 observer has `cpuinfo` in `FORBIDDEN_MODULES`. Its import audit
+calls `deny` for this module or a child. It also rejects a forbidden module
+already present at installation. Preloading it would violate the policy.
+The proposed serving gate required that exact denial before the first target
+import in each phase. Normal conftest loading therefore conflicts with the
+retained policy before any selected test body can run.
+
+The denial is a **task-specific gate requirement**. It is not a general vLLM
+API rule or an assertion that cpuinfo is defective. Root's serving43 source
+instruction explicitly required the observer's CPUinfo/worker/process/socket
+denials. Root then required a stop on a concrete unavoidable import denial.
+The earlier renderer runtime plan also states that cpuinfo and target process
+or socket operations must not be allowed as an expected outcome. This packet
+does not change that policy.
+
+## Existing observations settle the environment boundary
+
+The exact earlier actual renderer packet has manifest
+`300eab4b3ef888c4a7ee50f8b53aaa68b90688319d524be479c301902db8cf42`.
+This packet independently checks its saved raw log descriptor and decodes
+that JSON as data. Origin passed with an installed observer. The next
+`width_collection` phase returned 4. Its observer records `event=import`,
+`status=denied`, `detail.module=cpuinfo`, and caller
+`/gate-v7/candidate/vllm/usage/usage_lib.py`, line 16. The saved bounded stderr
+is retained here unchanged. No renderer function or test body ran here.
+
+Accepted Compact18 actual `2d9196328a19131980c3a996bc36b0f6a76ec59ee2a4363a4a3efd644d138b69`
+is different in the relevant respect. Its exact saved guest result passed,
+but has no observer field. Its frozen adapter invokes the normal phases
+without `observer_bootstrap`. Its network-state checks do not implement the
+new import denial. That result proves the prior selected imported Responses
+cases in their actual environment. It does not prove that normal conftests
+can load under the serving43 cpuinfo denial. The plan failed to close this
+transitive import boundary. No serving regression is established by this
+failure, and no repeat is proposed.
+
+## Approved data preparation retained
+
+Root approved a separate small cache role:
+`serving/stream-kv-serving43-gpt2-cache-v1`. Its `cache-manifest.json` is
+3,872 bytes, SHA-256
+`55f7275b1336ab0f9b7ddfc7974ba68d68860f3cf80e35c3d9d08d3c83519b07`.
+The whole `hf` tree has six regular files: five exact existing GPT-2 blob
+bodies and `refs/main`; five snapshot-to-blob internal relative links; six
+directories excluding the HF root. Regular bytes total 2,854,606, including
+the 40-byte ref. Revision is `607a30d783dfa663caf39e06633721c8d4cfcd7e`.
+All copied files are 0444 and all directories/root are 0555. The links remain
+internal and match their exact declared targets. Copied source identities are
+retained. The original mutable host cache is not a proposed bind.
+
+This preserves local cache bytes. It does not add remote provenance, model
+weights, a tokenizer result or runtime authority. The copy and final local
+small-tree check read only these named inputs and owned outputs. No package
+or archive API ran.
+
+`source-override-contract.json` closes the exact eight existing-destination
+read-only overrides: four final production files, three final test files and
+base371 Responses context.py. The last removes the unrelated cumulative
+budget patch. The data-only canonical derivation has 8,075 entries and digest
+`40556336312c4d45567113ee1409820bdbd7cb80ebeffb8973faf7cf117264cd`.
+No full candidate tree was copied. No target path, shared source or existing
+manifest was changed. The source derivation is not an import or test result.
+
+## Next boundary
+
+Keep all denials, normal conftests and final production/test bytes unchanged.
+Do not skip conftests, mock cpuinfo, preload it, add an observer exemption, or
+repeat the known failure. Root must decide whether a different explicitly
+reviewed execution policy/environment is in scope. This packet supplies no
+such alternative and no executable launch command.
+
+The separate NIXL row still has its Ray and OPT metadata limits from the
+frozen plan. It does not block unrelated test code by itself. Here, the
+normal-serving import policy is the sufficient blocker. Real imported
+serving43 results, real engine admission, NIXL transport, producer lease
+release, model output and general 371/native837 ABI remain unproved.

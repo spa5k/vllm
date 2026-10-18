@@ -1,0 +1,22 @@
+The saved extracted pair passes its four finite contracts. The late stream rejection has zero notice submissions in the baseline and one in the candidate. The other three cases have one notice in each version. No ordinary engine submission is recorded in any of the eight rows.
+
+| Case | Baseline notices | Candidate notices | Other saved outcome |
+|---|---:|---:|---|
+| Preflight rejection | 1 | 1 | QueueOverflowError; no frames |
+| Render error | 1 | 1 | VLLMValidationError; no frames |
+| Late nonstream rejection | 1 | 1 | QueueOverflowError; no frames |
+| Late stream rejection | 0 | 1 | Same error frame, then the same `[DONE]` frame |
+
+The independent data script checks the exact eight-row order, exact types and complete row key sets. It checks the full transfer dictionary, original request ID, `abort_immediately=true`, local request IDs, lazy generator flags, exceptions, and frames. It rejects 15 data mutants. These are rejection controls for the reviewer validator. They are not 15 executed serving scenarios.
+
+The stdout is complete at 21,640 bytes, SHA256 `716d232f603bb69bdfefe10570b67e981636986d30e06b9ef621557d30842813`. Stderr is empty. The typed wrapper receipt records one attempt, zero retries, PID 8701, exit 0, both EOF flags, reaped=true, complete=true, no first error, and elapsed 0.779753667069599 seconds. Its exact command uses the existing venv Python with `-B -I -S` and the sealed extracted script. The receipt has no cleanup-error field on this successful path. The wrapper's `passed` field alone is a transport result; this review separately checks the case data.
+
+All 26 saved binding rows match independently derived source AST metadata. The six input files have their exact full hashes. This includes the unchanged seven AsyncLLM methods, baseline and candidate serving methods, retained exception classes, and the real candidate dataclass guard. Its field annotations and dataclass decorator remain; method annotations and decorators are listed as removed. Candidate base is 16,173 bytes, SHA256 `cdb5e1de3b1242bf186aad935ddaccf75de684a010705959479359c0eb68c81e`. Candidate Chat is 57,993 bytes, SHA256 `f04b294863fa3c1e64434da902beec88f870fc108365b05ffe6d6cda7b9667ef`. Both equal the final formatted originals and the sealed proposal copies. The data audit does not compile or execute these ASTs.
+
+The three original run files were read as stable regular single-link files, with modes 0644 observed during this review. Their exact bytes equal the separate sealed checkpoint copies. The checkpoint full manifest is `f1c02f8d41e861403fbf19df1c29ec608655f3574e266996e533357b6f7fbae4`. The complete checkpoint and source proposal closed sets, payload hashes and 0444/0555 modes were checked. Copies of the three selected run files are retained here. The checkpoint receipt filename collision was bookkeeping after the pair; its retained receipt states that the target pair was not rerun. This review does not audit the checkpoint's shared STATUS history.
+
+Root supplied a transcription of the original native tool object: chunk `e2bd64`, exit 0, wall 0.986475875 seconds, and no active session field. Root says its output JSON equals the child receipt semantically. No original native-object file existed. `PARENT_TOOL_TRANSCRIPTION.json` is labelled as a parent message transcription. It is not original tool transport. The independent audit checks the actual saved child receipt and raw files. The child elapsed time and outer tool wall have different scopes. Neither is a performance result.
+
+This reviewer prepared the extracted fixture and reviewed the wrapper source. This is a fresh saved-data replay with a separate validator; it is not a different-author review of the fixture design. Root performed the one execution. The reviewer did not rerun the fixture, wrapper, author checks, or target bodies.
+
+The result is extracted-body execution with explicit fakes. A notice here is a record in FakeEngineCore, not an observed connector RPC or remote block release. The SSE text uses fake error serialization. This is not pytest, real ASGI, NIXL, device, model, current-build, or performance evidence. The four cases do not test MaxQueuedTokensError, cancellation/close, failed notification, positive RequestOutput suppression, multi-prompt or beam exclusions, or later Responses turns. The earlier import denials and paid holds remain. No new execution authority is granted.

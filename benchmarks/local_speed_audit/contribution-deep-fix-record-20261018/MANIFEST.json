@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "entries": [
+    {
+      "path": ".gitattributes",
+      "bytes": 55,
+      "sha256": "c19c0245cc9cd84d3fe3fbcfc35ed27ff85356ac2b614ee555b5025f0f9b8802"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 12075,
+      "sha256": "c3a1ebfd7b865a8f818c77b0d9be7d84fe1352ac17b77f9e2ce4d327ffb7703c"
+    },
+    {
+      "path": "evidence/draft-fix-delivery.json",
+      "bytes": 1883,
+      "sha256": "a83bb416c2f98dca5751634f0a35980512751028ade543e02f5d00cbc0a79e8c"
+    },
+    {
+      "path": "evidence/normal-test-blocker.txt",
+      "bytes": 5872,
+      "sha256": "afe62b66df7ffeceda1fe1d1f68194140b2c4cbd70b63561d466ecbf58d9ca27"
+    },
+    {
+      "path": "evidence/normal-test-plan.txt",
+      "bytes": 9210,
+      "sha256": "72e31508bef67d0392f8705f017ec902e0c55133113e08b4bfdff1a4ff6dc0ab"
+    },
+    {
+      "path": "evidence/ownership-review.txt",
+      "bytes": 7439,
+      "sha256": "edfab745ab5b495ad74f5a9ad0df3bdb54ba2e5ef34b902a7185c1c4ba31ca07"
+    },
+    {
+      "path": "evidence/result-review.txt",
+      "bytes": 4420,
+      "sha256": "6d851449af67e5e29c9b063d9d495862e3e97daedc20a4f1fe48f718f7624d9e"
+    },
+    {
+      "path": "evidence/source-review.txt",
+      "bytes": 5622,
+      "sha256": "fed8f86817fefa3b32e968b2498820af83420f0a168b83496e49468f2dc8aaae"
+    },
+    {
+      "path": "evidence/static-checks.json",
+      "bytes": 1020,
+      "sha256": "28f913a9fb50469c223bae9a3653c789df298564309482ff2afdf5f7654df7cc"
+    },
+    {
+      "path": "evidence/stream-kv-source-pair-receipt.json",
+      "bytes": 1143,
+      "sha256": "9d2a7eda14f37240a3f2a74f2ee4b6658425245a728bfd5a0fd94703d2b2ad19"
+    },
+    {
+      "path": "evidence/stream-kv-source-pair.json",
+      "bytes": 21640,
+      "sha256": "716d232f603bb69bdfefe10570b67e981636986d30e06b9ef621557d30842813"
+    },
+    {
+      "path": "evidence-index.json",
+      "bytes": 5173,
+      "sha256": "b3452aaeed3e0500e780e34c94209fd39583fd2e396d1dba4e38e847d228e4ea"
+    },
+    {
+      "path": "patches/stream-kv-admission-cleanup-draft.patch",
+      "bytes": 24573,
+      "sha256": "4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4"
+    }
+  ],
+  "payload_files": 13,
+  "payload_bytes": 100125
+}
