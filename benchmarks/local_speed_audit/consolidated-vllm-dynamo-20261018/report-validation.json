@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_utc": "2026-10-18T18:00:54.968863+00:00",
+  "checked_utc": "2026-10-18T18:12:17.235347+00:00",
   "scope": "Report, HTML and saved-record checks only. No product experiments, model runs, paid jobs or upstream PR action.",
   "result": "PASS",
   "report_count": 3,
-  "local_citations_checked": 161,
+  "local_citations_checked": 166,
   "remote_links_present_not_http_checked": 36,
   "historical_source_files_hashed": 64,
   "historical_inventory_hash_mismatches": [],
@@ -22,11 +22,21 @@
     "dynamo": "No material correction.",
     "vllm": "Three clarifications applied: fallback copy mechanism; PCP policy-port warning; existing FP8 dispatch PR."
   },
-  "source_index_sha256": "e6a6f771352ba80c258dd63dca215552e09c8e8064e9bb9b7acb32aaef8a08be",
-  "consolidated_file_sha256": "5b9aa664980a010bd93e04b9e7cd37886262c827dd588b31a0e3ad2828d9b6bf",
+  "source_index_sha256": "3838f00589325240a0febc8f249b4e59a609f8a98808aa09c8d4f060c60ca722",
+  "consolidated_file_sha256": "c186e9b88ad2044f104683460226781d4f79c5cfaded71afb55b7d782a02b08c",
   "historical_results_reproduced_for_this_report": false,
-  "html_sha256": "eb78994c362c55179e6db4d5be26ce1a0d22bf035740705a7851511f07de2e49",
-  "html_browser_checks": {
+  "html_sha256": "5a2c51b2cc4c8d72e010e3a89afd494b42d50904436d660c6a8ec7ae3bbd804d",
+  "repository_checks": {
+    "pre_commit_selected_authored_files": "PASS after line wrapping and formatting corrections",
+    "initial_findings_fixed": [
+      "Markdown table spacing",
+      "Ruff formatting",
+      "Remove forbidden re import"
+    ],
+    "json_parser": "All packet JSON parsed",
+    "product_tests": "Not applicable to this report update"
+  },
+  "prior_html_browser_checks": {
     "desktop_viewport": [
       1440,
       1000
@@ -50,14 +60,24 @@
     "external_assets": 0,
     "screenshots_visually_reviewed": true
   },
-  "repository_checks": {
-    "pre_commit_selected_authored_files": "PASS on corrected second run",
-    "initial_findings_fixed": [
-      "Markdown table spacing",
-      "Ruff formatting",
-      "Remove forbidden re import"
-    ],
-    "json_parser": "All packet JSON parsed",
-    "product_tests": "Not applicable to this report update"
+  "presentation_revision_checks": {
+    "visible_research_sections": 7,
+    "recent_sections": 2,
+    "prior_week_sections": 4,
+    "startup_sections": 1,
+    "all_visible_by_default": true,
+    "all_before_pr_ledger": true,
+    "summary_cards": 8,
+    "unique_element_ids": true,
+    "broken_internal_anchors": 0,
+    "desktop_dom_checked": true,
+    "period_filter_recent_count": 2,
+    "period_plus_project_lastweek_vllm_count": 2,
+    "empty_state_and_reset_checked": true,
+    "raw_unresolved_reference_links": 0,
+    "desktop_screenshot_reviewed": true,
+    "final_scroll_margin_only_change_after_desktop_check": true,
+    "mobile_not_rerun_for_this_revision": true,
+    "automatic_in_app_refresh": "Blocked by browser URL policy for file://. No workaround attempted."
   }
 }

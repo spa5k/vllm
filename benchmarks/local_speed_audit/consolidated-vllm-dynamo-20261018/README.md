@@ -2,8 +2,11 @@
 
 Period: **6–18 October 2026, India time**.
 
-- Open [report.html](report.html) in a browser for the plain-language overview,
-  searchable public PR ledger, glossary and all three embedded technical reports.
+- Open [report.html](report.html) in a browser for the dated research results.
+  Seven visible sections cover 17–18 October, 10–15 October and the startup
+  study. Period and project filters help select the work to read.
+- The HTML also has plain explanations, a separate public PR ledger, a glossary
+  and all three embedded technical reports.
 - Read [REPORT.md](REPORT.md) for the consolidated Markdown report.
 - Read [vLLM history](vllm-early-history/REPORT.md) and
   [Dynamo history](dynamo-history/REPORT.md) for the detailed appendices.

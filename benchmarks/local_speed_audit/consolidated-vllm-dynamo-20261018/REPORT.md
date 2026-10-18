@@ -14,12 +14,6 @@ report. Two agents read old records for this consolidation.
 
 ## 1. Main results
 
-The strongest delivered outcome is **four merged upstream PRs** in the reviewed
-set: one in vLLM and three in Dynamo. Another **eight PRs remain open**. Three
-reviewed PRs are closed without a merge. These states were checked directly
-through GitHub on 18 October at about 23:02–23:03 India time. The exact heads,
-check results and timestamps are saved in [public-pr-state.json](public-pr-state.json).
-
 The strongest new model performance result is the experimental vLLM grammar
 output head: **8.2–8.9% less complete offline request time** on three tested
 narrow-grammar Qwen3-4B workloads. It is off by default and has strict support
@@ -27,6 +21,21 @@ limits. The result is not a general serving speedup. Other useful work includes
 startup-memory safety, bounded checkpoint retention, TCP admission ownership,
 KV rejection cleanup, native ARM quantization correctness and planner metadata
 consistency. Their evidence levels differ.
+
+The 10–15 October experiments also produced native table/slot fusion gains,
+4 MiB less FP8 fallback scratch in a tested shape, compact MoE warmup routes,
+PCP counting and MLA allocation/correctness results. The 17–18 October search
+added ARM quantization, cache-dtype, Responses budget and pooling findings;
+three vLLM lifecycle drafts; and Dynamo metadata, planner, session, broker and
+SDK observations. Sections 4–9 record these results, not only the public PRs.
+The [HTML edition](report.html#findings) displays the dated research sections
+before the public contribution ledger. The sections are open by default.
+
+The delivered public outcome is **four merged upstream PRs** in the reviewed
+set: one in vLLM and three in Dynamo. Another **eight PRs remain open**. Three
+reviewed PRs are closed without a merge. These states were checked directly
+through GitHub on 18 October at about 23:02–23:03 India time. The exact heads,
+check results and timestamps are saved in [public-pr-state.json](public-pr-state.json).
 
 Several large component improvements did not become useful model improvements.
 The clearest example is n-gram graph replay: strong isolated proposer gains,
@@ -499,7 +508,7 @@ Source for both: [Dynamo implementation plan][DPLAN] and
 | Finding | Observed result | Status |
 | --- | --- | --- |
 | Planner DP sample labels | Native estimator: 21/24 DP8 baseline rows disagree with aggregate simulated batch count; candidate 24/24 agrees; DP1 control matches. Native SDK models retain data and return finite predictions. | Qualified component with AST/package-shell limits. Prior approximation policy and normal installed project gate remain. Prediction changes do not prove better accuracy or autoscaling. |
-| Session append/removal | Native session/event machinery and component parity. Leaf-removal timings improve in selected shapes; mixed/internal cases regress slightly. | Prior review already covers parts of the mechanism. Active tier stack and actual eligible frequency matter. No serving gain. |
+| Session append/removal | Each version passed 32 selected native session tests and eight backend tests. Selected leaf-removal medians improved 35.5% and 27.6%; mixed/internal cases regressed 5.9% and 2.6%. Native Stored-event replay retained parity. | Prior review already covers parts of the mechanism. Timing wrapper and native event consumer differ. Active tier stack and actual eligible frequency matter. No serving gain. |
 | NATS endpoint identity collision | Valid same-DRT namespace/component pairs encode to the same subject. Noncolliding control: 9/9 correct. Joint collision: six wrong-handler replies among eight requests. Real broker exchanges match. | Native correctness observation. Exact alias concern exists in prior review. No wire-format patch; compatibility/migration needs the runtime owner. Not a security or production-frequency claim. |
 | SDK top-level null | Normal SDK unary call gets an annotated null frame but no unannotated item; exact no-response RuntimeError. Six non-null typed controls pass. | Public null policy is unresolved. No shared schema patch is justified from this observation alone. |
 | Audio AAC | Real SoundFile constructor on macOS accepts WAV/FLAC but rejects AAC before writing bytes. | Dependency admission only. No Dynamo formatter, waveform, model, HTTP or Linux path ran. Backend-specific policy is needed. |

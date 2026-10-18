@@ -14,10 +14,10 @@ PUBLISHED = "https://github.com/spa5k/vllm/blob/"
 PUBLISHED += "feat/vllm-contribution-research-20261018/"
 
 
-def render_markdown(path: Path, prefix: str) -> str:
+def render_markdown(path: Path, prefix: str, content: str | None = None) -> str:
     """Render tables and preserve the scope of external local evidence links."""
     parser = MarkdownIt("commonmark", {"html": False}).enable("table")
-    tokens = parser.parse(path.read_text())
+    tokens = parser.parse(path.read_text() if content is None else content)
     heading_count = 0
     for token in tokens:
         if token.type == "heading_open":
@@ -56,6 +56,111 @@ def render_markdown(path: Path, prefix: str) -> str:
     return parser.renderer.render(tokens, parser.options, {})
 
 
+def research_catalog() -> str:
+    """Keep the dated research visible without duplicating its source text."""
+    path = ROOT / "REPORT.md"
+    text = path.read_text()
+    references = "\n".join(
+        line for line in text.splitlines() if line.startswith("[") and "]: " in line
+    )
+
+    def section(number: int) -> str:
+        start = text.index(f"\n## {number}. ") + 1
+        end = text.find("\n## ", start + 1)
+        return text[start : end if end != -1 else len(text)].partition("\n")[2]
+
+    dynamo = section(8)
+    recent_heading = "### Native HTTP metadata inconsistency, then a normal tested fix"
+    old_core = dynamo.split("### TCP admission until ACK", 1)[0]
+    lru = "### Approximate-LRU physical copy index"
+    old_core += lru + dynamo.split(lru, 1)[1].split(recent_heading, 1)[0]
+    recent_dynamo = recent_heading + dynamo.split(recent_heading, 1)[1]
+    panels = [
+        (
+            "recent-vllm",
+            "recent",
+            "vllm",
+            "17–18 October · vLLM",
+            "Quantization, cache identity, pooling and failure handling",
+            "Native ARM and GPU observations, API regressions and later lifecycle "
+            "drafts. Each row retains its tested boundary and missing check.",
+            section(7),
+        ),
+        (
+            "recent-dynamo",
+            "recent",
+            "dynamo",
+            "17–18 October · Dynamo",
+            "Metadata, profiler artifacts, planner labels and native routing",
+            "The metadata fix passed its normal Rust gate. The profiler remains "
+            "source-reviewed. Other native observations retain policy "
+            "and owner limits.",
+            recent_dynamo,
+        ),
+        (
+            "gpu-core",
+            "lastweek",
+            "vllm",
+            "10–15 October · vLLM",
+            "GPU preparation, memory and core-engine drafts",
+            "Fusion, FP8 scratch reuse, compact warmup routes, PCP counting and "
+            "cache writes. Component savings stay separate from model performance.",
+            section(5),
+        ),
+        (
+            "model-results",
+            "lastweek",
+            "vllm",
+            "14–15 October · vLLM",
+            "Full-model results, including the experiments that did not help",
+            "Grammar projection improved selected offline requests. MLA table reuse "
+            "removed allocation. N-gram replay did not improve the larger model.",
+            section(6),
+        ),
+        (
+            "dynamo-core",
+            "lastweek",
+            "dynamo",
+            "10–14 October · Dynamo",
+            "Router state, queue statistics, prefix lookup and physical-copy LRU",
+            "Native CPU gains came with storage costs and workload regressions. "
+            "These separate candidates have no established serving-speed gain.",
+            old_core,
+        ),
+        (
+            "other-engines",
+            "lastweek",
+            "other",
+            "14–15 October · Other engines",
+            "TensorRT-LLM and SGLang findings from the same research chats",
+            "These retain their actual project labels. Many are CPU, interpreter "
+            "or compile checks with native-device validation still missing.",
+            section(9),
+        ),
+        (
+            "startup",
+            "early",
+            "vllm",
+            "8 October · vLLM",
+            "Startup, compiler attribution, checkpoint loading and cold/warm effects",
+            "The baseline study corrected several promising assumptions. Cold/warm "
+            "differences and partial compiler timings are not patch speedups.",
+            section(4),
+        ),
+    ]
+    result = []
+    for key, period, project, date, title, lead, content in panels:
+        body = render_markdown(path, "research-" + key, content + "\n\n" + references)
+        result.append(
+            f'<article class="research-panel" id="result-{key}" '
+            f'data-period="{period}" data-project="{project}">'
+            f'<div class="research-panel-head"><div class="tag">{date}</div>'
+            f"<h3>{title}</h3><p>{lead}</p></div>"
+            f'<div class="prose">{body}</div></article>'
+        )
+    return "\n".join(result)
+
+
 def main() -> None:
     snapshot = json.loads((ROOT / "public-pr-state.json").read_text())
     rows = []
@@ -73,6 +178,7 @@ def main() -> None:
             f"<td><code>{pr['headRefOid'][:12]}</code></td></tr>"
         )
     replacements = {
+        "@@RESEARCH_CATALOG@@": research_catalog(),
         "@@PR_ROWS@@": "\n".join(rows),
         "@@MAIN_REPORT@@": render_markdown(ROOT / "REPORT.md", "main"),
         "@@VLLM_HISTORY@@": render_markdown(

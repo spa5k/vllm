@@ -8,6 +8,7 @@
 <style>
 :root{--ink:#172533;--muted:#536674;--paper:#f4f6f4;--white:#fff;--line:#dce4df;--nav:#142b2b;--green:#216b54;--blue:#245c98;--amber:#845718;--soft:#edf4ef}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--blue);text-underline-offset:3px}button,input,select{font:inherit}button,a,input,select,summary{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d69b30;outline-offset:4px}.skip{position:absolute;left:16px;top:-90px;background:white;padding:10px;z-index:5}.skip:focus{top:12px}.shell{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:var(--nav);color:#e5eee8;padding:34px 24px;display:flex;flex-direction:column;gap:25px}.brand{font-size:21px;letter-spacing:-.5px;font-weight:750}.brand span{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:550;color:#b0c8bb;margin-top:7px}.sidebar nav{display:grid;gap:4px}.sidebar nav a{color:#d0e0d5;padding:9px 12px;border-radius:6px;text-decoration:none;font-size:14px}.sidebar nav a:hover{background:#26423d;color:white}.sidebar-note{margin-top:auto;font-size:12px;color:#b7cdc0;border-top:1px solid #3c544b;padding-top:17px}.pause{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.3px}.pause:before{content:"";width:7px;height:7px;border-radius:50%;background:#add0b0}main{min-width:0;max-width:1320px;padding:52px 5vw 80px}.eyebrow{text-transform:uppercase;letter-spacing:2.2px;font-size:11px;font-weight:750;color:var(--green)}h1{font-size:clamp(36px,4.5vw,65px);line-height:1.08;letter-spacing:-2.1px;max-width:780px;margin:15px 0 20px}h2{font-size:29px;line-height:1.2;letter-spacing:-.8px;margin:0 0 14px}h3{font-size:19px;line-height:1.35;margin:15px 0 10px}p{margin:0 0 16px}.intro{font-size:18px;color:var(--muted);max-width:760px}.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.pill{display:inline-flex;border:1px solid var(--line);padding:5px 11px;background:#fff;border-radius:20px;font-size:12px;font-weight:600}.actions{display:flex;gap:10px;flex-wrap:wrap}.button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:7px;padding:10px 15px;font-size:13px;font-weight:650;cursor:pointer;text-decoration:none}.button.primary{background:var(--green);border-color:var(--green);color:white}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:34px 0 18px}.stat{background:white;border:1px solid var(--line);border-radius:10px;padding:21px}.stat b{display:block;font-size:39px;line-height:1.15;letter-spacing:-1px}.stat span{display:block;font-size:12px;color:var(--muted);margin-top:8px}.stat.green b{color:var(--green)}.stat.blue b{color:var(--blue)}.caption{font-size:12px;color:var(--muted)}section{margin-top:56px;scroll-margin-top:28px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.section-head p{color:var(--muted);max-width:740px;margin-bottom:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.card{background:white;border:1px solid var(--line);border-radius:11px;padding:26px;min-width:0}.card p:last-child{margin-bottom:0}.tag{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;font-weight:750;color:var(--green)}.metric{font-size:32px;letter-spacing:-1px;font-weight:750;margin:15px 0 2px;line-height:1.2}.metric-label{font-size:12px;color:var(--muted);margin-bottom:18px}.limit{background:#f5f7f5;border-left:3px solid #a0b9a9;padding:11px 13px;font-size:13px;margin-top:18px}.flow{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:18px 0}.flow span{background:var(--soft);padding:6px 9px;border-radius:5px;font-size:12px;font-weight:650}.flow i{font-style:normal;color:var(--muted)}.wide-note{border-radius:11px;background:#e8f0e9;padding:25px 28px;margin-top:18px}.wide-note p:last-child{margin-bottom:0}.four{grid-template-columns:repeat(4,minmax(0,1fr))}.evidence .card{padding:19px}.evidence h3{font-size:16px}.evidence p{font-size:13px;color:var(--muted)}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:17px}.filters input{min-width:170px;flex:1}.filters input,.filters select{border:1px solid #b7c5bc;background:white;border-radius:6px;padding:10px 12px;font-size:13px;color:var(--ink)}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:9px;background:white}table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}th{background:#eaf0eb;color:#42594a;font-size:11px;text-transform:uppercase;letter-spacing:.6px;padding:14px 16px}td{padding:14px 16px;border-top:1px solid var(--line);vertical-align:top}td:first-child{white-space:nowrap;font-weight:650}.badge{border-radius:20px;padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap}.merged{background:#e3f1e7;color:#216141}.open{background:#e8f0fd;color:#285a93}.closed{background:#f1e9e5;color:#765545}code{font:11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf1ed;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}.timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.time-item{border-top:2px solid #648773;padding:15px 7px 0}.time-item b{font-size:13px}.time-item p{font-size:13px;color:var(--muted);margin-top:7px}.terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:0}.terms div{padding:16px 0;border-top:1px solid var(--line)}dt{font-weight:700;font-size:14px}dd{margin:6px 0 0;color:var(--muted);font-size:14px}.record{background:white;border:1px solid var(--line);border-radius:10px;margin-top:14px;overflow:hidden}.record>summary{cursor:pointer;padding:20px 24px;font-weight:700;font-size:16px;list-style-position:inside}.record>summary:hover{background:#f1f6f1}.record[open]>summary{border-bottom:1px solid var(--line)}.prose{padding:18px 26px 28px;font-size:14px;line-height:1.8;overflow-wrap:anywhere;min-width:0}.prose h2{font-size:25px;margin-top:30px}.prose h3{font-size:22px;margin-top:30px}.prose h4{font-size:18px;margin-top:25px}.prose h5{font-size:16px;margin-top:22px}.prose table{display:block;overflow:auto;margin:20px 0;font-size:12px;max-width:100%}.prose th,.prose td{min-width:140px;padding:10px}.prose th:first-child,.prose td:first-child{white-space:normal}.prose pre{padding:16px;background:#edf1ed;overflow:auto;border-radius:6px}.prose pre code{padding:0}.prose li{margin-bottom:7px}.prose .local-evidence:after{content:" ↗ local";font-size:10px;color:var(--muted);white-space:nowrap}.source-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:19px}.footer{margin-top:50px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}[hidden]{display:none!important}
+.research-panel{background:white;border:1px solid var(--line);border-radius:11px;margin-top:22px;overflow:hidden;scroll-margin-top:200px}.research-panel-head{padding:25px 26px 10px;background:#edf4ef;border-bottom:1px solid var(--line)}.research-panel-head h3{font-size:25px;letter-spacing:-.5px;margin:9px 0}.research-panel-head p{color:var(--muted);font-size:14px}.research-panel .prose{padding-top:8px}.research-tools{position:sticky;top:0;z-index:2;background:var(--paper);padding:15px 0 9px;border-bottom:1px solid var(--line)}.research-tools .filters{margin-bottom:5px}.research-tools label{font-size:12px;font-weight:650;display:flex;align-items:center;gap:9px}.research-tools select{font-size:13px}.research-quicklinks{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.research-summary .metric{font-size:27px}.research-summary .card{padding:23px}.research-summary .card h3{font-size:18px}.research-summary .card p{font-size:14px}.research-summary .card>a{display:inline-block;font-size:12px;font-weight:650;margin-top:14px}.date-stat b{font-size:27px;letter-spacing:-.5px}.research-empty{padding:20px;background:white;border:1px solid var(--line);border-radius:9px}
 @media(min-width:1650px){main{padding-left:85px;padding-right:85px}}
 @media(max-width:1150px){.four{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{padding:25px 18px}.shell{grid-template-columns:210px minmax(0,1fr)}main{padding:40px 4vw}.stats{gap:9px}.stat{padding:17px}}
 @media(max-width:800px){.shell{display:block}.sidebar{height:auto;position:relative;padding:20px 22px;gap:14px}.brand{font-size:18px}.brand span{display:inline;margin-left:10px;letter-spacing:1px;font-size:9px}.sidebar nav{display:flex;gap:4px;flex-wrap:wrap}.sidebar nav a{padding:5px 8px;font-size:12px}.sidebar-note{display:none}main{padding:30px 22px 60px}h1{letter-spacing:-1.4px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}.four{grid-template-columns:repeat(2,minmax(0,1fr))}.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.terms{grid-template-columns:1fr}.card{padding:22px}.intro{font-size:16px}.prose{padding:12px 17px}.section-head{display:block}}
@@ -22,7 +23,7 @@
 <aside class="sidebar">
 <div class="brand">vLLM × Dynamo<span>Research record / 2026</span></div>
 <nav aria-label="Report sections">
-<a href="#overview">01 · Overview</a><a href="#findings">02 · What changed</a>
+<a href="#overview">01 · Overview</a><a href="#findings">02 · Research results</a>
 <a href="#evidence">03 · What the tests prove</a><a href="#contributions">04 · Public contributions</a>
 <a href="#timeline">05 · Work history</a><a href="#limits">06 · Costs and open gates</a>
 <a href="#glossary">07 · Terms explained</a><a href="#technical">08 · Full records</a>
@@ -37,21 +38,554 @@
 <p class="intro">vLLM runs language models. Dynamo routes requests and coordinates inference workers. This work examined how they start, use memory, prepare GPU work and handle failures.</p>
 <div class="hero-meta"><span class="pill">Three linked chats + final vLLM scout</span><span class="pill">64 saved source records</span><span class="pill">Research stopped</span></div>
 <div class="actions"><a class="button primary" href="#findings">Read the findings</a><a class="button" href="REPORT.md">Markdown report</a><button class="button" id="print-report" type="button">Print / Save PDF</button></div>
-<div class="stats" aria-label="Reviewed public code contribution status">
-<div class="stat green"><b>4</b><span>Merged code PRs</span></div><div class="stat blue"><b>8</b><span>Open code PRs</span></div>
-<div class="stat"><b>3</b><span>Closed without a merge</span></div><div class="stat"><b>15</b><span>Reviewed public code PRs</span></div>
+<div class="stats date-stat" aria-label="Research periods and scope">
+<div class="stat green"><b>17–18 Oct</b><span>Recent bugs and deeper fixes</span></div><div class="stat blue"><b>10–15 Oct</b><span>GPU, core and model experiments</span></div>
+<div class="stat"><b>8 Oct</b><span>Startup and compiler study</span></div><div class="stat"><b>7 sections</b><span>Visible dated research results</span></div>
 </div>
-<p class="caption">GitHub snapshot: 18 October 2026, about 23:02–23:03 India time. One merged vLLM PR and three merged Dynamo PRs. The separate closed documentation PR is outside these totals. Coverage starts on 6 October; this is not a claim of complete records for 4–5 October.</p>
+<p class="caption">Research results come first. The public PR ledger is a separate section below. Coverage starts on 6 October; this is not a claim of complete records for 4–5 October.</p>
 </header>
 <section id="findings">
-<div class="section-head"><div><div class="eyebrow">What changed</div><h2>The results in plain language.</h2><p>Correctness and performance need different proof. These examples show the cause, the change and the limit of the evidence.</p></div></div>
-<div class="grid">
-<article class="card"><div class="tag">vLLM · Memory safety · Open PR</div><h3>A saved plan must use the current memory budget.</h3><div class="metric">16.15 → 6.23 GiB</div><div class="metric-label">Stale KV allowance → freshly profiled allowance in the tested budget change</div><p>A startup plan can outlive the settings that produced it. After the GPU budget fell, the old plan still allowed too much KV memory. The fix invalidates that plan. Related work adds multimodal inputs to the plan identity.</p><div class="limit">This is a correctness result. It is not 9.92 GiB of memory saved in a normal unchanged run. The PT loader separately reduced tracked live-tensor peaks by 52–59%; RSS/PSS did not show a clear reduction.</div></article>
-<article class="card"><div class="tag">Dynamo · Transport correctness · Draft PR</div><h3>Cancellation does not remove queued transport work.</h3><div class="flow"><span>Queue request</span><i>→</i><span>Keep capacity owned</span><i>→</i><span>ACK or discard</span></div><p>The waiting caller could cancel and release a permit while its request still occupied transport storage. The fix keeps that permit with the request until ACK or discard. A one-slot native socket regression fails on the original code and passes with the fix.</p><div class="limit">The combined native network run passed 304 cases with three known base cases excluded. This is not a complete clean network-suite result or a model-speed result.</div></article>
-<article class="card"><div class="tag">vLLM · Offline model result · Local draft</div><h3>Small grammar vocabularies can avoid a full projection.</h3><div class="metric">8.2–8.9% less time</div><div class="metric-label">Complete offline request time · three narrow Qwen3-4B workloads · one L4</div><p>A grammar can permit only a small set of next tokens. The draft projects those rows, then keeps the normal mask and sampler. The final version repairs observed precision and startup-memory problems. It is off by default.</p><div class="limit">BF16, TP1, MRV2 and the recorded graph settings. Broad grammars and unsupported modes fall back. This does not establish a general serving gain or equal accuracy on a large benchmark.</div></article>
-<article class="card"><div class="tag">vLLM + Dynamo · Failure handling · Drafts</div><h3>Follow each operation to its terminal state.</h3><p>Some failures occur after the function that created the operation has returned. The later vLLM drafts cover a missed KV rejection notice, utility calls left pending after engine death and background Responses left queued after an error.</p><p>Dynamo also has a four-file metadata fix. List and retrieve used different projections for the same model. A normal Rust regression fails on the baseline and all five selected candidate tests pass.</p><div class="limit">The vLLM lifecycle suites use mocked engine or transport boundaries. Live connector, engine and public HTTP checks remain. The Dynamo metadata gate is distinct from an inference test.</div></article>
+<div class="section-head"><div><div class="eyebrow">Research beyond the public PR ledger</div><h2>What we found yesterday and last week.</h2><p>The recent work is dated 17–18 October. The earlier GPU and core campaigns are dated 10–15 October. All seven research sections below are visible when the page opens.</p></div></div>
+<div class="grid research-summary">
+<article class="card"><div class="tag">17–18 October · vLLM · Native ARM</div><h3>GPT-OSS gate/up layout selected the wrong values.</h3><div class="metric">35 / 1,024 mismatches</div><p>The original native result exceeded tolerance at 35 values. Alternating gate/up selection passes. The official ARM suite has 169 passes and a synthetic two-expert loader check passes.</p><div class="limit">Trained GPT-OSS and the reporter's checkpoint format remain untested.</div><a href="#result-recent-vllm">Read the recent vLLM results →</a></article>
+<article class="card"><div class="tag">17–18 October · vLLM · GPU component</div><h3>Segmented mean pooling avoids unnecessary work.</h3><div class="metric">2.88–6.93x faster</div><p>This is the cold-L2 L4 pooling component. Eighty-four correctness cases pass. Three trained MiniLM pooling checks agree. Warm BF16 component gains were larger.</p><div class="limit">This is not model throughput. Actual worker dispatch and owner coordination remain.</div><a href="#result-recent-vllm">Read pooling, cache and API findings →</a></article>
+<article class="card"><div class="tag">17–18 October · Dynamo · Normal Rust gate</div><h3>Model list and retrieve disagreed about context size.</h3><div class="metric">4,096 vs 2,048</div><p>Real native HTTP routes returned different metadata for the same model. A four-file fix shares the existing projection. The normal baseline fails and all five selected candidate tests pass.</p><div class="limit">This is a metadata correctness result. No inference or later-main build is claimed.</div><a href="#result-recent-dynamo">Read metadata and profiler findings →</a></article>
+<article class="card"><div class="tag">17–18 October · Dynamo · Native broker</div><h3>Different endpoint names can reach the wrong handler.</h3><div class="metric">6 / 8 wrong replies</div><p>Two valid namespace/component pairs produced the same NATS subject. All nine noncolliding controls were correct. The colliding cell had six wrong-handler replies among eight requests.</p><div class="limit">Prior review already identified the alias concern. Wire migration and owner policy remain open.</div><a href="#result-recent-dynamo">Read NATS, planner, SDK and GPU observations →</a></article>
+<article class="card"><div class="tag">15 October · vLLM · Native GPU metadata</div><h3>Table/slot fusion combines two launches.</h3><div class="metric">3.5–20.0% less time</div><p>Seven L4 shapes saved 1.14–4.59 µs per metadata call. Earlier H100 shapes saved 17.7–28.2%. CUDA, synthetic eager/FULL model and separate async smoke checks passed.</p><div class="limit">No full serving gain. The newer 17–18 October source successor has only source/mocked evidence.</div><a href="#result-gpu-core">Read fusion and the full core draft queue →</a></article>
+<article class="card"><div class="tag">15 October · vLLM · Native allocation</div><h3>FP8 scalar fallback needs one fewer temporary.</h3><div class="metric">4 MiB less scratch</div><p>All 12 paired observations saved 4,194,304 bytes for a 1,024 × 2,048 weight. Fifty-four CUDA records and synthetic plain/online Llama pairs passed.</p><div class="limit">Timing is mixed. The saving is per complete fallback apply. It must not be multiplied by layer count.</div><a href="#result-gpu-core">Read scratch reuse and warmup memory results →</a></article>
+<article class="card"><div class="tag">15 October · vLLM · Offline full model</div><h3>Project only the vocabulary rows a grammar permits.</h3><div class="metric">8.2–8.9% less time</div><p>This is complete offline request time for three narrow Qwen3-4B workloads on one L4. The final draft fixes observed precision and startup-memory failures. It is off by default.</p><div class="limit">BF16, TP1, MRV2 and recorded graph settings. No broad serving or general accuracy claim.</div><a href="#result-model-results">Read the model results and exact limits →</a></article>
+<article class="card"><div class="tag">14–15 October · vLLM · Negative result</div><h3>N-gram replay did not improve the larger model.</h3><div class="metric">No full-generation gain</div><p>The isolated proposer saved 68.9–71.0% of its time. Qwen3-4B full-generation medians were 0.01–0.02% slower, with 69,003 timed output tokens matched per arm. The draft stayed held.</p><div class="limit">This prevented a component improvement from becoming an unsupported model-speed claim.</div><a href="#result-model-results">Read the negative result and MLA studies →</a></article>
 </div>
-<div class="wide-note"><h3>A faster component can leave the whole request unchanged.</h3><p>N-gram graph replay reduced isolated proposer time by 68.9–71.0%. The later Qwen3-4B run matched 69,003 timed tokens per arm, but full-generation medians were 0.01–0.02% slower. The draft stayed on hold. Fusion saved metadata microseconds. FP8 scratch reuse saved a 4 MiB temporary in one tested fallback shape. Each claim keeps its actual boundary.</p></div>
+<div class="wide-note"><h3>More results are visible below.</h3><p>The dated sections include the wrong cross-dtype cache hit, cumulative Responses budget, three lifecycle patches, compact MoE warmup, PCP counting, MLA, Dynamo planner/session findings, LRU tradeoffs, and the TensorRT-LLM/SGLang work. They include failures, rejected leads and blocked checks.</p></div>
+<div class="research-tools">
+<div class="filters"><label>Period <select id="research-period" aria-label="Filter research by period"><option value="all">All periods · 7 sections</option><option value="recent">17–18 October · recent work</option><option value="lastweek">10–15 October · last week</option><option value="early">8 October · startup study</option></select></label><label>Project <select id="research-project" aria-label="Filter research by project"><option value="all">All projects</option><option value="vllm">vLLM</option><option value="dynamo">Dynamo</option><option value="other">TensorRT-LLM / SGLang</option></select></label></div>
+<p id="research-count" class="caption" role="status" aria-live="polite">7 of 7 research sections shown</p>
+</div>
+<p id="research-empty" class="research-empty" hidden>No research section matches these filters. Select all periods or all projects.</p>
+<article class="research-panel" id="result-recent-vllm" data-period="recent" data-project="vllm"><div class="research-panel-head"><div class="tag">17–18 October · vLLM</div><h3>Quantization, cache identity, pooling and failure handling</h3><p>Native ARM and GPU observations, API regressions and later lifecycle drafts. Each row retains its tested boundary and missing check.</p></div><div class="prose"><h4 id="research-recent-vllm-heading-1">Initial findings</h4>
+<table>
+<thead>
+<tr>
+<th>Candidate</th>
+<th>Actual evidence</th>
+<th>Remaining work</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ARM GPT-OSS W4A8 gate/up layout</td>
+<td>Original native result has 35/1,024 values outside tolerance. Alternating gate/up selection passes. Official ARM suite: 169 passes. Synthetic two-expert loader/native check passes.</td>
+<td>Trained GPT-OSS and reporter checkpoint format. Synthetic loading is not that reporter's compression recipe.</td>
+</tr>
+<tr>
+<td>Responses cumulative output budget</td>
+<td>Original real ASGI/Harmony JSON/SSE pair has six budget failures and two controls. Candidate passes eight HTTP cases and 18 normal cases.</td>
+<td>Engine, tokenizer and tools are scripted. Real model/tool evaluation and adjacent PR coordination remain.</td>
+</tr>
+<tr>
+<td>Offline embedding dtype in prefix-cache identity</td>
+<td>Equal bytes with FP16/BF16 meaning cause a wrong 32-token hit. Fix gives zero cross-dtype hit and preserves same-dtype reuse. Nine normal cases pass.</td>
+<td>Public worker/model path and live cache compatibility. A denied import follow-up is an environment failure.</td>
+</tr>
+<tr>
+<td>Direct segmented mean pooling</td>
+<td>84 correctness cases. L4 cold-L2 component: 2.88–6.93x faster; warm BF16: 4.18–33.51x. Three trained MiniLM pooling checks agree.</td>
+<td>Actual worker dispatch, model throughput and PR 60035 coordination. These are not model speedups.</td>
+</tr>
+<tr>
+<td>Refreshed MRV2 table/slot fusion</td>
+<td>Corrected current dirty-row clearing and draft-consumer seed; source review and 459 mocked cases.</td>
+<td>Native device/model/performance and PR 60767 coordination. Separate from the older native-tested draft.</td>
+</tr>
+</tbody>
+</table>
+<p>Sources, exact patch hashes and commands:
+<a href="https://github.com/spa5k/vllm/blob/feat/vllm-contribution-research-20261018/benchmarks/local_speed_audit/contribution-record-20261018/REPORT.md">initial contribution record</a> and <a href="https://github.com/spa5k/vllm/blob/feat/vllm-contribution-research-20261018/benchmarks/local_speed_audit/contribution-final-20261018/REPORT.md">final vLLM record</a>.</p>
+<h4 id="research-recent-vllm-heading-2">The later substantive lifecycle drafts</h4>
+<p><strong>KV rejection cleanup.</strong> A lazy engine iterator can reject after the earlier
+request-construction wrapper has ended. Remote prefill then misses its
+rejection notice. The four-production-file, three-test-file patch joins those
+lifetimes and sends the notice at most once before any engine output.</p>
+<p>The candidate passed 43 normal mocked-engine/RPC cases. Its host audit failed
+after cleanup because a saved helper compared eight Responses names with all
+43 collected names. Independent saved-data review confirmed the 43 passes.
+The original-code follow-up failed exactly three missing-notice assertions;
+its host and strict result checker passed the expected-failure contract.
+The baseline suite did not pass. Its separate independent actual-result audit
+was not completed before the user stop. A live connector/producer lease test
+remains. Permanent leakage is not proved. PR 59343 touches the shared helper.</p>
+<p>Source: <code>feat/stream-kv-admission-cleanup</code>, <code>c72c801883a1eb9355b9ea8863464a6b74c59482</code>.</p>
+<p><strong>Utility futures after engine death.</strong> Six original controlled requests stayed
+pending. Six candidate requests raised EngineDeadError and cleared the registry.
+The normal suite later passed all 23 cases with real futures, tasks and bounded
+caller threads. Engine transport was mocked. Host, guest and strict checker
+passed. Independent review passed 1,154 data/source checks and three negatives.
+Two original delivery tool objects were not saved; the completion receipt,
+host records and strict-checker object were retained. Keep that evidence limit.</p>
+<p>Source: <code>feat/utility-terminal-cleanup</code>, <code>6b80689e4263f918946729083bdd54781733e1ad</code>.</p>
+<p><strong>Background Responses terminal state.</strong> A stored non-streaming response could
+stay queued after an ordinary producer exception. The draft marks an active
+response failed while preserving terminal states and cancellation. Twenty-two
+controlled rows and 12 normal cases passed. Engine/render/tool inputs are
+mocked. Full public HTTP, real engine and model evaluation remain open.</p>
+<p>Source: <code>feat/background-response-terminal</code>, <code>ce0e01324cd451ed985fa8b39ce071e5b8ac3f07</code>.</p>
+<p>All three branches were signed and pushed to Kamran's fork. They are separate
+drafts, not one tested stack. The final detailed report is at <code>c154d7216b</code> on
+<code>feat/vllm-contribution-research-20261018</code>. No upstream publication occurred
+in this contribution-search phase. Source and evidence links are in
+<a href="https://github.com/spa5k/vllm/blob/feat/vllm-contribution-research-20261018/benchmarks/local_speed_audit/contribution-final-20261018/REPORT.md">the final vLLM record</a>.</p>
+</div></article>
+<article class="research-panel" id="result-recent-dynamo" data-period="recent" data-project="dynamo"><div class="research-panel-head"><div class="tag">17–18 October · Dynamo</div><h3>Metadata, profiler artifacts, planner labels and native routing</h3><p>The metadata fix passed its normal Rust gate. The profiler remains source-reviewed. Other native observations retain policy and owner limits.</p></div><div class="prose"><h4 id="research-recent-dynamo-heading-1">Native HTTP metadata inconsistency, then a normal tested fix</h4>
+<p>Two ready namespaces advertised the same model/alias with effective context
+limits 2,048 and 4,096. The real native frontend returned 4,096 from list and
+2,048 from retrieve in stable dual-namespace samples. Single-namespace controls
+agreed. No inference request was needed to establish the inconsistency.</p>
+<p>The four-file candidate shares the existing projection between OpenAI list,
+retrieve and Anthropic callers. It preserves the current list policy instead
+of inventing a new min/max winner. Later normal Rust gate 9530 reproduced the
+baseline assertion failure and passed five candidate tests: one HTTP regression,
+two resolver tests and two readiness tests. Independent review checked the result.</p>
+<p>Candidate: <code>50722afdfedc8b0e7027fce18b781437ef3ffa27</code>. This is the strongest
+new 17–18 October Dynamo implementation result. The original native runtime
+wheel did not itself contain the fix; the later Rust gate is distinct evidence.</p>
+<h4 id="research-recent-dynamo-heading-2">Profiler artifact provenance: deeper implementation, tests blocked</h4>
+<p>Candidate <code>8b991fad3a738d672656267a22ff407877839ff9</code> changes five production
+files and three existing test files. It carries only interpolation artifacts
+produced by the current invocation into final assembly. It preserves aggregate
+fallback, user files and the existing partial-artifact shape.</p>
+<p>Independent source review found no new actionable defect. Normal Python
+imports, collection, original failure and candidate product tests did not run.
+A qualified matching runtime/AIS/test dependency closure was unavailable.
+The implementation goal stayed incomplete. Repeated failed setup routes were
+closed rather than replaced with fake package initializers or copied helpers.</p>
+<p>Source for both: <a href="file:///Users/pacific/.codex/research/dynamo-2026-10-17/IMPLEMENTATION-PLAN.md" title="Local source record: /Users/pacific/.codex/research/dynamo-2026-10-17/IMPLEMENTATION-PLAN.md" class="local-evidence">Dynamo implementation plan</a> and
+<a href="#appendix-dynamo">Dynamo history</a>.</p>
+<h4 id="research-recent-dynamo-heading-3">Other native findings and their exact limits</h4>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Observed result</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Planner DP sample labels</td>
+<td>Native estimator: 21/24 DP8 baseline rows disagree with aggregate simulated batch count; candidate 24/24 agrees; DP1 control matches. Native SDK models retain data and return finite predictions.</td>
+<td>Qualified component with AST/package-shell limits. Prior approximation policy and normal installed project gate remain. Prediction changes do not prove better accuracy or autoscaling.</td>
+</tr>
+<tr>
+<td>Session append/removal</td>
+<td>Each version passed 32 selected native session tests and eight backend tests. Selected leaf-removal medians improved 35.5% and 27.6%; mixed/internal cases regressed 5.9% and 2.6%. Native Stored-event replay retained parity.</td>
+<td>Prior review already covers parts of the mechanism. Timing wrapper and native event consumer differ. Active tier stack and actual eligible frequency matter. No serving gain.</td>
+</tr>
+<tr>
+<td>NATS endpoint identity collision</td>
+<td>Valid same-DRT namespace/component pairs encode to the same subject. Noncolliding control: 9/9 correct. Joint collision: six wrong-handler replies among eight requests. Real broker exchanges match.</td>
+<td>Native correctness observation. Exact alias concern exists in prior review. No wire-format patch; compatibility/migration needs the runtime owner. Not a security or production-frequency claim.</td>
+</tr>
+<tr>
+<td>SDK top-level null</td>
+<td>Normal SDK unary call gets an annotated null frame but no unannotated item; exact no-response RuntimeError. Six non-null typed controls pass.</td>
+<td>Public null policy is unresolved. No shared schema patch is justified from this observation alone.</td>
+</tr>
+<tr>
+<td>Audio AAC</td>
+<td>Real SoundFile constructor on macOS accepts WAV/FLAC but rejects AAC before writing bytes.</td>
+<td>Dependency admission only. No Dynamo formatter, waveform, model, HTTP or Linux path ran. Backend-specific policy is needed.</td>
+</tr>
+<tr>
+<td>GMS V1</td>
+<td>Real L4 Qwen3-0.6B generation matches 32 output token IDs. Both workers expose the same blocks/capacity/descriptor bytes and graph launches.</td>
+<td>Qualification, not memory savings or a fair speed comparison. No distributed serving or integrity result.</td>
+</tr>
+<tr>
+<td>Routed video duration</td>
+<td>Real source omits seconds while forwarding the parser request. Draft and four cases prepared.</td>
+<td>Normal Omni imports and actual tests remain unrun. Parser frame counts are not final encoded duration.</td>
+</tr>
+<tr>
+<td>Non-UUID mocker request ID</td>
+<td>Source can generate independent fallback UUIDs across P/D calls.</td>
+<td>No supported baseline runtime observation or candidate result. Asset acquisition failed before tokenizer bytes.</td>
+</tr>
+</tbody>
+</table>
+<p>Sources: <a href="file:///Users/pacific/.codex/research/dynamo-2026-10-17/DETAILED-RESEARCH-REPORT.md" title="Local source record: /Users/pacific/.codex/research/dynamo-2026-10-17/DETAILED-RESEARCH-REPORT.md" class="local-evidence">permanent Dynamo evidence record</a> and
+<a href="#appendix-dynamo">Dynamo history</a>. Source-only planner startup-name,
+replay-budget and active-PR reviews remain in the linked history. They are not
+counted as independent validated fixes.</p>
+</div></article>
+<article class="research-panel" id="result-gpu-core" data-period="lastweek" data-project="vllm"><div class="research-panel-head"><div class="tag">10–15 October · vLLM</div><h3>GPU preparation, memory and core-engine drafts</h3><p>Fusion, FP8 scratch reuse, compact warmup routes, PCP counting and cache writes. Component savings stay separate from model performance.</p></div><div class="prose"><p>These are independent candidates. Earlier native evidence does not transfer
+automatically to a later port or different source base.</p>
+<table>
+<thead>
+<tr>
+<th>Candidate</th>
+<th>Strongest result retained</th>
+<th>Limit or decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MLA live-cache restoration</td>
+<td>Base lost a strided cache write; the patch restores real selected cache storage. A later native model check confirmed the target write.</td>
+<td>Keep cache restoration distinct from the save-gather performance prototype. Broader transfer/attention checks remain.</td>
+</tr>
+<tr>
+<td>PCP dispatch counting</td>
+<td>Replaces per-rank request scans with O(P+N) counting. 208 normal CPU cases; two H100 ranks matched 272 generated tokens and 816 logprobs.</td>
+<td>Synthetic eager model. Large CPU stress gains are not model-throughput gains. Small controls include overhead. PR 60538 changes short-prefill ownership and invalidates the saved count on that policy. The private correction has source checks only.</td>
+</tr>
+<tr>
+<td>Compact DeepGEMM warmup routes</td>
+<td>Retained route allocation: 77.623 → 0.683 MiB. All 320 route plans match. Real synthetic MoE startup/serving checks matched tokens, weights and RNG.</td>
+<td>The small warm helper was about 5.2% slower. No total startup-peak or startup-speed claim.</td>
+</tr>
+<tr>
+<td>DeepGEMM route metadata</td>
+<td>67 native H100 cases; large-route model path reached R131072. Three PSUM calls use one block each instead of 32.</td>
+<td>Earlier component time: 50.120 → 28.614 µs. Synthetic model; useful serving gain unmeasured.</td>
+</tr>
+<tr>
+<td>PP integer row gathering</td>
+<td>CPU coverage and four real CUDA row/event cases.</td>
+<td>Two-rank speculative model gate remains open.</td>
+</tr>
+<tr>
+<td>Async KV reservations</td>
+<td>Selected scheduler tests and supported fallback contracts.</td>
+<td>Real offload/DMA, failure, resume and serving validation remain.</td>
+</tr>
+<tr>
+<td>EPLB inverse maps</td>
+<td>Source/CPU/native component work.</td>
+<td>Candidate distributed rebalance and useful model latency remain.</td>
+</tr>
+<tr>
+<td>Input preparation fusion</td>
+<td>Native int64 token-state coverage.</td>
+<td>Earlier 18–28.6% timing belongs to an int32 prototype. UVA/model/lifetime gates remain.</td>
+</tr>
+<tr>
+<td>XQA draft graph</td>
+<td>Earlier native graph/output evidence; current port has 34 AR worker and five capability CPU cases.</td>
+<td>The current port lacks device/model validation. Old-head results are not a current-port pass.</td>
+</tr>
+<tr>
+<td>Sampler staged writes</td>
+<td>CPU source timing and selected state tests.</td>
+<td>Native pinned-buffer lifetime and full model gates remain.</td>
+</tr>
+<tr>
+<td>Masked MoE clear removal / EP activation</td>
+<td>Targeted evidence and old native probes.</td>
+<td>Held for mixed gains, ABI/port and distributed/model limits.</td>
+</tr>
+</tbody>
+</table>
+<p>Source: <a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md" class="local-evidence">14 October core record</a> and
+<a href="#appendix-vllm">early vLLM history</a>.</p>
+<h4 id="research-gpu-core-heading-1">Table/slot fusion: useful metadata improvement</h4>
+<p>The final tested October 15 draft combines two metadata launches into one.
+Seven L4 shapes used <strong>3.5–20.0% less GPU metadata time</strong>, saving 1.14–4.59 µs
+per call. Earlier H100 shapes used 17.7–28.2% less time. Full table contents
+and the full allocated slot tail were checked. Fourteen committed CUDA cells,
+synthetic eager/FULL model pairs and a separate async-output smoke passed.</p>
+<p>The FULL diagnostic copied metadata to CPU and serialized steps. The separate
+async smoke did not prove active device readers at slot reuse. Normal UniProc
+FIFO ownership has source and protocol-model support. Startup and distributed
+late readers retain separate contracts. There is no full serving speed claim.</p>
+<p>Tested draft: <code>feat/gather-slot-fusion</code>, <code>a40a6eb6a02bd7995452df7ac4f41cb787c7180c</code>.
+The 17–18 October refreshed fusion draft is a <strong>different source successor</strong>.
+It restores current dirty-row and draft-consumer behavior. That successor has
+source/mocked evidence only. It does not inherit the October 15 GPU pass.</p>
+<h4 id="research-gpu-core-heading-2">Scalar FP8 scratch: memory improvement</h4>
+<p>The eager scalar fallback keeps one BF16 weight scratch buffer instead of two.
+All 12 paired allocation observations saved 4,194,304 bytes for a 1,024 × 2,048
+weight. Fifty-four CUDA records and synthetic plain/online Llama pairs passed.
+Timing was mixed, including a slower cell. The saving is per complete apply;
+it cannot be added across layers or treated as total model peak reduction.</p>
+<p>Final test-only head: <code>1804ee56d9395f80659209ac3d93ad73020796d8</code>.
+Production bytes match native-tested <code>216fcf143b84e526c8722e67cbb7b8bb31187a7a</code>.
+Automatic L4/H100 routes usually bypass this fallback. The SM100 route has
+source reachability evidence, not final native Blackwell validation.</p>
+<p>Source for both: <a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-budget-validation-5h-20261015/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-budget-validation-5h-20261015/REPORT.md" class="local-evidence">final five-hour validation</a>.</p>
+</div></article>
+<article class="research-panel" id="result-model-results" data-period="lastweek" data-project="vllm"><div class="research-panel-head"><div class="tag">14–15 October · vLLM</div><h3>Full-model results, including the experiments that did not help</h3><p>Grammar projection improved selected offline requests. MLA table reuse removed allocation. N-gram replay did not improve the larger model.</p></div><div class="prose"><h4 id="research-model-results-heading-1">Grammar-selected output head</h4>
+<p>The experimental head projects the union of grammar-allowed vocabulary rows,
+then retains the normal mask, processors and sampler. It has no persistent
+selected-weight cache. Wide or unsupported batches use the dense path. The
+final patch profiles its maximum workspace before KV sizing and uses dense
+fallback with explicit manual KV budgets.</p>
+<p>On Qwen3-4B, one L4, BF16, MRV2, TP1 and the recorded graph settings, three
+tested narrow workloads used <strong>8.2–8.9% less complete offline request time</strong>.
+The unconstrained control had no clear change. Eighty-two final native tests
+and 16 full-model comparisons passed. The frozen 32-question JSON check had
+32 valid objects and 10 correct answers on both paths. This is not a full
+GSM8K result or universal numerical identity.</p>
+<p>An early BF16 projection changed two token sequences. The final FP32 selected
+projection fixed the observed failure. Startup memory was also repaired and
+retested. Those corrections are part of the final draft, not optional future
+work. TP, quantized heads, LoRA, speculation and broad serving are outside its
+support. This is the strongest measured model-speed draft in the records.</p>
+<h4 id="research-model-results-heading-2">MLA request-table reuse</h4>
+<p>The Triton MLA draft stops copying a request block-table row for each draft
+query. Query rows index the original request table. It removes an O(BQW)
+temporary and copy; it does not remove attention arithmetic.</p>
+<p>Full DeepSeek-V2-Lite-Chat used all 27 attention layers and accepted 3,650 draft
+tokens. Five full-model token/logprob comparisons matched. Metadata, native
+attention and changed-page graph checks passed. Full-model timing was noisy
+and mixed. <strong>No stable full-model speedup is established.</strong> It remains an
+allocation-reduction draft.</p>
+<p>Source for both: <a href="file:///Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/REPORT.md" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/REPORT.md" class="local-evidence">final grammar and MLA review</a>. Earlier overnight
+results are superseded where the later review repaired precision, memory or
+test coverage.</p>
+<h4 id="research-model-results-heading-3">N-gram replay: a useful negative result</h4>
+<p>Managed replay reduced launch-bound proposer time by 68.9–71.0%. Native tests,
+queued checks, sleep/wake and graph checks passed. OPT-125m improved by only
+0.8–1.4%. The later Qwen3-4B check ran four workloads with 11 pairs each and
+matched 69,003 timed output tokens per arm. Full generation medians were
+0.01–0.02% slower. The draft is held. A large isolated host/launch gain did not
+justify a broad model-speed claim.</p>
+<p>Source: <a href="file:///Users/pacific/Developer/dynamo-audit/20261014/core-gpu-followup/REPORT.md" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261014/core-gpu-followup/REPORT.md" class="local-evidence">GPU follow-up and later correction</a>.</p>
+<h4 id="research-model-results-heading-4">Other vLLM GPU results</h4>
+<table>
+<thead>
+<tr>
+<th>Candidate</th>
+<th>Saved result</th>
+<th>Remaining limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct context-free MLA output</td>
+<td>Earlier BF16 source used 2.05–2.36% less complete one-output-token model time on four DeepSeek workloads. Eight FA3 cases and seven model comparisons matched.</td>
+<td>Final FP8 dtype guard has CPU evidence only. The final guarded source needs a native rerun.</td>
+</tr>
+<tr>
+<td>Packed XQA ragged masks</td>
+<td>About 256 → 48 µs for mask plus native attention in the scoped H100 case; 16 native consumer cases.</td>
+<td>Resident-offset component boundary. Model attempt stopped at offline lookup.</td>
+</tr>
+<tr>
+<td>Zero-expert routing</td>
+<td>Complete L4 router call used about 20.46–21.21% less time; 432 native and 1,944 CPU cases matched.</td>
+<td>Zero-expert model feature only. No full model or graph result.</td>
+</tr>
+<tr>
+<td>Mamba2 causal CB tile skip</td>
+<td>36 producer and 108 consumer interpreter cases; 144 CUDA targets compile.</td>
+<td>No native timing. All CTAs still launch; some small chunks skip no tiles.</td>
+</tr>
+<tr>
+<td>Torch MXFP8 capability guard</td>
+<td>Forced SM90 path fails its native recipe with CUBLAS_STATUS_NOT_SUPPORTED. Ten capability and 40 modeled selection cases pass after an SM100 guard.</td>
+<td>Narrow forced-backend compatibility fix. Installed selection/native supported-device tests remain.</td>
+</tr>
+</tbody>
+</table>
+<p>Source: <a href="file:///Users/pacific/Developer/dynamo-audit/20261015/deep-core-five-hour/REPORT.md" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/deep-core-five-hour/REPORT.md" class="local-evidence">15 October cross-project report</a>.</p>
+</div></article>
+<article class="research-panel" id="result-dynamo-core" data-period="lastweek" data-project="dynamo"><div class="research-panel-head"><div class="tag">10–14 October · Dynamo</div><h3>Router state, queue statistics, prefix lookup and physical-copy LRU</h3><p>Native CPU gains came with storage costs and workload regressions. These separate candidates have no established serving-speed gain.</p></div><div class="prose"><h4 id="research-dynamo-core-heading-1">Earlier core work and tradeoffs</h4>
+<table>
+<thead>
+<tr>
+<th>Candidate</th>
+<th>Saved result</th>
+<th>Decision or missing gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output-weight tracking</td>
+<td>1,055 native router tests, two ignored. At 4,096 hinted outputs, complete component CPU time fell 38.7%; requested heap peak fell from 241,776 to 143,472 bytes.</td>
+<td>Adds 16 header bytes. Reweighting and hinted-growth complexity remain. No serving result.</td>
+</tr>
+<tr>
+<td>Scheduler queue statistics</td>
+<td>Welford values preserve current statistics. FCFS Q4096 component time fell 41.5%; priority case fell 11.8%.</td>
+<td>Normal native existing-file follow-up had 287 passes and one port-race failure, then one passing retry. It was not one clean full-suite pass. Global conftest was bypassed.</td>
+</tr>
+<tr>
+<td>Long-prefix lookup</td>
+<td>Native router and exact parity checks. 4,096 blocks/32 workers: 2.704 → 1.233 µs.</td>
+<td>O(L) remains. Reconvergent inputs were 20–30% slower. Mixed production value is unknown.</td>
+</tr>
+<tr>
+<td>Deadline index</td>
+<td>Sparse expiry and staggered drain became much cheaper in the tested native component.</td>
+<td>Rejected as a general contribution. Roughly three times the queue storage; bulk cancellation 57–70% slower; simultaneous expiry also slower.</td>
+</tr>
+<tr>
+<td>Pinned image embedding cache</td>
+<td>31 native connector and four configuration tests. Eight 8 MiB saves: 14.468 → 5.482 ms, including allocation/save work.</td>
+<td>Classic multimodal vLLM cache only. Real image miss/hit serving, supported versions and allocator-wide pinned memory remain open.</td>
+</tr>
+<tr>
+<td>Skip unused image sizing</td>
+<td>200 source-parity cases. An unused 32K-token hint fell from about 215–220 to 1.49–1.60 µs.</td>
+<td>SDK/media doubles. Native TRT integration and actual vision requests remain unrun.</td>
+</tr>
+</tbody>
+</table>
+<p>These are separate local candidates. None is a new full-model performance
+result. Source identities and final tradeoffs are in
+<a href="#appendix-dynamo">the Dynamo history</a> and <a href="file:///Users/pacific/Developer/dynamo-audit/20261010/pr-worthiness/REPORT.txt" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261010/pr-worthiness/REPORT.txt" class="local-evidence">the worthiness review</a>.</p>
+<h4 id="research-dynamo-core-heading-2">Approximate-LRU physical copy index</h4>
+<p>Duplicate output hashes can have many physical copies. A position index removes
+the repeated vector search and repairs the index after swap_remove. The native
+router suite passed 1,081 tests with three existing ignored cases. All 65,536
+saved state/event snapshots matched. At 4,096 duplicate copies, eviction
+pressure used 90.1% less time; the full measured sequence used 61.0% less.</p>
+<p>The tradeoff is eight extra bytes per copy on the tested host. A small case
+was 6.3% slower; large distinct-hash cases were 1.4–1.9% slower. Real duplicate
+frequency is unknown. The feature is opt-in approximate LRU with events off.
+The local one-file draft is not a proved serving improvement.</p>
+<p>Source: <a href="file:///Users/pacific/Developer/dynamo-audit/20261014/next-core/REPORT.md" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261014/next-core/REPORT.md" class="local-evidence">LRU follow-up</a>.</p>
+</div></article>
+<article class="research-panel" id="result-other-engines" data-period="lastweek" data-project="other"><div class="research-panel-head"><div class="tag">14–15 October · Other engines</div><h3>TensorRT-LLM and SGLang findings from the same research chats</h3><p>These retain their actual project labels. Many are CPU, interpreter or compile checks with native-device validation still missing.</p></div><div class="prose"><p>These experiments occurred in the chat named <code>dynamo</code>. They are not Dynamo
+product fixes. Their repository labels must remain attached to each claim.</p>
+<table>
+<thead>
+<tr>
+<th>Project and lead</th>
+<th>Evidence</th>
+<th>Decision or missing gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TensorRT-LLM Marlin routing-sort reuse</td>
+<td>Two sorts become one; 480 exact CPU handoff cases.</td>
+<td>Native FP4 output, graph routing and complete-layer timing remain.</td>
+</tr>
+<tr>
+<td>TensorRT-LLM DeepGEMM scratch ownership</td>
+<td>Concurrent chunks alias three writable buffers. Separate slots pass 32 allocator and 12 scheduler-arm checks.</td>
+<td>Native two-stream corruption is not proved. Graph ownership and actual peak memory remain.</td>
+</tr>
+<tr>
+<td>TensorRT-LLM SM120 expert IDs</td>
+<td>108 original counterexamples in 252 CPU cases; global-ID normalization passes.</td>
+<td>Supported multi-GPU dispatch/GEMM/model test remains.</td>
+</tr>
+<tr>
+<td>TensorRT-LLM forced dynamic FP8 SwiGLU</td>
+<td>Eight policy failures among 48 CPU cases; 40 controls.</td>
+<td>Native model gate and wider fusion-policy audit remain.</td>
+</tr>
+<tr>
+<td>TensorRT-LLM dynamic NVFP4 zero scale</td>
+<td>Infinite scale in 12 CPU examples.</td>
+<td>Blackwell quantizer/GEMM propagation remains untested.</td>
+</tr>
+<tr>
+<td>TensorRT-LLM GDN/Mamba copy removal</td>
+<td>Exact CPU stride/alignment handoffs.</td>
+<td>Native state update, reduction order, graph and model checks remain.</td>
+</tr>
+<tr>
+<td>TensorRT-LLM active-expert conversion</td>
+<td>1,344 CPU cases, 504 avoid extra conversion.</td>
+<td>Tiny cases can lose. Native full-call value remains unmeasured.</td>
+</tr>
+<tr>
+<td>SGLang SWA predicate</td>
+<td>1,230 CPU plus 1,230 CUDA helper cases; eight native consumers. Tested helper time falls 12–28%.</td>
+<td>Three initial host readbacks remain. No full SGLang serving result.</td>
+</tr>
+<tr>
+<td>SGLang block-16 FP4 pool</td>
+<td>Full allocated-pool conversion has high calculated traffic. Inline reader/compact prototypes have codec, interpreter and compiler checks.</td>
+<td>Shared-prefix compact cases regress up to 3.25x MPS/3.62x CPU. Inline reader has more spills. No general fix or native speed win.</td>
+</tr>
+<tr>
+<td>SGLang local decode buffers</td>
+<td>144 metadata cases and 12 adapted tests. Example storage 128 → 8 MiB.</td>
+<td>Native capture/output remains.</td>
+</tr>
+<tr>
+<td>SGLang AITER scales and fresh K/V ordering</td>
+<td>CPU counterexamples for Q descale and in-place producer ordering.</td>
+<td>ROCm, physical layout, stream, graph and model tests remain. These are distinct defects.</td>
+</tr>
+<tr>
+<td>SGLang AITER left window</td>
+<td>24 original boundary differences; 60 corrected CPU cases.</td>
+<td>Native ROCm window test and owner coordination remain.</td>
+</tr>
+<tr>
+<td>SGLang compiled one-token MoE</td>
+<td>Conservative guard has eligibility and CPU compiled-output evidence.</td>
+<td>Optimized fallback is a CPU double. Native compile/EP/layout/model gate remains.</td>
+</tr>
+<tr>
+<td>SGLang Lean setup/lookup, KDA backup and FA3 Q view</td>
+<td>CPU/interpreter/offline-compile or pointer evidence.</td>
+<td>Native complete-call crossover, recovery or attention output remains.</td>
+</tr>
+</tbody>
+</table>
+<p>Twenty-two private patches were checked separately against their pinned source.
+That is not one combined stack. All six vLLM patches in that campaign passed
+pinned changed-file Ruff checks. It was not a full repository type/build pass.
+Source: <a href="file:///Users/pacific/Developer/dynamo-audit/20261015/deep-core-five-hour/REPORT.md" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/deep-core-five-hour/REPORT.md" class="local-evidence">cross-project report</a> and its linked primary-source appendix.</p>
+</div></article>
+<article class="research-panel" id="result-startup" data-period="early" data-project="vllm"><div class="research-panel-head"><div class="tag">8 October · vLLM</div><h3>Startup, compiler attribution, checkpoint loading and cold/warm effects</h3><p>The baseline study corrected several promising assumptions. Cold/warm differences and partial compiler timings are not patch speedups.</p></div><div class="prose"><h4 id="research-startup-heading-1">Real startup and FP8 baseline measurements</h4>
+<p>Qwen3.8-27B on two H100s took 252.18 seconds to become ready in one cold process
+and 104.82 seconds in a later process in the same container. Compiler files and
+model-file cache state both changed. The 58.4% difference is a cold/warm
+observation, not a patch result. Steady decode matrix work accounted for about
+83–84% of summed GPU kernel time in the tested 8,192-token case. This did not
+prove a memory-bandwidth bottleneck.</p>
+<p>FP8 was not uniformly faster. Single-request output rates improved by about
+30.5–33.2% in the first allocation. The eight-request, 2,048-token case lost
+12.7%, 14.3% and 12.5% across three allocations. Exact-workload traces linked
+the loss to large mixed-prefill row counts taking the SM90 swap-AB route when
+the row count was not divisible by four. Steady decode could be faster while
+the complete request was slower. The small math checks had equal aggregate
+scores but different outputs; they do not establish equal model quality.
+Existing PR <a href="https://github.com/vllm-project/vllm/pull/60464">#60464</a> already
+addresses the measured dispatch rule. This audit reproduced the stock failure.
+It did not rebuild or validate that PR's fix.</p>
+<p>Source: <a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/two-gpu-profile-20261008/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/two-gpu-profile-20261008/REPORT.md" class="local-evidence">two-GPU profile</a>.</p>
+<h4 id="research-startup-heading-2">Compiler work: useful attribution and rejected shortcuts</h4>
+<p>A later cold trace found 130 compile-adaptor attempts per rank, but only 40
+reached native inner compilation. Ninety already took the reuse path. It did
+not prove 130 repeated full compilations. A 21–22 second region inside the
+PyTorch compiler frontend remained unattributed. It was a useful next target,
+not a completed optimization. Inclusive call durations and concurrent rank
+times must not be added.</p>
+<p>Shared AOT artifact serialization was implemented and tested on two model
+families. Exact object memoization plus a content pool reduced native serialize
+calls from 29 to three and 27 to three. Artifact collection saved 49.54–56.06 ms.
+Fresh AOT cache loads matched all 64 generated tokens and returned logprobs.
+The collector still hashes all entries. Its whole complexity did not become
+constant per distinct object. The patch stays local at <code>6360d59e</code>; it is held
+because a roughly 50 ms phase saving did not establish a useful startup gain.</p>
+<p>Host-local checkpoint prefetch was rejected for submission. A two-host cache
+simulation improved page coverage from 50% to 100%, but did not show a speed
+gain. The loading ranks for an auxiliary model can differ from host membership.
+A new loader collective could wait for ranks that never enter that load.
+Existing pre-sharded loading and lazy views also disproved some simple copy
+assumptions.</p>
+<p>The later compiler frontend trace attributed about 9.2 seconds to functional
+graph capture/cleanup and 5.6 seconds to mutation/view metadata. It still did
+not establish a safe removal. The earlier unattributed interval is a historical
+measurement, not the final limit of the investigation.</p>
+<p>Sources: <a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/compiler-heavy-audit-20261008/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/compiler-heavy-audit-20261008/REPORT.md" class="local-evidence">compiler audit</a>, <a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/compiler-heavy-audit-20261008/frontend/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/compiler-heavy-audit-20261008/frontend/REPORT.md" class="local-evidence">later frontend attribution</a>,
+<a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/generic-startup-audit-20261008/final-validation/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/generic-startup-audit-20261008/final-validation/REPORT.md" class="local-evidence">startup decision</a>.</p>
+<h4 id="research-startup-heading-3">Graph-memory accounting correction</h4>
+<p>The warm graph estimate of 708 MiB and final capture delta of 74 MiB initially
+looked like a large avoidable gap. Explicit boundaries found 624 MiB retained
+after the temporary probe. Most of the apparent gap was not free memory that
+could safely become KV cache. Existing upstream work covered the confirmed
+accounting defects. No new broad graph-probe removal patch was justified.</p>
+<p>Source: <a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/generic-startup-audit-20261008/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/generic-startup-audit-20261008/REPORT.md" class="local-evidence">generic startup audit</a>.</p>
+</div></article>
 </section>
 <section id="evidence" class="evidence">
 <div class="section-head"><div><div class="eyebrow">Read the evidence correctly</div><h2>What each test can establish.</h2><p>These categories describe different boundaries. More test cases do not turn a source check into a model result.</p></div></div>
@@ -63,7 +597,7 @@
 </div>
 </section>
 <section id="contributions">
-<div class="section-head"><div><div class="eyebrow">Public contribution ledger</div><h2>What reached upstream.</h2><p>These are the 15 code PRs reviewed for this report. Select a project or state. Open a PR for its current discussion.</p></div></div>
+<div class="section-head"><div><div class="eyebrow">Public contribution ledger</div><h2>What reached upstream.</h2><p>The reviewed code set has four merged, eight open and three closed unmerged PRs. This is the 18 October 2026 snapshot at about 23:02–23:03 India time. Select a project or state. Open a PR for its current discussion.</p></div></div>
 <div class="filters"><input id="pr-search" type="search" placeholder="Search title, number or commit…" aria-label="Search public PRs"><select id="project-filter" aria-label="Filter PRs by project"><option value="all">All projects · 15</option><option value="vLLM">vLLM · 6</option><option value="Dynamo">Dynamo · 9</option></select><select id="state-filter" aria-label="Filter PRs by state"><option value="all">All states</option><option value="merged">Merged</option><option value="open">Open</option><option value="closed">Closed without merge</option></select></div>
 <p id="pr-count" class="caption" role="status" aria-live="polite">15 of 15 code PRs shown</p>
 <div class="table-wrap"><table id="pr-table"><thead><tr><th scope="col">Project</th><th scope="col">Contribution</th><th scope="col">State at snapshot</th><th scope="col">Head</th></tr></thead><tbody><tr data-project="vLLM" data-state="open"><td>vLLM</td><td><a href="https://github.com/vllm-project/vllm/pull/60143">#60143 · [Bugfix] Invalidate startup plans on GPU budget changes</a></td><td><span class="badge open">Open</span></td><td><code>e36c80ffdcb1</code></td></tr>
@@ -128,11 +662,6 @@ research schedules were read as <strong>PAUSED</strong> on 18 October. No goal, 
 model run, paid job, public post or source-code change was started to make this
 report. Two agents read old records for this consolidation.</p>
 <h3 id="main-heading-2">1. Main results</h3>
-<p>The strongest delivered outcome is <strong>four merged upstream PRs</strong> in the reviewed
-set: one in vLLM and three in Dynamo. Another <strong>eight PRs remain open</strong>. Three
-reviewed PRs are closed without a merge. These states were checked directly
-through GitHub on 18 October at about 23:02–23:03 India time. The exact heads,
-check results and timestamps are saved in <a href="public-pr-state.json">public-pr-state.json</a>.</p>
 <p>The strongest new model performance result is the experimental vLLM grammar
 output head: <strong>8.2–8.9% less complete offline request time</strong> on three tested
 narrow-grammar Qwen3-4B workloads. It is off by default and has strict support
@@ -140,6 +669,19 @@ limits. The result is not a general serving speedup. Other useful work includes
 startup-memory safety, bounded checkpoint retention, TCP admission ownership,
 KV rejection cleanup, native ARM quantization correctness and planner metadata
 consistency. Their evidence levels differ.</p>
+<p>The 10–15 October experiments also produced native table/slot fusion gains,
+4 MiB less FP8 fallback scratch in a tested shape, compact MoE warmup routes,
+PCP counting and MLA allocation/correctness results. The 17–18 October search
+added ARM quantization, cache-dtype, Responses budget and pooling findings;
+three vLLM lifecycle drafts; and Dynamo metadata, planner, session, broker and
+SDK observations. Sections 4–9 record these results, not only the public PRs.
+The <a href="report.html#findings">HTML edition</a> displays the dated research sections
+before the public contribution ledger. The sections are open by default.</p>
+<p>The delivered public outcome is <strong>four merged upstream PRs</strong> in the reviewed
+set: one in vLLM and three in Dynamo. Another <strong>eight PRs remain open</strong>. Three
+reviewed PRs are closed without a merge. These states were checked directly
+through GitHub on 18 October at about 23:02–23:03 India time. The exact heads,
+check results and timestamps are saved in <a href="public-pr-state.json">public-pr-state.json</a>.</p>
 <p>Several large component improvements did not become useful model improvements.
 The clearest example is n-gram graph replay: strong isolated proposer gains,
 but no gain on the later Qwen3-4B full-generation test. That PR remains held.
@@ -845,8 +1387,8 @@ closed rather than replaced with fake package initializers or copied helpers.</p
 </tr>
 <tr>
 <td>Session append/removal</td>
-<td>Native session/event machinery and component parity. Leaf-removal timings improve in selected shapes; mixed/internal cases regress slightly.</td>
-<td>Prior review already covers parts of the mechanism. Active tier stack and actual eligible frequency matter. No serving gain.</td>
+<td>Each version passed 32 selected native session tests and eight backend tests. Selected leaf-removal medians improved 35.5% and 27.6%; mixed/internal cases regressed 5.9% and 2.6%. Native Stored-event replay retained parity.</td>
+<td>Prior review already covers parts of the mechanism. Timing wrapper and native event consumer differ. Active tier stack and actual eligible frequency matter. No serving gain.</td>
 </tr>
 <tr>
 <td>NATS endpoint identity collision</td>
@@ -1666,7 +2208,7 @@ are separate. Both research schedules remain paused.</p>
 </div></details>
 <div class="source-links"><a class="button" href="public-pr-state.json">PR snapshot</a><a class="button" href="source-index.json">Source hashes</a><a class="button" href="report-validation.json">Report checks</a><a class="button" href="automation-state.json">Paused schedules</a></div>
 </section>
-<footer class="footer"><p>Prepared with AI assistance for Kamran. Source period: 6–18 October 2026. This HTML edition presents saved evidence. It adds no new model or performance result.</p><p>Markdown SHA-256: <code>5b9aa664980a010bd93e04b9e7cd37886262c827dd588b31a0e3ad2828d9b6bf</code></p><p>Self-contained HTML. No external fonts, analytics, CDN scripts or network requests. Both research schedules remain paused.</p></footer>
+<footer class="footer"><p>Prepared with AI assistance for Kamran. Source period: 6–18 October 2026. This HTML edition presents saved evidence. It adds no new model or performance result.</p><p>Markdown SHA-256: <code>c186e9b88ad2044f104683460226781d4f79c5cfaded71afb55b7d782a02b08c</code></p><p>Self-contained HTML. No external fonts, analytics, CDN scripts or network requests. Both research schedules remain paused.</p></footer>
 </main></div>
 <script>
 (() => {
@@ -1690,11 +2232,34 @@ are separate. Both research schedules remain paused.</p>
   search.addEventListener('input', filter);
   project.addEventListener('change', filter);
   state.addEventListener('change', filter);
+  const researchPeriod = document.getElementById('research-period');
+  const researchProject = document.getElementById('research-project');
+  const panels = [...document.querySelectorAll('.research-panel')];
+  const filterResearch = () => {
+    let shown = 0;
+    panels.forEach(panel => {
+      const visible = (researchPeriod.value === 'all' || researchPeriod.value === panel.dataset.period)
+        && (researchProject.value === 'all' || researchProject.value === panel.dataset.project);
+      panel.hidden = !visible;
+      shown += Number(visible);
+    });
+    document.getElementById('research-count').textContent = `${shown} of ${panels.length} research sections shown`;
+    document.getElementById('research-empty').hidden = shown !== 0;
+  };
+  researchPeriod.addEventListener('change', filterResearch);
+  researchProject.addEventListener('change', filterResearch);
   const openHash = () => {
     const target = document.getElementById(location.hash.slice(1));
     if (!target) return;
+    const panel = target.closest('.research-panel');
+    if (panel && panel.hidden) {
+      researchPeriod.value = 'all';
+      researchProject.value = 'all';
+      filterResearch();
+    }
     const record = target.closest('details');
     if (record) record.open = true;
+    if (record || panel) requestAnimationFrame(() => target.scrollIntoView({block:'start'}));
   };
   window.addEventListener('hashchange', openHash);
   openHash();

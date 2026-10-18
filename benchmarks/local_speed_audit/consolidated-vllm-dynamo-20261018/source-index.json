@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_utc": "2026-10-18T18:00:54.968863+00:00",
+  "created_utc": "2026-10-18T18:12:17.235347+00:00",
   "period_india": "6–18 October 2026",
   "scope": "Checksums for the historical records and local consolidation. These checks verify file identity, not the underlying experiment. No models, build targets, credentials, environment trees or binaries were copied.",
   "source_file_count": 64,
@@ -460,24 +460,24 @@
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/README.md",
       "packet_relative_path": "README.md",
       "role": "consolidated_report_artifact",
-      "bytes": 1617,
-      "sha256": "628c58ab92eedc65f1d092c3be36da31c5144d328e07ae9256404ab77a9e8a90",
-      "line_count": 33
+      "bytes": 1804,
+      "sha256": "076896a878c8b93414de0681c31ef331245bb39d78c3bcf9bb8a7c84196592d5",
+      "line_count": 36
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/REPORT.md",
       "packet_relative_path": "REPORT.md",
       "role": "consolidated_report_artifact",
-      "bytes": 48475,
-      "sha256": "5b9aa664980a010bd93e04b9e7cd37886262c827dd588b31a0e3ad2828d9b6bf",
-      "line_count": 666
+      "bytes": 49227,
+      "sha256": "c186e9b88ad2044f104683460226781d4f79c5cfaded71afb55b7d782a02b08c",
+      "line_count": 675
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/automation-state.json",
       "packet_relative_path": "automation-state.json",
       "role": "consolidated_report_artifact",
       "bytes": 981,
-      "sha256": "bedc5642574a2930330af988ab6c9617078e8fee95c4ef6f7f00ae4265960adc",
+      "sha256": "830c70756a907a906fc53c35f33a9ad51060a8d68f308a22fe84c52d7cc75283",
       "line_count": 22
     },
     {
@@ -508,25 +508,25 @@
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/render_report.py",
       "packet_relative_path": "render_report.py",
       "role": "consolidated_report_artifact",
-      "bytes": 4023,
-      "sha256": "deba0daa6f5e934890790ca02f47a200b2271094860d00fa9ce716fb9da461bc",
-      "line_count": 98
+      "bytes": 8389,
+      "sha256": "aaa88f074c3c3e8b41b1939b274c3e0db1ed0acc514e48fed13c71586102fd15",
+      "line_count": 204
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/report.html",
       "packet_relative_path": "report.html",
       "role": "consolidated_report_artifact",
-      "bytes": 185135,
-      "sha256": "eb78994c362c55179e6db4d5be26ce1a0d22bf035740705a7851511f07de2e49",
-      "line_count": 1712
+      "bytes": 227139,
+      "sha256": "5a2c51b2cc4c8d72e010e3a89afd494b42d50904436d660c6a8ec7ae3bbd804d",
+      "line_count": 2277
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/report_template.html",
       "packet_relative_path": "report_template.html",
       "role": "consolidated_report_artifact",
-      "bytes": 26063,
-      "sha256": "3baab0a5b8757e4f4eb9900cbc16cf60f93485a7ebaae64fe5bf8723ef46af19",
-      "line_count": 154
+      "bytes": 30922,
+      "sha256": "3ccad9b883ec7db54b978d6a0445c11a8d4e317c7e834200f88c7ff5e8c2fb64",
+      "line_count": 188
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/thread-coverage.json",
@@ -560,5 +560,10 @@
     "branch": "feat/vllm-contribution-research-20261018",
     "parent_commit": "c154d7216b8724d74ffbff12e4f1f326ff041e07",
     "scope": "Report packet only. No raw Dynamo archive, model, build, or experiment trees."
+  },
+  "presentation_revision": {
+    "parent_report_commit": "73bea199b05d1b12a8a64c607bf9e8381dec0770",
+    "purpose": "Make the recent and prior-week research visible before the PR ledger.",
+    "new_product_experiments": false
   }
 }
