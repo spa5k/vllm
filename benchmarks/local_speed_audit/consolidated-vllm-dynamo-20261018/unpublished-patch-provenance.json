@@ -1,0 +1,193 @@
+{
+  "scope": "Historical branch identities and retained patch bytes. A branch at the common base may not contain its patch; see the review queue. No current-base product run.",
+  "branches": [
+    {
+      "branch": "feat/stream-kv-admission-cleanup",
+      "head": "c72c801883a1eb9355b9ea8863464a6b74c59482",
+      "first_parent": "371745ebd6c12f314402c6c319de2e7ef82c2981",
+      "last_commit_stat": ".../openai/chat_completion/test_serving_chat.py    | 98 +++++++++++++++++++++-\n .../openai/completion/test_completion_error.py     | 91 +++++++++++++++++++-\n .../openai/responses/test_serving_responses.py     | 96 +++++++++++++++++++++\n vllm/entrypoints/generate/base/serving.py          | 92 +++++++++++++++-----\n vllm/entrypoints/openai/chat_completion/serving.py | 11 ++-\n vllm/entrypoints/openai/completion/serving.py      | 15 +++-\n vllm/entrypoints/openai/responses/serving.py       | 18 +++-\n 7 files changed, 392 insertions(+), 29 deletions(-)",
+      "upstream_tracking_ref": "fork/feat/stream-kv-admission-cleanup",
+      "fork_head_observed": "c72c801883a1eb9355b9ea8863464a6b74c59482"
+    },
+    {
+      "branch": "feat/utility-terminal-cleanup",
+      "head": "6b80689e4263f918946729083bdd54781733e1ad",
+      "first_parent": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+      "last_commit_stat": "tests/v1/engine/test_wake_up_contract.py | 484 +++++++++++++++++++++++++++++++\n vllm/v1/engine/core_client.py            | 211 ++++++++++++--\n 2 files changed, 667 insertions(+), 28 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": "6b80689e4263f918946729083bdd54781733e1ad"
+    },
+    {
+      "branch": "feat/background-response-terminal",
+      "head": "ce0e01324cd451ed985fa8b39ce071e5b8ac3f07",
+      "first_parent": "e80b6c642f21fd5b24439825592f5b9ced36add8",
+      "last_commit_stat": ".../openai/responses/test_serving_responses.py     | 126 +++++++++++++++++++++\n vllm/entrypoints/openai/responses/serving.py       |  22 ++--\n 2 files changed, 139 insertions(+), 9 deletions(-)",
+      "upstream_tracking_ref": "fork/feat/background-response-terminal",
+      "fork_head_observed": "ce0e01324cd451ed985fa8b39ce071e5b8ac3f07"
+    },
+    {
+      "branch": "feat/mla-cache-write-current",
+      "head": "cd4754c1f5754b1f8cc1b8b0480a81200e7c849e",
+      "first_parent": "8530aed2b78a19eb00e242031c22bb78d615eea2",
+      "last_commit_stat": ".../v1/kv_connector/unit/test_example_connector.py | 120 ++++++++++++++++++++-\n .../kv_connector/v1/example_connector.py           |  15 +--\n 2 files changed, 128 insertions(+), 7 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    },
+    {
+      "branch": "feat/fp8-scalar-scratch",
+      "head": "1804ee56d9395f80659209ac3d93ad73020796d8",
+      "first_parent": "216fcf143b84e526c8722e67cbb7b8bb31187a7a",
+      "last_commit_stat": "tests/quantization/test_fp8.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    },
+    {
+      "branch": "feat/deepgemm-compact-warmup-routes",
+      "head": "50e79d62764346e384e6461ade61aa86bb7cce8c",
+      "first_parent": "3f466c852cfd3882820af8dd7963ac775174bce4",
+      "last_commit_stat": "tests/model_executor/test_deep_gemm_warmup.py  | 106 +++++++++++++++++++++++++\n vllm/model_executor/warmup/deep_gemm_warmup.py |  50 +++++++-----\n 2 files changed, 135 insertions(+), 21 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    },
+    {
+      "branch": "feat/deepgemm-route-metadata-final",
+      "head": "f547bd2e57f3ed811a5cd13debe4713d2b210e5f",
+      "first_parent": "3f466c852cfd3882820af8dd7963ac775174bce4",
+      "last_commit_stat": "tests/kernels/moe/test_count_expert_num_tokens.py  | 48 ++++++++++++++++\n tests/kernels/moe/test_deepgemm.py                 | 64 ++++++++++++++++++++++\n .../layers/fused_moe/deep_gemm_utils.py            | 34 +++++++-----\n vllm/model_executor/layers/fused_moe/utils.py      | 63 ++++++++++++++++++++-\n 4 files changed, 192 insertions(+), 17 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    },
+    {
+      "branch": "feat/grammar-sparse-head-research",
+      "head": "8530aed2b78a19eb00e242031c22bb78d615eea2",
+      "first_parent": "273a04964ed9d1e389c4a7cb9d660e8294782f8d",
+      "last_commit_stat": ".buildkite/test-amd.yaml                           |   2 -\n .buildkite/test_areas/misc.yaml                    |   2 -\n .buildkite/test_areas/spec_decode.yaml             |   1 -\n .github/mergify.yml                                |   3 +-\n .github/workflows/issue_autolabel.yml              |   1 -\n docs/features/speculative_decoding/README.md       |   4 +-\n docs/features/speculative_decoding/mlp.md          |  48 -----\n docs/mkdocs/gen_files/generate_examples.py         |   1 -\n tests/config/draft_model_arch_groundtruth.json     |  17 --\n tests/config/test_model_arch_config.py             |  27 +--\n tests/models/registry.py                           |  10 -\n tests/models/test_registry.py                      |   3 -\n .../acceptance_rates/mtp_other/test_medusa.py      |  50 -----\n tests/v1/worker/test_gpu_warmup_blocks.py          |   2 -\n vllm/config/speculative.py                         |  61 +------\n vllm/config/vllm.py                                |   7 +-\n vllm/model_executor/models/interfaces_base.py      |  20 +-\n vllm/model_executor/models/medusa.py               | 202 ---------------------\n vllm/model_executor/models/mlp_speculator.py       | 182 -------------------\n vllm/model_executor/models/registry.py             |   4 -\n vllm/transformers_utils/config.py                  |   4 +-\n vllm/transformers_utils/configs/__init__.py        |   4 -\n vllm/transformers_utils/configs/medusa.py          |  67 -------\n vllm/transformers_utils/configs/mlp_speculator.py  |  69 -------\n .../model_arch_config_convertor.py                 |   9 -\n vllm/v1/spec_decode/medusa.py                      |  79 --------\n vllm/v1/worker/gpu_model_runner.py                 |  33 ----\n 27 files changed, 27 insertions(+), 885 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    },
+    {
+      "branch": "feat/mla-implicit-query-metadata",
+      "head": "8530aed2b78a19eb00e242031c22bb78d615eea2",
+      "first_parent": "273a04964ed9d1e389c4a7cb9d660e8294782f8d",
+      "last_commit_stat": ".buildkite/test-amd.yaml                           |   2 -\n .buildkite/test_areas/misc.yaml                    |   2 -\n .buildkite/test_areas/spec_decode.yaml             |   1 -\n .github/mergify.yml                                |   3 +-\n .github/workflows/issue_autolabel.yml              |   1 -\n docs/features/speculative_decoding/README.md       |   4 +-\n docs/features/speculative_decoding/mlp.md          |  48 -----\n docs/mkdocs/gen_files/generate_examples.py         |   1 -\n tests/config/draft_model_arch_groundtruth.json     |  17 --\n tests/config/test_model_arch_config.py             |  27 +--\n tests/models/registry.py                           |  10 -\n tests/models/test_registry.py                      |   3 -\n .../acceptance_rates/mtp_other/test_medusa.py      |  50 -----\n tests/v1/worker/test_gpu_warmup_blocks.py          |   2 -\n vllm/config/speculative.py                         |  61 +------\n vllm/config/vllm.py                                |   7 +-\n vllm/model_executor/models/interfaces_base.py      |  20 +-\n vllm/model_executor/models/medusa.py               | 202 ---------------------\n vllm/model_executor/models/mlp_speculator.py       | 182 -------------------\n vllm/model_executor/models/registry.py             |   4 -\n vllm/transformers_utils/config.py                  |   4 +-\n vllm/transformers_utils/configs/__init__.py        |   4 -\n vllm/transformers_utils/configs/medusa.py          |  67 -------\n vllm/transformers_utils/configs/mlp_speculator.py  |  69 -------\n .../model_arch_config_convertor.py                 |   9 -\n vllm/v1/spec_decode/medusa.py                      |  79 --------\n vllm/v1/worker/gpu_model_runner.py                 |  33 ----\n 27 files changed, 27 insertions(+), 885 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    },
+    {
+      "branch": "feat/pcp-linear-dispatch-count",
+      "head": "23d4867fe4c5775b535a0fc2aadbe5cdcdad86d3",
+      "first_parent": "3f466c852cfd3882820af8dd7963ac775174bce4",
+      "last_commit_stat": "tests/v1/worker/test_gpu_pcp_manager.py | 29 ++++++++++++++++++++++\n vllm/v1/worker/gpu/pcp_manager.py       | 44 +++++++++++++++++++++++++++------\n 2 files changed, 66 insertions(+), 7 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    },
+    {
+      "branch": "feat/gather-slot-fusion",
+      "head": "a40a6eb6a02bd7995452df7ac4f41cb787c7180c",
+      "first_parent": "8530aed2b78a19eb00e242031c22bb78d615eea2",
+      "last_commit_stat": "tests/v1/worker/test_gpu_block_table.py |  95 ++++++++++++++++++++++++-----\n vllm/v1/worker/gpu/block_table.py       | 104 +++++++++++++++++++++++++++++++-\n vllm/v1/worker/gpu/model_runner.py      |  10 +--\n 3 files changed, 185 insertions(+), 24 deletions(-)",
+      "upstream_tracking_ref": "",
+      "fork_head_observed": null
+    }
+  ],
+  "files": [
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/grammar.patch",
+      "bytes": 34637,
+      "sha256": "673f8a91f2c3fedde66a7cb1e4211413596424bddfcf33cf98e49fcecffaeb99",
+      "changed_paths": [
+        "docs/features/structured_outputs.md",
+        "tests/v1/worker/test_gpu_logits_processors.py",
+        "tests/v1/worker/test_grammar_invalid_drafts.py",
+        "vllm/config/structured_outputs.py",
+        "vllm/model_executor/layers/logits_processor.py",
+        "vllm/model_executor/models/llama.py",
+        "vllm/model_executor/models/qwen3.py",
+        "vllm/v1/worker/gpu/model_runner.py",
+        "vllm/v1/worker/gpu/structured_outputs.py"
+      ]
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/mla.patch",
+      "bytes": 13113,
+      "sha256": "0e16d1e52a6645cb545215ce978e364ef9f9ec5fb612dd355b94dd10b0bae42f",
+      "changed_paths": [
+        "tests/kernels/attention/test_triton_decode_attention.py",
+        "tests/kernels/attention/test_triton_mla_causal_verify_flatten.py",
+        "vllm/v1/attention/backends/mla/triton_mla.py",
+        "vllm/v1/attention/ops/triton_decode_attention.py"
+      ]
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/final-source-provenance.json",
+      "bytes": 5768,
+      "sha256": "4370642d95e5b89f0a6fe592ee3e799127c9e4e9dd564b3c001ccd4fd4438447"
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-record-20261018/patches/arm-w4a8.patch",
+      "bytes": 4586,
+      "sha256": "6df2e88a4956c998c6319cf4cbf3ab2dd80cf177b3902d57ca039fac9e114e79",
+      "changed_paths": []
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-record-20261018/patches/prompt-embedding-dtype.patch",
+      "bytes": 6252,
+      "sha256": "f7359d31d5cb59986725de1dc0f3a5c996df64f67e3055cc85d1ca0ae910551e",
+      "changed_paths": []
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-record-20261018/patches/responses-output-budget.patch",
+      "bytes": 21623,
+      "sha256": "d4bdc319f2b89281c4a2b77acf85aab5b613fe6fdf9cf5735529100252f77027",
+      "changed_paths": [
+        "vllm/entrypoints/openai/responses/context.py",
+        "vllm/entrypoints/openai/responses/serving.py",
+        "tests/entrypoints/openai/responses/test_serving_responses.py"
+      ]
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/frontend-context-candidate-record-9490/frontend-model-context.patch",
+      "bytes": 17422,
+      "sha256": "881013b51e601beeff353c1b6c422e22ced4127508838acebe215829ba4a1b51",
+      "changed_paths": [
+        "lib/llm/src/http/service.rs",
+        "lib/llm/src/http/service/anthropic.rs",
+        "lib/llm/src/http/service/openai.rs",
+        "lib/llm/tests/http-service.rs"
+      ]
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/profiler-artifact-candidate-record-9550/profiler-artifact-provenance.patch",
+      "bytes": 26689,
+      "sha256": "c41ed0159679b766a8469bda818272ccf09813ecea1ebe2a6e7d0db113cca855",
+      "changed_paths": [
+        "components/src/dynamo/profiler/interpolation.py",
+        "components/src/dynamo/profiler/profile_sla.py",
+        "components/src/dynamo/profiler/tests/integration/test_profile_sla_dgdr.py",
+        "components/src/dynamo/profiler/tests/unit/test_helpers_profile_sla.py",
+        "components/src/dynamo/profiler/tests/unit/test_interpolation.py",
+        "components/src/dynamo/profiler/utils/dgd_generation.py",
+        "components/src/dynamo/profiler/utils/profile_decode.py",
+        "components/src/dynamo/profiler/utils/profile_prefill.py"
+      ]
+    }
+  ],
+  "checked_utc": "2026-10-18T18:28:25.873304+00:00",
+  "fork_ref_query_argv": [
+    "git",
+    "ls-remote",
+    "--heads",
+    "fork",
+    "refs/heads/feat/stream-kv-admission-cleanup",
+    "refs/heads/feat/utility-terminal-cleanup",
+    "refs/heads/feat/background-response-terminal",
+    "refs/heads/feat/mla-cache-write-current",
+    "refs/heads/feat/fp8-scalar-scratch",
+    "refs/heads/feat/deepgemm-compact-warmup-routes",
+    "refs/heads/feat/deepgemm-route-metadata-final",
+    "refs/heads/feat/grammar-sparse-head-research",
+    "refs/heads/feat/mla-implicit-query-metadata",
+    "refs/heads/feat/pcp-linear-dispatch-count",
+    "refs/heads/feat/gather-slot-fusion"
+  ]
+}

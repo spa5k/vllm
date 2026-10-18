@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "created_utc": "2026-10-18T18:12:17.235347+00:00",
-  "period_india": "6–18 October 2026",
+  "period_india": "6\u201318 October 2026",
   "scope": "Checksums for the historical records and local consolidation. These checks verify file identity, not the underlying experiment. No models, build targets, credentials, environment trees or binaries were copied.",
   "source_file_count": 64,
   "sources": [
@@ -454,103 +454,127 @@
       "line_count": 198
     }
   ],
-  "report_artifact_count": 12,
+  "report_artifact_count": 15,
   "report_artifacts": [
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/README.md",
-      "packet_relative_path": "README.md",
       "role": "consolidated_report_artifact",
-      "bytes": 1804,
-      "sha256": "076896a878c8b93414de0681c31ef331245bb39d78c3bcf9bb8a7c84196592d5",
-      "line_count": 36
+      "bytes": 2258,
+      "sha256": "05f61bc0f474e2aee862490f1a3406e48bdc79cd1ba9c39aace7d2fc25e2f99f",
+      "line_count": 43,
+      "packet_relative_path": "README.md"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/REPORT.md",
-      "packet_relative_path": "REPORT.md",
       "role": "consolidated_report_artifact",
-      "bytes": 49227,
-      "sha256": "c186e9b88ad2044f104683460226781d4f79c5cfaded71afb55b7d782a02b08c",
-      "line_count": 675
+      "bytes": 51225,
+      "sha256": "7eb7b9b1bc5ed1ce9ee2e15518833df11c8e88489fb9945d67440922c5a3f8f0",
+      "line_count": 703,
+      "packet_relative_path": "REPORT.md"
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/UNPUBLISHED_REVIEW_QUEUE.md",
+      "role": "consolidated_report_artifact",
+      "bytes": 29840,
+      "sha256": "56ac115dd9258683b91dd00334994bb72bc14389dee0d9bf77e1800c5da07ed5",
+      "line_count": 479,
+      "packet_relative_path": "UNPUBLISHED_REVIEW_QUEUE.md"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/automation-state.json",
-      "packet_relative_path": "automation-state.json",
       "role": "consolidated_report_artifact",
       "bytes": 981,
-      "sha256": "830c70756a907a906fc53c35f33a9ad51060a8d68f308a22fe84c52d7cc75283",
-      "line_count": 22
+      "sha256": "e5f6feb82cd7f4c43ac6142d0af2bb69d405c533cd5a1f4a4eb19d60869e2b25",
+      "line_count": 22,
+      "packet_relative_path": "automation-state.json"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/dynamo-history/REPORT.md",
-      "packet_relative_path": "dynamo-history/REPORT.md",
       "role": "consolidated_report_artifact",
       "bytes": 32199,
       "sha256": "5b109f832e3faef233b8c2405eecf9da6fa4e992370a728083e810c09302b51a",
-      "line_count": 145
+      "line_count": 145,
+      "packet_relative_path": "dynamo-history/REPORT.md"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/dynamo-history/sources.json",
-      "packet_relative_path": "dynamo-history/sources.json",
       "role": "consolidated_report_artifact",
       "bytes": 9362,
       "sha256": "59015248fdeaf13ae1824a02d68be9d2b68b9ee8ce556af82fab75b1ebc73750",
-      "line_count": 217
+      "line_count": 217,
+      "packet_relative_path": "dynamo-history/sources.json"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/public-pr-state.json",
-      "packet_relative_path": "public-pr-state.json",
       "role": "consolidated_report_artifact",
       "bytes": 92205,
       "sha256": "dda92dc874933bea0944b96d00208f6e49f1072e0f59d825503eaa097ad30797",
-      "line_count": 3392
+      "line_count": 3392,
+      "packet_relative_path": "public-pr-state.json"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/render_report.py",
-      "packet_relative_path": "render_report.py",
       "role": "consolidated_report_artifact",
-      "bytes": 8389,
-      "sha256": "aaa88f074c3c3e8b41b1939b274c3e0db1ed0acc514e48fed13c71586102fd15",
-      "line_count": 204
+      "bytes": 8602,
+      "sha256": "5df4ec599b51af7b587cf5827f5de96a98b21c01199fed7caae1bf3b8b34aa10",
+      "line_count": 209,
+      "packet_relative_path": "render_report.py"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/report.html",
-      "packet_relative_path": "report.html",
       "role": "consolidated_report_artifact",
-      "bytes": 227139,
-      "sha256": "5a2c51b2cc4c8d72e010e3a89afd494b42d50904436d660c6a8ec7ae3bbd804d",
-      "line_count": 2277
+      "bytes": 265100,
+      "sha256": "5c955eaa96cd65cc614482daf794a660196d0e4bfbe63320360ed9cb50574d10",
+      "line_count": 2892,
+      "packet_relative_path": "report.html"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/report_template.html",
-      "packet_relative_path": "report_template.html",
       "role": "consolidated_report_artifact",
-      "bytes": 30922,
-      "sha256": "3ccad9b883ec7db54b978d6a0445c11a8d4e317c7e834200f88c7ff5e8c2fb64",
-      "line_count": 188
+      "bytes": 31480,
+      "sha256": "6fa37da99025b191c08e3429018b72596f4c99bc915ae847de652059ecce08e1",
+      "line_count": 194,
+      "packet_relative_path": "report_template.html"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/thread-coverage.json",
-      "packet_relative_path": "thread-coverage.json",
       "role": "consolidated_report_artifact",
       "bytes": 26187,
       "sha256": "be6550d39d74ad3d2446f090b3582f46d624f943e2afbb75048bcd6439d21a01",
-      "line_count": 463
+      "line_count": 463,
+      "packet_relative_path": "thread-coverage.json"
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/unpublished-owner-checks.json",
+      "role": "consolidated_report_artifact",
+      "bytes": 757764,
+      "sha256": "203e41186b71658eed5b7ab92a2da723554efd8bd3852258f08748fb5c0926f0",
+      "line_count": 18315,
+      "packet_relative_path": "unpublished-owner-checks.json"
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/unpublished-patch-provenance.json",
+      "role": "consolidated_report_artifact",
+      "bytes": 13932,
+      "sha256": "e4f479a51f85efe7a79267de20b4d03001e80e6ad411ace70f99ebffab18bc0e",
+      "line_count": 193,
+      "packet_relative_path": "unpublished-patch-provenance.json"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/vllm-early-history/REPORT.md",
-      "packet_relative_path": "vllm-early-history/REPORT.md",
       "role": "consolidated_report_artifact",
       "bytes": 39922,
       "sha256": "2ae96ec0d2806a22b331818b05a720d578a195344bd581cf4a555b54235bbc72",
-      "line_count": 147
+      "line_count": 147,
+      "packet_relative_path": "vllm-early-history/REPORT.md"
     },
     {
       "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/vllm-early-history/SOURCE_INVENTORY.json",
-      "packet_relative_path": "vllm-early-history/SOURCE_INVENTORY.json",
       "role": "consolidated_report_artifact",
       "bytes": 10354,
       "sha256": "f105e86dd42d7e074c0dcceb92c1f2112d47a534cc460f485bd92973321fa6e8",
-      "line_count": 352
+      "line_count": 352,
+      "packet_relative_path": "vllm-early-history/SOURCE_INVENTORY.json"
     }
   ],
   "self_hash_excluded": true,
@@ -565,5 +589,100 @@
     "parent_report_commit": "73bea199b05d1b12a8a64c607bf9e8381dec0770",
     "purpose": "Make the recent and prior-week research visible before the PR ledger.",
     "new_product_experiments": false
-  }
+  },
+  "ranking_inputs": [
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/frontend-context-candidate-record-9490/README.md",
+      "role": "unpublished_ranking_input",
+      "bytes": 1624,
+      "sha256": "5742a3838be248484c020259cce5d3899ea491f361f757fbe6ecbeab96afd19a",
+      "line_count": 11
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/frontend-context-candidate-record-9490/frontend-model-context.patch",
+      "role": "unpublished_ranking_input",
+      "bytes": 17422,
+      "sha256": "881013b51e601beeff353c1b6c422e22ced4127508838acebe215829ba4a1b51",
+      "line_count": 403
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/profiler-artifact-candidate-record-9550/README.md",
+      "role": "unpublished_ranking_input",
+      "bytes": 1526,
+      "sha256": "37274ffa62dcb386295714ba0cd586ba5bffe219a9009ad51eb4e022b6c6f2e5",
+      "line_count": 11
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/experiments/profiler-artifact-candidate-record-9550/profiler-artifact-provenance.patch",
+      "role": "unpublished_ranking_input",
+      "bytes": 26689,
+      "sha256": "c41ed0159679b766a8469bda818272ccf09813ecea1ebe2a6e7d0db113cca855",
+      "line_count": 664
+    },
+    {
+      "path": "/Users/pacific/.codex/research/dynamo-2026-10-17/notes/frontend-context-result-review-9539.md",
+      "role": "unpublished_ranking_input",
+      "bytes": 4030,
+      "sha256": "0af947e331b170f8be0eccd502210306044597fbea8981e33778e05f1ba76878",
+      "line_count": 24
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-record-20261018/patches/arm-w4a8.patch",
+      "role": "unpublished_ranking_input",
+      "bytes": 4586,
+      "sha256": "6df2e88a4956c998c6319cf4cbf3ab2dd80cf177b3902d57ca039fac9e114e79",
+      "line_count": 134
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-record-20261018/patches/prompt-embedding-dtype.patch",
+      "role": "unpublished_ranking_input",
+      "bytes": 6252,
+      "sha256": "f7359d31d5cb59986725de1dc0f3a5c996df64f67e3055cc85d1ca0ae910551e",
+      "line_count": 174
+    },
+    {
+      "path": "/Users/pacific/.codex/worktrees/vllm-research-record/vllm/benchmarks/local_speed_audit/contribution-record-20261018/patches/responses-output-budget.patch",
+      "role": "unpublished_ranking_input",
+      "bytes": 21623,
+      "sha256": "d4bdc319f2b89281c4a2b77acf85aab5b613fe6fdf9cf5735529100252f77027",
+      "line_count": 532
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/final-source-provenance.json",
+      "role": "unpublished_ranking_input",
+      "bytes": 5768,
+      "sha256": "4370642d95e5b89f0a6fe592ee3e799127c9e4e9dd564b3c001ccd4fd4438447",
+      "line_count": 113
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/grammar.patch",
+      "role": "unpublished_ranking_input",
+      "bytes": 34637,
+      "sha256": "673f8a91f2c3fedde66a7cb1e4211413596424bddfcf33cf98e49fcecffaeb99",
+      "line_count": 817
+    },
+    {
+      "path": "/Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/mla.patch",
+      "role": "unpublished_ranking_input",
+      "bytes": 13113,
+      "sha256": "0e16d1e52a6645cb545215ce978e364ef9f9ec5fb612dd355b94dd10b0bae42f",
+      "line_count": 358
+    },
+    {
+      "path": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/consolidated-vllm-dynamo-20261018/unpublished-ranking-evidence-20261018/owner-checks-full.json",
+      "role": "unpublished_ranking_input",
+      "bytes": 11158358,
+      "sha256": "f1775270e6d7b1f006cd6946ac6f0a6aab1e01d7ad7fa1b57d1ec743cc5eec4a",
+      "line_count": 22063
+    }
+  ],
+  "ranking_input_count": 12,
+  "ranking_updated_utc": "2026-10-18T18:31:25.252154+00:00",
+  "ranking_revision": {
+    "parent_report_commit": "ab30c126e4290594b97cf2fe76a75428e0e5c636",
+    "purpose": "Rank unpublished candidates, identify exact recovery artifacts and correct the utility duplicate assessment.",
+    "new_product_experiments": false,
+    "semantic_source_review": "Not rerun; current-base review is a gate for each candidate."
+  },
+  "ranking_date_india": "2026-10-19"
 }

@@ -41,6 +41,8 @@ def render_markdown(path: Path, prefix: str, content: str | None = None) -> str:
                 target = "#appendix-vllm"
             elif target == "dynamo-history/REPORT.md":
                 target = "#appendix-dynamo"
+            elif target == "UNPUBLISHED_REVIEW_QUEUE.md":
+                target = "#review-queue"
             elif target.startswith("/"):
                 if "vllm-research-record/vllm/" in target:
                     target = (
@@ -178,6 +180,9 @@ def main() -> None:
             f"<td><code>{pr['headRefOid'][:12]}</code></td></tr>"
         )
     replacements = {
+        "@@REVIEW_QUEUE@@": render_markdown(
+            ROOT / "UNPUBLISHED_REVIEW_QUEUE.md", "queue"
+        ),
         "@@RESEARCH_CATALOG@@": research_catalog(),
         "@@PR_ROWS@@": "\n".join(rows),
         "@@MAIN_REPORT@@": render_markdown(ROOT / "REPORT.md", "main"),

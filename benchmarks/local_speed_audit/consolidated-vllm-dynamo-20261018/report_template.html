@@ -23,10 +23,11 @@
 <aside class="sidebar">
 <div class="brand">vLLM × Dynamo<span>Research record / 2026</span></div>
 <nav aria-label="Report sections">
-<a href="#overview">01 · Overview</a><a href="#findings">02 · Research results</a>
-<a href="#evidence">03 · What the tests prove</a><a href="#contributions">04 · Public contributions</a>
-<a href="#timeline">05 · Work history</a><a href="#limits">06 · Costs and open gates</a>
-<a href="#glossary">07 · Terms explained</a><a href="#technical">08 · Full records</a>
+<a href="#overview">01 · Overview</a><a href="#review-queue">02 · Unpublished ranking</a>
+<a href="#findings">03 · Research results</a><a href="#evidence">04 · What the tests prove</a>
+<a href="#contributions">05 · Public contributions</a><a href="#timeline">06 · Work history</a>
+<a href="#limits">07 · Costs and open gates</a><a href="#glossary">08 · Terms explained</a>
+<a href="#technical">09 · Full records</a>
 </nav>
 <div class="sidebar-note"><span class="pause">Both schedules paused</span><p style="margin-top:12px">Final record. Research remains stopped. PR states are a dated snapshot.</p></div>
 </aside>
@@ -37,13 +38,18 @@
 <p class="intro">A final record of fixes, measurements, rejected leads and remaining checks across vLLM and NVIDIA Dynamo.</p>
 <p class="intro">vLLM runs language models. Dynamo routes requests and coordinates inference workers. This work examined how they start, use memory, prepare GPU work and handle failures.</p>
 <div class="hero-meta"><span class="pill">Three linked chats + final vLLM scout</span><span class="pill">64 saved source records</span><span class="pill">Research stopped</span></div>
-<div class="actions"><a class="button primary" href="#findings">Read the findings</a><a class="button" href="REPORT.md">Markdown report</a><button class="button" id="print-report" type="button">Print / Save PDF</button></div>
+<div class="actions"><a class="button primary" href="#review-queue">Review unpublished work</a><a class="button" href="#findings">Read the findings</a><a class="button" href="REPORT.md">Markdown report</a><button class="button" id="print-report" type="button">Print / Save PDF</button></div>
 <div class="stats date-stat" aria-label="Research periods and scope">
 <div class="stat green"><b>17–18 Oct</b><span>Recent bugs and deeper fixes</span></div><div class="stat blue"><b>10–15 Oct</b><span>GPU, core and model experiments</span></div>
 <div class="stat"><b>8 Oct</b><span>Startup and compiler study</span></div><div class="stat"><b>7 sections</b><span>Visible dated research results</span></div>
 </div>
 <p class="caption">Research results come first. The public PR ledger is a separate section below. Coverage starts on 6 October; this is not a claim of complete records for 4–5 October.</p>
 </header>
+<section id="review-queue">
+<div class="section-head"><div><div class="eyebrow">Manual contribution handoff</div><h2>Rank the unpublished findings.</h2><p>Thirteen candidates, with separate impact and preparation ranks. Each entry gives its exact artifact, tests and remaining conditions. Utility terminal cleanup is excluded because an open fix already owns it.</p></div></div>
+<div class="card prose">@@REVIEW_QUEUE@@</div>
+</section>
+
 <section id="findings">
 <div class="section-head"><div><div class="eyebrow">Research beyond the public PR ledger</div><h2>What we found yesterday and last week.</h2><p>The recent work is dated 17–18 October. The earlier GPU and core campaigns are dated 10–15 October. All seven research sections below are visible when the page opens.</p></div></div>
 <div class="grid research-summary">

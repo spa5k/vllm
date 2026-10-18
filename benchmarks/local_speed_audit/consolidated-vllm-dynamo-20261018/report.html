@@ -23,10 +23,11 @@
 <aside class="sidebar">
 <div class="brand">vLLM × Dynamo<span>Research record / 2026</span></div>
 <nav aria-label="Report sections">
-<a href="#overview">01 · Overview</a><a href="#findings">02 · Research results</a>
-<a href="#evidence">03 · What the tests prove</a><a href="#contributions">04 · Public contributions</a>
-<a href="#timeline">05 · Work history</a><a href="#limits">06 · Costs and open gates</a>
-<a href="#glossary">07 · Terms explained</a><a href="#technical">08 · Full records</a>
+<a href="#overview">01 · Overview</a><a href="#review-queue">02 · Unpublished ranking</a>
+<a href="#findings">03 · Research results</a><a href="#evidence">04 · What the tests prove</a>
+<a href="#contributions">05 · Public contributions</a><a href="#timeline">06 · Work history</a>
+<a href="#limits">07 · Costs and open gates</a><a href="#glossary">08 · Terms explained</a>
+<a href="#technical">09 · Full records</a>
 </nav>
 <div class="sidebar-note"><span class="pause">Both schedules paused</span><p style="margin-top:12px">Final record. Research remains stopped. PR states are a dated snapshot.</p></div>
 </aside>
@@ -37,13 +38,528 @@
 <p class="intro">A final record of fixes, measurements, rejected leads and remaining checks across vLLM and NVIDIA Dynamo.</p>
 <p class="intro">vLLM runs language models. Dynamo routes requests and coordinates inference workers. This work examined how they start, use memory, prepare GPU work and handle failures.</p>
 <div class="hero-meta"><span class="pill">Three linked chats + final vLLM scout</span><span class="pill">64 saved source records</span><span class="pill">Research stopped</span></div>
-<div class="actions"><a class="button primary" href="#findings">Read the findings</a><a class="button" href="REPORT.md">Markdown report</a><button class="button" id="print-report" type="button">Print / Save PDF</button></div>
+<div class="actions"><a class="button primary" href="#review-queue">Review unpublished work</a><a class="button" href="#findings">Read the findings</a><a class="button" href="REPORT.md">Markdown report</a><button class="button" id="print-report" type="button">Print / Save PDF</button></div>
 <div class="stats date-stat" aria-label="Research periods and scope">
 <div class="stat green"><b>17–18 Oct</b><span>Recent bugs and deeper fixes</span></div><div class="stat blue"><b>10–15 Oct</b><span>GPU, core and model experiments</span></div>
 <div class="stat"><b>8 Oct</b><span>Startup and compiler study</span></div><div class="stat"><b>7 sections</b><span>Visible dated research results</span></div>
 </div>
 <p class="caption">Research results come first. The public PR ledger is a separate section below. Coverage starts on 6 October; this is not a claim of complete records for 4–5 October.</p>
 </header>
+<section id="review-queue">
+<div class="section-head"><div><div class="eyebrow">Manual contribution handoff</div><h2>Rank the unpublished findings.</h2><p>Thirteen candidates, with separate impact and preparation ranks. Each entry gives its exact artifact, tests and remaining conditions. Utility terminal cleanup is excluded because an open fix already owns it.</p></div></div>
+<div class="card prose"><h2 id="queue-heading-1">Unpublished findings: impact and PR preparation</h2>
+<p>Prepared on 19 October 2026, India time, from research through 18 October.
+This is a manual review queue. Research remains
+stopped. Both research schedules remain paused. No new product test, model run,
+paid job or upstream submission was made for this update.</p>
+<p><strong>Start with Dynamo context metadata, the grammar output head and MLA cache
+restoration.</strong> For a larger change across serving modules, review KV rejection
+cleanup next. Its live connector test is still missing.</p>
+<p><strong>Correction: do not open our utility-terminal-cleanup draft as a new PR.</strong>
+The fresh search found open <a href="https://github.com/vllm-project/vllm/pull/56416">vLLM #56416</a> and
+<a href="https://github.com/vllm-project/vllm/pull/58279">#58279</a>. They cover pending utility futures when the receiver stops.
+The second PR includes the first author's work with consent. This supersedes
+the earlier ownership assessment. Our tests remain useful research evidence.
+They do not establish a new contribution.</p>
+<h3 id="queue-heading-2">How to read the ranks</h3>
+<p>Impact ranks compare the potential effect within each supported path. They
+consider wrong output, failed cleanup, deployment correctness, measured model
+time and memory. They do not estimate how often users meet the problem.
+For example, KV cleanup has a high potential effect, but permanent leakage
+and actual producer lease release were not proved.</p>
+<p>Preparation ranks compare the evidence already saved and the work still
+needed for a PR. Rank 1 is the closest candidate for human preparation.
+<strong>No entry is certified for immediate submission.</strong> All need human line review,
+a current target base, fresh duplicate checks and the relevant tests on that
+base. A large test count cannot replace a missing live execution path.</p>
+<table>
+<thead>
+<tr>
+<th>Preparation rank</th>
+<th>Impact rank</th>
+<th>Finding</th>
+<th>Present state</th>
+<th>Main remaining condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>9</td>
+<td>Dynamo context metadata</td>
+<td>Normal baseline failure and candidate pass</td>
+<td>Current-base check; Linux/default-feature scope</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>vLLM grammar-selected output head</td>
+<td>Strongest measured model-speed draft</td>
+<td>Restore exact patch; scope and current-base review</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>vLLM MLA live-cache restoration</td>
+<td>Native synthetic model confirms the corrected write</td>
+<td>Supported transfer/attention and trained-model check</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>vLLM KV rejection cleanup</td>
+<td>Seven-file draft; 43 normal mocked-engine cases pass</td>
+<td>Live connector and producer lease witness</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>ARM GPT-OSS W4A8 gate/up layout</td>
+<td>Native failure repaired; 169 ARM tests pass</td>
+<td>Trained GPT-OSS with the reporter's format</td>
+</tr>
+<tr>
+<td>6</td>
+<td>13</td>
+<td>FP8 scalar scratch</td>
+<td>Native allocation saving and synthetic model checks</td>
+<td>Useful production fallback reachability; supported device</td>
+</tr>
+<tr>
+<td>7</td>
+<td>12</td>
+<td>Triton MLA request-table reuse</td>
+<td>Native attention and trained-model output checks</td>
+<td>Current base; graph/FP8 serving if claimed</td>
+</tr>
+<tr>
+<td>8</td>
+<td>10</td>
+<td>Compact DeepGEMM warmup routes</td>
+<td>Large retained-route memory saving</td>
+<td>Total startup memory and real configuration value</td>
+</tr>
+<tr>
+<td>9</td>
+<td>11</td>
+<td>DeepGEMM route metadata</td>
+<td>Native tests and synthetic MoE path checks</td>
+<td>Representative trained-model and serving value</td>
+</tr>
+<tr>
+<td>10</td>
+<td>6</td>
+<td>Embedding dtype in prefix-cache identity</td>
+<td>Wrong cross-dtype cache hit reproduced</td>
+<td>Public worker/model path and cache compatibility</td>
+</tr>
+<tr>
+<td>11</td>
+<td>8</td>
+<td>Background Responses terminal state</td>
+<td>Twelve normal mocked-engine cases pass</td>
+<td>Full HTTP create/retrieve with a real engine</td>
+</tr>
+<tr>
+<td>12</td>
+<td>7</td>
+<td>Responses cumulative output budget</td>
+<td>Real HTTP handlers pass with scripted generation</td>
+<td>Real model/tool turns; adjacent PR coordination</td>
+</tr>
+<tr>
+<td>13</td>
+<td>3</td>
+<td>Dynamo profiler artifact provenance</td>
+<td>Eight-file implementation; source review only</td>
+<td>Qualified normal environment; authored tests unrun</td>
+</tr>
+</tbody>
+</table>
+<p>The order is an engineering judgement. It is not a measured score. Profiler
+provenance ranks high for potential effect and last for preparation because
+the normal execution gate is still open.</p>
+<h3 id="queue-heading-3">Source and ownership checks for this queue</h3>
+<p>The fresh upstream metadata reads returned these main heads:</p>
+<ul>
+<li>vLLM: <code>ff01a6b14f329ccd4162fce309913542e2abcd5b</code>.</li>
+<li>Dynamo: <code>2141a9690d670440d729e99771afb2fb53e79284</code>.</li>
+</ul>
+<p>These are reference points, not newly tested builds. The candidates retain
+their historical bases below. No candidate was rebased or validated on those
+fresh main heads in this report update.</p>
+<p><a href="unpublished-owner-checks.json">The ownership packet</a> contains the exact
+commands, search result identities, selected PR metadata, file lists and hashes.
+Its <code>full_raw_record</code> path and hash identify the retained complete issue/PR
+comments, bodies and utility-owner diffs. Those raw bytes are local evidence,
+outside this published packet. Broad queries that returned 100 rows are capped.
+Narrow title searches are also saved.
+Search titles and most body text stay in the full raw record. This keeps
+external spelling and long source payloads separate from the authored report.
+An empty search does not prove that a fix has no owner. Four initial issue
+commands used an invalid flag combination. Their errors remain recorded.
+Corrected comment reads and full issue reads are separate successful calls.</p>
+<p>This is an ownership screen, not a full review of every PR diff or inline
+thread. The previous detailed source reviews remain historical evidence.
+Repeat the required issue/comment, linked-open-PR and area-open-PR checks
+immediately before a proposal. Resolve any direct overlap first.</p>
+<p><a href="unpublished-patch-provenance.json">The patch provenance packet</a> records local
+branch heads, first parents and retained patch hashes. A first parent is not
+always the upstream base. In particular, the grammar and MLA table branches
+currently point at their base commit. <strong>Checking out those branch names alone
+does not recover either patch. Use the saved patch artifacts.</strong></p>
+<h3 id="queue-heading-4">1. Dynamo context metadata consistency</h3>
+<p><strong>Impact 9; preparation 1.</strong> Model list and model retrieve can return different
+context sizes for one model or alias. A client can then select an incorrect
+request limit. The patch uses the same existing projection in the resolver
+and both protocol handlers. It changes four existing files.</p>
+<p>Patch branch: <code>feat/model-context-metadata-consistency</code>.
+Candidate: <code>50722afdfedc8b0e7027fce18b781437ef3ffa27</code>.
+Upstream base: <code>5f618a58adca23d527763c688b9cc5a322c7efde</code>.
+The branch is retained in a local Git bundle. It is not a public candidate
+branch. <a href="file:///Users/pacific/.codex/research/dynamo-2026-10-17/experiments/frontend-context-candidate-record-9490/README.md" title="Local source record: /Users/pacific/.codex/research/dynamo-2026-10-17/experiments/frontend-context-candidate-record-9490/README.md" class="local-evidence">Open the recovery instructions and patch</a>.</p>
+<p>Completed validation: native HTTP observations first showed 4096 versus 2048.
+The later normal Cargo regression failed on the original source and passed
+on the candidate. The controlled regression uses the reverse card order:
+retrieve is 4096 and list is 2048. Five selected candidate tests passed:
+one HTTP regression, two resolver tests and two existing readiness tests.
+The cases include aliases, overrides, missing cards and effective zero.
+The run used macOS ARM64, Cargo 1.96.1, a reviewed Swagger override,
+<code>--locked --offline -p dynamo-llm --no-default-features</code> and two build jobs.
+An <a href="file:///Users/pacific/.codex/research/dynamo-2026-10-17/notes/frontend-context-result-review-9539.md" title="Local source record: /Users/pacific/.codex/research/dynamo-2026-10-17/notes/frontend-context-result-review-9539.md" class="local-evidence">independent saved-result review</a> confirms the run.</p>
+<p>Before submission: review the chosen list policy and all four files. Compare
+the current upstream versions. Run the relevant normal tests on the final
+base. Add Linux/default-feature coverage where needed by the submission.
+No inference or performance result is claimed. The saved follow-up found all
+four base files unchanged at <code>d846fdaed801007e3e1da8879665fcf7de60ec61</code>;
+that does not validate the fresh main above. Open Dynamo #16470 addresses
+discovery reconciliation. Its saved scope is adjacent to this projection.</p>
+<h3 id="queue-heading-5">2. Grammar-selected output head</h3>
+<p><strong>Impact 2; preparation 2.</strong> Narrow grammars permit few vocabulary tokens.
+This experimental, off-by-default feature projects those rows before the
+normal mask, processors and sampler. Wide or unsupported batches use the
+dense path. The final nine-file patch includes precision and startup-memory
+repairs found during validation.</p>
+<p>Recorded branch: <code>feat/grammar-sparse-head-research</code>.
+Base and current branch ref: <code>8530aed2b78a19eb00e242031c22bb78d615eea2</code>.
+<strong>There is no separate committed patch head in that ref.</strong> Recover the exact
+<a href="file:///Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/grammar.patch" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/grammar.patch" class="local-evidence">grammar patch</a>, SHA256
+<code>673f8a91f2c3fedde66a7cb1e4211413596424bddfcf33cf98e49fcecffaeb99</code>.
+The <a href="file:///Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/final-source-provenance.json" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/final-source-provenance.json" class="local-evidence">source manifest</a> binds every changed file. The old working
+directory is not in the current active worktree list.</p>
+<p>Completed validation: 82 final native tests and 16 full-model comparisons.
+On Qwen3-4B, L4, BF16, TP1 and MRV2, three narrow workloads used 8.2–8.9% less
+complete offline request time across three randomized paired rounds.
+The unconstrained control had no clear change. A frozen 32-question JSON
+check returned 32 valid objects and 10 correct answers on both paths.
+Tokens matched. This is not a full GSM8K evaluation. Startup profiles the
+maximum selected workspace. A separate FP16/manual-KV run confirms dense
+fallback. Changed-file pre-commit passed. <a href="file:///Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/REPORT.md" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/REPORT.md" class="local-evidence">Tests, model harness and draft</a>.</p>
+<p>Before submission: recover the patch in a clean review branch, review the
+feature's complexity and confirm maintainer interest in this narrow support
+scope. Repeat normal tests and the supported model case on the final base.
+The saved runs used matching precompiled native support with changed Python
+and Triton files, not a full C++ source build. Llama has wrapper tests only.
+Do not claim TP, quantized heads, LoRA, speculative decoding or broad serving
+support. Open #60566 uses a different screen and excludes structured outputs.
+Open #59740 targets a speculative drafter. Open #45400 changes grammar jump
+decoding. These are related work; keep the distinction in a future PR.</p>
+<h3 id="queue-heading-6">3. MLA live-cache restoration</h3>
+<p><strong>Impact 4; preparation 3.</strong> Loading into a reshaped interleaved cache can
+write a temporary copy. The actual cache then keeps stale values. The patch
+writes the selected block and row indices in the bound storage. It changes
+the existing example connector and its existing unit suite.</p>
+<p>Local branch: <code>feat/mla-cache-write-current</code>.
+Head: <code>cd4754c1f5754b1f8cc1b8b0480a81200e7c849e</code>.
+Base: <code>8530aed2b78a19eb00e242031c22bb78d615eea2</code>.
+Worktree: <code>/Users/pacific/.codex/worktrees/example-mla-cache-write/vllm</code>.
+<a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-radical-20261015/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-radical-20261015/REPORT.md" class="local-evidence">Current-base patch and native evidence</a>.</p>
+<p>Completed validation: four current-package CPU regression cases pass; four
+CUDA cases skip on CPU. Earlier native CPU/CUDA cases pass. The later paired
+H100 model gate uses real external-cache admission and two interleaved FP16
+layer views. Original loading leaves the sentinels in place. Candidate loading
+restores selected payloads before attention and preserves unselected rows.
+Four greedy tokens and 16 selected scores match full recomputation. The model
+is a small dummy DeepseekV2 model. It is not a trained quality evaluation.
+Changed-file pre-commit passed.</p>
+<p>Before submission: validate the supported save/transfer/load path on the final
+base with a representative trained MLA model. Check supported cache layouts
+and the existing connector contract. The native gate used current Python
+with selected older native support. Do not claim a new full build, generic
+offload fix or performance improvement. Keep this separate from MLA table
+reuse and the save-gather performance prototype.</p>
+<h3 id="queue-heading-7">4. KV rejection cleanup across serving modules</h3>
+<p><strong>Impact 1; preparation 4.</strong> A lazy engine iterator can reject after the
+earlier construction wrapper ends. The remote prefill side can then miss its
+rejection notice. This seven-file patch joins construction and iterator
+failure cleanup across Chat, Completion and Responses. It sends the notice
+at most once and stops rejection cleanup after the first engine output.</p>
+<p>Pushed fork branch: <a href="https://github.com/spa5k/vllm/tree/feat/stream-kv-admission-cleanup">feat/stream-kv-admission-cleanup</a>.
+Head: <code>c72c801883a1eb9355b9ea8863464a6b74c59482</code>.
+First parent: <code>371745ebd6c12f314402c6c319de2e7ef82c2981</code>.
+Worktree: <code>/Users/pacific/.codex/worktrees/vllm-stream-kv-admission/vllm</code>.
+<a href="../contribution-final-20261018/REPORT.md">Final test evidence and source record</a>.</p>
+<p>Completed validation: 43 normal unit cases pass with mocked engine/RPC inputs:
+24 Chat, 11 Completion and eight Responses. The candidate host audit failed
+after cleanup because it compared the wrong collected-name sets. Independent
+saved-result review confirms the 43 test passes. Three original-code cases
+then fail at the expected missing-notice assertion. That baseline experiment's
+host and strict checker pass the expected-failure contract. The baseline
+pytest suite itself fails. A separate independent review of that last actual
+result was not completed before the stop.</p>
+<p>Before submission: run the proposed real engine and connector test. Show the
+request rejection, notice delivery and actual producer lease release. Check
+cancellation and iterator lifecycle on the supported public path. Permanent
+leakage is not proved. Open #59343 touches the shared helper; #51505 covers
+adjacent multi-prompt work. Open #53298 repairs accepted scheduler state after
+KV load rejection, which is a different failure boundary. Recheck these diffs
+and coordinate before proposing a shared-helper change.</p>
+<h3 id="queue-heading-8">5. ARM GPT-OSS W4A8 gate/up layout</h3>
+<p><strong>Impact 5; preparation 5.</strong> The affected activation path selects the wrong
+gate/up columns. Alternating columns correct the measured native result.</p>
+<p>No dedicated committed fix branch is retained in this packet. Use
+<a href="../contribution-record-20261018/patches/arm-w4a8.patch">arm-w4a8.patch</a>.
+SHA256: <code>6df2e88a4956c998c6319cf4cbf3ab2dd80cf177b3902d57ca039fac9e114e79</code>.
+The runtime source pin is <code>837e87e1c5024843b66383ef1bd60ca5672a9575</code>.
+The saved selected-preimage check extends through
+<code>072c0886d53d933a7e1d3da7e8a3a91670cf181d</code>. This is applicability evidence,
+not a build at that later commit. <a href="../contribution-record-20261018/REPORT.md">Native commands and source record</a>.</p>
+<p>Completed validation: the original native result has 35 of 1,024 values outside
+tolerance. The candidate passes. The official ARM suite passes 169 cases.
+A synthetic two-expert loader/native check also passes.</p>
+<p>Before submission: reproduce the failure and repair on trained GPT-OSS using
+the reporter's actual compression/checkpoint format. Check the loader packing
+contract. Issue #59457 and adjacent #61593 are retained in the fresh ownership
+packet. The synthetic format does not establish the reporter's recipe.
+Create a clean review branch from the patch only after selecting the target.</p>
+<h3 id="queue-heading-9">6. Scalar FP8 scratch reuse</h3>
+<p><strong>Impact 13; preparation 6.</strong> The eager scalar fallback can retain one BF16
+weight scratch buffer instead of two. The benefit is bounded memory reduction
+in that fallback. It is not a generic FP8 or model-speed improvement.</p>
+<p>Local branch: <code>feat/fp8-scalar-scratch</code>.
+Final test-only head: <code>1804ee56d9395f80659209ac3d93ad73020796d8</code>.
+Native-tested production head: <code>216fcf143b84e526c8722e67cbb7b8bb31187a7a</code>.
+Production base: <code>716c5225aefa7aae0628d88a6d58adddbca7c22c</code>.
+Worktree: <code>/Users/pacific/.codex/worktrees/fp8-scalar-scratch/vllm</code>.
+<a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-budget-validation-5h-20261015/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-budget-validation-5h-20261015/REPORT.md" class="local-evidence">Patch record, allocations and model checks</a>.</p>
+<p>Completed validation: 54 CUDA records and synthetic plain/online Llama pairs
+pass. All 12 paired allocation observations save 4,194,304 bytes for the
+1,024 × 2,048 weight. Final production bytes match the native-tested head.
+Timing is mixed and includes a slower cell.</p>
+<p>Before submission: identify a useful supported production configuration that
+actually selects this fallback. Automatic L4/H100 routes usually bypass it.
+The SM100 route has source reachability evidence only; native Blackwell
+validation is missing. Recheck the final base and alias/lifetime assumptions.
+Do not add per-apply savings across layers or call them total model peak.</p>
+<h3 id="queue-heading-10">7. Triton MLA request-table reuse</h3>
+<p><strong>Impact 12; preparation 7.</strong> Query rows can index the original request table
+instead of copying a row for every draft query. This removes an O(BQW)
+temporary and copy. Attention arithmetic remains unchanged.</p>
+<p>Recorded branch: <code>feat/mla-implicit-query-metadata</code>.
+Base and current branch ref: <code>8530aed2b78a19eb00e242031c22bb78d615eea2</code>.
+There is no separate committed patch head in that ref. Use the saved
+<a href="file:///Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/mla.patch" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/mla.patch" class="local-evidence">MLA patch</a>, SHA256
+<code>0e16d1e52a6645cb545215ce978e364ef9f9ec5fb612dd355b94dd10b0bae42f</code>.
+The <a href="file:///Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/final-source-provenance.json" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/evidence/final-source-provenance.json" class="local-evidence">source manifest</a> binds the final four-file patch.</p>
+<p>Completed validation: 16 metadata tests; 18 targeted BF16/FP8 cases on L4.
+A100 passes nine BF16 cases and skips nine unsupported FP8 cases.
+Changed-page/length fixed-query graph replay passes. Five full-model
+DeepSeek-V2-Lite-Chat token/logprob comparisons match across all 27 attention
+layers; 3,650 draft tokens are accepted. Full-model timings are mixed.
+<strong>No stable model speedup is established.</strong> <a href="file:///Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/REPORT.md" title="Local source record: /Users/pacific/Developer/dynamo-audit/20261015/pr-ready-core/REPORT.md" class="local-evidence">Tests and model harness</a>.</p>
+<p>Before submission: recover the patch in a clean branch and confirm that the
+allocation saving warrants the change. Repeat on the final base. Full-model
+graphs, FP8 serving and ROCm remain unvalidated. Open #57094 owns the inherited
+empty-padding NaN issue. Related #37353 is in another backend. The fresh broad
+MLA searches are capped; they do not clear all possible owners.</p>
+<h3 id="queue-heading-11">8. Compact DeepGEMM warmup routes</h3>
+<p><strong>Impact 10; preparation 8.</strong> Keep compact route information and expand only
+the current warmup case. The GEMM work stays the same.</p>
+<p>Local branch: <code>feat/deepgemm-compact-warmup-routes</code>.
+Head: <code>50e79d62764346e384e6461ade61aa86bb7cce8c</code>.
+Base: <code>3f466c852cfd3882820af8dd7963ac775174bce4</code>.
+Worktree: <code>/Users/pacific/.codex/worktrees/core-warmup-count-20261014/vllm</code>.
+<a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md" class="local-evidence">Exact patch, package tests and engine checks</a>.</p>
+<p>Completed validation: 13 normal package CPU cases, 320 native route plans and
+eight native GEMM outputs. A real synthetic FP8 MoE engine matches 48 output
+tokens, weights and CUDA RNG states. H100 retained route allocation falls
+from 77.623 to 0.683 MiB. A small warm helper is about 5.2% slower.</p>
+<p>Before submission: measure total startup peak and the value for a relevant
+trained-model configuration. Keep the helper regression visible. Refresh
+warmup ownership and current source. The saved allocation is not a measured
+reduction in total engine peak or startup time.</p>
+<h3 id="queue-heading-12">9. DeepGEMM route metadata</h3>
+<p><strong>Impact 11; preparation 9.</strong> Count large route sets with less repeated work
+and use one block for each tested PSUM launch. The patch changes two production
+files and two existing test files.</p>
+<p>Local branch: <code>feat/deepgemm-route-metadata-final</code>.
+Head: <code>f547bd2e57f3ed811a5cd13debe4713d2b210e5f</code>.
+Base: <code>3f466c852cfd3882820af8dd7963ac775174bce4</code>.
+No active worktree for this ref is in the current inventory. The branch and
+<a href="file:///Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md" title="Local source record: /Users/pacific/Developer/vllm/benchmarks/local_speed_audit/core-finalize-20261014/REPORT.md" class="local-evidence">metadata-current.patch with test records</a> remain retained.</p>
+<p>Completed validation: 67 current-source H100 cases and both synthetic FP8 MoE
+engine arms. Weights, tokens and finite logprobs match. The large-route path
+reaches R131072. Three PSUM calls each use one block instead of 32. The earlier
+large count component takes 28.614 rather than 50.120 microseconds.</p>
+<p>Before submission: prove useful value in a representative full trained-model
+path. Check small controls, quantization, final-base source and ownership.
+Open #48734 changes count-kernel block sizing and recompilation behavior;
+its interaction needs a changed-line comparison before a proposal. Do not
+quote the component reduction as serving throughput.</p>
+<h3 id="queue-heading-13">10. Embedding dtype in prefix-cache identity</h3>
+<p><strong>Impact 6; preparation 10.</strong> Equal embedding bytes can represent different
+values in FP16 and BF16. A key based only on bytes can then reuse the wrong
+prefix. The draft adds dtype to that identity.</p>
+<p>No dedicated committed fix branch is retained in this packet. Use
+<a href="../contribution-record-20261018/patches/prompt-embedding-dtype.patch">prompt-embedding-dtype.patch</a>.
+SHA256: <code>f7359d31d5cb59986725de1dc0f3a5c996df64f67e3055cc85d1ca0ae910551e</code>.
+Runtime and later selected-preimage pins are the same as entry 5.
+<a href="../contribution-record-20261018/REPORT.md">Exact manager reproduction, tests and commands</a>.</p>
+<p>Completed validation: a real cache-manager probe changes from a wrong 32-token
+cross-dtype hit to zero hit. Same-dtype reuse remains. Nine normal candidate
+cases pass. A later denied import attempt is an environment failure.</p>
+<p>Before submission: exercise the public offline worker/model entry point with
+live prefix reuse. Check supported embedding conversion and cache-identity
+compatibility. Refresh adjacent #56656 and #53769. Their saved scopes differ,
+but the new broad search is capped. No trained-model cache-output result is
+claimed by the manager test.</p>
+<h3 id="queue-heading-14">11. Background Responses terminal state</h3>
+<p><strong>Impact 8; preparation 11.</strong> A stored non-streaming background response can
+remain queued after its producer fails. The draft records failure for active
+responses and preserves existing terminal states and cancellation.</p>
+<p>Pushed fork branch:
+<a href="https://github.com/spa5k/vllm/tree/feat/background-response-terminal">feat/background-response-terminal</a>.
+Head: <code>ce0e01324cd451ed985fa8b39ce071e5b8ac3f07</code>.
+First parent: <code>e80b6c642f21fd5b24439825592f5b9ced36add8</code>.
+Worktree: <code>/Users/pacific/.codex/worktrees/background-response-terminal/vllm</code>.
+<a href="../contribution-final-20261018/REPORT.md">Normal test evidence and prior failed setup</a>.</p>
+<p>Completed validation: 22 controlled rows and 12 normal cases pass. The normal
+cases cover three late errors, eight terminal-state controls and cancellation.
+Engine, renderer and tool inputs are mocked. Host, guest and strict checker
+pass. The initial asset-metadata failure ran zero test cases and stays saved.</p>
+<p>Before submission: create and retrieve through the public HTTP API with a real
+queue and engine. Confirm the failed status and unchanged successful/cancelled
+responses. Run the relevant model/API evaluation. Coordinate any overlap with
+the open Responses lifecycle work before combining patches.</p>
+<h3 id="queue-heading-15">12. Responses cumulative output budget</h3>
+<p><strong>Impact 7; preparation 12.</strong> The allowance can reset between built-in tool
+turns. This draft tracks one request-wide output budget through those turns.</p>
+<p>No dedicated committed fix branch is retained in this packet. Use
+<a href="../contribution-record-20261018/patches/responses-output-budget.patch">responses-output-budget.patch</a>.
+SHA256: <code>d4bdc319f2b89281c4a2b77acf85aab5b613fe6fdf9cf5735529100252f77027</code>.
+Runtime and later selected-preimage pins are the same as entry 5.
+<a href="../contribution-record-20261018/REPORT.md">HTTP reproducer, normal tests and exact commands</a>.</p>
+<p>Completed validation: six original budget failures and two controls through
+real ASGI/Harmony JSON/SSE handlers. The candidate passes all eight HTTP cases
+and 18 normal cases. Engine generation, tokenizer and tools are scripted.</p>
+<p>Before submission: run real model/tool sequences, streaming and non-streaming
+output/usage evaluation on the final base. Resolve the current interactions
+with open #47112, #54064 and #58018. Those change tool-call counts, finalization
+or item lifecycle. Do not submit this as a fully validated public serving fix
+on scripted generation alone.</p>
+<h3 id="queue-heading-16">13. Dynamo profiler artifact provenance: blocked</h3>
+<p><strong>Impact 3; preparation 13.</strong> A skipped or partial profile must not let final
+deployment assembly consume stale fixed-path results. The implementation
+carries results from the current run through interpolation and final assembly.
+It changes five production files and three existing test files.</p>
+<p>Bundle branch: <code>feat/profile-artifact-provenance</code>.
+Candidate: <code>8b991fad3a738d672656267a22ff407877839ff9</code>.
+Base: <code>5f618a58adca23d527763c688b9cc5a322c7efde</code>.
+<a href="file:///Users/pacific/.codex/research/dynamo-2026-10-17/experiments/profiler-artifact-candidate-record-9550/README.md" title="Local source record: /Users/pacific/.codex/research/dynamo-2026-10-17/experiments/profiler-artifact-candidate-record-9550/README.md" class="local-evidence">Local bundle, patch and recovery instructions</a>.
+This is not a public candidate branch.</p>
+<p>Completed validation: independent source review and static checks only.
+The nine authored cases have not run. Normal imports, collection, baseline
+failure, candidate success and lint have not passed. The retained Python
+environment lacks the required dependency closure; some selected suites can
+skip at import. The metadata Cargo result does not close this Python gate.</p>
+<p>Before submission: use a qualified normal environment. Preserve package
+initializers, conftest and plugin discovery. Collect and run the intended cases
+with zero skips. Show genuine aggregate selection, original failure and
+candidate success. Test skipped/partial profiling and deployment assembly.
+Compare current #13770 and #13020 before accepting a new contribution. The
+older selected-base equality check is not a current-main build. Keep blocked
+until the normal gate and owner comparison pass.</p>
+<h3 id="queue-heading-17">Retained work outside the new-PR queue</h3>
+<table>
+<thead>
+<tr>
+<th>Finding and patch location</th>
+<th>Evidence retained</th>
+<th>Reason to hold or exclude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Utility terminal cleanup: <code>feat/utility-terminal-cleanup</code>, <code>6b80689e4263f918946729083bdd54781733e1ad</code></td>
+<td>Six original requests pending; six candidate errors; 23 normal mocked-transport cases pass</td>
+<td><strong>Exclude as duplicate.</strong> Open #56416 and #58279 cover this defect. Their reported real-ZMQ/model results are author claims, not our runs.</td>
+</tr>
+<tr>
+<td>PCP count: <code>feat/pcp-linear-dispatch-count</code>, <code>23d4867fe4c5775b535a0fc2aadbe5cdcdad86d3</code></td>
+<td>208 CPU cases; two-H100 synthetic model matches 272 tokens and 816 scores</td>
+<td>Open #60538 changes short-prefill ownership. The saved vector count is invalid under that policy. The private correction has source/CPU evidence only.</td>
+</tr>
+<tr>
+<td>Table/slot fusion: <code>feat/gather-slot-fusion</code>, <code>a40a6eb6a02bd7995452df7ac4f41cb787c7180c</code></td>
+<td>Native component savings, 14 CUDA cells and synthetic model checks on the old head</td>
+<td>Current source successor has only source/mocked evidence. It does not inherit the old native result. Coordinate #60767.</td>
+</tr>
+<tr>
+<td>Direct segmented mean pooling: initial scout patch/prototype record</td>
+<td>84 correctness cases; L4 component gains; three trained MiniLM pooling checks</td>
+<td>Actual worker dispatch and model throughput missing. Coordinate #60035.</td>
+</tr>
+<tr>
+<td>Direct context-free MLA output: cross-project patch record</td>
+<td>Earlier BF16 model time improves 2.05–2.36%</td>
+<td>Final FP8 dtype guard has CPU evidence only. Rerun the final source natively before ranking it as prepared.</td>
+</tr>
+<tr>
+<td>Dynamo planner, NATS collision and session-removal studies</td>
+<td>Native/component failures and partial candidate results are retained</td>
+<td>Design-policy and owner gates remain. Session work overlaps #16501/#16610. No competing patch is cleared.</td>
+</tr>
+<tr>
+<td>Dynamo physical-copy LRU: <code>feat/lru-copy-position</code>, uncommitted source draft</td>
+<td>Native/parity checks; large pressure-case benefit, small/mixed regressions</td>
+<td>Workload frequency and representative application value unknown. No committed candidate head.</td>
+</tr>
+<tr>
+<td>N-gram replay, split-table caller, serializer and deadline index</td>
+<td>Useful negative results and failed assumptions</td>
+<td>No useful larger-model gain, complete-call regression, weak total benefit or storage/regression cost. Do not submit from component numbers.</td>
+</tr>
+</tbody>
+</table>
+<p>Existing public PRs, including closed proposals, are listed in the main report.
+They are outside this unpublished queue. This update does not reopen them.</p>
+<h3 id="queue-heading-18">Manual handoff</h3>
+<ol>
+<li>Select one candidate and its exact artifact. Review every changed line.</li>
+<li>Verify the branch or patch hash against the provenance packet. For grammar
+and MLA tables, recover the patch; their branch refs alone hold no fix.</li>
+<li>Choose the final upstream base in a separate clean checkout. Preserve the
+existing working trees and other chats' changes. Do not combine independent
+drafts and then claim their individual tests cover the stack.</li>
+<li>Repeat issue comments, linked-open-PR and area-open-PR checks. Read any
+overlapping current diff and review discussion. Stop if the fix is owned.</li>
+<li>Run normal relevant tests and the missing live/model gate stated above.
+Keep original/candidate commands, source hashes, output and failures.</li>
+<li>Run the project PR checklist. Explain scope, tradeoffs, duplicate distinction,
+actual tests and model evaluation. Disclose AI assistance.</li>
+<li>Create a PR only after human review and those conditions are satisfied.</li>
+</ol>
+<p>The linked evidence contains the original test selections and harness commands.
+Commands from frozen containers require their recorded source and environment;
+they are not generic local setup instructions. No new compute budget is active.</p>
+<p>Checklist coverage in this update: evidence scope, cause, compatibility limits,
+complexity/benefit, ownership and missing test gates were assessed. <strong>Skip:
+full current-source changed-line approval and TraceDecay semantic expansion.</strong>
+This update prioritizes saved records and documentation. It does not perform a
+new product-code safety review or establish unindexed consumers as safe.</p>
+</div>
+</section>
+
 <section id="findings">
 <div class="section-head"><div><div class="eyebrow">Research beyond the public PR ledger</div><h2>What we found yesterday and last week.</h2><p>The recent work is dated 17–18 October. The earlier GPU and core campaigns are dated 10–15 October. All seven research sections below are visible when the page opens.</p></div></div>
 <div class="grid research-summary">
@@ -123,6 +639,8 @@ passed. Independent review passed 1,154 data/source checks and three negatives.
 Two original delivery tool objects were not saved; the completion receipt,
 host records and strict-checker object were retained. Keep that evidence limit.</p>
 <p>Source: <code>feat/utility-terminal-cleanup</code>, <code>6b80689e4263f918946729083bdd54781733e1ad</code>.</p>
+<p>Ownership update: open #56416 and #58279 already cover this failure. The draft
+is excluded from new PR work. See the ranked handoff in section 12.</p>
 <p><strong>Background Responses terminal state.</strong> A stored non-streaming response could
 stay queued after an ordinary producer exception. The draft marks an active
 response failed while preserving terminal states and cancellation. Twenty-two
@@ -1259,6 +1777,8 @@ passed. Independent review passed 1,154 data/source checks and three negatives.
 Two original delivery tool objects were not saved; the completion receipt,
 host records and strict-checker object were retained. Keep that evidence limit.</p>
 <p>Source: <code>feat/utility-terminal-cleanup</code>, <code>6b80689e4263f918946729083bdd54781733e1ad</code>.</p>
+<p>Ownership update: open #56416 and #58279 already cover this failure. The draft
+is excluded from new PR work. See the ranked handoff in section 12.</p>
 <p><strong>Background Responses terminal state.</strong> A stored non-streaming response could
 stay queued after an ordinary producer exception. The draft marks an active
 response failed while preserving terminal states and cancellation. Twenty-two
@@ -1613,25 +2133,115 @@ changed. Both vLLM and Dynamo finite automations were read as paused.</p>
 <p>Sources: campaign reports, <a href="https://github.com/spa5k/vllm/blob/feat/vllm-contribution-research-20261018/benchmarks/local_speed_audit/contribution-final-20261018/REPORT.md">final vLLM stop</a>, and
 <a href="#appendix-dynamo">Dynamo budget/history</a>.</p>
 <h3 id="main-heading-36">12. Handoff order</h3>
-<p>This is a suggested review order if Kamran later chooses to resume. It is not
-an active goal, schedule or authorization for more compute.</p>
-<ol>
-<li>Resolve human review and CI access on the open public PRs. Preserve the
-current closed/merged decisions.</li>
-<li>Review the final grammar head as the strongest measured model-performance
-draft, within its narrow supported modes and memory limits.</li>
-<li>Review Dynamo metadata <code>50722af</code> and vLLM KV cleanup <code>c72c801</code> as correctness
-work. The latter still needs real connector/lease validation and shared-helper
-coordination.</li>
-<li>Assess PCP counting, compact warmup and the native-tested fusion/FP8 drafts
-at their exact tested commits. A newer source port needs new validation.</li>
-<li>Review ARM W4A8, Responses cumulative budget, embedding-cache dtype and
-utility/background terminal drafts with their model/engine gaps visible.</li>
-<li>Keep the Dynamo profiler provenance fix blocked until a qualified normal
-environment is available. More mocked tests do not close that gate.</li>
-<li>Keep speculative or hardware-bound TRT/SGLang/MRV2 successors on hold until
-the smallest real native gate can run under a new explicit compute budget.</li>
-</ol>
+<p>The <a href="#review-queue">unpublished review queue</a> ranks the strongest
+remaining findings. It includes exact branch heads or patch hashes, completed
+tests, evidence limits, ownership checks and the missing validation for each.
+It is a manual handoff. It starts no research, schedule or paid work.</p>
+<table>
+<thead>
+<tr>
+<th>Preparation rank</th>
+<th>Impact rank</th>
+<th>Finding</th>
+<th>Main remaining condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>9</td>
+<td>Dynamo context metadata</td>
+<td>Current-base and platform scope</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>Grammar-selected output head</td>
+<td>Recover the patch; review supported scope and current base</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>MLA live-cache restoration</td>
+<td>Representative transfer/attention and trained model</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>KV rejection cleanup</td>
+<td>Live connector and producer lease witness</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>ARM GPT-OSS W4A8 gate/up layout</td>
+<td>Trained model with reporter checkpoint format</td>
+</tr>
+<tr>
+<td>6</td>
+<td>13</td>
+<td>FP8 scalar scratch</td>
+<td>Useful production fallback and supported-device gate</td>
+</tr>
+<tr>
+<td>7</td>
+<td>12</td>
+<td>MLA request-table reuse</td>
+<td>Final-base validation; graph/FP8 serving if claimed</td>
+</tr>
+<tr>
+<td>8</td>
+<td>10</td>
+<td>Compact DeepGEMM warmup routes</td>
+<td>Total startup memory and representative value</td>
+</tr>
+<tr>
+<td>9</td>
+<td>11</td>
+<td>DeepGEMM route metadata</td>
+<td>Representative trained-model and serving value</td>
+</tr>
+<tr>
+<td>10</td>
+<td>6</td>
+<td>Embedding dtype in prefix-cache identity</td>
+<td>Public worker/model cache path</td>
+</tr>
+<tr>
+<td>11</td>
+<td>8</td>
+<td>Background Responses terminal state</td>
+<td>Public HTTP with a real queue and engine</td>
+</tr>
+<tr>
+<td>12</td>
+<td>7</td>
+<td>Responses cumulative output budget</td>
+<td>Real model/tool evaluation and owner coordination</td>
+</tr>
+<tr>
+<td>13</td>
+<td>3</td>
+<td>Dynamo profiler artifact provenance</td>
+<td>Blocked: normal environment and tests</td>
+</tr>
+</tbody>
+</table>
+<p>Preparation ranks measure distance to a human-prepared PR. Impact ranks compare
+potential effect within the supported path. They do not measure deployment
+frequency. No entry is approved for immediate submission. The grammar draft
+has the strongest measured model-speed result. KV cleanup has broader potential
+failure-path value but still lacks a live lease-release witness.</p>
+<p><strong>Ownership correction, 19 October, India time:</strong> open upstream
+<a href="https://github.com/vllm-project/vllm/pull/56416">PR #56416</a> and
+<a href="https://github.com/vllm-project/vllm/pull/58279">#58279</a> cover pending utility
+futures after receiver termination. Do not open our utility-terminal draft as
+a competing fix. The earlier test results remain valid at their stated scope.
+This corrects the earlier ownership screen; it does not erase historical work.</p>
+<p><strong>Recovery warning:</strong> the grammar and MLA request-table branch refs point at
+their common base. They do not contain committed patch changes. The queue
+links the exact saved patches and file hashes. Use those artifacts for recovery.
+Other branches remain independent drafts, not one tested stack.</p>
 <p>Every upstream submission still needs a human to understand the cause, review
 every changed line, run the relevant tests, refresh duplicate/owner checks and
 disclose AI assistance. No new source stack was assembled or validated here.</p>
@@ -1649,6 +2259,11 @@ retrieval limits.</li>
 <li><a href="automation-state.json">Schedule state</a>: both finite automations are paused.</li>
 <li><a href="report-validation.json">Report checks</a>: local citation, JSON, hash and PR-count
 checks. These checks do not rerun historical product experiments.</li>
+<li><a href="#review-queue">Unpublished review queue</a>: impact and preparation
+ranks with branches, tests and missing validation.</li>
+<li><a href="unpublished-owner-checks.json">Fresh ownership checks</a> and
+<a href="unpublished-patch-provenance.json">patch provenance</a>: exact commands, returned
+observations and local artifact identities for the ranked handoff.</li>
 </ul>
 <p>The original consolidation was saved locally. Kamran then authorized this
 report and an HTML edition to be committed and pushed to
@@ -2208,7 +2823,7 @@ are separate. Both research schedules remain paused.</p>
 </div></details>
 <div class="source-links"><a class="button" href="public-pr-state.json">PR snapshot</a><a class="button" href="source-index.json">Source hashes</a><a class="button" href="report-validation.json">Report checks</a><a class="button" href="automation-state.json">Paused schedules</a></div>
 </section>
-<footer class="footer"><p>Prepared with AI assistance for Kamran. Source period: 6–18 October 2026. This HTML edition presents saved evidence. It adds no new model or performance result.</p><p>Markdown SHA-256: <code>c186e9b88ad2044f104683460226781d4f79c5cfaded71afb55b7d782a02b08c</code></p><p>Self-contained HTML. No external fonts, analytics, CDN scripts or network requests. Both research schedules remain paused.</p></footer>
+<footer class="footer"><p>Prepared with AI assistance for Kamran. Source period: 6–18 October 2026. This HTML edition presents saved evidence. It adds no new model or performance result.</p><p>Markdown SHA-256: <code>7eb7b9b1bc5ed1ce9ee2e15518833df11c8e88489fb9945d67440922c5a3f8f0</code></p><p>Self-contained HTML. No external fonts, analytics, CDN scripts or network requests. Both research schedules remain paused.</p></footer>
 </main></div>
 <script>
 (() => {

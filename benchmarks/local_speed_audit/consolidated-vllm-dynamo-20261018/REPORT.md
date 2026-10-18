@@ -400,6 +400,9 @@ host records and strict-checker object were retained. Keep that evidence limit.
 
 Source: `feat/utility-terminal-cleanup`, `6b80689e4263f918946729083bdd54781733e1ad`.
 
+Ownership update: open #56416 and #58279 already cover this failure. The draft
+is excluded from new PR work. See the ranked handoff in section 12.
+
 **Background Responses terminal state.** A stored non-streaming response could
 stay queued after an ordinary producer exception. The draft marks an active
 response failed while preserving terminal states and cancellation. Twenty-two
@@ -611,24 +614,44 @@ Sources: campaign reports, [final vLLM stop][VFINAL], and
 
 ## 12. Handoff order
 
-This is a suggested review order if Kamran later chooses to resume. It is not
-an active goal, schedule or authorization for more compute.
+The [unpublished review queue](UNPUBLISHED_REVIEW_QUEUE.md) ranks the strongest
+remaining findings. It includes exact branch heads or patch hashes, completed
+tests, evidence limits, ownership checks and the missing validation for each.
+It is a manual handoff. It starts no research, schedule or paid work.
 
-1. Resolve human review and CI access on the open public PRs. Preserve the
-   current closed/merged decisions.
-2. Review the final grammar head as the strongest measured model-performance
-   draft, within its narrow supported modes and memory limits.
-3. Review Dynamo metadata `50722af` and vLLM KV cleanup `c72c801` as correctness
-   work. The latter still needs real connector/lease validation and shared-helper
-   coordination.
-4. Assess PCP counting, compact warmup and the native-tested fusion/FP8 drafts
-   at their exact tested commits. A newer source port needs new validation.
-5. Review ARM W4A8, Responses cumulative budget, embedding-cache dtype and
-   utility/background terminal drafts with their model/engine gaps visible.
-6. Keep the Dynamo profiler provenance fix blocked until a qualified normal
-   environment is available. More mocked tests do not close that gate.
-7. Keep speculative or hardware-bound TRT/SGLang/MRV2 successors on hold until
-   the smallest real native gate can run under a new explicit compute budget.
+| Preparation rank | Impact rank | Finding | Main remaining condition |
+| --- | --- | --- | --- |
+| 1 | 9 | Dynamo context metadata | Current-base and platform scope |
+| 2 | 2 | Grammar-selected output head | Recover the patch; review supported scope and current base |
+| 3 | 4 | MLA live-cache restoration | Representative transfer/attention and trained model |
+| 4 | 1 | KV rejection cleanup | Live connector and producer lease witness |
+| 5 | 5 | ARM GPT-OSS W4A8 gate/up layout | Trained model with reporter checkpoint format |
+| 6 | 13 | FP8 scalar scratch | Useful production fallback and supported-device gate |
+| 7 | 12 | MLA request-table reuse | Final-base validation; graph/FP8 serving if claimed |
+| 8 | 10 | Compact DeepGEMM warmup routes | Total startup memory and representative value |
+| 9 | 11 | DeepGEMM route metadata | Representative trained-model and serving value |
+| 10 | 6 | Embedding dtype in prefix-cache identity | Public worker/model cache path |
+| 11 | 8 | Background Responses terminal state | Public HTTP with a real queue and engine |
+| 12 | 7 | Responses cumulative output budget | Real model/tool evaluation and owner coordination |
+| 13 | 3 | Dynamo profiler artifact provenance | Blocked: normal environment and tests |
+
+Preparation ranks measure distance to a human-prepared PR. Impact ranks compare
+potential effect within the supported path. They do not measure deployment
+frequency. No entry is approved for immediate submission. The grammar draft
+has the strongest measured model-speed result. KV cleanup has broader potential
+failure-path value but still lacks a live lease-release witness.
+
+**Ownership correction, 19 October, India time:** open upstream
+[PR #56416](https://github.com/vllm-project/vllm/pull/56416) and
+[#58279](https://github.com/vllm-project/vllm/pull/58279) cover pending utility
+futures after receiver termination. Do not open our utility-terminal draft as
+a competing fix. The earlier test results remain valid at their stated scope.
+This corrects the earlier ownership screen; it does not erase historical work.
+
+**Recovery warning:** the grammar and MLA request-table branch refs point at
+their common base. They do not contain committed patch changes. The queue
+links the exact saved patches and file hashes. Use those artifacts for recovery.
+Other branches remain independent drafts, not one tested stack.
 
 Every upstream submission still needs a human to understand the cause, review
 every changed line, run the relevant tests, refresh duplicate/owner checks and
@@ -648,6 +671,11 @@ disclose AI assistance. No new source stack was assembled or validated here.
 - [Schedule state](automation-state.json): both finite automations are paused.
 - [Report checks](report-validation.json): local citation, JSON, hash and PR-count
   checks. These checks do not rerun historical product experiments.
+- [Unpublished review queue](UNPUBLISHED_REVIEW_QUEUE.md): impact and preparation
+  ranks with branches, tests and missing validation.
+- [Fresh ownership checks](unpublished-owner-checks.json) and
+  [patch provenance](unpublished-patch-provenance.json): exact commands, returned
+  observations and local artifact identities for the ranked handoff.
 
 The original consolidation was saved locally. Kamran then authorized this
 report and an HTML edition to be committed and pushed to
