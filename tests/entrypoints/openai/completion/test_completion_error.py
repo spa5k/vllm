@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
 
+import asyncio
 import json
 from dataclasses import dataclass, field
 from typing import Any
@@ -16,7 +17,12 @@ from vllm.entrypoints.openai.models.protocol import BaseModelPath
 from vllm.entrypoints.openai.models.serving import OpenAIServingModels
 from vllm.entrypoints.scale_out.render.serving import ServingRender
 from vllm.entrypoints.serve.engine.protocol import ErrorResponse
-from vllm.exceptions import GenerationError, VLLMValidationError
+from vllm.exceptions import (
+    GenerationError,
+    MaxQueuedTokensError,
+    QueueOverflowError,
+    VLLMValidationError,
+)
 from vllm.logprobs import Logprob
 from vllm.outputs import CompletionOutput, RequestOutput, WeightVersionSpan
 from vllm.renderers.deepseek_v4 import DeepseekV4Renderer
@@ -835,6 +841,89 @@ async def test_completion_error_stream_first_chunk(include_usage: bool):
         f"Expected error message in chunks: {chunks}"
     )
     assert chunks[-1] == "data: [DONE]\n\n"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("stream", [True, False])
+@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
+@pytest.mark.parametrize("notice_fails", [False, True])
+async def test_late_completion_queue_rejection_notifies_remote_prefill_once(
+    stream, error_type, notice_fails
+):
+    """A single completion input keeps cleanup across lazy engine iteration."""
+    engine = MagicMock(spec=AsyncLLM)
+    engine.errored = False
+    engine.model_config = MockModelConfig()
+    engine.input_processor = MagicMock()
+    engine.renderer = _build_renderer(engine.model_config)
+    engine.notify_kv_transfer_request_rejected = AsyncMock(
+        side_effect=RuntimeError("notice failed") if notice_fails else None
+    )
+    serving = _build_serving_completion(engine)
+    serving.has_kv_connector = True
+
+    async def reject(*args, **kwargs):
+        raise error_type()
+        yield
+
+    engine.generate.side_effect = reject
+    request = CompletionRequest(
+        model=MODEL_NAME,
+        prompt="hi",
+        max_tokens=10,
+        stream=stream,
+        kv_transfer_params={"do_remote_prefill": True},
+    )
+    if stream:
+        response = await serving.create_completion(request)
+        chunks = [chunk async for chunk in response]
+        assert any('"error"' in chunk for chunk in chunks)
+        assert chunks[-1] == "data: [DONE]\n\n"
+    else:
+        with pytest.raises(error_type):
+            await serving.create_completion(request)
+    engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
+        request.request_id, request.kv_transfer_params, data_parallel_rank=None
+    )
+
+
+@pytest.mark.asyncio
+async def test_multi_prompt_completion_does_not_use_single_input_rejection_notice():
+    """One rejected branch cannot establish ownership of another prompt's KV."""
+    engine = MagicMock(spec=AsyncLLM)
+    engine.errored = False
+    engine.model_config = MockModelConfig()
+    engine.input_processor = MagicMock()
+    engine.renderer = _build_renderer(engine.model_config)
+    engine.notify_kv_transfer_request_rejected = AsyncMock()
+    serving = _build_serving_completion(engine)
+    serving.has_kv_connector = True
+
+    admitted = asyncio.Event()
+
+    async def generate(engine_input, sampling_params, request_id, **kwargs):
+        if request_id.endswith("-0"):
+            admitted.set()
+            yield _make_metrics_request_output(metrics=None)
+            return
+        await admitted.wait()
+        raise QueueOverflowError()
+
+    engine.generate.side_effect = generate
+    request = CompletionRequest(
+        model=MODEL_NAME,
+        prompt=["one", "two"],
+        max_tokens=10,
+        stream=True,
+        kv_transfer_params={"do_remote_prefill": True},
+    )
+    response = await serving.create_completion(request)
+    chunks = [chunk async for chunk in response]
+    assert admitted.is_set()
+    assert engine.generate.call_count == 2
+    assert any('"error"' in chunk for chunk in chunks)
+    assert chunks[-1] == "data: [DONE]\n\n"
+    engine.notify_kv_transfer_request_rejected.assert_not_awaited()
 
 
 def test_json_schema_response_format_missing_schema():

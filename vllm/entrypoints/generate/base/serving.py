@@ -2,10 +2,11 @@
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
 import json
 import time
-from collections.abc import Awaitable
+from collections.abc import AsyncGenerator, Awaitable
+from contextlib import aclosing
 from dataclasses import dataclass, field
 from http import HTTPStatus
-from typing import ClassVar, Generic, TypeVar
+from typing import Any, ClassVar, Generic, TypeVar
 
 from fastapi import Request
 from pydantic import ConfigDict
@@ -25,7 +26,11 @@ from vllm.entrypoints.serve.engine.protocol import ErrorResponse
 from vllm.entrypoints.serve.engine.serving import BaseServing
 from vllm.entrypoints.serve.engine.typing import AnyRequest
 from vllm.entrypoints.serve.utils.request_logger import RequestLogger
-from vllm.exceptions import GenerationError
+from vllm.exceptions import (
+    GenerationError,
+    MaxQueuedTokensError,
+    QueueOverflowError,
+)
 from vllm.inputs import EngineInput
 from vllm.logger import init_logger
 from vllm.logprobs import Logprob, PromptLogprobs
@@ -124,6 +129,46 @@ class ServeContext(Generic[RequestT]):
     lora_request: LoRARequest | None = None
     engine_inputs: list[EngineInput] | None = None
     model_config = ConfigDict(arbitrary_types_allowed=True)
+
+
+@dataclass
+class _KVTransferRejectionCleanup:
+    engine_client: EngineClient
+    request_id: str
+    kv_transfer_params: dict[str, Any]
+    data_parallel_rank: int | None
+    attempted: bool = False
+    engine_output_observed: bool = False
+
+    async def notify_once(self) -> None:
+        if self.attempted or self.engine_output_observed:
+            return
+        self.attempted = True
+        try:
+            await self.engine_client.notify_kv_transfer_request_rejected(
+                self.request_id,
+                self.kv_transfer_params,
+                data_parallel_rank=self.data_parallel_rank,
+            )
+        except Exception:
+            logger.warning(
+                "Failed to notify KV connector about rejected request %s",
+                self.request_id,
+                exc_info=True,
+            )
+
+    async def guard_initial_admission(
+        self, iterator: AsyncGenerator[RequestOutput, None]
+    ) -> AsyncGenerator[RequestOutput, None]:
+        async with aclosing(iterator):
+            try:
+                async for output in iterator:
+                    if isinstance(output, RequestOutput):
+                        self.engine_output_observed = True
+                    yield output
+            except (QueueOverflowError, MaxQueuedTokensError):
+                await self.notify_once()
+                raise
 
 
 class GenerateBaseServing(BaseServing, BeamSearchOnlineMixin):
@@ -268,17 +313,35 @@ class GenerateBaseServing(BaseServing, BeamSearchOnlineMixin):
                     pass
         return request.priority
 
+    def _create_kv_transfer_rejection_cleanup(
+        self,
+        request: ChatCompletionRequest | CompletionRequest | ResponsesRequest,
+        raw_request: Request | None,
+    ) -> _KVTransferRejectionCleanup | None:
+        params = self.has_kv_connector and request.kv_transfer_params
+        if not params or not params.get("do_remote_prefill"):
+            return None
+        return _KVTransferRejectionCleanup(
+            self.engine_client,
+            request.request_id,
+            params,
+            self._get_data_parallel_rank(raw_request),
+        )
+
     async def _with_kv_transfer_rejection_cleanup(
         self,
         awaitable: Awaitable[_T],
         request: ChatCompletionRequest | CompletionRequest | ResponsesRequest,
         raw_request: Request | None,
+        *,
+        kv_cleanup: _KVTransferRejectionCleanup | None = None,
     ) -> _T:
-        """Wrap a `create_*` coroutine so that, if it raises or returns an
-        ErrorResponse (i.e. the request never reached the engine), the KV
-        connector is notified to free any pinned remote-prefill blocks."""
-        kv_transfer_params = self.has_kv_connector and request.kv_transfer_params
-        if not kv_transfer_params or not kv_transfer_params.get("do_remote_prefill"):
+        """Notify once for rejection unless engine output was observed."""
+        if kv_cleanup is None:
+            kv_cleanup = self._create_kv_transfer_rejection_cleanup(
+                request, raw_request
+            )
+        if kv_cleanup is None:
             return await awaitable
 
         notify = True
@@ -289,18 +352,7 @@ class GenerateBaseServing(BaseServing, BeamSearchOnlineMixin):
             return result
         finally:
             if notify:
-                try:
-                    await self.engine_client.notify_kv_transfer_request_rejected(
-                        request.request_id,
-                        kv_transfer_params,
-                        data_parallel_rank=self._get_data_parallel_rank(raw_request),
-                    )
-                except Exception:
-                    logger.warning(
-                        "Failed to notify KV connector about rejected request %s",
-                        request.request_id,
-                        exc_info=True,
-                    )
+                await kv_cleanup.notify_once()
 
     @staticmethod
     def _get_decoded_token(

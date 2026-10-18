@@ -67,6 +67,7 @@ from vllm.entrypoints.openai.responses.streaming_events import (
     StreamingState,
 )
 from vllm.entrypoints.serve.engine.protocol import ErrorResponse
+from vllm.exceptions import MaxQueuedTokensError, QueueOverflowError
 from vllm.inputs import tokens_input
 from vllm.logprobs import Logprob as SampleLogprob
 from vllm.outputs import CompletionOutput, RequestOutput
@@ -1483,6 +1484,101 @@ def _make_serving_instance(
         tool_parser=tool_parser,
         enable_per_request_metrics=enable_per_request_metrics,
     )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("stream", [True, False])
+@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
+@pytest.mark.parametrize("reject_after_output", [False, True])
+async def test_responses_queue_rejection_notice_only_before_first_engine_output(
+    stream, error_type, reject_after_output, monkeypatch: pytest.MonkeyPatch
+):
+    """A later tool turn cannot release the first turn's already used prefix."""
+
+    class ToolCallingContext(HarmonyContext):
+        def __init__(self, *args, **kwargs):
+            self._messages = []
+            self.request = kwargs["request"]
+            self._needs_tool_call = reject_after_output
+
+        def append_output(self, output):
+            pass
+
+        def need_builtin_tool_call(self):
+            return self._needs_tool_call
+
+        async def call_tool(self):
+            self._needs_tool_call = False
+            return []
+
+        def append_tool_output(self, output):
+            pass
+
+    monkeypatch.setattr(
+        "vllm.entrypoints.openai.responses.serving.HarmonyContext",
+        ToolCallingContext,
+    )
+    serving = _make_serving_instance()
+    serving.use_harmony = True
+    serving.has_kv_connector = True
+    serving.engine_client.errored = False
+    serving.engine_client.notify_kv_transfer_request_rejected = AsyncMock()
+    serving.models.model_name.return_value = "test-model"
+    serving._check_model = AsyncMock(return_value=None)
+    serving._maybe_get_adapters = MagicMock(return_value=None)
+    serving._make_response_parser = MagicMock(return_value=None)
+    serving.online_renderer.validate_chat_template.return_value = None
+    serving._render_resolved_response_inputs = AsyncMock(
+        return_value=SimpleNamespace(messages=[], engine_input=tokens_input([7, 8]))
+    )
+    serving.online_renderer.render_responses_harmony_messages.return_value = (
+        tokens_input([7, 8, 9])
+    )
+
+    async def consume_full(request, sampling_params, result_generator, *args):
+        async for _ in result_generator:
+            pass
+
+    async def consume_stream(request, sampling_params, result_generator, *args):
+        async for context in result_generator:
+            yield context
+
+    serving.responses_full_generator = consume_full
+    serving.responses_stream_generator = consume_stream
+    calls = 0
+
+    async def generate(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        if reject_after_output and calls == 1:
+            output = _make_request_output("hello", [10], finish_reason="stop")
+            output.finished = True
+            yield output
+            return
+        raise error_type()
+
+    serving.engine_client.generate.side_effect = generate
+    request = ResponsesRequest(
+        input="hi",
+        tools=[],
+        stream=stream,
+        store=False,
+        kv_transfer_params={"do_remote_prefill": True},
+    )
+    with pytest.raises(error_type):
+        response = await serving.create_responses(request)
+        if stream:
+            async for _ in response:
+                pass
+
+    assert calls == (2 if reject_after_output else 1)
+    notice = serving.engine_client.notify_kv_transfer_request_rejected
+    if reject_after_output:
+        notice.assert_not_awaited()
+    else:
+        notice.assert_awaited_once_with(
+            request.request_id, request.kv_transfer_params, data_parallel_rank=None
+        )
 
 
 async def _empty_context_generator():

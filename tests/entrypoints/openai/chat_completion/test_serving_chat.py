@@ -44,7 +44,12 @@ from vllm.entrypoints.openai.models.serving import (
 from vllm.entrypoints.openai.parser.harmony_utils import get_encoding
 from vllm.entrypoints.serve.engine.protocol import ErrorResponse
 from vllm.entrypoints.serve.utils.tool_calls_utils import resolve_finish_reason
-from vllm.exceptions import GenerationError, QueueOverflowError, VLLMValidationError
+from vllm.exceptions import (
+    GenerationError,
+    MaxQueuedTokensError,
+    QueueOverflowError,
+    VLLMValidationError,
+)
 from vllm.inputs import TokensPrompt
 from vllm.logprobs import Logprob
 from vllm.multimodal.inputs import PlaceholderRange
@@ -1545,7 +1550,8 @@ async def test_serving_chat_returns_correct_model_name():
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("stream", [True, False])
-async def test_admission_rejection_escapes_before_response_starts(stream):
+@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
+async def test_admission_rejection_escapes_before_response_starts(stream, error_type):
     """Overload rejections must propagate out of create_chat_completion.
 
     For streaming this is the only chance to return a real HTTP status: once
@@ -1557,19 +1563,103 @@ async def test_admission_rejection_escapes_before_response_starts(stream):
     mock_engine.model_config = MockModelConfig()
     mock_engine.input_processor = MagicMock()
     mock_engine.renderer = _build_renderer(mock_engine.model_config)
-    mock_engine.check_admission.side_effect = QueueOverflowError()
+    mock_engine.check_admission.side_effect = error_type()
+    mock_engine.notify_kv_transfer_request_rejected = AsyncMock()
 
     serving_chat = _build_serving_chat(mock_engine)
+    serving_chat.has_kv_connector = True
     req = ChatCompletionRequest(
         model=MODEL_NAME,
         messages=[{"role": "user", "content": "what is 1+1?"}],
         stream=stream,
+        kv_transfer_params={"do_remote_prefill": True},
     )
 
-    with pytest.raises(QueueOverflowError):
+    with pytest.raises(error_type):
         await serving_chat.create_chat_completion(req)
 
     mock_engine.generate.assert_not_called()
+
+    mock_engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
+        req.request_id, req.kv_transfer_params, data_parallel_rank=None
+    )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("stream", [True, False])
+@pytest.mark.parametrize("error_type", [QueueOverflowError, MaxQueuedTokensError])
+@pytest.mark.parametrize("remote_prefill", [True, False])
+@pytest.mark.parametrize("n", [1, 2])
+async def test_late_chat_queue_rejection_notifies_remote_prefill_once(
+    stream, error_type, remote_prefill, n
+):
+    """Lazy queue rejection releases remote prefill, including parallel sampling."""
+    engine = _build_mock_engine()
+    engine.notify_kv_transfer_request_rejected = AsyncMock()
+    serving = _build_serving_chat(engine)
+    serving.has_kv_connector = True
+
+    async def reject(*args, **kwargs):
+        raise error_type()
+        yield
+
+    engine.generate.side_effect = reject
+    request = ChatCompletionRequest(
+        model=MODEL_NAME,
+        messages=[{"role": "user", "content": "hi"}],
+        stream=stream,
+        n=n,
+        kv_transfer_params={"do_remote_prefill": True} if remote_prefill else None,
+    )
+    if stream:
+        response = await serving.create_chat_completion(request)
+        chunks = [chunk async for chunk in response]
+        assert any('"error"' in chunk for chunk in chunks)
+        assert chunks[-1] == "data: [DONE]\n\n"
+    else:
+        with pytest.raises(error_type):
+            await serving.create_chat_completion(request)
+
+    engine.generate.assert_called_once()
+    if remote_prefill:
+        engine.notify_kv_transfer_request_rejected.assert_awaited_once_with(
+            request.request_id, request.kv_transfer_params, data_parallel_rank=None
+        )
+    else:
+        engine.notify_kv_transfer_request_rejected.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("stream", [True, False])
+async def test_chat_engine_output_prevents_rejection_notice(stream):
+    """An error after engine output must not release its remote prefix again."""
+    engine = _build_mock_engine()
+    engine.notify_kv_transfer_request_rejected = AsyncMock()
+    serving = _build_serving_chat(engine)
+    serving.has_kv_connector = True
+
+    async def generate_then_fail(*args, **kwargs):
+        output = _make_metrics_request_output(metrics=None)
+        output.finished = False
+        output.outputs[0].finish_reason = None
+        yield output
+        raise GenerationError("backend failed")
+
+    engine.generate.side_effect = generate_then_fail
+    request = ChatCompletionRequest(
+        model=MODEL_NAME,
+        messages=[{"role": "user", "content": "hi"}],
+        stream=stream,
+        kv_transfer_params={"do_remote_prefill": True},
+    )
+    if stream:
+        response = await serving.create_chat_completion(request)
+        chunks = [chunk async for chunk in response]
+        assert chunks[-1] == "data: [DONE]\n\n"
+    else:
+        with pytest.raises(GenerationError):
+            await serving.create_chat_completion(request)
+    engine.notify_kv_transfer_request_rejected.assert_not_awaited()
 
 
 @pytest.mark.asyncio

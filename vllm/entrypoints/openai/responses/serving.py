@@ -29,6 +29,7 @@ from vllm.entrypoints.generate.base.protocol import (
 )
 from vllm.entrypoints.generate.base.serving import (
     GenerateBaseServing,
+    _KVTransferRejectionCleanup,
     build_per_request_timing_metrics,
 )
 from vllm.entrypoints.mcp.tool_server import ToolServer
@@ -320,12 +321,20 @@ class OpenAIServingResponses(GenerateBaseServing):
         | ResponsesResponse
         | ErrorResponse
     ):
+        kv_cleanup = self._create_kv_transfer_rejection_cleanup(request, raw_request)
         return await self._with_kv_transfer_rejection_cleanup(
-            self._create_responses(request, raw_request), request, raw_request
+            self._create_responses(request, raw_request, kv_cleanup=kv_cleanup),
+            request,
+            raw_request,
+            kv_cleanup=kv_cleanup,
         )
 
     async def _create_responses(
-        self, request: ResponsesRequest, raw_request: Request | None = None
+        self,
+        request: ResponsesRequest,
+        raw_request: Request | None = None,
+        *,
+        kv_cleanup: _KVTransferRejectionCleanup | None = None,
     ) -> (
         AsyncGenerator[StreamingResponsesResponse, None]
         | ResponsesResponse
@@ -527,6 +536,7 @@ class OpenAIServingResponses(GenerateBaseServing):
                 session_id=session_id,
                 reasoning_parser_kwargs=reasoning_parser_kwargs,
                 reasoning_ended=True if request._grammar_from_parser else None,
+                kv_cleanup=kv_cleanup,
             )
             generators.append(generator)
 
@@ -649,6 +659,7 @@ class OpenAIServingResponses(GenerateBaseServing):
         session_id: str | None = None,
         reasoning_parser_kwargs: dict[str, Any] | None = None,
         reasoning_ended: bool | None = None,
+        kv_cleanup: _KVTransferRejectionCleanup | None = None,
     ):
         max_model_len = self.model_config.max_model_len
         cache_salt = cast(str | None, engine_input.get("cache_salt"))
@@ -677,6 +688,9 @@ class OpenAIServingResponses(GenerateBaseServing):
                 reasoning_parser_kwargs=reasoning_parser_kwargs,
                 reasoning_ended=reasoning_ended,
             )
+
+            if sub_request == 0 and kv_cleanup is not None:
+                generator = kv_cleanup.guard_initial_admission(generator)
 
             async for res in generator:
                 context.request_metrics = res.metrics

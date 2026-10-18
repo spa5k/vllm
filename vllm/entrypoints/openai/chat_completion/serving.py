@@ -21,6 +21,7 @@ from vllm.entrypoints.generate.base.protocol import (
 )
 from vllm.entrypoints.generate.base.serving import (
     GenerateBaseServing,
+    _KVTransferRejectionCleanup,
     build_per_request_timing_metrics,
     build_spec_decoding_metrics,
     chat_top_logprobs_limit,
@@ -292,14 +293,20 @@ class OpenAIServingChat(GenerateBaseServing):
         for the API specification. This API mimics the OpenAI
         Chat Completion API.
         """
+        kv_cleanup = self._create_kv_transfer_rejection_cleanup(request, raw_request)
         return await self._with_kv_transfer_rejection_cleanup(
-            self._create_chat_completion(request, raw_request), request, raw_request
+            self._create_chat_completion(request, raw_request, kv_cleanup=kv_cleanup),
+            request,
+            raw_request,
+            kv_cleanup=kv_cleanup,
         )
 
     async def _create_chat_completion(
         self,
         request: ChatCompletionRequest,
         raw_request: Request | None = None,
+        *,
+        kv_cleanup: _KVTransferRejectionCleanup | None = None,
     ) -> AsyncGenerator[str, None] | ChatCompletionResponse | ErrorResponse:
         # Streaming response
         tokenizer = self.renderer.tokenizer
@@ -407,6 +414,8 @@ class OpenAIServingChat(GenerateBaseServing):
 
         assert len(generators) == 1
         (result_generator,) = generators
+        if kv_cleanup is not None and not request.use_beam_search:
+            result_generator = kv_cleanup.guard_initial_admission(result_generator)
 
         if request.stream:
             return self.chat_completion_stream_generator(
