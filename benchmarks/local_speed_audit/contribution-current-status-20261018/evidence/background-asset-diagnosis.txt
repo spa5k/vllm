@@ -1,0 +1,13 @@
+# Background12 prephase failure
+
+The saved guest failed on a stale test-file descriptor before any origin, collection or test phase. The guest status is `failed`; `phases` is empty. This is an input metadata mismatch. It is not a CPUinfo import denial or a test failure.
+
+The adapter copied Compact18's `harmony-inputs.json` byte for byte. Its `files.real_parser_test` points to the overridden Responses test path but still declares the old Compact18 test: 92,927 bytes, SHA256 `b2fb41e825a5c8681c18cdfa0529b9f8b9a529d4d3b69021ac2fb263cb5441d2`. The approved background file at that effective mount is 87,013 bytes, SHA256 `6463ee688eef79b3d35a0d8813b74e84845d3978dcaae86f681717abb6c5722a`.
+
+The unchanged `harmony` function checks each asset's size before its hash. All six other effective asset paths match their full saved size and SHA. Both pinned embedded ranges match. The single stale test row explains the saved assertion at runner line132. The existing candidate source override and derived manifest already declare the correct background test. No source, test or native asset change is needed.
+
+The smallest correction is the two values in that one Harmony row. The changed JSON hash must then be bound by `LOCAL_FILES` in the runner. The resulting source manifest/runner identity and family role/hash references need ordinary exact rebinding for a fresh separately reviewed attempt. Keep the helper function, tests, policy, resources and lifecycle algorithms unchanged. This diagnosis creates no successor gate or retry authority.
+
+`asset-comparison.json` has all seven effective host paths and descriptors. `result.json` binds the 16,726-byte saved guest stdout, SHA256 `865b644afebccbefbf0e0ee8e0cf1cb3dfee58e592267cfebb47a011a60d1326`. The run was not sealed when those bytes were read. This narrow diagnosis does not audit lifecycle, cleanup or native Root completion. It does not accept any test, import, model, native ABI or runtime result.
+
+Own stdlib data checks read named files, parse source AST, compare hashes and inspect fixed binary byte ranges. No subject/helper/test function, import, process, timer, resource or container ran.

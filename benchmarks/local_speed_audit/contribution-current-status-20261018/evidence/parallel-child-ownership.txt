@@ -1,0 +1,31 @@
+# Parallel-sampling request ownership
+
+Verdict: **no new supported defect is selected**. The concrete parent-state retention branch is already owned by open PR #51629. No patch, new regression, or execution is justified for that branch.
+
+## Exact source and supported path
+
+Main was observed at `fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de`. The five fresh GitHub Contents receipts close the exact AsyncLLM, OutputProcessor, ParentRequest, InputProcessor and nearby AsyncLLM test files. `SOURCE_IDENTITIES.json` records their byte counts, SHA256 and recomputed Git blob SHA1. AST parsing did not execute any source body.
+
+The selected public engine flow is ordinary `AsyncLLM.generate` with `SamplingParams(n>1)`. The existing `test_abort` uses n=3 among concurrent requests and checks that cancelling selected callers does not change the other requests' token totals. This is a real existing caller/test design. The test was read, not run. It is CUDA-gated at module import on this snapshot, so this audit does not label that whole suite a cheap CPU execution gate.
+
+`AsyncLLM.add_request` builds all child IDs through `ParentRequest.get_child_info`, checks aggregate admission, and registers every local child before its first EngineCore submission await. The send loop is inside `except BaseException`, which aborts the exact internal parent ID and re-raises. `generate` also aborts the internal collector ID on cancellation or GeneratorExit, then closes the collector. `OutputProcessor.abort_requests` expands an internal parent into its retained child IDs. These source edges refute the simple hypothesis that ordinary cancellation of this parent necessarily loses the sibling handles. They do not prove physical worker completion or cover a failed abort RPC.
+
+Public and internal request IDs have separate maps. InputProcessor normally adds a random suffix to a public ID. A repeated public ID deliberately groups all associated internal IDs for an explicit public-ID abort. The source documents that behavior. Disabling randomization has an explicit warning and is outside a new collision claim.
+
+## Concrete gap and exact owner
+
+The public-ID abort branch expands the external ID to child IDs. Each child then takes the `req_state is not None` branch. That branch removes child state, but does not remove the parent-map entry. With a queue, creation of the abort output can remove children from `ParentRequest.child_requests`; it still does not pop the corresponding parent-map entry. `_finish_request` is not called by this abort branch. This is frontend parent-state retention, not proof that EngineCore children or native tensors remain live.
+
+[PR #51629](https://github.com/vllm-project/vllm/pull/51629), open head `a8b28c0505ecd3e6d269d5353cb266da3d9341f5`, fixes exactly that child branch. Its full two-file diff resolves `req_state.parent_req`, discards the child, and removes the parent after its last child. Its existing-suite regression covers both a list of child internal IDs and the public external ID. The body and full comment history are retained. The reported local checks and merge-conflict notices are external reports, not results from this audit. An older/conflicted base does not make this work unowned.
+
+The nearby register-before-send failure window is also owned. Open [PR #56212](https://github.com/vllm-project/vllm/pull/56212), head `f7381878a1a894e6ee7fcd5d8a049bc168ba6ddb`, contains rollback and serialization-bound changes. Its n>1 async hunk is based on an older fan-out shape; current main already has the all-child registration and parent rollback described above. This packet does not claim the whole PR is redundant. The already closed add_request cancellation finding #57061 has its current issue comments and linked open PR #57062 retained only as an exclusion refresh.
+
+## Search bounds and stop rule
+
+The two fresh area PR searches returned 22 and 20 rows, each below a 100-row cap. Each number-linked open PR query for #51629, #56212 and #57061 returned one row. The initial all-state issue query hit its 30-row cap, so it is not an exhaustive issue inventory. No global ownership-absence claim follows. Direct body, comment and complete diff evidence is sufficient to reject the selected exact parent-state fix.
+
+The root REPORT and named closed embedding-disconnect, Chat cancellation, admission and beam-sibling packets were read first. Background terminal, stream-KV notice, utility futures, beam PR #60550 and RPC PRs #57846/#60290/#60401 are excluded. No broader lifecycle survey is claimed.
+
+The own checker passed 40 source/data assertions. There was no extracted behavior fixture, target/package import, async task, server, engine, model, native call, resource launch, install or publication. Only bounded read-only GitHub retrieval and own stdlib byte/AST inspection ran. Thus there is no new runtime result or repair acceptance.
+
+The research and code-exploration skill guidance was used. All four team slots were occupied, so no additional research agent was created. The retained TraceDecay scout scope is stale/unindexed; no graph absence is inferred. This is a vLLM engine ownership rule, not a new external API compatibility claim. No new library documentation question or Context7 query was needed. No failure occurred in the saved primary retrieval or the own audit. Earlier truncated console reads were orientation only; the selected methods and exact owner diff were then read in bounded form.

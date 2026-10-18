@@ -1,0 +1,66 @@
+PLUGIN registered: <_pytest.config.PytestPluginManager object at 0xffffa72d51f0>
+PLUGIN registered: <_pytest.config.Config object at 0xffffa6bee510>
+PLUGIN registered: <module '_pytest.mark' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/mark/__init__.py'>
+PLUGIN registered: <module '_pytest.main' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/main.py'>
+PLUGIN registered: <module '_pytest.runner' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/runner.py'>
+PLUGIN registered: <module '_pytest.fixtures' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/fixtures.py'>
+PLUGIN registered: <module '_pytest.helpconfig' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/helpconfig.py'>
+PLUGIN registered: <module '_pytest.python' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/python.py'>
+PLUGIN registered: <module '_pytest.terminal' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/terminal.py'>
+PLUGIN registered: <module '_pytest.debugging' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/debugging.py'>
+PLUGIN registered: <module '_pytest.unittest' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/unittest.py'>
+PLUGIN registered: <module '_pytest.capture' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/capture.py'>
+PLUGIN registered: <module '_pytest.skipping' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/skipping.py'>
+PLUGIN registered: <module '_pytest.legacypath' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/legacypath.py'>
+PLUGIN registered: <module '_pytest.tmpdir' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/tmpdir.py'>
+PLUGIN registered: <module '_pytest.monkeypatch' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/monkeypatch.py'>
+PLUGIN registered: <module '_pytest.recwarn' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/recwarn.py'>
+PLUGIN registered: <module '_pytest.pastebin' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/pastebin.py'>
+PLUGIN registered: <module '_pytest.assertion' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/assertion/__init__.py'>
+PLUGIN registered: <module '_pytest.junitxml' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/junitxml.py'>
+PLUGIN registered: <module '_pytest.doctest' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/doctest.py'>
+PLUGIN registered: <module '_pytest.cacheprovider' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/cacheprovider.py'>
+PLUGIN registered: <module '_pytest.setuponly' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/setuponly.py'>
+PLUGIN registered: <module '_pytest.setupplan' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/setupplan.py'>
+PLUGIN registered: <module '_pytest.stepwise' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/stepwise.py'>
+PLUGIN registered: <module '_pytest.unraisableexception' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/unraisableexception.py'>
+PLUGIN registered: <module '_pytest.threadexception' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/threadexception.py'>
+PLUGIN registered: <module '_pytest.warnings' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/warnings.py'>
+PLUGIN registered: <module '_pytest.logging' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/logging.py'>
+PLUGIN registered: <module '_pytest.reports' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/reports.py'>
+PLUGIN registered: <module '_pytest.faulthandler' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/faulthandler.py'>
+PLUGIN registered: <module '_pytest.subtests' from '/freeze/python-env/lib/python3.12/site-packages/_pytest/subtests.py'>
+PLUGIN registered: <module 'pytest_asyncio.plugin' from '/gate-base/wheel-overlay/pytest_asyncio/plugin.py'>
+PLUGIN registered: <module 'anyio.pytest_plugin' from '/freeze/python-env/lib/python3.12/site-packages/anyio/pytest_plugin.py'>
+PLUGIN registered: <CaptureManager _method='fd' _global_capturing=<MultiCapture out=<FDCapture 1 oldfd=5 _state='suspended' tmpfile=<_io.TextIOWrapper name="<_io.FileIO name=6 mode='rb+' closefd=True>" mode='r+' encoding='utf-8'>> err=<FDCapture 2 oldfd=7 _state='suspended' tmpfile=<_io.TextIOWrapper name="<_io.FileIO name=8 mode='rb+' closefd=True>" mode='r+' encoding='utf-8'>> in_=<FDCapture 0 oldfd=3 _state='started' tmpfile=<_io.TextIOWrapper name='/dev/null' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>
+PLUGIN registered: <module 'tests.conftest' from '/gate-v7/candidate/tests/conftest.py'>
+PLUGIN registered: <module 'tests.entrypoints.conftest' from '/gate-v7/candidate/tests/entrypoints/conftest.py'>
+PLUGIN registered: <module 'tests.entrypoints.openai.responses.conftest' from '/gate-v7/candidate/tests/entrypoints/openai/responses/conftest.py'>
+PLUGIN registered: <Session  exitstatus=<ExitCode.OK: 0> testsfailed=0 testscollected=0>
+PLUGIN registered: <_pytest.cacheprovider.LFPlugin object at 0xffff77838b60>
+PLUGIN registered: <_pytest.cacheprovider.NFPlugin object at 0xffffa725e540>
+PLUGIN registered: <class '_pytest.legacypath.LegacyTmpdirPlugin'>
+PLUGIN registered: <_pytest.terminal.TerminalReporter object at 0xffff7748bd40>
+PLUGIN registered: <_pytest.logging.LoggingPlugin object at 0xffff77490260>
+PLUGIN registered: <_pytest.fixtures.FixtureManager object at 0xffff7748b080>
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_generation_failure_is_retrievable[QueueOverflowError]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_generation_failure_is_retrievable[MaxQueuedTokensError]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_generation_failure_is_retrievable[EngineGenerateError]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[False-completed]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[False-cancelled]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[False-incomplete]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[False-failed]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[True-completed]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[True-cancelled]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[True-incomplete]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_failure_preserves_terminal_state[True-failed]
+tests/entrypoints/openai/responses/test_serving_responses.py::test_background_cancel_preserves_status_and_cleans_task
+
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /gate-v7/candidate/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+12 tests collected in 0.74s

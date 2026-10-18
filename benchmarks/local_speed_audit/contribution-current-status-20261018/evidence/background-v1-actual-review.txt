@@ -1,0 +1,71 @@
+# Background12 failed-attempt data review
+
+## Decision
+
+`PASS_FAILURE_ONLY_DATA_AUDIT`
+
+The saved evidence is complete for a failed attempt. It does not show a unit-test result. The attempt stopped in the adapter's harmony input check before origin discovery, pytest collection, or pytest execution.
+
+The run packet is `serving/background12-normal-v1-run/manifest.json`, 9,751 bytes, SHA-256 `971287be1418138f7ce21d2425cc6a8308ae9c28086858d6c7e056054fe45fb3`. It contains 49 payload files and 313,749 bytes.
+
+The Root invocation packet is `control/root-background12-host-invocation-v1/manifest.json`, 1,737 bytes, SHA-256 `3e6ee6d74c54fac398fb5d5a809ff801e41e55c1c176ce6138f3fcedd48b75e2`. It contains eight payload files and 6,926 bytes.
+
+Both packets have closed file and directory sets. All payload files are mode 0444. All packet roots and directories are mode 0555.
+
+## Observed result
+
+The container was created and started once. It exited with code 70. The terminal state has `OOMKilled=false`, `Pid=0`, and no Docker error text.
+
+The guest produced one 16,726-byte `VLLM_GATE_RESULT` line. Its SHA-256 is `865b644afebccbefbf0e0ee8e0cf1cb3dfee58e592267cfebb47a011a60d1326`.
+
+The guest status is `failed`. The failure is `AssertionError`. The measured guest elapsed time is 42.882013187 seconds.
+
+The traceback reaches `runner.py` line 264 in `main`, then line 132 in `harmony`. The asserted condition is `path.stat().st_size == row["bytes"]`.
+
+The saved `phases` object is empty. There is no origin result, collection result, JUnit data, or background test result. The number of unit-test rows executed is zero.
+
+## Exact source-data mismatch
+
+The sealed harmony input table uses the old `real_parser_test` identity. It expects `/gate-v7/candidate/tests/entrypoints/openai/responses/test_serving_responses.py` to be 92,927 bytes with SHA-256 `b2fb41e825a5c8681c18cdfa0529b9f8b9a529d4d3b69021ac2fb263cb5441d2`.
+
+The approved read-only source override mounts a different test at the same path. That candidate test is 87,013 bytes with SHA-256 `6463ee688eef79b3d35a0d8813b74e84845d3978dcaae86f681717abb6c5722a`.
+
+The saved source file matches the approved 87,013-byte identity. The source plan and fresh closure bind that candidate test. The old harmony row and the approved mount therefore cannot both pass.
+
+The raw traceback does not print the failed path or the two identities. The precise row diagnosis is a source-data inference from the sealed harmony table, the exact mount destination, the approved override, and the size assertion. The observed failure location is fully consistent with this mismatch.
+
+## Lifecycle and cleanup
+
+The lifecycle contains 20 complete command receipts. Each capture returned zero and has complete stdout and stderr descriptors.
+
+The ledger covers version, context, image, inventory, create, prestart inspect, start, seven polls, logs, cleanup identity, removal, and three absence inventories. The same 64-character CID appears in create, start, and removal output.
+
+The controller recorded 19 metadata calls, five cleanup calls, and one log call. The candidate lifecycle lasted 51.17429275019094 seconds. It remained inside the original 1,500-second batch.
+
+Cleanup has no saved error. Removal returned the exact CID. The ID, all-container, and name absence inventories have empty stdout and stderr. The terminal PID is zero.
+
+The Root observation before the host call precedes the pair start. The pair end precedes the Root observation after the host call. These are conservative same-host brackets, not exact process birth or exit times.
+
+## Host result
+
+The host runner exited with code 1 after it rejected the target exit code 70. Root recorded two active-session receipts and a final completed receipt with no session ID. This proves the host child was reaped.
+
+Host stdout is empty. Host stderr contains the expected assertion that success requires terminal exit code zero. The host failure does not change the saved container lifecycle or cleanup evidence.
+
+No Root success completion receipt exists. No success checker result exists. The success checker and `root_complete.py` did not run.
+
+## Test scope
+
+The planned eight terminal-state rows are four statuses crossed with two producer outcomes: a raised exception and a returned `ErrorResponse`. They are not two store modes.
+
+None of those rows ran. The three active error rows and the public cancel row also did not run. No candidate behavior, public endpoint, real engine, worker, model, output quality, or performance result follows.
+
+The source and preflight closure passed before the target start. This failed attempt does not invalidate those byte identities. It exposes one stale cross-file harmony expectation in the runner inputs.
+
+## Independent audit method
+
+The review performed 744 data checks. It replayed both sealed packet manifests, all saved file hashes and modes, the lifecycle, ledger receipts, raw command streams, terminal state, clocks, Root tool receipts, exact source identities, and cleanup inventories.
+
+The reviewer did not execute the adapter, preflight, host runner, success checker, completion helper, pytest, target code, Docker, timers, process tools, network tools, or resource commands.
+
+This packet has no runtime authority. A correction needs a new source review before any further attempt. The failed run and invocation remain immutable evidence.

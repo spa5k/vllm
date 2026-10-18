@@ -1,0 +1,69 @@
+# Independent audit of the background12 V2 result
+
+## Decision
+
+`PASS_SAVED_DATA_AUDIT`
+
+The saved data supports one successful candidate run of the 12 selected normal pytest rows. All 12 rows passed. This review did not execute the checker, pytest, subject code, a container, or a resource command.
+
+The run packet is `serving/background12-normal-v2-run/manifest.json`, 14,249 bytes, SHA-256 `2efc78e14228e9e4a1b03a7ee1e5e6b383bc118fd8e95d21ab487dca964542ed`. It contains 73 payload files and 505,218 payload bytes.
+
+The invocation packet is `control/root-background12-host-invocation-v2/manifest.json`, 1,961 bytes, SHA-256 `2ce1b98142c214f193bc9ff20edb14bcfca640234279ee5452c35418d6121902`. It contains nine payload files and 9,714 payload bytes.
+
+Both packets have closed file and directory sets. All payload files are mode 0444. All packet roots and directories are mode 0555.
+
+## Test result
+
+The guest result status is `passed`. Origin, collection, and test phases returned zero. Their saved argv arrays match the approved source plan.
+
+Collection found exactly the 12 requested nodes. It loaded the three normal project conftests and `pytest-asyncio`. It did not cut the conftest path or preload a replacement module.
+
+The JUnit data is 2,262 bytes with SHA-256 `adda4a17414a033e2121fcfa3d4b5de5307edcc21fc0f4e6deba9c834a20d60c`. It has exactly 12 leaf testcase rows. It reports zero failures, zero errors, and zero skipped tests. The testcase identities match the 12 selectors.
+
+The guest log is 62,855 bytes with SHA-256 `01d0ab4861fcbcf6f3200083253961b25376e17f890f685e9b39ce4e1e8690cb`. Its measured elapsed time is 103.215114464 seconds. The full candidate lifecycle lasted 107.88911504205316 seconds.
+
+## Source and phase identity
+
+The saved Harmony receipt matches adapter V2. It includes all seven effective files and both embedded tokenizer ranges. The saved source derivation matches the 8,075-entry candidate base, the 1,434,650-byte derived manifest, and the three read-only source overrides.
+
+The origin receipt matches the approved expected origin data. The saved limits show one CPU, 4 GiB memory, zero swap, offline environment variables, and the approved Python path and library path.
+
+The 12 cases use mocked engine and tool paths. The eight terminal-state cases are four terminal states crossed with raised exception versus returned `ErrorResponse` behavior.
+
+## Container lifecycle
+
+The ledger has the exact command order. It covers version, context, image, initial inventory, create, prestart inspect, start, 14 polls, logs, cleanup identity, forced removal, and three absence inventories.
+
+Each command receipt is complete. Each return code is an exact integer zero. Each raw stdout and stderr stream matches its saved byte count and SHA-256.
+
+The created container `Config`, `HostConfig`, environment, labels, image, command, nine read-only mounts, and top-level mount representation match the approved plan. The only admitted post-start representation change is `HostConfig.OomKillDisable` from false to null.
+
+The terminal state is exited with integer exit code zero, `OOMKilled=false`, and integer PID zero. The cleanup identity matches the last terminal poll. Forced removal returned the exact CID.
+
+The ID, all-container, and name absence inventories have empty stdout and stderr. Cleanup has no saved error.
+
+## Clocks and Root receipts
+
+The input closure was 30.927250146865845 seconds old at host entry. The target-start wall age was 33.73453116416931 seconds. Both are inside the accepted bounds.
+
+The target and lifecycle elapsed times fit the 480-second target window. The lifecycle fits the 1,380-second normal allocation and the original 1,500-second batch.
+
+The Root before observation precedes the pair start. The pair end precedes the Root after observation. These are conservative same-host brackets. They are not exact process birth or exit timestamps.
+
+The final host receipt has exit code zero and no session ID. The completion receipt has SHA-256 `01ab8556fa275b8661cae01985d075a08f569ad09c4d09157183a2a9fe410c5e`. It reports completed and reaped controller state with exit code zero.
+
+The saved strict Root check reports pair success. It binds adapter V2, family V3, the completion receipt, the exact candidate verdict, and the source closure. Its stderr is empty.
+
+## Audit method
+
+The independent audit performed 1,056 saved-source and saved-data checks. It used three inert negative controls for integer typing and JUnit counters.
+
+The audit replayed both packet closures, source and review closures, all raw phases, JUnit structure, all ledger streams, full created configuration, typed terminal state, freshness, clocks, completion data, native receipts, and cleanup inventories.
+
+## Limits
+
+This result covers 12 ordinary unit-test rows with mocked engine and tools. It does not cover a public HTTP route, a real engine, a worker, a model, trained output, a native ABI, model quality, or performance.
+
+The normal CPU policy permits bounded metadata helpers and local asyncio plumbing for this selected suite. The evidence is not a complete process or native-syscall trace.
+
+The reviewer did not execute subject code or use runtime resources. No paid action occurred.

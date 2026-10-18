@@ -1,0 +1,47 @@
+# Independent review of the background12 corrected gates
+
+## Decision
+
+`PASS_SOURCE_DATA_RUNTIME_HELD`
+
+I found no source or fixed-data blocker in the sealed adapter V2 and gate family V3. This review does not authorize a preflight or a target run.
+
+The direct review map has exactly two rows. It binds `serving/background12-normal-adapter-v2/manifest.json` at 3,505 bytes and SHA-256 `c8edf6d9cc476fd0f1bc8c318a6529966cd8eed9b9bf9c0a39dc324829d25b66`. It also binds `control/background12-root-gates-proposal-v3/manifest.json` at 5,244 bytes and SHA-256 `38d950999493870e5f127708d13f14acc6be3fe9d0068946f6ea3a3a5ea85aba`.
+
+## Failed attempt and correction
+
+The first actual attempt remains immutable failure evidence. It stopped before origin and pytest phases because the Harmony descriptor for `test_serving_responses.py` used the old 92,927-byte source and old hash. The approved mounted source is 87,013 bytes with SHA-256 `6463ee688eef79b3d35a0d8813b74e84845d3978dcaae86f681717abb6c5722a`.
+
+Adapter V2 changes only `files.real_parser_test` in `harmony-inputs.json` and the identities that bind that file. All runner function ASTs match adapter V1. The other six Harmony files and both embedded tokenizer ranges are unchanged.
+
+Family V3 changes only active role, hash, and fresh-output identities required by adapter V2 and the second attempt. The preflight and saved library are byte-identical to the accepted parent. The candidate, selectors, policy, helpers, lifecycle rules, resource rules, and result semantics are unchanged.
+
+## Fixed closure
+
+The review replayed all 318 fixed descriptors against actual bytes. It replayed all 34 direct bindings and all 26 executable packet closures. Each executable packet uses the inherited `files` schema.
+
+The review verified all seven effective Harmony paths. It verified the two fixed ranges in the 6.1 MB tokenizer binary. It verified the exact mode and link count for each source. The three declared freeze hard-link pairs have the expected shared inode and link count of two.
+
+The fresh result role is `serving/background12-normal-v2-run`. The fresh closure is `control/root-background12-input-closure-v2.json`. The fresh invocation is `control/root-background12-host-invocation-v2`. The fresh container name is `vllm-scout-background12-v2-20261018`. All four future identities were absent during this review.
+
+## Runtime contract
+
+The source retains nine read-only mounts, the exact three source overrides, the cached image identity, one CPU, 4 GiB of memory, 128 PIDs, a read-only root, private PID namespace, no network, and bounded scratch and output locations.
+
+The source retains the 1,500-second original host clock, 1,380-second normal allocation, 120-second cleanup allocation, and 480-second target window. The per-phase timers remain independent. The enclosing PID1 timeout and strict total elapsed check provide the whole-guest bound.
+
+Success still requires the exact 12 selected normal pytest rows, canonical JUnit counts, complete source and provider identity, typed Docker metadata, original completion testimony, no OOM, exact cleanup, and three complete absence inventories. The eight terminal-state rows are four terminal states crossed with raised exception versus returned `ErrorResponse` behavior.
+
+## Independent controls
+
+The review performed 1,941 source and data checks. It used three inert descriptor mutations to reject a wrong byte count, wrong hash, and wrong type. It did not execute subject functions or copied subject methods.
+
+The review executed no adapter, gate, preflight, author verifier, checker, helper, target, timer, Docker command, resource command, network request, or paid action.
+
+## Limits
+
+The first actual attempt proves only the stale-descriptor failure and cleanup. It ran zero unit tests. This review does not convert that result into test evidence.
+
+A fresh preflight must still validate the current input closure. Root must own any launch and completion receipt. A successful saved result needs a separate independent data audit.
+
+The selected tests use mocked engine and tool paths. They do not prove a real engine, model, public HTTP path, model quality, native ABI, or performance.

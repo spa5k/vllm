@@ -1,0 +1,21 @@
+# Stream-KV43 normal CPU validation plan
+
+Status: SOURCE_PLAN_READY_RUNTIME_HELD. No adapter, gate family, helper, test or resource was created or run here. This plan does not depend on Background12 success.
+
+Use the existing seven-file stream-KV snapshot bfe1ecd5 and patch4053b1c3. SOURCE_VIEW.json specifies the exact eight existing-destination RO overrides, including restored base371 Responses context. Its8075-row logical manifest is40556336312c4d45567113ee1409820bdbd7cb80ebeffb8973faf7cf117264cd. No whole source/environment copy is needed.
+
+SELECTORS.json contains eight exact function selectors and43 expected node/JUnit pairs: Chat24, Completion11, Responses8. These are derived from literal decorators and cached pytest9.1 source, not observed collection. The default IDs include escaped regex text and list argument fallback names. A future exact collection must confirm the whole set before tests are accepted. Keep all three named ancestor conftests and real pytest-asyncio. The separate NIXL scheduler row is excluded.
+
+Chat/Completion use a real cached GPT2 tokenizer with mocked engine/notice RPC. Responses uses mocked rendering/Harmony/tool/consumer inputs with the real serving first/later-attempt loop. The selected source fixtures do not construct real worker/model/server/connector processes. This is source scope, not an observed absence or full process trace.
+
+CACHE_VIEW.json pins the existing local GPT2 revision607a30d783dfa663caf39e06633721c8d4cfcd7e view. Mount its hf root RO at actual HF_HOME=/scratch/hf. Close six regular files, five exact internal relative links and six directories excluding root (seven including root). Regular bytes total2854606. All files are0444 UID501:GID20 with nlink1; no hardlink exception is admitted for this cache. No weights, mutable original cache, acquisition, model-ID edit or tokenizer mock is proposed. Local bytes are not new remote provenance.
+
+HARMONY_INPUTS.json is derived from the actual selected source view. real_parser_test must be85485B/5fde703dee639d3c033b9420b22f89b4437343607938c9570e43d0d213e2ec3d. Neither the Background1287013/6463ee nor old Compact1892927/b2fb descriptor applies. All other six effective Harmony files and two native embedded ranges were rehashed as data. Existing freeze hardlinks retain their exact closed groups; nothing is relinked or relaxed. ASSET_AUDIT.json records these observations. Future local-file hash joins must bind this actual JSON.
+
+Use the separately approved normal CPU policy. It permits bounded trusted metadata helpers and local asyncio plumbing inside offline cgroup/PID/tmpfs/privatePID bounds. It does not install the incompatible renderer import observer. Historical denials remain unchanged. It has no complete syscall/process trace and no claim that cgroups alone enforce no-worker. Keep source-selected mocked-engine scope and exact cleanup.
+
+The proposed envelope retains CPU1/RAM4GiB/equal total swap/PID128/network-none/read-only/dropALL/no-newprivileges and2GiB noexec scratch. Five inherited tree mounts, one future small adapter, eight file overrides and one cache view make15 RO mounts. Use origin30/collection120/test240s, PID1 timeout420+5, host target480 and original1500 with120 cleanup. Separate phase caps do not implement one shared remaining guest deadline. Do not claim their390s sum guarantees completion. Keep131072B JUnit,65536B per phase stream,921600B result and1MiB Docker log caps; overflow or incomplete capture fails closed.
+
+Concrete preparation still required: one small exact adapter and consolidated host/preflight/checker/completion family under this new policy; different-author source/resource review; fresh full mounted-tree/provider/image/bin/ledger/SSD/cache closure; full typed15mount admission; one candidate attempt with no automatic retry; exact owned removal and three complete empty inventories; final actual native completion/reap and saved-data acceptance. No such runtime authority follows from this plan.
+
+A pass would concern these selected imported Python unit paths on retained837 native providers and named371 source. It would not establish a whole-current build, general ABI, real queue admission/producer lease/NIXL delivery, public ASGI/model behavior, GPU or performance.

@@ -1,0 +1,45 @@
+# Stream-KV normal CPU feasibility
+
+Verdict: **43_SOURCE_SELECTED_CANDIDATES_UNDER_NEW_NORMAL_CPU_POLICY**. All43 remain candidates until actual normal collection and execution. No gate, import, test or resource ran in this audit.
+
+The new policy is explicit in the closed background12 POLICY.json: trusted CPU metadata helpers and local asyncio plumbing are allowed within the offline container bounds. It does not install the historical renderer observer. Historical observer-held packets remain unchanged. The background12 target had not started when Root assigned this audit. This report does not infer that its environment has passed.
+
+## What can use this environment
+
+The exact existing selection contains eight function selectors and43 rows, derived independently from their literal AST parameter lists:
+
+| Suite | Rows | Real and mocked inputs |
+|---|---:|---|
+| Chat |24| Real serving/render/tokenizer paths, mocked engine/admission/notice RPC.4 early rejection,16 late queue rejection,2 post-output error,2 existing render-time controls. |
+| Completion |11| Real serving/renderer/formatter and tokenizer, mocked engine/notice RPC.8 late rejection,1 admitted-sibling multi-input control,2 existing first-error streaming controls. |
+| Responses |8| Real create and first/later engine-attempt loop, mocked engine, renderer, Harmony context, tools and full/stream consumers. |
+
+No selected row starts an ASGI server, real EngineCore/worker, model or connector. Responses8 is not a full SSE formatter or public HTTP test. Chat/Completion streaming consumers exercise serving formatter output in-process. All43 require the ordinary module imports, real pytest-asyncio and normal ancestor conftests. An import, fixture, cache, collection or timeout failure is an environment failure, not a successful repair result.
+
+The39 declared candidate rows include2 pre-existing early-admission rows. There are37 net-new rows. The four nearby guard rows bring the selection to43. SELECTORS remain the exact old plan file; no extra tests were added.
+
+## Exact tokenizer and runtime inputs
+
+Chat24 and Completion11 construct HfRenderer with cached_tokenizer_from_config. MockModelConfig uses openai-community/gpt2, auto mode, trust_remote_code=False, and no revision override. Responses8 does not call a real GPT2 tokenizer, although its module imports MockModelConfig from the Chat module.
+
+The existing immutable small view is serving/stream-kv-serving43-gpt2-cache-v1/hf. Its cache-manifest SHA is55f7275b1336ab0f9b7ddfc7974ba68d68860f3cf80e35c3d9d08d3c83519b07. This audit rechecked all17 entries:6 regular files (five blobs and refs/main),5 internal relative links,6 directories excluding HF root,2,854,606 regular bytes. Revision is607a30d783dfa663caf39e06633721c8d4cfcd7e. Files/root modes and no-escape targets match. The bodies are config.json, tokenizer_config.json, vocab.json, merges.txt and tokenizer.json. No model weight is needed for these fixtures. This is a closed local cache identity, not new remote provenance or an observed tokenizer result.
+
+The future selected cache path must resolve from actual HF_HOME; with inherited HF_HOME=/scratch/hf, bind this exact hf view there read-only and keep hub resolution under /scratch/hf/hub. Do not mount the mutable host cache or change the fixture model ID. Root must close the exact mount/env plan before a later attempt.
+
+Reuse the named environment only: image sha256:e5b65587bce7de595f299855d7385fe7fca39b8a74baa261ba1b7147afa78e58; /freeze/python-env/bin/python → /usr/local/bin/python3.12, Python3.12.12 SHA7863a4d5e03fde7791c7f8c2c304cf3522f435e19745364ad18a6b7a0458af57; /usr/local/bin/uv SHA39d70eb83160a5ce842f8aa7a8083fbc19b09d96c8647f0b6dc9f3a4502ec8e8. Import roots remain /gate-seven-wheel/dependency-overlay:/gate-base/wheel-overlay:/gate-v7/candidate. Origin expectations close19 package roots,7 added metadata rows,2 added native modules and _C.abi3.so SHAacf122dde16999627ff616ba9c1d671968d372c9ea79697e8a593a4a96a91ee2 at /gate-v7/candidate/vllm/_C.abi3.so. Initial LD_LIBRARY_PATH remains /gate-base/native-libs:/freeze/python-env/lib/python3.12/site-packages/torch/lib. These inherited identities are not newly imported or a general current-source/native ABI proof.
+
+## Source stacking and drift
+
+All7 frozen final candidate files match the attached clean worktree at c72c801883a1eb9355b9ea8863464a6b74c59482. Patch4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4 and manifest bfe1ecd5cd3f90299a730aaf50fcbea54a3cd95a567da7860e9a2f5e0f426250 stay unchanged.
+
+Use the prior exact eight-row source transform:4 production files,3 test files, plus base371 Responses context.py SHA463fc3283a1873756d9efd7d333e587ea7a327544e2d50f0a6c90fb27b118dbf. All8 whole bodies currently match that worktree. The context override removes the unrelated budget patch in the cached V7 parent. Do not reuse background12's whole Responses serving/test overrides or compact budget files: those would replace the intended stream-KV snapshot. No automatic combination is reviewed.
+
+Five named candidate preimages match the retained e80/fe8 source set: base serving, Chat serving, Completion serving, Responses serving and Responses tests. This is named-source currency, not a new whole-main transfer. No source was rebased or edited.
+
+## Next minimum validation and separate limits
+
+The useful next step is one candidate-only normal collection and execution of these exact43 rows, under a separately reviewed fresh gate using the new policy and closed8-row source/cache view. Require43 unique collected IDs and43 direct passing JUnit cases, no skip/failure/error, normal conftest/plugin records, exact origins and bounded raw phase/XML bytes. The prior420s guest/480s host/1500s original-batch CPU envelope is a starting bound, not an execution approval or completion guarantee. Root owns admission.
+
+The separate one-row NIXL scheduler test still has its retained Ray package and authentic OPT config/model-info gaps. It is a scheduler unit test, not real NIXL transport. Those gaps do not block the mocked serving43 selection. Proving real rejection RPC delivery, producer lease release, public ASGI behavior or model serving needs separate connector/server/model validation.
+
+Own85 source/data checks passed. They read only named source/metadata and this small cache. No author checker, package, target or body was executed.
