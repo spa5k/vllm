@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-18T12:52:57.251924+00:00",
+  "research_archive": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017",
+  "reviewed_upstream_sha": "072c0886d53d933a7e1d3da7e8a3a91670cf181d",
+  "scope": "Documentation and exact draft patch artifacts; no production code applied",
+  "patch_whitespace": "Preserve exact unified-diff context bytes",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 28,
+      "sha256": "9caa144f956baf245cbb0194938c047d656a0363185416f8ad1555131bb18344"
+    },
+    {
+      "path": "EVIDENCE_AUDIT.md",
+      "bytes": 4719,
+      "sha256": "ecff338228320bb2ea1030af5a3170988d8eeb218b102436e6f8330934047cfd"
+    },
+    {
+      "path": "NEXT_PHASE.md",
+      "bytes": 3570,
+      "sha256": "5d9ec33b40ad7db72f344ff529b5922af8ef84355f426fc6d279c084bca0ff47"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 20787,
+      "sha256": "39a660d318ad1b787e4dcfd138e0294fdbabf39341e18132549be5e42d2de5ff"
+    },
+    {
+      "path": "evidence-index.json",
+      "bytes": 63662,
+      "sha256": "b0161ae578ece95b3607d5db71f9aa618e3a5d2883959e7f08fe5d4a80e3099d"
+    },
+    {
+      "path": "patches/arm-w4a8.patch",
+      "bytes": 4586,
+      "sha256": "6df2e88a4956c998c6319cf4cbf3ab2dd80cf177b3902d57ca039fac9e114e79"
+    },
+    {
+      "path": "patches/prompt-embedding-dtype.patch",
+      "bytes": 6252,
+      "sha256": "f7359d31d5cb59986725de1dc0f3a5c996df64f67e3055cc85d1ca0ae910551e"
+    },
+    {
+      "path": "patches/prompt-embedding-width.patch",
+      "bytes": 4777,
+      "sha256": "c34bbbfd4504ab50c496407cabada390d321bead94fee7c8fcb450c004b1c5e8"
+    },
+    {
+      "path": "patches/responses-output-budget.patch",
+      "bytes": 21623,
+      "sha256": "d4bdc319f2b89281c4a2b77acf85aab5b613fe6fdf9cf5735529100252f77027"
+    }
+  ],
+  "local_markdown_links": [
+    {
+      "from": "REPORT.md",
+      "to": "NEXT_PHASE.md"
+    },
+    {
+      "from": "REPORT.md",
+      "to": "evidence-index.json"
+    },
+    {
+      "from": "REPORT.md",
+      "to": "patches/arm-w4a8.patch"
+    },
+    {
+      "from": "REPORT.md",
+      "to": "patches/responses-output-budget.patch"
+    },
+    {
+      "from": "REPORT.md",
+      "to": "patches/prompt-embedding-dtype.patch"
+    },
+    {
+      "from": "REPORT.md",
+      "to": "patches/prompt-embedding-width.patch"
+    },
+    {
+      "from": "REPORT.md",
+      "to": "NEXT_PHASE.md"
+    }
+  ]
+}

@@ -1,0 +1,532 @@
+diff --git a/vllm/entrypoints/openai/responses/context.py b/vllm/entrypoints/openai/responses/context.py
+--- a/vllm/entrypoints/openai/responses/context.py
++++ b/vllm/entrypoints/openai/responses/context.py
+@@ -112,6 +112,7 @@
+     # the stored engine timestamps cover only one turn, while token usage is
+     # accumulated across all turns.
+     request_metrics_cover_all_generation_turns: bool = True
++    output_token_budget_exhausted: bool = False
+ 
+     @abstractmethod
+     def append_output(self, output: RequestOutput) -> None:
+diff --git a/vllm/entrypoints/openai/responses/serving.py b/vllm/entrypoints/openai/responses/serving.py
+--- a/vllm/entrypoints/openai/responses/serving.py
++++ b/vllm/entrypoints/openai/responses/serving.py
+@@ -650,6 +650,8 @@
+         reasoning_parser_kwargs: dict[str, Any] | None = None,
+         reasoning_ended: bool | None = None,
+     ):
++        sampling_params = sampling_params.clone()
++        max_output_tokens = sampling_params.max_tokens
+         max_model_len = self.model_config.max_model_len
+         cache_salt = cast(str | None, engine_input.get("cache_salt"))
+ 
+@@ -688,6 +690,15 @@
+                 # The model did not ask for a tool call, so we're done.
+                 break
+ 
++            remaining_tokens = (
++                max_output_tokens - context.num_output_tokens
++                if max_output_tokens is not None
++                else None
++            )
++            if remaining_tokens is not None and remaining_tokens <= 0:
++                context.output_token_budget_exhausted = True
++                break
++
+             # Call the tool and update the context with the result.
+             context.request_metrics_cover_all_generation_turns = False
+             tool_output = await context.call_tool()
+@@ -707,7 +718,7 @@
+ 
+                 sampling_params.max_tokens = get_max_tokens(
+                     max_model_len,
+-                    context.request.max_output_tokens if context.request else None,
++                    remaining_tokens,
+                     self._extract_prompt_len(engine_input),
+                     self.default_sampling_params,
+                     self.override_max_tokens,
+@@ -726,7 +737,7 @@
+ 
+                 sampling_params.max_tokens = get_max_tokens(
+                     max_model_len,
+-                    context.request.max_output_tokens,
++                    remaining_tokens,
+                     self._extract_prompt_len(engine_input),
+                     self.default_sampling_params,  # type: ignore
+                     self.override_max_tokens,  # type: ignore
+@@ -734,6 +745,10 @@
+                         -1 if context.request.truncation != "disabled" else None
+                     ),
+                 )
++
++            sampling_params.min_tokens = min(
++                sampling_params.min_tokens, sampling_params.max_tokens
++            )
+ 
+             # OPTIMIZATION
+             priority = orig_priority - 1
+@@ -867,6 +882,9 @@
+             # Calculate usage.
+             assert final_res.prompt_token_ids is not None
+             num_tool_output_tokens = 0
++
++        if context.output_token_budget_exhausted:
++            status = "incomplete"
+ 
+         assert isinstance(context, (SimpleContext, HarmonyContext, ParsableContext))
+         num_prompt_tokens = context.num_prompt_tokens
+diff --git a/tests/entrypoints/openai/responses/test_serving_responses.py b/tests/entrypoints/openai/responses/test_serving_responses.py
+--- a/tests/entrypoints/openai/responses/test_serving_responses.py
++++ b/tests/entrypoints/openai/responses/test_serving_responses.py
+@@ -2,13 +2,16 @@
+ # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+ 
+ import asyncio
++import json
+ from collections import deque
+ from contextlib import AsyncExitStack, asynccontextmanager
+ from types import SimpleNamespace
+ from unittest.mock import AsyncMock, MagicMock
+ 
++import httpx
+ import pytest
+ import pytest_asyncio
++from fastapi import FastAPI
+ from openai.types.responses import (
+     ResponseFunctionToolCall,
+     ResponseOutputItemDoneEvent,
+@@ -44,6 +47,10 @@
+     RequestResponseMetadata,
+ )
+ from vllm.entrypoints.mcp.tool_server import ToolServer
++from vllm.entrypoints.openai.parser.harmony_utils import get_encoding
++from vllm.entrypoints.openai.responses.api_router import (
++    router as responses_router,
++)
+ from vllm.entrypoints.openai.responses.context import (
+     ConversationContext,
+     HarmonyContext,
+@@ -74,6 +81,7 @@
+ from vllm.renderers import TokenizeParams
+ from vllm.renderers.online_renderer import (
+     OnlineRenderer,
++    ResponsesRenderResult,
+     _extract_allowed_tools_from_mcp_requests,
+ )
+ from vllm.sampling_params import SamplingParams
+@@ -847,6 +855,7 @@
+                 self._messages = []
+                 self.request = None
+                 self._needs_tool_call = True
++                self.num_output_tokens = 0
+ 
+             def append_output(self, output) -> None:
+                 pass
+@@ -884,7 +893,7 @@
+         async for _ in serving_responses_instance._generate_with_builtin_tools(
+             request_id="req",
+             engine_input=tokens_input([1], cache_salt="request-salt"),
+-            sampling_params=MagicMock(),
++            sampling_params=SamplingParams(max_tokens=16),
+             context=context,
+             tok_params=TokenizeParams(
+                 max_total_tokens=3,
+@@ -903,51 +912,316 @@
+         assert followup_engine_input["prompt_token_ids"] == [3, 4]
+ 
+     @pytest.mark.asyncio
+-    async def test_harmony_tool_followup_respects_max_output_tokens(
+-        self, serving_responses_instance
++    @pytest.mark.parametrize(
++        "request_limit,initial_limit,turns,expected_limits,expected_calls,exhausted,"
++        "min_tokens",
++        [
++            pytest.param(
++                16,
++                16,
++                [(10, True), (10, False)],
++                [16, 6],
++                1,
++                False,
++                12,
++                id="remaining_min_tokens",
++            ),
++            pytest.param(
++                16,
++                16,
++                [(16, True)],
++                [16],
++                0,
++                True,
++                0,
++                id="exhausted",
++            ),
++            pytest.param(
++                16,
++                16,
++                [(8, True), (8, True)],
++                [16, 8],
++                1,
++                True,
++                0,
++                id="second_tool_boundary",
++            ),
++            pytest.param(
++                16,
++                8,
++                [(6, True), (6, False)],
++                [8, 2],
++                1,
++                False,
++                0,
++                id="effective_cap",
++            ),
++            pytest.param(
++                None,
++                16,
++                [(10, True), (10, False)],
++                [16, 6],
++                1,
++                False,
++                0,
++                id="omitted_cap",
++            ),
++        ],
++    )
++    async def test_builtin_tool_followup_uses_remaining_output_tokens(
++        self,
++        serving_responses_instance,
++        request_limit,
++        initial_limit,
++        turns,
++        expected_limits,
++        expected_calls,
++        exhausted,
++        min_tokens,
+     ):
+-        class ToolCallingHarmonyContext(HarmonyContext):
++        class ToolCallingContext(ParsableContext):
+             def __init__(self, request):
+                 self._messages = []
++                self.response_messages = []
++                self.response_parser = None
+                 self.request = request
+-                self._needs_tool_call = True
++                self.num_output_tokens = 0
++                self.tool_calls = 0
+ 
+             def append_output(self, output) -> None:
+-                pass
++                self.num_output_tokens += len(output.outputs[0].token_ids)
++                self._needs_tool_call = output.requests_tool
+ 
+             def need_builtin_tool_call(self) -> bool:
+                 return self._needs_tool_call
+ 
+             async def call_tool(self):
+-                self._needs_tool_call = False
++                self.tool_calls += 1
+                 return []
+ 
+             def append_tool_output(self, output) -> None:
+                 pass
+ 
+         max_tokens_per_turn = []
++        min_tokens_per_turn = []
+ 
+         async def generate_output(engine_input, sampling_params, *args, **kwargs):
++            tokens, requests_tool = turns[len(max_tokens_per_turn)]
+             max_tokens_per_turn.append(sampling_params.max_tokens)
+-            yield MagicMock()
++            min_tokens_per_turn.append(sampling_params.min_tokens)
++            sampling_params._verify_args()
++            yield SimpleNamespace(
++                metrics=None,
++                outputs=[
++                    SimpleNamespace(
++                        token_ids=[1] * min(tokens, sampling_params.max_tokens)
++                    )
++                ],
++                requests_tool=requests_tool,
++            )
+ 
+         serving_responses_instance.engine_client.generate.side_effect = generate_output
+         serving_responses_instance.online_renderer.render_responses_harmony_messages = (
+             MagicMock(return_value=tokens_input([1, 2, 3]))
+         )
+-        context = ToolCallingHarmonyContext(
+-            ResponsesRequest(input="test", max_output_tokens=10)
++        serving_responses_instance._render_next_turn = AsyncMock(
++            return_value=[tokens_input([1, 2, 3])]
++        )
++        context = ToolCallingContext(
++            ResponsesRequest(input="test", max_output_tokens=request_limit)
++        )
++        sampling_params = SamplingParams(
++            max_tokens=initial_limit, min_tokens=min_tokens
+         )
+ 
+         async for _ in serving_responses_instance._generate_with_builtin_tools(
+             request_id="req",
+             engine_input=tokens_input([1]),
+-            sampling_params=SamplingParams(max_tokens=10),
++            sampling_params=sampling_params,
+             context=context,
+         ):
+             pass
+ 
+-        assert max_tokens_per_turn == [10, 10]
++        assert max_tokens_per_turn == expected_limits
++        assert min_tokens_per_turn == [
++            min(min_tokens, limit) for limit in expected_limits
++        ]
++        assert context.num_output_tokens <= initial_limit
++        assert context.tool_calls == expected_calls
++        assert context.output_token_budget_exhausted is exhausted
++        assert sampling_params.max_tokens == initial_limit
++        assert sampling_params.min_tokens == min_tokens
++
++    @pytest.mark.asyncio
++    @pytest.mark.parametrize("stream", [False, True])
++    @pytest.mark.parametrize(
++        "case", ["tool_boundary", "remaining", "final_boundary", "truncated"]
++    )
++    async def test_http_builtin_tool_budget(
++        self, serving_responses_instance, stream, case
++    ):
++        """Keep one output cap across real JSON/SSE routes and scripted turns."""
++        encoding = get_encoding()
++        tool_tokens = encoding.encode(
++            "<|channel|>analysis<|message|>Need to search for the requested "
++            "information before giving a precise final answer.<|end|>"
++            "<|start|>assistant to=browser.search<|channel|>commentary"
++            '<|constrain|>json<|message|>{"query":"vllm"}<|call|>',
++            allowed_special="all",
++        )
++        final_tokens = encoding.encode(
++            "<|channel|>final<|message|>The search is complete. This is the "
++            "final answer with enough fixed text for the output limit control."
++            "<|return|>",
++            allowed_special="all",
++        )
++        assert 16 <= len(tool_tokens) <= 128
++        assert 16 <= len(final_tokens) <= 128
++        remainder = len(final_tokens) - 1
++        scripts = [tool_tokens, final_tokens]
++        if case == "tool_boundary":
++            cap, expected_limits, searches = len(tool_tokens), [len(tool_tokens)], 0
++        elif case == "remaining":
++            cap = len(tool_tokens) + len(final_tokens)
++            expected_limits, searches = [cap, len(final_tokens)], 1
++        elif case == "final_boundary":
++            cap, scripts = len(final_tokens), [final_tokens]
++            expected_limits, searches = [cap], 0
++        else:
++            cap = len(tool_tokens) + remainder
++            expected_limits, searches = [cap, remainder], 1
++        expected_status = (
++            "incomplete" if case in {"tool_boundary", "truncated"} else "completed"
++        )
++        serving = serving_responses_instance
++        serving.use_harmony = True
++        serving.parser = HarmonyParser
++        serving.model_config.max_model_len = 4096
++        serving.override_max_tokens = None
++        serving.has_kv_connector = False
++        serving.engine_client.errored = False
++        serving.models.is_base_model.side_effect = lambda name: name == "test-model"
++        serving.models.model_name.return_value = "test-model"
++        serving.models.lora_requests = {}
++        tokenizer = MagicMock()
++        tokenizer.decode.side_effect = lambda ids, **kwargs: encoding.decode(ids)
++        serving.renderer.get_tokenizer.return_value = tokenizer
++        serving.online_renderer.validate_chat_template.return_value = None
++        serving.online_renderer.render_responses = AsyncMock(
++            return_value=ResponsesRenderResult(
++                messages=[], engine_input=tokens_input([1, 2])
++            )
++        )
++        serving.online_renderer.render_responses_harmony_messages.return_value = (
++            tokens_input([1] * (len(tool_tokens) + 5))
++        )
++        serving.tool_server.has_tool.side_effect = lambda name: name == "browser"
++        session = MagicMock()
++        session.call_tool = AsyncMock(
++            return_value=SimpleNamespace(content=[SimpleNamespace(text="result")])
++        )
++        closed = []
++
++        @asynccontextmanager
++        async def new_session(tool_name, request_id, headers):
++            assert tool_name == "browser"
++            try:
++                yield session
++            finally:
++                closed.append(tool_name)
++
++        serving.tool_server.new_session.side_effect = new_session
++        limits, emitted = [], []
++
++        async def generate(engine_input, sampling_params, *args, **kwargs):
++            script = scripts[len(limits)]
++            limit = sampling_params.max_tokens
++            limits.append(limit)
++            token_ids = script[:limit]
++            emitted.append(len(token_ids))
++            finish_reason = "length" if len(token_ids) < len(script) else "stop"
++            chunks = [token_ids]
++            if stream:
++                split = len(token_ids) // 2
++                chunks = [token_ids[:split], token_ids[split:]]
++            for index, chunk in enumerate(chunks):
++                finished = index == len(chunks) - 1
++                output = _make_request_output(
++                    encoding.decode(chunk),
++                    chunk,
++                    finish_reason=finish_reason if finished else None,
++                )
++                output.prompt_token_ids = engine_input["prompt_token_ids"]
++                output.finished = finished
++                yield output
++
++        serving.engine_client.generate.side_effect = generate
++        app = FastAPI()
++        app.include_router(responses_router)
++        app.state.openai_serving_responses = serving
++        transport = httpx.ASGITransport(app=app, raise_app_exceptions=False)
++        async with httpx.AsyncClient(
++            transport=transport, base_url="http://testserver"
++        ) as client:
++            response = await client.post(
++                "/v1/responses",
++                json={
++                    "model": "test-model",
++                    "input": "test",
++                    "store": False,
++                    "stream": stream,
++                    "max_output_tokens": cap,
++                    "tools": [{"type": "web_search_preview"}],
++                },
++            )
++
++        assert response.status_code == 200, response.text
++        if stream:
++            assert response.headers["content-type"].startswith("text/event-stream")
++            events = []
++            for record in response.text.strip().split("\n\n"):
++                event_line, data_line = record.splitlines()
++                assert event_line.startswith("event: ")
++                assert data_line.startswith("data: ")
++                event = json.loads(data_line.removeprefix("data: "))
++                assert event_line == f"event: {event['type']}"
++                events.append(event)
++            assert events[0]["type"] == "response.created"
++            sequence = [event["sequence_number"] for event in events]
++            assert sequence == sorted(set(sequence))
++            terminals = [
++                event
++                for event in events
++                if event["type"]
++                in {"response.completed", "response.incomplete", "response.failed"}
++            ]
++            assert len(terminals) == 1
++            assert terminals[0] is events[-1]
++            assert terminals[0]["type"] == f"response.{expected_status}"
++            result = terminals[0]["response"]
++        else:
++            assert response.headers["content-type"].startswith("application/json")
++            result = response.json()
++
++        assert limits == expected_limits
++        assert result["max_output_tokens"] == cap
++        assert result["status"] == expected_status
++        assert result["incomplete_details"] == (
++            {"reason": "max_output_tokens"} if expected_status == "incomplete" else None
++        )
++        assert result["usage"]["output_tokens"] == sum(emitted) == cap
++        reasoning = result["usage"]["output_tokens_details"]["reasoning_tokens"]
++        assert 0 <= reasoning <= cap
++        assert (reasoning > 0) is (case != "final_boundary")
++        search_calls = [
++            call
++            for call in session.call_tool.await_args_list
++            if call.args[0] == "search"
++        ]
++        assert len(search_calls) == searches
++        if search_calls:
++            assert search_calls[0].args == ("search", {"query": "vllm"})
++        assert closed == ["browser"]
+ 
+     @pytest.mark.asyncio
+     async def test_initialize_tool_sessions(
+@@ -1566,11 +1840,16 @@
+     assert events[-1].response.metrics.time_to_first_token_ms == pytest.approx(500.0)
+ 
+ 
+-async def _stream_truncated_by_length(serving: OpenAIServingResponses):
++async def _stream_truncated_by_length(
++    serving: OpenAIServingResponses, *, budget_exhausted: bool = False
++):
+     request = ResponsesRequest(input="hi", tools=[], stream=True, store=False)
+     context = _make_simple_context_with_output(
+-        "cut mid sen", [10, 20], finish_reason="length"
+-    )
++        "cut mid sen",
++        [10, 20],
++        finish_reason="stop" if budget_exhausted else "length",
++    )
++    context.output_token_budget_exhausted = budget_exhausted
+ 
+     async def one_context():
+         yield context
+@@ -1590,27 +1869,40 @@
+ 
+ 
+ @pytest.mark.asyncio
+-async def test_responses_stream_truncated_by_length_reports_incomplete():
+-    """A max_output_tokens cut must end the stream with ``response.incomplete``
+-    and mark the cut item ``incomplete`` in both ``output_item.done`` and the
+-    final response (#57998)."""
+-    events = await _stream_truncated_by_length(_make_serving_instance())
++@pytest.mark.parametrize("budget_exhausted", [False, True])
++async def test_responses_stream_truncated_by_length_reports_incomplete(
++    budget_exhausted,
++):
++    """An exhausted response budget emits one incomplete terminal event.
++
++    A complete item keeps its status when only the next tool turn is blocked.
++    """
++    events = await _stream_truncated_by_length(
++        _make_serving_instance(), budget_exhausted=budget_exhausted
++    )
+ 
+     item_done = [e for e in events if e.type == "response.output_item.done"]
+-    assert [e.item.status for e in item_done] == ["incomplete"]
++    item_status = "completed" if budget_exhausted else "incomplete"
++    assert [e.item.status for e in item_done] == [item_status]
+     final = events[-1]
+     assert isinstance(final, ResponseIncompleteEvent)
+     assert final.response.status == "incomplete"
+     assert final.response.incomplete_details.reason == "max_output_tokens"
+-    assert [item.status for item in final.response.output] == ["incomplete"]
++    assert [item.status for item in final.response.output] == [item_status]
++    assert final.response.max_output_tokens == 2
++    assert sum(e.type == "response.incomplete" for e in events) == 1
++    assert not any(e.type == "response.completed" for e in events)
+ 
+ 
+ @pytest.mark.asyncio
+-async def test_background_stream_replay_stops_on_response_incomplete():
++@pytest.mark.parametrize("budget_exhausted", [False, True])
++async def test_background_stream_replay_stops_on_response_incomplete(budget_exhausted):
+     """Replaying a stored background stream must end at ``response.incomplete``
+     as it does at ``response.completed``, instead of waiting for more events."""
+     serving = _make_serving_instance()
+-    events = await _stream_truncated_by_length(serving)
++    events = await _stream_truncated_by_length(
++        serving, budget_exhausted=budget_exhausted
++    )
+     assert isinstance(events[-1], ResponseIncompleteEvent)
+     serving.event_store["resp_bg"] = (deque(events), asyncio.Event())
+ 

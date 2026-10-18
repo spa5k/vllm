@@ -1,0 +1,134 @@
+--- a/csrc/cpu/dynamic_4bit_int_moe_cpu.cpp
++++ b/csrc/cpu/dynamic_4bit_int_moe_cpu.cpp
+@@ -131,10 +131,19 @@
+       auto y13 = mm(x_e, w13_e, g_eff_13, /*in_features=*/hidden_size,
+                     /*out_features=*/w13_out_features);
+ 
+-      auto g_part =
+-          y13.narrow(/*dim=*/1, /*start=*/0, /*length=*/intermediate_size);
+-      auto u_part = y13.narrow(/*dim=*/1, /*start=*/intermediate_size,
+-                               /*length=*/intermediate_size);
++      torch::Tensor g_part;
++      torch::Tensor u_part;
++      if (activation_kind == ActivationKind::SwiGLUOAI) {
++        g_part = y13.slice(/*dim=*/1, /*start=*/0,
++                           /*end=*/w13_out_features, /*step=*/2);
++        u_part = y13.slice(/*dim=*/1, /*start=*/1,
++                          /*end=*/w13_out_features, /*step=*/2);
++      } else {
++        g_part =
++            y13.narrow(/*dim=*/1, /*start=*/0, /*length=*/intermediate_size);
++        u_part = y13.narrow(/*dim=*/1, /*start=*/intermediate_size,
++                            /*length=*/intermediate_size);
++      }
+ 
+       torch::Tensor act;
+       if (activation_kind == ActivationKind::SwiGLUOAI) {  // SwiGLUOAI
+--- a/tests/kernels/moe/test_cpu_int4_moe.py
++++ b/tests/kernels/moe/test_cpu_int4_moe.py
+@@ -36,6 +36,12 @@
+     return F.silu(x[..., :d]) * x[..., d:]
+ 
+ 
++def _swigluoai_and_mul(x: torch.Tensor) -> torch.Tensor:
++    gate = x[..., ::2].clamp(max=7.0)
++    up = x[..., 1::2].clamp(min=-7.0, max=7.0)
++    return (up + 1.0) * gate * torch.sigmoid(1.702 * gate)
++
++
+ def _make_int4_moe_weights(
+     E: int,
+     N: int,
+@@ -103,11 +109,6 @@
+ 
+     w13_ref = w13_int4.float() * w13_scale
+     w2_ref = w2_int4.float() * w2_scale
+-    if has_bias and w13_bias is not None:
+-        w13_ref = w13_ref + w13_bias.float().unsqueeze(-1)
+-    if has_bias and w2_bias is not None:
+-        w2_ref = w2_ref + w2_bias.float().unsqueeze(-1)
+-
+     return w13_packed, w2_packed, w13_ref, w2_ref, w13_bias, w2_bias
+ 
+ 
+@@ -117,6 +118,9 @@
+     w2_ref: torch.Tensor,
+     topk_weight: torch.Tensor,
+     topk_ids: torch.Tensor,
++    activation: MoEActivation = MoEActivation.SILU,
++    w13_bias: torch.Tensor | None = None,
++    w2_bias: torch.Tensor | None = None,
+ ) -> torch.Tensor:
+     """Reference INT4 W4A8 fused MoE using dequantized weights.
+ 
+@@ -139,10 +143,17 @@
+         if mask.sum():
+             # w13: [2N, K], input: [B, K] -> output: [B, 2N]
+             gate_up = torch.matmul(a_exp[mask], w13_ref[i].transpose(0, 1))
+-            # SwiGLU activation
+-            hidden = _silu_and_mul(gate_up)
++            if w13_bias is not None:
++                gate_up = gate_up + w13_bias[i].float()
++            if activation == MoEActivation.SWIGLUOAI:
++                hidden = _swigluoai_and_mul(gate_up)
++            else:
++                hidden = _silu_and_mul(gate_up)
+             # w2: [K, N], hidden: [B, N] -> output: [B, K]
+-            out[mask] = torch.matmul(hidden, w2_ref[i].transpose(0, 1))
++            expert_out = torch.matmul(hidden, w2_ref[i].transpose(0, 1))
++            if w2_bias is not None:
++                expert_out = expert_out + w2_bias[i].float()
++            out[mask] = expert_out
+ 
+     return (
+         (out.view(B, -1, w2_ref.shape[1]) * topk_weight_flat.view(B, -1, 1))
+@@ -223,5 +234,49 @@
+     )
+ 
+ 
++def test_cpu_int4_moe_swigluoai_interleaved():
++    """GPT-OSS gate/up pairs must stay interleaved through W4A8."""
++    set_random_seed(0)
++    M, N, K, E, topk, group_size = 2, 256, 512, 1, 1, -1
++    activation_dtype = torch.bfloat16
++    activation = MoEActivation.SWIGLUOAI
++    a = torch.randn(M, K, dtype=activation_dtype) / (K**0.5)
++    w13_packed, w2_packed, w13_ref, w2_ref, w13_bias, w2_bias = (
++        _make_int4_moe_weights(E, N, K, group_size, has_bias=True)
++    )
++    topk_weight = torch.ones((M, topk), dtype=activation_dtype)
++    topk_ids = torch.zeros((M, topk), dtype=torch.long)
++
++    ref_out = ref_int4_moe(
++        a,
++        w13_ref,
++        w2_ref,
++        topk_weight,
++        topk_ids,
++        activation,
++        w13_bias,
++        w2_bias,
++    )
++    out = torch.ops._C.dynamic_4bit_int_moe(
++        a,
++        topk_ids,
++        topk_weight,
++        w13_packed,
++        w2_packed,
++        K,
++        N,
++        group_size,
++        False,
++        CPUExpertsInt4._activation_kind(activation),
++    )
++
++    torch.testing.assert_close(
++        ref_out,
++        out,
++        atol=INT4_W4A8_ATOL,
++        rtol=INT4_W4A8_RTOL,
++    )
++
++
+ if __name__ == "__main__":
+     sys.exit(pytest.main([__file__, "-v"]))

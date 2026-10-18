@@ -1,0 +1,1544 @@
+{
+  "schema": 1,
+  "kind": "compact_retained_research_evidence_index",
+  "record_date_utc": "2026-10-18",
+  "scope": "Retained evidence through 12:40 UTC. Saved-data/index work only; no new target or author verifier run.",
+  "archive_path_base": "benchmarks/local_speed_audit/contribution-scout-20261017",
+  "archive_paths_portable_relative_to_base": true,
+  "raw_archive_included_in_git_bundle": false,
+  "source_pins": {
+    "runtime": "837e87e1c5024843b66383ef1bd60ca5672a9575",
+    "four_patch_applicability": "953fa442fafedbf51c3310d577474f80e457964a",
+    "latest_selected_source": "072c0886d53d933a7e1d3da7e8a3a91670cf181d"
+  },
+  "report_observed": {
+    "path": "control/recordable-report-20261018/REPORT.md",
+    "bytes": 20787,
+    "sha256": "39a660d318ad1b787e4dcfd138e0294fdbabf39341e18132549be5e42d2de5ff"
+  },
+  "findings": [
+    {
+      "id": "arm_w4a8",
+      "rank": 1,
+      "title": "GPT-OSS W4A8 interleaved gate/up layout",
+      "canonical_patch": {
+        "path": "core/gpt-oss-w4a8-candidate.patch",
+        "bytes": 4586,
+        "sha256": "6df2e88a4956c998c6319cf4cbf3ab2dd80cf177b3902d57ca039fac9e114e79",
+        "bundle_path": "patches/arm-w4a8.patch",
+        "changed_paths": [
+          "csrc/cpu/dynamic_4bit_int_moe_cpu.cpp",
+          "tests/kernels/moe/test_cpu_int4_moe.py"
+        ],
+        "preimages": [
+          {
+            "path": "csrc/cpu/dynamic_4bit_int_moe_cpu.cpp",
+            "preimage_bytes": 6452,
+            "preimage_sha256": "241633e89247b62d92eeb0226321d6e520138f6df3e4808e8c46e65882e3dd85",
+            "preimage_git_blob": "1b071d334ff43b754c441a12c2b2dc0f340dd5a9",
+            "postimage_bytes": 6815,
+            "postimage_sha256": "fa65d0a7d6974d5cd340f9a27b20a12619943218a2b6ec40615c8123d2bb28b9"
+          },
+          {
+            "path": "tests/kernels/moe/test_cpu_int4_moe.py",
+            "preimage_bytes": 6943,
+            "preimage_sha256": "3a0a0089059e9b11d40d7039450fda1f085a74b1c401135ec3989c84c1f7183f",
+            "preimage_git_blob": "2d5534ba086ef7be342b9732b8e588efd8f5fe11",
+            "postimage_bytes": 8551,
+            "postimage_sha256": "b3165b7c5e74c30f6903b8cd6baf562ca6d257df6aca542b6d3256f7b4b0c89f"
+          }
+        ],
+        "applicability_main": "953fa442fafedbf51c3310d577474f80e457964a",
+        "format_only_test_successor": false,
+        "current_runtime_pass": false
+      },
+      "source_pin": {
+        "runtime": "837e87e1c5024843b66383ef1bd60ca5672a9575",
+        "selected_current": "072c0886d53d933a7e1d3da7e8a3a91670cf181d",
+        "current_build_tested": false
+      },
+      "observations": {
+        "public_operator_pair": {
+          "baseline": "expected numerical failure",
+          "mismatched_elements": 35,
+          "elements": 1024,
+          "baseline_greatest_absolute_error": 0.03759765625,
+          "candidate": "one regression pass",
+          "candidate_greatest_absolute_error": null,
+          "tolerances": {
+            "atol": 0.02,
+            "rtol": 0.02
+          },
+          "silu_controls_each_variant": 2,
+          "normal_conftests": false
+        },
+        "official_candidate_only": {
+          "tests_passed": 169,
+          "normal_conftests": 3,
+          "native_extension_sha256": "acf122dde16999627ff616ba9c1d671968d372c9ea79697e8a593a4a96a91ee2"
+        },
+        "synthetic_loader_candidate_only": {
+          "experts": [
+            0,
+            1
+          ],
+          "max_absolute_error": 0.03125,
+          "atol": 0.02,
+          "rtol": 0.02,
+          "trained_model": false
+        }
+      },
+      "commands": [
+        {
+          "argv": [
+            "/opt/audit/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-q",
+            "tests/kernels/moe/test_cpu_int4_moe.py::test_cpu_int4_moe_swigluoai_interleaved"
+          ],
+          "provenance": "pinned wrapper source; actual baseline/candidate phase results retained",
+          "source_ref": "arm_public_command_source"
+        },
+        {
+          "api": "pytest.main",
+          "argv": [
+            "tests/kernels/moe/test_cpu_int4_moe.py",
+            "-x",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            "--junitxml=/work/receipts/full_file.xml"
+          ],
+          "provenance": "pinned official wrapper source; full_file receipt binds successful invocation",
+          "source_ref": "arm_official_command_source"
+        }
+      ],
+      "evidence_refs": [
+        "arm_public_receipt",
+        "arm_public_review",
+        "arm_official_receipt",
+        "arm_official_review",
+        "arm_loader_actual",
+        "arm_loader_review",
+        "arm_ownership"
+      ],
+      "coordination": {
+        "issue": 59457,
+        "saved_state": "open, unassigned, no comments; linked open PR query empty",
+        "pull_requests": [
+          {
+            "number": 61593,
+            "head": "6bb3e1879e29890159305c4536a52bc025001336",
+            "overlap": "same native file, GELU_TANH activation; different fix"
+          },
+          {
+            "number": 52240,
+            "head": "11b62e28d2bd69b24fa6eda87f8a4820a6230bd0",
+            "overlap": "MXFP4 layout boundary, different path"
+          }
+        ],
+        "no_upstream_contact": true
+      },
+      "limits": [
+        "No trained GPT-OSS output or reporter checkpoint-format validation.",
+        "Official build and loader checks are candidate-only; original numerical proof is a separate minimal public-operator component build.",
+        "No whole wheel, full CPU suite, current-main build, model quality, W8A8 resolution or throughput claim."
+      ]
+    },
+    {
+      "id": "responses_budget",
+      "rank": 2,
+      "title": "Cumulative max_output_tokens over built-in tool turns",
+      "canonical_patch": {
+        "path": "control/formatted-contribution-tests-v2/responses-formatted-contribution.patch",
+        "bytes": 21623,
+        "sha256": "d4bdc319f2b89281c4a2b77acf85aab5b613fe6fdf9cf5735529100252f77027",
+        "bundle_path": "patches/responses-output-budget.patch",
+        "changed_paths": [
+          "vllm/entrypoints/openai/responses/context.py",
+          "vllm/entrypoints/openai/responses/serving.py",
+          "tests/entrypoints/openai/responses/test_serving_responses.py"
+        ],
+        "preimages": [
+          {
+            "path": "vllm/entrypoints/openai/responses/context.py",
+            "preimage_bytes": 37957,
+            "preimage_sha256": "463fc3283a1873756d9efd7d333e587ea7a327544e2d50f0a6c90fb27b118dbf",
+            "preimage_git_blob": "6aaae5191098c33cc4546c53d7077f54a18fe398",
+            "postimage_bytes": 38005,
+            "postimage_sha256": "cc8c9513de2e1bcc09dc8984943c7634b489bc7a3b555bcc0425263eceaeec4e"
+          },
+          {
+            "path": "vllm/entrypoints/openai/responses/serving.py",
+            "preimage_bytes": 56542,
+            "preimage_sha256": "4f9cacf4d4c4137d5aca65bc93d4f9936e057ee673687eeb5db2dbc5d724c501",
+            "preimage_git_blob": "ba9d95b428732380506d2a5f4cf4c23a58cf752c",
+            "postimage_bytes": 57140,
+            "postimage_sha256": "41e0c7e0a00758cdba2f9ba5532ced2802b09a49149ebe92c61f158d68a3b8dc"
+          },
+          {
+            "path": "tests/entrypoints/openai/responses/test_serving_responses.py",
+            "preimage_bytes": 82018,
+            "preimage_sha256": "621f150210187bd6f7be7989b1b1677035de18c8c3912edee975514cf5cd4fb6",
+            "preimage_git_blob": "67b9dd4e4fadc2a492d8f2fac47ce68112e41c2b",
+            "postimage_bytes": 93400,
+            "postimage_sha256": "9dc45c0b71bff75f91e4ebbe4c9594f83ba8fa3233ab2426fd7c11d008acda7b"
+          }
+        ],
+        "applicability_main": "953fa442fafedbf51c3310d577474f80e457964a",
+        "format_only_test_successor": true,
+        "current_runtime_pass": false
+      },
+      "tested_original_patch": {
+        "path": "serving/responses-contribution-bundle-v1/responses-cumulative-budget.patch",
+        "bytes": 21122,
+        "sha256": "b162e28d64a4c2a6284cc5d9d322114c72a2b1c85bfb0d693ea9d0d7f3324c3b"
+      },
+      "source_pin": {
+        "runtime": "837e87e1c5024843b66383ef1bd60ca5672a9575",
+        "selected_current": "072c0886d53d933a7e1d3da7e8a3a91670cf181d"
+      },
+      "observations": {
+        "http_pair": {
+          "baseline": {
+            "intended_failures": 6,
+            "natural_final_controls_passed": 2
+          },
+          "candidate": {
+            "passed": 8
+          },
+          "real_asgi_harmony_json_sse": true,
+          "engine_tokenizer_tool_sessions": "scripted"
+        },
+        "compact_candidate_only": {
+          "passed": 18,
+          "failed": 0,
+          "skipped": 0,
+          "normal_conftests": true
+        },
+        "formatted_successor": "production bytes unchanged; tests AST/comments equal; static checks only; not rerun"
+      },
+      "commands": {
+        "provenance": "exact saved phase argv, not commands executed by this audit",
+        "http": {
+          "baseline": {
+            "http_collection": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "--trace-config",
+                "--collect-only",
+                "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget"
+              ],
+              "returncode": 0
+            },
+            "http_test": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "-ra",
+                "--tb=short",
+                "--basetemp=/scratch/pytest-http",
+                "--junitxml=/scratch/http-budget.xml",
+                "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget"
+              ],
+              "returncode": 1
+            },
+            "origin": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "/gate-normal20/runtime/origin_probe.py"
+              ],
+              "returncode": 0
+            }
+          },
+          "candidate": {
+            "http_collection": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "--trace-config",
+                "--collect-only",
+                "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget"
+              ],
+              "returncode": 0
+            },
+            "http_test": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "-ra",
+                "--tb=short",
+                "--basetemp=/scratch/pytest-http",
+                "--junitxml=/scratch/http-budget.xml",
+                "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget"
+              ],
+              "returncode": 0
+            },
+            "origin": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "/gate-normal20/runtime/origin_probe.py"
+              ],
+              "returncode": 0
+            }
+          }
+        },
+        "compact_candidate": {
+          "compact_collection": {
+            "argv": [
+              "/usr/local/bin/uv",
+              "run",
+              "--no-project",
+              "--offline",
+              "--python",
+              "/freeze/python-env/bin/python",
+              "--",
+              "/freeze/python-env/bin/python",
+              "-B",
+              "-m",
+              "pytest",
+              "-q",
+              "--strict-markers",
+              "-o",
+              "cache_dir=/scratch/pytest-cache",
+              "--trace-config",
+              "--collect-only",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[tool_boundary-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[tool_boundary-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[remaining-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[remaining-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[final_boundary-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[final_boundary-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[truncated-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[truncated-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[remaining_min_tokens]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[exhausted]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[second_tool_boundary]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[effective_cap]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[omitted_cap]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_responses_stream_truncated_by_length_reports_incomplete[False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_responses_stream_truncated_by_length_reports_incomplete[True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_background_stream_replay_stops_on_response_incomplete[False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_background_stream_replay_stops_on_response_incomplete[True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_harmony_tool_followup_preserves_render_params"
+            ],
+            "returncode": 0
+          },
+          "compact_test": {
+            "argv": [
+              "/usr/local/bin/uv",
+              "run",
+              "--no-project",
+              "--offline",
+              "--python",
+              "/freeze/python-env/bin/python",
+              "--",
+              "/freeze/python-env/bin/python",
+              "-B",
+              "-m",
+              "pytest",
+              "-q",
+              "--strict-markers",
+              "-o",
+              "cache_dir=/scratch/pytest-cache",
+              "-ra",
+              "--tb=short",
+              "--basetemp=/scratch/pytest-compact18",
+              "--junitxml=/scratch/compact18.xml",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[tool_boundary-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[tool_boundary-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[remaining-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[remaining-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[final_boundary-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[final_boundary-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[truncated-False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_http_builtin_tool_budget[truncated-True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[remaining_min_tokens]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[exhausted]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[second_tool_boundary]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[effective_cap]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_builtin_tool_followup_uses_remaining_output_tokens[omitted_cap]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_responses_stream_truncated_by_length_reports_incomplete[False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_responses_stream_truncated_by_length_reports_incomplete[True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_background_stream_replay_stops_on_response_incomplete[False]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::test_background_stream_replay_stops_on_response_incomplete[True]",
+              "tests/entrypoints/openai/responses/test_serving_responses.py::TestInitializeToolSessions::test_harmony_tool_followup_preserves_render_params"
+            ],
+            "returncode": 0
+          },
+          "origin": {
+            "argv": [
+              "/usr/local/bin/uv",
+              "run",
+              "--no-project",
+              "--offline",
+              "--python",
+              "/freeze/python-env/bin/python",
+              "--",
+              "/freeze/python-env/bin/python",
+              "-B",
+              "/gate-normal20/runtime/origin_probe.py"
+            ],
+            "returncode": 0
+          }
+        }
+      },
+      "evidence_refs": [
+        "responses_bundle",
+        "responses_http_actual",
+        "responses_http_review",
+        "responses_compact_actual",
+        "responses_compact_review",
+        "formatted_tests",
+        "formatted_tests_review",
+        "static_lint_review",
+        "responses_ownership"
+      ],
+      "coordination": {
+        "pull_requests": [
+          {
+            "number": 47112,
+            "head": "9b72619a24e945b6a3bd1a9a9a39fc0f5afbc4be",
+            "overlap": "tool-call count, different cause"
+          },
+          {
+            "number": 54064,
+            "head": "6efb6124beb2b884b128aa5b0a4edda4875493e9",
+            "overlap": "usage/finalization"
+          },
+          {
+            "number": 58018,
+            "head": "28e1e69ae8f0aee5885e4dc33f1d7127e15cbcb0",
+            "overlap": "item lifecycle"
+          }
+        ],
+        "exact_duplicate_found_in_bounded_review": false,
+        "no_global_absence_claim": true,
+        "no_upstream_contact": true
+      },
+      "limits": [
+        "No real model, external tool/network server, model evaluation or throughput proof.",
+        "18-case run is candidate-only; eight-case HTTP pair is separate.",
+        "Final format-only test successor has not run."
+      ]
+    },
+    {
+      "id": "prompt_dtype",
+      "rank": 3,
+      "title": "Offline prompt-embedding dtype in prefix-cache identity",
+      "canonical_patch": {
+        "path": "control/formatted-contribution-tests-v2/prompt_dtype-formatted-contribution.patch",
+        "bytes": 6252,
+        "sha256": "f7359d31d5cb59986725de1dc0f3a5c996df64f67e3055cc85d1ca0ae910551e",
+        "bundle_path": "patches/prompt-embedding-dtype.patch",
+        "changed_paths": [
+          "vllm/v1/core/kv_cache_utils.py",
+          "tests/v1/core/test_kv_cache_utils.py",
+          "tests/v1/core/test_prefix_caching.py"
+        ],
+        "preimages": [
+          {
+            "path": "vllm/v1/core/kv_cache_utils.py",
+            "preimage_bytes": 46300,
+            "preimage_sha256": "774fa7691b5b496b8fe7c74d0e0488bec475048ef9d085872c3bf2fe1ccc63f2",
+            "preimage_git_blob": "aadc9cda5732fbe4036b8d8a8811960c3b758fae",
+            "postimage_bytes": 46447,
+            "postimage_sha256": "e8f0d11a385d3c8d2e60121fdbd9149f82fac699cf23d1ec6447b06261448b78"
+          },
+          {
+            "path": "tests/v1/core/test_kv_cache_utils.py",
+            "preimage_bytes": 78015,
+            "preimage_sha256": "09fd2ecd3917a391f7192e16d38ec45c1c4df2f467c7b13cd6a35ba77ac1d9fe",
+            "preimage_git_blob": "09f365d3823f6a853da80fccfd1330922f6acd64",
+            "postimage_bytes": 78169,
+            "postimage_sha256": "5b9be1e9f33524129da5fe29cf2f6fb2d92ea9f7b12676b657d9bc96234bf9a6"
+          },
+          {
+            "path": "tests/v1/core/test_prefix_caching.py",
+            "preimage_bytes": 234410,
+            "preimage_sha256": "2b73a1f75f181d311c3e054649acf68f66758c70016f03f0078b9a9912931e45",
+            "preimage_git_blob": "52455c6083056bd541b4bc3177bcbd833722ff2f",
+            "postimage_bytes": 236037,
+            "postimage_sha256": "380c0bf9511698dc1a0c04a2b5d25d57967719040f9a18e8a3d4249a65b407f0"
+          }
+        ],
+        "applicability_main": "953fa442fafedbf51c3310d577474f80e457964a",
+        "format_only_test_successor": true,
+        "current_runtime_pass": false
+      },
+      "tested_original_patch": {
+        "path": "core/prompt-embedding-prefix-cache-contribution-proposal-v1/contribution.patch",
+        "bytes": 6268,
+        "sha256": "6e5e3c850430300fda27393d157a414802e2a3d11d4c28f0ea62d4bb85fbb710"
+      },
+      "source_pin": {
+        "runtime": "837e87e1c5024843b66383ef1bd60ca5672a9575",
+        "selected_current": "072c0886d53d933a7e1d3da7e8a3a91670cf181d"
+      },
+      "observations": {
+        "witness": {
+          "shape": [
+            33,
+            64
+          ],
+          "same_raw_word": "0x3c00",
+          "fp16_value": 1.0,
+          "bf16_value": 0.0078125
+        },
+        "real_manager_pair": {
+          "hash_functions": [
+            "sha256",
+            "sha256_cbor"
+          ],
+          "baseline_cross_dtype_cached_tokens": 32,
+          "candidate_cross_dtype_cached_tokens": 0,
+          "same_dtype_cached_tokens_both": 32,
+          "complete_reusable_blocks": 2,
+          "actual_kv_tensor_contents_checked": false
+        },
+        "normal_suite_pair": {
+          "baseline": {
+            "intended_failures": 2,
+            "controls_passed": 7
+          },
+          "candidate": {
+            "passed": 9
+          },
+          "normal_conftests": true
+        },
+        "public_worker_followup": "failed under process/import research guard; CPUWorker import and model execution not proved",
+        "formatted_successor": "production unchanged; test AST/comments equal; not rerun"
+      },
+      "commands": {
+        "provenance": "exact argv read from retained raw result records",
+        "manager": {
+          "baseline": [
+            "/usr/bin/timeout",
+            "--signal=TERM",
+            "--kill-after=5s",
+            "120s",
+            "/usr/local/bin/uv",
+            "run",
+            "--offline",
+            "--no-project",
+            "/freeze/python-env/bin/python",
+            "-B",
+            "-S",
+            "-X",
+            "pycache_prefix=/work/pycache",
+            "/audit/probe.py"
+          ],
+          "candidate": [
+            "/usr/bin/timeout",
+            "--signal=TERM",
+            "--kill-after=5s",
+            "120s",
+            "/usr/local/bin/uv",
+            "run",
+            "--offline",
+            "--no-project",
+            "/freeze/python-env/bin/python",
+            "-B",
+            "-S",
+            "-X",
+            "pycache_prefix=/work/pycache",
+            "/audit/probe.py"
+          ]
+        },
+        "normal_suite": {
+          "baseline": {
+            "dtype_collection": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "--trace-config",
+                "--collect-only",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds_cached",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_different_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_block_hasher_with_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_with_prompt_embeds_and_mm_inputs",
+                "tests/v1/core/test_prefix_caching.py::test_prompt_embed_dtype_separates_prefix_cache_entries"
+              ],
+              "returncode": 0
+            },
+            "dtype_test": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "-ra",
+                "--tb=short",
+                "--basetemp=/scratch/pytest-dtype",
+                "--junitxml=/scratch/dtype-prefix-cache.xml",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds_cached",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_different_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_block_hasher_with_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_with_prompt_embeds_and_mm_inputs",
+                "tests/v1/core/test_prefix_caching.py::test_prompt_embed_dtype_separates_prefix_cache_entries"
+              ],
+              "returncode": 1
+            },
+            "origin": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "/gate-normal20/runtime/origin_probe.py"
+              ],
+              "returncode": 0
+            }
+          },
+          "candidate": {
+            "dtype_collection": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "--trace-config",
+                "--collect-only",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds_cached",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_different_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_block_hasher_with_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_with_prompt_embeds_and_mm_inputs",
+                "tests/v1/core/test_prefix_caching.py::test_prompt_embed_dtype_separates_prefix_cache_entries"
+              ],
+              "returncode": 0
+            },
+            "dtype_test": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "-m",
+                "pytest",
+                "-q",
+                "--strict-markers",
+                "-o",
+                "cache_dir=/scratch/pytest-cache",
+                "-ra",
+                "--tb=short",
+                "--basetemp=/scratch/pytest-dtype",
+                "--junitxml=/scratch/dtype-prefix-cache.xml",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds_cached",
+                "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_different_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_block_hasher_with_prompt_embeds",
+                "tests/v1/core/test_kv_cache_utils.py::test_request_with_prompt_embeds_and_mm_inputs",
+                "tests/v1/core/test_prefix_caching.py::test_prompt_embed_dtype_separates_prefix_cache_entries"
+              ],
+              "returncode": 0
+            },
+            "origin": {
+              "argv": [
+                "/usr/local/bin/uv",
+                "run",
+                "--no-project",
+                "--offline",
+                "--python",
+                "/freeze/python-env/bin/python",
+                "--",
+                "/freeze/python-env/bin/python",
+                "-B",
+                "/gate-normal20/runtime/origin_probe.py"
+              ],
+              "returncode": 0
+            }
+          }
+        }
+      },
+      "evidence_refs": [
+        "dtype_source",
+        "dtype_manager_actual",
+        "dtype_manager_review",
+        "dtype_suite_actual",
+        "dtype_suite_review",
+        "dtype_compatibility",
+        "dtype_compatibility_review",
+        "cpu_import_failure",
+        "cpu_import_failure_review",
+        "formatted_tests",
+        "formatted_tests_review",
+        "static_lint_review",
+        "dtype_ownership"
+      ],
+      "coordination": {
+        "issue": 56655,
+        "pull_requests": [
+          {
+            "number": 56656,
+            "head": "f52547bf6134db94d818287cccae57c4fc52fc37",
+            "overlap": "same helper, different mask fix"
+          },
+          {
+            "number": 53769,
+            "head": "937c614836a69e8cc9cd61c22ebc66a4a4403106",
+            "overlap": "broader conformance tests"
+          }
+        ],
+        "no_upstream_contact": true
+      },
+      "limits": [
+        "HTTP input loader normalizes dtype; evidence targets offline embeddings.",
+        "No actual KV tensors, public worker/model pass, serving, quality or speed result.",
+        "Embedding keys and reviewed offload filenames change; live cross-version store and rolling upgrade remain untested.",
+        "Final format-only tests not rerun."
+      ]
+    },
+    {
+      "id": "mean_pool",
+      "rank": 4,
+      "title": "Direct segmented mean pooling",
+      "canonical_patch": null,
+      "canonical_patch_limit": "No complete production contribution patch was identified in this bounded audit. The measured probe is retained below.",
+      "prototype": {
+        "path": "gpu/mean_pool_probe.py",
+        "bytes": 17230,
+        "sha256": "f2dd1382b385948685f26e11f21d01f90211495fdb6f91e95311ab4ea647f792"
+      },
+      "source_pin": {
+        "runtime": "837e87e1c5024843b66383ef1bd60ca5672a9575",
+        "selected_source_refresh": "03ee (full exact source identity retained in meanpool_source_refresh)",
+        "latest_main_applicability_proved": false
+      },
+      "observations": {
+        "cold_l2_l4": {
+          "correctness_cases": 84,
+          "timing_rows": 16,
+          "reported_speedup_range": [
+            2.878392145067867,
+            6.926142750093669
+          ],
+          "scope": "isolated component, graph/CUPTI, cold L2, multiple candidate configurations"
+        },
+        "warm_bf16_l4": {
+          "shapes": 6,
+          "median_ratio_range": [
+            4.182441351939088,
+            33.51234087528458
+          ],
+          "scope": "Warm amortized isolated MeanPool call with per-call output allocation and Python dispatch. One GPU session, one CUDA synchronize before/after each 20-call block, three alternating blocks. Fixed direct64/64/4 policy. No full-runner or serving latency claim. Warm cache behavior differs from the earlier cold-L2 graph/CUPTI experiment."
+        },
+        "trained_minilm_pooling": {
+          "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "candidate_outputs_checked": 3,
+          "batches": 2,
+          "maximum_candidate_reference_error": 5.960464477539063e-08,
+          "minimum_normalized_cosine": 0.9999999403953552,
+          "cpu_preflight_candidate_outputs_checked": 0,
+          "loaded_vllm_modules": []
+        }
+      },
+      "commands": [
+        {
+          "argv": [
+            "/opt/audit/.venv/bin/python",
+            "/work/mean-pool/mean_pool_probe.py",
+            "--quick",
+            "--output",
+            "/tmp/mean-pool-result.json",
+            "--vendor-cupti",
+            "/work/vendor-cupti"
+          ],
+          "provenance": "exact pinned L4 wrapper-source command, not separately observed raw argv",
+          "source_ref": "meanpool_native_command_source"
+        },
+        {
+          "argv": [
+            "/opt/audit/.venv/bin/python",
+            "/work/mean-pool/mean_pool_eager_probe.py",
+            "--output",
+            "/tmp/mean-pool-result.json",
+            "--vendor-cupti",
+            "/work/vendor-cupti"
+          ],
+          "provenance": "exact pinned L4 wrapper-source command, not separately observed raw argv",
+          "source_ref": "meanpool_warm_command_source"
+        }
+      ],
+      "evidence_refs": [
+        "meanpool_native",
+        "meanpool_native_analysis",
+        "meanpool_native_review",
+        "meanpool_diagnostic_review",
+        "meanpool_warm",
+        "meanpool_warm_review",
+        "meanpool_eager_source_review",
+        "meanpool_trained_cpu",
+        "meanpool_trained_l4",
+        "meanpool_trained_inputs",
+        "meanpool_trained_review",
+        "meanpool_source_refresh",
+        "meanpool_fusion_ownership"
+      ],
+      "independent_review_manifest": null,
+      "independent_review_limit": "Earlier component and trained-pooling reviews are standalone retained review files, not a newly invented review manifest. Their exact file hashes are in evidence_refs.",
+      "coordination": {
+        "pull_requests": [
+          {
+            "number": 60035,
+            "head": "83ab4245bdb821035442f78b15b73786da036444",
+            "overlap": "mean-pooling batch invariance and reduction choices"
+          }
+        ],
+        "hold": true
+      },
+      "limits": [
+        "Component speed is not model throughput.",
+        "Trained pooled-output check is source-only upstream plus candidate, not dispatch through a vLLM engine/worker.",
+        "No broad model-quality/task evaluation, serving latency, current-main integration or ready production patch.",
+        "Cold graph/device and warm amortized host+device timing scopes differ."
+      ]
+    },
+    {
+      "id": "mrv2_fusion",
+      "rank": 5,
+      "title": "MRV2 table and slot preparation fusion",
+      "canonical_patch": {
+        "path": "gpu/fusion-current-rebase-v2/candidate.patch",
+        "bytes": 15253,
+        "sha256": "925bc6198ba2d877408e68055262959132762dbe825f8544a7c8cedf192ee745",
+        "base_commit": "0c5dd18e7a0ace18d99438fb16b8375572ea76b5",
+        "changed_paths": [
+          "vllm/v1/worker/gpu/block_table.py",
+          "vllm/v1/worker/gpu/model_runner.py",
+          "tests/v1/worker/test_gpu_block_table.py"
+        ],
+        "latest_main_applicability_proved": false,
+        "runtime_tested": false
+      },
+      "observations": {
+        "level": "source-only corrected draft",
+        "draft_consumer_seed_rows": 8,
+        "dirty_rows_preserved": true,
+        "expected_slots": [
+          24,
+          9,
+          42,
+          19,
+          36,
+          -1,
+          -1,
+          -1
+        ],
+        "native_device_model_or_performance_result": false
+      },
+      "commands": [
+        {
+          "argv": [
+            ".venv/bin/python",
+            "-m",
+            "pytest",
+            "tests/v1/worker/test_gpu_block_table.py",
+            "-v"
+          ],
+          "executed": false,
+          "provenance": "future test plan only"
+        }
+      ],
+      "evidence_refs": [
+        "fusion_source",
+        "fusion_review",
+        "meanpool_fusion_ownership"
+      ],
+      "coordination": {
+        "pull_requests": [
+          {
+            "number": 60767,
+            "head_prefix": "df31",
+            "head_full": "See exact retained fusion-pr.json in meanpool_fusion_ownership",
+            "overlap": "new gather/dirty-row policy; integration direction unresolved"
+          },
+          {
+            "number": 59297,
+            "overlap": "adjacent block geometry"
+          }
+        ],
+        "hold": true
+      },
+      "limits": [
+        "Complete patch is verified only against retained 0c5dd18e base.",
+        "No latest-main applicability, CUDA graph execution, device correctness, model or speed proof.",
+        "Integer source-model controls are not native kernel results."
+      ]
+    },
+    {
+      "id": "prompt_width",
+      "rank": null,
+      "status": "held",
+      "title": "Direct offline prompt-embedding width validation",
+      "canonical_patch": {
+        "path": "control/prompt-width-formatted-contribution-v1/change.patch",
+        "bytes": 4777,
+        "sha256": "c34bbbfd4504ab50c496407cabada390d321bead94fee7c8fcb450c004b1c5e8",
+        "bundle_path": "patches/prompt-embedding-width.patch",
+        "changed_paths": [
+          "vllm/renderers/embed_utils.py",
+          "vllm/renderers/base.py",
+          "tests/renderers/test_completions.py"
+        ],
+        "preimages": [
+          {
+            "path": "vllm/renderers/embed_utils.py",
+            "preimage_bytes": 5539,
+            "preimage_sha256": "5d16e6830e8a03125ef110a37f9064893b189344aa3667af41e8f0521a659c75",
+            "preimage_git_blob": "69ff920fa873960c585989999b35aaf9231b5567",
+            "postimage_bytes": 5550,
+            "postimage_sha256": "2989d59666735519938f861d2a4bf059d81e3cb0580a1aa20d8c9a0c930d7479"
+          },
+          {
+            "path": "vllm/renderers/base.py",
+            "preimage_bytes": 52078,
+            "preimage_sha256": "66eb10974cba6efe8578cb2426ea3f87eba4138398ca98584493831d19d2d528",
+            "preimage_git_blob": "f22b4215bdbdc4e76342b21122f91db0de7f5e51",
+            "postimage_bytes": 52182,
+            "postimage_sha256": "dd7c77b5149422af9178dc1e7649c2306ffa19a846a2531844cc8aaaf43d4efb"
+          },
+          {
+            "path": "tests/renderers/test_completions.py",
+            "preimage_bytes": 27733,
+            "preimage_sha256": "ec78c8b1203ee5a1f12bc36e875de66abf3810fdb0808dc4b8c2de7acc02792c",
+            "preimage_git_blob": "f7e53b1389128d630f71877809ee6e62e1825040",
+            "postimage_bytes": 29022,
+            "postimage_sha256": "0f2296a07d302b64557b9cb5dd49854022d2e3e41e2d56a661b2004384de71b1"
+          }
+        ],
+        "applicability_main": "953fa442fafedbf51c3310d577474f80e457964a",
+        "format_only_test_successor": true,
+        "current_runtime_pass": false
+      },
+      "source_pin": {
+        "selected_current": "072c0886d53d933a7e1d3da7e8a3a91670cf181d",
+        "runtime_attempt": "837e87e1c5024843b66383ef1bd60ca5672a9575 plus exact source overlay"
+      },
+      "observations": {
+        "source_review": "direct render_cmpl reaches process_for_engine; rank/batch normalization and OPT fallback retained",
+        "renderer_attempt": {
+          "origin_returncode": 0,
+          "collection_returncode": 4,
+          "target_exit_code": 70,
+          "cause": "cpuinfo import denied during normal conftest chain",
+          "width_test_phase_executed": false,
+          "candidate_started": false
+        },
+        "direct_cases_executed": 0,
+        "serialized_controls_executed": 0
+      },
+      "commands": [],
+      "evidence_refs": [
+        "width_source",
+        "width_formatted",
+        "width_source_review",
+        "width_failure",
+        "width_failure_invocation",
+        "width_failure_review"
+      ],
+      "coordination": {
+        "issue": 61709,
+        "nearby_merged_issue": 61736,
+        "pull_requests": [
+          {
+            "number": 59930,
+            "head": "25506507c1db8fcbb3d8fda60461e7da212d6735",
+            "overlap": "same renderer file, adjacent decode-budget work; not same width fix"
+          },
+          {
+            "number": 51123,
+            "overlap": "reviewed different scope"
+          },
+          {
+            "number": 55233,
+            "overlap": "reviewed different scope"
+          },
+          {
+            "number": 51891,
+            "overlap": "reviewed different scope"
+          }
+        ],
+        "no_global_absence_claim": true
+      },
+      "limits": [
+        "All four direct assertion cases and four serialized controls remain unrun.",
+        "Invalid width is an input-contract defect hypothesis; width one may broadcast in MRV1.",
+        "Logical MRV2 indexing arithmetic does not prove a physical CUDA OOB or native crash.",
+        "No successful renderer runtime, model evaluation or launch authority."
+      ]
+    },
+    {
+      "id": "cmake_arch_list",
+      "rank": null,
+      "status": "coordination hold",
+      "canonical_patch": null,
+      "source_pin": "072c0886d53d933a7e1d3da7e8a3a91670cf181d",
+      "observations": {
+        "real_cmake_helper_calls": 11,
+        "source": "10.0",
+        "targets": "10.0a;10.3a",
+        "actual_result": "10.0a",
+        "isolated_10_0a_result": "10.0a",
+        "isolated_10_3a_result": "10.0",
+        "compiler_threshold_correction": "13.4, not 13.1"
+      },
+      "commands": [
+        [
+          "/opt/homebrew/Cellar/cmake/4.4.4/bin/cmake",
+          "-P",
+          "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/root-cuda-arch-cmake-review-v1/probe.cmake"
+        ]
+      ],
+      "evidence_refs": [
+        "cmake_source",
+        "cmake_compatibility",
+        "cmake_actual",
+        "cmake_actual_review",
+        "cmake_duplicate",
+        "sampling_cmake_clarification"
+      ],
+      "coordination": {
+        "pull_requests": [
+          {
+            "number": 56582,
+            "head": "b5f2899b4f25d234f6ca7f838fefc7e482535ed4",
+            "overlap": "same source-removal cause; existing owner"
+          }
+        ],
+        "issue": 56548,
+        "hold": true
+      },
+      "limits": [
+        "Real helper interpreter results and official compatibility documents only.",
+        "No compiler, project configure, generated cubin, wheel failure or device loading.",
+        "No independent fix or patch proposed."
+      ]
+    },
+    {
+      "id": "sampling_tiny_logits",
+      "rank": null,
+      "status": "source/arithmetic and ownership hold",
+      "canonical_patch": null,
+      "source_pin": "072c0886d53d933a7e1d3da7e8a3a91670cf181d (selected kernel equal to 494 source)",
+      "observations": {
+        "vocabulary": 1024,
+        "finite_logits": [
+          0.0,
+          9.999999960041972e-13,
+          1.9999999920083944e-12,
+          1.000000013351432e-10
+        ],
+        "remaining_logits": "-inf",
+        "k": 2,
+        "p": null,
+        "temperature": 1.0,
+        "reference_finite_indices": [
+          2,
+          3
+        ],
+        "two_independent_scalar_source_models_finite_indices": [
+          3
+        ],
+        "positive_values": "three distinct normal FP32 values, not underflow or tied maxima"
+      },
+      "commands": [],
+      "evidence_refs": [
+        "sampling_source",
+        "sampling_review",
+        "sampling_cmake_clarification",
+        "latest_delta"
+      ],
+      "coordination": {
+        "pull_requests": [
+          {
+            "number": 59804,
+            "head": "0ae548aa1dccca1a348f12bf5987da52d693c803",
+            "overlap": "shared tie/final mask helper; exact absolute top-k stop fix not established"
+          }
+        ],
+        "hold": true
+      },
+      "limits": [
+        "No Triton/compiler/device, public-request, model-quality or native correctness result.",
+        "HAS_TRITON and monolithic dispatch must be forced for a future existing-suite check; explicit seed excludes fused MRV2 path.",
+        "Original phrase works at V4 means the counterexample also occurs there; both source-model rows keep [3].",
+        "No patch, new paid launch or runtime authority."
+      ]
+    }
+  ],
+  "shared_evidence_refs": [
+    "portability",
+    "latest_delta",
+    "formatted_tests",
+    "formatted_tests_review",
+    "static_lint_review"
+  ],
+  "references": {
+    "portability": {
+      "path": "control/contribution-portability-20261018T1105/manifest.json",
+      "bytes": 3290,
+      "sha256": "9bd5f7964c515d44dde5ce0ff2c224b30f37ac698ef801223cbdd808c37f3c19"
+    },
+    "latest_delta": {
+      "path": "control/upstream-selected-source-delta-20261018T1220/manifest.json",
+      "bytes": 817,
+      "sha256": "9673b902d770942eef460057225ac14aae49b29ed6d87dd736713505d01f3f9c"
+    },
+    "formatted_tests": {
+      "path": "control/formatted-contribution-tests-v2/manifest.json",
+      "bytes": 6027,
+      "sha256": "eb583ebd630f5c0a38aeb8f0c600be19d14b6461183832a010bd4b2e8f3eb295"
+    },
+    "formatted_tests_review": {
+      "path": "serving/formatted-contribution-tests-independent-review-v1/manifest.json",
+      "bytes": 2283,
+      "sha256": "a81fb38a34532ab1908e2848b353f9ae7b255e4972a663fc10a5ee2532ebe93d"
+    },
+    "static_lint_review": {
+      "path": "core/candidate-static-lint-independent-review-v1/manifest.json",
+      "bytes": 1585,
+      "sha256": "165e111f6641d5b50ce5a83bdbacc8cb0708914e90835629085d0e2147ef1f5c"
+    },
+    "arm_public_review": {
+      "path": "control/linux-arm-public-op/v4-result-review.json",
+      "bytes": 3252,
+      "sha256": "898e439c382992b67ddaa88db954e01a2e8043dd6ba6a80c0df12b04ae12bd13"
+    },
+    "arm_public_receipt": {
+      "path": "control/linux-arm-public-op/gate-receipt.json",
+      "bytes": 816,
+      "sha256": "07bf3f2701dd089b2178e1720d8655db0f45cb958b0e8e7e1fd3469703f3d8de"
+    },
+    "arm_official_receipt": {
+      "path": "control/linux-arm-official-build/official-candidate-v3/controller-result.json",
+      "bytes": 10852,
+      "sha256": "40116a2034a6965317bebad622546c69614df6d7e146f8b1ac827777dbb4d8a3"
+    },
+    "arm_official_review": {
+      "path": "control/linux-arm-official-build/review/official-candidate-v3-result/review-manifest.json",
+      "bytes": 2318,
+      "sha256": "606b558da27952683c5ad04a31bd66525ff50570142a827a1db50248eea828f2"
+    },
+    "arm_loader_actual": {
+      "path": "control/gpt-oss-docker-managed-local-v4-run/manifest.json",
+      "bytes": 8605,
+      "sha256": "76214ae8b82d8e5b78ff558140dbce84a77c5f4e52cad86062e4fe64d088dca2"
+    },
+    "arm_loader_review": {
+      "path": "control/gpt-oss-docker-managed-local-v4-result-independent-review-v1/manifest.json",
+      "bytes": 1697,
+      "sha256": "452da343894419cc97e8ef72ff48a415a44a1faae62a74e6295b431768224b6c"
+    },
+    "arm_ownership": {
+      "path": "core/arm-w4a8-current-review-20261018T0740/manifest.json",
+      "bytes": 8028,
+      "sha256": "d39033aa89740411279becf2e438427f3ede2b78e5dc4b842450499d29d3c076"
+    },
+    "responses_bundle": {
+      "path": "serving/responses-contribution-bundle-v1/manifest.json",
+      "bytes": 5882,
+      "sha256": "6fdd0444a9fe4e180fb5c32fbed96d68b9fe9c1d21d1743fdb816e5ac25efbb7"
+    },
+    "responses_http_actual": {
+      "path": "serving/responses-http-normal-suite-pair-v3-run/manifest.json",
+      "bytes": 32564,
+      "sha256": "2b124a2a74ae3096d748fc5f3001ca5e81fefc984665a52cce4e7f8628dd0378"
+    },
+    "responses_http_review": {
+      "path": "serving/responses-http-normal-suite-pair-v3-result-independent-review-v1/manifest.json",
+      "bytes": 5290,
+      "sha256": "240613615819d1922f7ff07c45c1ed13005dceb55ca3182b8821422462741342"
+    },
+    "responses_compact_actual": {
+      "path": "serving/responses-compact18-normal-suite-v2-run/manifest.json",
+      "bytes": 16459,
+      "sha256": "2d9196328a19131980c3a996bc36b0f6a76ec59ee2a4363a4a3efd644d138b69"
+    },
+    "responses_compact_review": {
+      "path": "serving/responses-compact18-normal-suite-v2-result-independent-review-v1/manifest.json",
+      "bytes": 1386,
+      "sha256": "06de7e0e71b0c96ad6f57883434be03d9a2cfc31abb2c7a388e9c991a817a0c4"
+    },
+    "responses_ownership": {
+      "path": "serving/responses-current-review-20261018T0735/manifest.json",
+      "bytes": 30345,
+      "sha256": "ec680cc6967eb96954131ff169aca47ae7f4307c8c08799d4f70ee7ddc51429b"
+    },
+    "dtype_source": {
+      "path": "core/prompt-embedding-prefix-cache-contribution-proposal-v1/manifest.json",
+      "bytes": 4361,
+      "sha256": "88303586ebbb77e094d23317b290e852cdcfeea251d559c840dca92367bc809f"
+    },
+    "dtype_manager_actual": {
+      "path": "core/prompt-kv-manager-pair-v2-run/manifest.json",
+      "bytes": 20684,
+      "sha256": "f76106a228038f5da4dbfff211001c0f7c6579d52d626d70a7e1f723b028f087"
+    },
+    "dtype_manager_review": {
+      "path": "core/prompt-kv-manager-pair-v2-result-independent-review-v1/manifest.json",
+      "bytes": 2043,
+      "sha256": "80d55eb9f64038862f0007c328bf835f2d1c91a80cb58a442e1e86530bce2953"
+    },
+    "dtype_suite_actual": {
+      "path": "core/prompt-embedding-prefix-cache-normal9-v4-run/manifest.json",
+      "bytes": 30878,
+      "sha256": "ccd9a1d28b94d94d495dbba438c06ff888dd2c6cef6cdc8bae7f95222c71a963"
+    },
+    "dtype_suite_review": {
+      "path": "core/prompt-embedding-prefix-cache-normal9-v4-result-independent-review-v1/manifest.json",
+      "bytes": 5647,
+      "sha256": "2b9e992649ce6a2d005d303edb71e9e0d8883817bfe3bc6aec3a6e430d893321"
+    },
+    "dtype_ownership": {
+      "path": "core/prompt-embedding-prefix-cache-current-review-20261018T0735/manifest.json",
+      "bytes": 8507,
+      "sha256": "65b4bd9a9e73ecb5e51ecf9e081b4590e6f9831301c911c187fcd1f534d2fc5f"
+    },
+    "dtype_compatibility": {
+      "path": "core/prompt-dtype-cache-compatibility-v1/manifest.json",
+      "bytes": 11419,
+      "sha256": "b1aa0d20771fc5fe25cfb1937325ade65cf4e35afa6120476bac3645f5beb7ca"
+    },
+    "dtype_compatibility_review": {
+      "path": "serving/prompt-dtype-cache-compatibility-review-v1/manifest.json",
+      "bytes": 1480,
+      "sha256": "92f65b9b512623448bd5c4be92c8e47d94fc8e68e0156c7d779eba0a5d055d20"
+    },
+    "cpu_import_failure": {
+      "path": "core/public-offline-cpu-worker-import-v4-run/manifest.json",
+      "bytes": 11759,
+      "sha256": "9cad492be10e786bafde1b80ba6a5d861b19ecb8cd0817a808c7f1d1a2e4b6b2"
+    },
+    "cpu_import_failure_review": {
+      "path": "core/public-offline-cpu-worker-import-v4-result-independent-review-v1/manifest.json",
+      "bytes": 1741,
+      "sha256": "10c4c9f2b508353bcf72e0ad2fee5e2bce161ab4afa5154c54d7cf2b6bc460ce"
+    },
+    "width_formatted": {
+      "path": "control/prompt-width-formatted-contribution-v1/manifest.json",
+      "bytes": 1574,
+      "sha256": "fcb3dffa0cf1173135a0894337fc68aca1444e411478a93a48d961f50415e38e"
+    },
+    "width_source": {
+      "path": "core/prompt-width-validation-contribution-v1/manifest.json",
+      "bytes": 3015,
+      "sha256": "591069787cc2788f638560c8873d52aa89b061e306d24f0374785bd02f743c11"
+    },
+    "width_source_review": {
+      "path": "gpu/prompt-width-proposal-review-v1/manifest.json",
+      "bytes": 8197,
+      "sha256": "78130307e2d9acb87de389b18e16566386b795e7895e5d6d3ce2d44eb6b73113"
+    },
+    "width_failure": {
+      "path": "core/prompt-width-renderer-pair-v1-run/manifest.json",
+      "bytes": 10467,
+      "sha256": "300eab4b3ef888c4a7ee50f8b53aaa68b90688319d524be479c301902db8cf42"
+    },
+    "width_failure_invocation": {
+      "path": "control/root-prompt-width-renderer-host-invocation-v1/manifest.json",
+      "bytes": 1985,
+      "sha256": "5d6786fbdb38ffe71d28ec620cc1aecc07fc83983ce0ea6a2974fe48323abc88"
+    },
+    "width_failure_review": {
+      "path": "gpu/prompt-width-renderer-actual-failure-review-v1/manifest.json",
+      "bytes": 2465,
+      "sha256": "e452b9ec591d4087abb87e1b337bea15529cb717e97d7714248e20a0946a11d8"
+    },
+    "meanpool_native": {
+      "path": "modal/mean-pool-l4-v3/result.json",
+      "bytes": 417966,
+      "sha256": "7a56b8a509e0706c27ef55727e92a9077617444a5a9f0a117a04d0ec493adcbe"
+    },
+    "meanpool_native_analysis": {
+      "path": "gpu/mean_pool_l4_analysis.json",
+      "bytes": 51353,
+      "sha256": "48f1026ff650597014a60f503fd153f396dd375e3789386f929af7ceb5fcf5ca"
+    },
+    "meanpool_native_review": {
+      "path": "control/core-review-evidence/mean-pool-l4-v3-summary.json",
+      "bytes": 649,
+      "sha256": "82f5f41b314788c38bc759a8cf24f3826bbd4bea3dfdca012873477253525a53"
+    },
+    "meanpool_diagnostic_review": {
+      "path": "control/core-review-evidence/mean-pool-diagnostic-change-review.json",
+      "bytes": 446,
+      "sha256": "0a0ca4fdc28535a226a8c3817e12291e648cfb3923f32799c92425347ab5f9a3"
+    },
+    "meanpool_warm": {
+      "path": "modal/mean-eager-l4-v1/result.json",
+      "bytes": 233344,
+      "sha256": "3c314d10fca31a51534376f5c7ca00889dcef51c1845c1ba09260b236cb0fbc0"
+    },
+    "meanpool_warm_review": {
+      "path": "control/mean-pool-eager-summary.json",
+      "bytes": 8581,
+      "sha256": "9a644942b226741960e0b6f501d0219f9197141aca7ecad1df561a9c98910784"
+    },
+    "meanpool_eager_source_review": {
+      "path": "control/eager-probe-review.md",
+      "bytes": 4646,
+      "sha256": "347637efcc8d0df58a7613c25d09bf45c23da4dbd5e2b3b7ebc878b8b28ecae2"
+    },
+    "meanpool_trained_cpu": {
+      "path": "modal/trained-pool-cpu-v1/result.json",
+      "bytes": 418496,
+      "sha256": "053da1107c566e661baa1e32ed212bc7f39a71c13011dc89bc230665865ecfb6"
+    },
+    "meanpool_trained_l4": {
+      "path": "modal/trained-pool-l4-v1/result.json",
+      "bytes": 964253,
+      "sha256": "b31b2b10e484cd6c3ad17f938c6ae38d2b2c4e66e1218a7fd14bbb35709445bb"
+    },
+    "meanpool_trained_review": {
+      "path": "control/trained-pool-result-review.json",
+      "bytes": 4595,
+      "sha256": "2fb09e4cfb793e3293cd0a71b1723bc906fad391b257e27b0698a8799368c54f"
+    },
+    "meanpool_trained_inputs": {
+      "path": "modal/trained-pool-inputs.json",
+      "bytes": 3048,
+      "sha256": "2a71e0a74995f8904bffcba9933dd72b934ac96986d63cc8d8b176769ad68827"
+    },
+    "meanpool_source_refresh": {
+      "path": "control/root-meanpool-target-refresh-20261018T0144/manifest.json",
+      "bytes": 604,
+      "sha256": "466d3133f5faa1c41b950844a4ef684484975107cade4694a8e7474e404be6f7"
+    },
+    "meanpool_fusion_ownership": {
+      "path": "control/root-meanpool-availability-20261018T0148/manifest.json",
+      "bytes": 2330,
+      "sha256": "dbd284de99130040a68d6208b9b8b7820497c1c5603ea99f5294b3a20dc83206"
+    },
+    "fusion_source": {
+      "path": "gpu/fusion-current-rebase-v2/artifact-manifest.json",
+      "bytes": 1671,
+      "sha256": "4ea52e4fcf23ecb6fcf557b7e2646247b489589523023bb36ffeefd0464aa2cc"
+    },
+    "fusion_review": {
+      "path": "control/fusion-current-rebase-v2-independent-review/review-manifest.json",
+      "bytes": 1360,
+      "sha256": "bbcf1547b85e7e37223cebb2ea983ec02646cef6e52ee5df3345495d884950b2"
+    },
+    "cmake_source": {
+      "path": "core/cuda-arch-intersection-audit-20261018T1220/manifest.json",
+      "bytes": 6977,
+      "sha256": "24f3c612b5ff64e0d2c21d54530a5baf71477013be00889806475b0b465e9edf"
+    },
+    "cmake_compatibility": {
+      "path": "core/cuda-arch-compatibility-followup-v1/manifest.json",
+      "bytes": 2047,
+      "sha256": "83be3c6d8e0382d4bc9259d0d4eb710974d79dc092c7d8d5472ebf391bc18968"
+    },
+    "cmake_actual": {
+      "path": "control/root-cuda-arch-cmake-review-v1/manifest.json",
+      "bytes": 1469,
+      "sha256": "adf4c6d43210786a0d4954add9b5b071fd5cd973c5bf75f42371b78e7eb5a84c"
+    },
+    "cmake_actual_review": {
+      "path": "gpu/cuda-arch-cmake-actual-independent-review-v1/manifest.json",
+      "bytes": 1998,
+      "sha256": "cd25b3a43070b35a9bfeb864bb320febef7204d87b23065147178e199cb33fb4"
+    },
+    "cmake_duplicate": {
+      "path": "control/root-cuda-arch-duplicate-followup-v1.json",
+      "bytes": 26904,
+      "sha256": "ba62da76afeefe867c617fa7216854f6eebf587428aaafe09b27524abdc83977"
+    },
+    "sampling_source": {
+      "path": "gpu/sampling-boundary-contract-audit-20261018T1220/manifest.json",
+      "bytes": 13465,
+      "sha256": "f98d4f3971add17020a1766ec0b38bf465ab7b6225c8bb7573c0f44531c0487d"
+    },
+    "sampling_review": {
+      "path": "gpu/sampling-tiny-logit-independent-review-v1/manifest.json",
+      "bytes": 1538,
+      "sha256": "3617fec7a2734b37a5520016b1d98515245edac9698a93b462ad1af7e736486c"
+    },
+    "sampling_cmake_clarification": {
+      "path": "gpu/sampling-and-cmake-prose-clarifications-v1/manifest.json",
+      "bytes": 1023,
+      "sha256": "a388fe0586d9f00cc31144c429fbbc1dd66b0bcbbf31b56768194d5149ae696c"
+    },
+    "checkpoint_1240": {
+      "path": "control/root-research-checkpoint-20261018T1240/manifest.json",
+      "bytes": 1985,
+      "sha256": "333f6edb752483ccdb35a3e7bdc7c38c3c0d62809874ae90a9b447de29bbfbf9"
+    },
+    "checkpoint_observation_1240": {
+      "path": "control/root-research-checkpoint-20261018T1240/OBSERVATION.json",
+      "bytes": 10161,
+      "sha256": "76cdafa9b7517a05aa52ce279349c0b99c5d901b3e405af03f61e9fa1fbca099"
+    },
+    "arm_public_command_source": {
+      "path": "control/linux-arm-public-op/run_tree.py",
+      "bytes": 3672,
+      "sha256": "1cf5902eb7ac42c52737b835da070db8bff2666a3edc4e7e6bd38b3a10dcb726"
+    },
+    "arm_official_command_source": {
+      "path": "control/linux-arm-official-build/offline-v4/test_gate.py",
+      "bytes": 6477,
+      "sha256": "8b25802018ef4fc74aa8a575935d3ef7b1cc3fac07d62e0cf77740bcd7e8411b"
+    },
+    "meanpool_native_command_source": {
+      "path": "modal/mean-pool-l4-v3/mean_pool_run.py",
+      "bytes": 3365,
+      "sha256": "e7579fcf0bc986d79a2d74fde9b8964675c38ae6eafdb6ef746e2025d1abd30e"
+    },
+    "meanpool_warm_command_source": {
+      "path": "modal/mean-eager-l4-v1/mean_pool_eager_run.py",
+      "bytes": 3192,
+      "sha256": "8852360d153d98ec9285d8ea829d5034fef89dcfc3d3682b1926abf48a1809cd"
+    },
+    "trained_pool_command_source": {
+      "path": "modal/trained-pool-l4-v1/trained_pool_run.py",
+      "bytes": 4461,
+      "sha256": "162495db30b4b3a0d5056ee31adf49e4864df4d8e2eb38c349da8660582361e8"
+    }
+  },
+  "audit_method": {
+    "selected_regular_files_rehashed": true,
+    "complete_subject_manifests_replayed": false,
+    "accepted_independent_reviews_reused": true,
+    "actual_saved_phase_argv_parsed": true,
+    "full_environment_or_source_tree_scanned": false,
+    "target_imports_or_subject_scripts_executed": false,
+    "new_network_or_resource_calls": false,
+    "raw_copies_written": false
+  },
+  "accounting_observation": {
+    "checkpoint_ref": "checkpoint_observation_1240",
+    "guarded_estimate_usd": 2.9192748,
+    "ceiling_usd": 10,
+    "invoice_or_balance_claim": false,
+    "free_bytes_at_checkpoint": 82161754112,
+    "historical_resource_only": true
+  },
+  "missing_or_unknown": [
+    "No verified complete MeanPool production contribution patch is identified.",
+    "Fusion has an exact complete retained old-base patch, but no current-main applicability or runtime result.",
+    "Public-op V4 candidate greatest_absolute_error is not reported; pass does not supply that numeric value.",
+    "No new global duplicate absence, whole OS/ABI, public worker/model, or ready-to-submit claim."
+  ],
+  "runtime_authority": false,
+  "paid_authority": false,
+  "publication_authority": false
+}
