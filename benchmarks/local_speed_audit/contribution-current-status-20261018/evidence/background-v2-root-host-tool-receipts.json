@@ -1,0 +1,30 @@
+[
+  {
+    "chunk_id": "95f60e",
+    "wall_time_seconds": 1.003084833,
+    "session_id": 81967,
+    "original_token_count": 0,
+    "output": ""
+  },
+  {
+    "chunk_id": "e38090",
+    "wall_time_seconds": 5.002454792,
+    "session_id": 81967,
+    "original_token_count": 0,
+    "output": ""
+  },
+  {
+    "chunk_id": "9e870e",
+    "wall_time_seconds": 5.003473333,
+    "session_id": 81967,
+    "original_token_count": 0,
+    "output": ""
+  },
+  {
+    "chunk_id": "edd59d",
+    "wall_time_seconds": 0.000015875,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  }
+]

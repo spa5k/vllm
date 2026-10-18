@@ -1,0 +1,38 @@
+{
+  "checks": 1056,
+  "cleanup_verified": true,
+  "decision": "PASS_SAVED_DATA_AUDIT",
+  "engine_and_tools_mocked": true,
+  "guest_elapsed_seconds": 103.215114464,
+  "host_exit": 0,
+  "invocation_manifest": {
+    "bytes": 1961,
+    "sha256": "2ce1b98142c214f193bc9ff20edb14bcfca640234279ee5452c35418d6121902"
+  },
+  "junit": {
+    "bytes": 2262,
+    "errors": 0,
+    "failures": 0,
+    "sha256": "adda4a17414a033e2121fcfa3d4b5de5307edcc21fc0f4e6deba9c834a20d60c",
+    "skipped": 0
+  },
+  "model_validated": false,
+  "native_abi": false,
+  "negative_controls": 3,
+  "oom_killed": false,
+  "pair_elapsed_seconds": 107.88911504205316,
+  "performance_claim": false,
+  "real_asgi_route": false,
+  "real_engine_or_model": false,
+  "resource_actions_by_reviewer": false,
+  "run_manifest": {
+    "bytes": 14249,
+    "sha256": "2efc78e14228e9e4a1b03a7ee1e5e6b383bc118fd8e95d21ab487dca964542ed"
+  },
+  "subject_code_executed_by_reviewer": false,
+  "target_exit": 0,
+  "target_pid": 0,
+  "three_absence_inventories_empty": true,
+  "unit_test_rows_executed": 12,
+  "unit_test_rows_passed": 12
+}

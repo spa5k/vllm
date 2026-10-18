@@ -1,0 +1,25 @@
+{
+  "kind": "ROOT_BACKGROUND12_DATA_CHECK_VIRTUAL_GROWTH_LIMITS",
+  "ps_argv": [
+    "/bin/ps",
+    "-o",
+    "vsz=",
+    "-p",
+    "46182"
+  ],
+  "ps_exit_code": 0,
+  "ps_stdout": "488805984\n",
+  "virtual_size_before_bytes": 500537327616,
+  "additional_virtual_address_allowance_bytes": 1073741824,
+  "address_space_soft_hard_bytes": [
+    501611069440,
+    501611069440
+  ],
+  "file_size_soft_hard_bytes": [
+    262144,
+    262144
+  ],
+  "alarm_seconds_after_python_startup": 63,
+  "resident_memory_cap_claim": false,
+  "scope": "A fixed virtual-address ceiling based on this process's observed baseline plus 1 GiB. This is not a 1 GiB total address-space or RSS ceiling."
+}

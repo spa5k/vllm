@@ -1,0 +1,49 @@
+{
+  "kind": "responses_background12_candidate_lifecycle",
+  "schema": 1,
+  "source_manifest_sha256": "c8edf6d9cc476fd0f1bc8c318a6529966cd8eed9b9bf9c0a39dc324829d25b66",
+  "admission_anchor": {
+    "preflight_epoch_seconds": 1792339805.0055418,
+    "closure_sha256": "b1ed8f5a51704d4cfa1788671c7bf56ce4359c7dd765331d7ef53ab25f3918f0",
+    "entry_epoch_seconds": 1792339835.932792,
+    "entry_monotonic_before": 1400245.503322333,
+    "entry_monotonic_after": 1400245.503323208,
+    "pair_start_monotonic": 1400245.508670083
+  },
+  "original_start_monotonic": 1400245.508670083,
+  "original_deadline_monotonic": 1401745.508670083,
+  "variant_order": [
+    "candidate"
+  ],
+  "variants": [
+    {
+      "utc": "2026-10-18T16:12:23.827114+00:00",
+      "variant": "candidate",
+      "failure": null,
+      "cleanup_errors": [],
+      "cleanup_verified": true,
+      "terminal": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-18T16:10:38.7929055Z",
+        "FinishedAt": "2026-10-18T16:12:22.57637759Z"
+      },
+      "metadata_calls": 26,
+      "cleanup_calls": 5,
+      "log_calls": 1,
+      "pair_elapsed_seconds": 107.88911504205316,
+      "within_original_slot": true,
+      "paid": false
+    }
+  ],
+  "paid": false,
+  "observed_end_monotonic": 1400353.462917416,
+  "within_original_batch": true
+}

@@ -1,0 +1,49 @@
+{
+  "kind": "responses_background12_candidate_lifecycle",
+  "schema": 1,
+  "source_manifest_sha256": "16df753e83820b7d889fbef3d6161581452a05367a0faa422fec6581e6076f27",
+  "admission_anchor": {
+    "preflight_epoch_seconds": 1792339004.599653,
+    "closure_sha256": "56e224314a61084a8b20db45de7d1ad1a56066969cd5f51421faee110870f3c3",
+    "entry_epoch_seconds": 1792339020.577371,
+    "entry_monotonic_before": 1399430.146790416,
+    "entry_monotonic_after": 1399430.146791166,
+    "pair_start_monotonic": 1399430.150829458
+  },
+  "original_start_monotonic": 1399430.150829458,
+  "original_deadline_monotonic": 1400930.150829458,
+  "variant_order": [
+    "candidate"
+  ],
+  "variants": [
+    {
+      "utc": "2026-10-18T15:57:51.755625+00:00",
+      "variant": "candidate",
+      "failure": null,
+      "cleanup_errors": [],
+      "cleanup_verified": true,
+      "terminal": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 70,
+        "Error": "",
+        "StartedAt": "2026-10-18T15:57:03.2245625Z",
+        "FinishedAt": "2026-10-18T15:57:46.702127173Z"
+      },
+      "metadata_calls": 19,
+      "cleanup_calls": 5,
+      "log_calls": 1,
+      "pair_elapsed_seconds": 51.17429275019094,
+      "within_original_slot": true,
+      "paid": false
+    }
+  ],
+  "paid": false,
+  "observed_end_monotonic": 1399481.325387416,
+  "within_original_batch": true
+}

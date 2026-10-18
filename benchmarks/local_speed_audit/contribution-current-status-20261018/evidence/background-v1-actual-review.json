@@ -1,0 +1,40 @@
+{
+  "checks": 744,
+  "claims": {
+    "candidate_behavior_tested": false,
+    "cleanup_and_three_absence_inventories_passed": true,
+    "container_created_started_and_exited": true,
+    "root_success_completion_created": false,
+    "runtime_authority": false,
+    "source_closure_passed": true,
+    "success_checker_run": false,
+    "unit_tests_passed": false
+  },
+  "cleanup_verified": true,
+  "decision": "PASS_FAILURE_ONLY_DATA_AUDIT",
+  "diagnosis": {
+    "observed": "runner harmony input size assertion failed before origin and pytest",
+    "scope": "The exact row is identified by sealed source/mount data and the asserted path. The raw traceback does not print the path or row values.",
+    "source_data_cause": "harmony real_parser_test expects92927B/b2fb while the approved mounted test is87013B/6463ee"
+  },
+  "guest_elapsed_seconds": 42.882013187,
+  "host_exit": 1,
+  "host_pair_elapsed_seconds": 51.17429275019094,
+  "invocation_manifest": {
+    "bytes": 1737,
+    "sha256": "3e6ee6d74c54fac398fb5d5a809ff801e41e55c1c176ce6138f3fcedd48b75e2"
+  },
+  "oom_killed": false,
+  "origin_phase_run": false,
+  "pytest_collection_run": false,
+  "pytest_test_run": false,
+  "resource_actions_by_reviewer": false,
+  "run_manifest": {
+    "bytes": 9751,
+    "sha256": "971287be1418138f7ce21d2425cc6a8308ae9c28086858d6c7e056054fe45fb3"
+  },
+  "subject_code_executed_by_reviewer": false,
+  "target_exit": 70,
+  "target_pid": 0,
+  "unit_tests_run": 0
+}

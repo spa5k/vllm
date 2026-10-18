@@ -1,0 +1,236 @@
+{
+  "kind": "CURRENT_RESEARCH_COMPACT_EVIDENCE_INDEX",
+  "schema": 1,
+  "source_packets": [
+    {
+      "role": "serving/background12-normal-v1-run",
+      "manifest_sha256": "971287be1418138f7ce21d2425cc6a8308ae9c28086858d6c7e056054fe45fb3",
+      "files": 49,
+      "payload_bytes": 313749
+    },
+    {
+      "role": "control/root-background12-host-invocation-v1",
+      "manifest_sha256": "3e6ee6d74c54fac398fb5d5a809ff801e41e55c1c176ce6138f3fcedd48b75e2",
+      "files": 8,
+      "payload_bytes": 6926
+    },
+    {
+      "role": "control/background12-normal-actual-review-v1",
+      "manifest_sha256": "7df3a45856c84d3f6b7faa016b0e217ff59614c90bd1b04e9d418e44fa5b4adc",
+      "files": 8,
+      "payload_bytes": 24606
+    },
+    {
+      "role": "serving/background12-normal-v2-run",
+      "manifest_sha256": "2efc78e14228e9e4a1b03a7ee1e5e6b383bc118fd8e95d21ab487dca964542ed",
+      "files": 73,
+      "payload_bytes": 505218
+    },
+    {
+      "role": "control/root-background12-host-invocation-v2",
+      "manifest_sha256": "2ce1b98142c214f193bc9ff20edb14bcfca640234279ee5452c35418d6121902",
+      "files": 9,
+      "payload_bytes": 9714
+    },
+    {
+      "role": "control/background12-normal-actual-review-v2",
+      "manifest_sha256": "d4f435e920c69f1a812525559c027a15d4f3b154fd7efd2b97fc8bc71737a1eb",
+      "files": 8,
+      "payload_bytes": 38294
+    },
+    {
+      "role": "control/background12-root-gates-independent-review-v2",
+      "manifest_sha256": "2fd52f7ac2c81f675bcaf1ed57ce30169f0cdbb794795eec549483e5bb6d3194",
+      "files": 8,
+      "payload_bytes": 24724
+    },
+    {
+      "role": "gpu/background12-harmony-input-diagnostic-v1",
+      "manifest_sha256": "63c2bc72e4d7e6cf33e0b3cffcff48a632b7cc24f0baf9d94716e16219f08dc4",
+      "files": 7,
+      "payload_bytes": 18816
+    },
+    {
+      "role": "serving/stream-kv-normal-policy-feasibility-v1",
+      "manifest_sha256": "7a51cc0293a5f3b87cfa2aaf3f27d331ad1f2572db28e3c310355f48a2187280",
+      "files": 6,
+      "payload_bytes": 50095
+    },
+    {
+      "role": "gpu/stream-kv43-normal-validation-plan-v2",
+      "manifest_sha256": "8c26b32370ee263d418b4cb1445ab870383c5af65ff6aa973e4727fb7b2eef9f",
+      "files": 11,
+      "payload_bytes": 81949
+    },
+    {
+      "role": "serving/deep-request-ownership-20261018T1600",
+      "manifest_sha256": "4fcf447523d939c9b9ce29e247484b2f0ac6fe9b45bc5dca129a5a41bb47b1ca",
+      "files": 56,
+      "payload_bytes": 1818827
+    }
+  ],
+  "byte_identical_copies": [
+    {
+      "path": "evidence/background-v1-guest.stdout.raw",
+      "source_archive_path": "serving/background12-normal-v1-run/candidate/logs/stdout.raw",
+      "bytes": 16726,
+      "sha256": "865b644afebccbefbf0e0ee8e0cf1cb3dfee58e592267cfebb47a011a60d1326"
+    },
+    {
+      "path": "evidence/background-v1-lifecycle.json",
+      "source_archive_path": "serving/background12-normal-v1-run/pair-lifecycle.json",
+      "bytes": 1503,
+      "sha256": "2cf8ffc334926bedb3af1cbcfdd4abc6db604841e87b9af780779b7fb2fe3201"
+    },
+    {
+      "path": "evidence/background-v1-actual-review.txt",
+      "source_archive_path": "control/background12-normal-actual-review-v1/REPORT.md",
+      "bytes": 5390,
+      "sha256": "4c5b4add8818773150b566ea997fe590ff3373d7574dbdd48bacedb1d6b668c8"
+    },
+    {
+      "path": "evidence/background-v1-actual-review.json",
+      "source_archive_path": "control/background12-normal-actual-review-v1/audit-result.json",
+      "bytes": 1449,
+      "sha256": "68b2739d1141683cab224de1ac134bafd7456e512fd7e5ef07dbbb6cccf2145b"
+    },
+    {
+      "path": "evidence/background-v2-guest.stdout.raw",
+      "source_archive_path": "serving/background12-normal-v2-run/candidate/logs/stdout.raw",
+      "bytes": 62855,
+      "sha256": "01d0ab4861fcbcf6f3200083253961b25376e17f890f685e9b39ce4e1e8690cb"
+    },
+    {
+      "path": "evidence/background-v2-lifecycle.json",
+      "source_archive_path": "serving/background12-normal-v2-run/pair-lifecycle.json",
+      "bytes": 1503,
+      "sha256": "3bc34b369ccc5fe4ccafffd485f0366c0a7b295831e7e4582c3c9658bbc7bbf7"
+    },
+    {
+      "path": "evidence/background-v2-actual-review.txt",
+      "source_archive_path": "control/background12-normal-actual-review-v2/REPORT.md",
+      "bytes": 5226,
+      "sha256": "b89444c736c86476d55fcdf9a06698b5ca830e6560acffed2dd5c392c2a1b6db"
+    },
+    {
+      "path": "evidence/background-v2-actual-review.json",
+      "source_archive_path": "control/background12-normal-actual-review-v2/audit-result.json",
+      "bytes": 1083,
+      "sha256": "d3512dbcdf63fc7e3f4600323fd75e00bb8b9e0b3ea641de54661ce5a19dab89"
+    },
+    {
+      "path": "evidence/background-v2-root-check.stdout.raw",
+      "source_archive_path": "serving/background12-normal-v2-run/root-check.stdout.raw",
+      "bytes": 5329,
+      "sha256": "53308cf76f1055fee39375f912424325fc183e6dc1814be748439834db203045"
+    },
+    {
+      "path": "evidence/background-v2-root-check.stderr.raw",
+      "source_archive_path": "serving/background12-normal-v2-run/root-check.stderr.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/background-v2-root-controller-completion.json",
+      "source_archive_path": "serving/background12-normal-v2-run/root-controller-completion.json",
+      "bytes": 907,
+      "sha256": "01ab8556fa275b8661cae01985d075a08f569ad09c4d09157183a2a9fe410c5e"
+    },
+    {
+      "path": "evidence/background-v2-root-checker-limits.json",
+      "source_archive_path": "serving/background12-normal-v2-run/root-checker-limits.json",
+      "bytes": 678,
+      "sha256": "8b32d8f02af4d03436f778fc443095fb76c218a60d625e40f8853162d9fcde4c"
+    },
+    {
+      "path": "evidence/background-v2-root-host-tool-receipts.json",
+      "source_archive_path": "control/root-background12-host-invocation-v2/root-host-tool-receipts.json",
+      "bytes": 582,
+      "sha256": "24400dbaa547b1664867b57b7c83b69913c38885ee1cf4ee60a0e0add63c76d1"
+    },
+    {
+      "path": "evidence/background-v2-root-acceptance-tool-receipts.json",
+      "source_archive_path": "control/root-background12-host-invocation-v2/root-acceptance-tool-receipts.json",
+      "bytes": 3188,
+      "sha256": "08e4aa963ebbeb8d18765ed15abfc3931ddee026e026bd959af7a6bf22b4b76a"
+    },
+    {
+      "path": "evidence/background-correction-source-review.txt",
+      "source_archive_path": "control/background12-root-gates-independent-review-v2/REPORT.md",
+      "bytes": 4194,
+      "sha256": "314ac1d5ca9f1882b25f70373db4010eb32981b6a21604077a0a1c2605a4f68e"
+    },
+    {
+      "path": "evidence/background-asset-diagnosis.txt",
+      "source_archive_path": "gpu/background12-harmony-input-diagnostic-v1/REPORT.md",
+      "bytes": 2155,
+      "sha256": "a252944ff727a2d4db758e4e19bf75757a3b5ca68d194e49a0487fe25dfdf8af"
+    },
+    {
+      "path": "evidence/stream-kv43-feasibility.txt",
+      "source_archive_path": "serving/stream-kv-normal-policy-feasibility-v1/REPORT.md",
+      "bytes": 6396,
+      "sha256": "fd718924ece97d2376cc05b3d4ca0f4285f9a0d30d21c35a77750c3671410d2a"
+    },
+    {
+      "path": "evidence/stream-kv43-plan.txt",
+      "source_archive_path": "gpu/stream-kv43-normal-validation-plan-v2/REPORT.md",
+      "bytes": 4260,
+      "sha256": "bae500c4d457f0007b791d81c51f74cc54b9746f1a8a19d466a40a95c530ab37"
+    },
+    {
+      "path": "evidence/parallel-child-ownership.txt",
+      "source_archive_path": "serving/deep-request-ownership-20261018T1600/REPORT.md",
+      "bytes": 5461,
+      "sha256": "ec12b674dbfa27ea38cdc8f4ededa79ad569009d7923adbb7288f4d991f55663"
+    }
+  ],
+  "decoded_original_streams": [
+    {
+      "path": "evidence/background-v2-junit.xml",
+      "bytes": 2262,
+      "sha256": "adda4a17414a033e2121fcfa3d4b5de5307edcc21fc0f4e6deba9c834a20d60c",
+      "source": "evidence/background-v2-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/background-v2-background_collection.stdout.raw",
+      "bytes": 7478,
+      "sha256": "a42c7ed0f4eda7138e5608cb2cba01bf2bf039760c62510b138c7306346acbe6",
+      "source": "evidence/background-v2-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/background-v2-background_collection.stderr.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "evidence/background-v2-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/background-v2-background_test.stdout.raw",
+      "bytes": 472,
+      "sha256": "749c96cbb319029599a50fb2fe24f5a34ac7eded90c8fd8fd9c8858cec0d9634",
+      "source": "evidence/background-v2-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/background-v2-background_test.stderr.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "evidence/background-v2-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/background-v2-origin.stdout.raw",
+      "bytes": 5935,
+      "sha256": "803b514a5ff5ef2a0faaaaa9c022949da287e15abd1f179b7c8b3eced8a61ce2",
+      "source": "evidence/background-v2-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/background-v2-origin.stderr.raw",
+      "bytes": 552,
+      "sha256": "89ae6964f8f8679052dffe3f134fc91ac1f7fa9d9d10847d61676990d84daa9e",
+      "source": "evidence/background-v2-guest.stdout.raw"
+    }
+  ],
+  "complete_archive_root": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017",
+  "complete_packets_bundled": false,
+  "scope": "Small selected evidence. Full immutable packets remain in the local scout archive. No model, wheel, environment or source tree is copied.",
+  "raw_text_extension_reason": "Raw copied review text uses .txt to retain original bytes without Markdown formatting. Evidence-only typo rules name exact source and Linux capability identifiers."
+}

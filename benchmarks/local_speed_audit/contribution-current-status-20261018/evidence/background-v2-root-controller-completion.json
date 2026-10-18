@@ -1,0 +1,28 @@
+{
+  "kind": "ROOT_RESPONSES_BACKGROUND12_COMPLETION",
+  "schema": 1,
+  "result_directory": "serving/background12-normal-v2-run",
+  "host_manifest_sha256": "38d950999493870e5f127708d13f14acc6be3fe9d0068946f6ea3a3a5ea85aba",
+  "controller_completed": true,
+  "controller_reaped": true,
+  "exit_code": 0,
+  "invocation_start_monotonic": 1400237.584154625,
+  "invocation_end_monotonic": 1400364.315822666,
+  "tool_receipts": [
+    {
+      "path": "root-host-tool-receipts.json",
+      "bytes": 582,
+      "sha256": "24400dbaa547b1664867b57b7c83b69913c38885ee1cf4ee60a0e0add63c76d1"
+    }
+  ],
+  "host_stdout": {
+    "path": "root-host.stdout.raw",
+    "bytes": 1261,
+    "sha256": "71fccf5f3e9da4005c39f14e7833bb5712162087c2740ca0ab46bba129e2976b"
+  },
+  "host_stderr": {
+    "path": "root-host.stderr.raw",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
