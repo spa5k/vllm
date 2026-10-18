@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "kind": "KV43_COMPACT_NORMAL_UNIT_EVIDENCE",
+  "source_packets": [
+    {
+      "role": "serving/stream-kv43-normal-v2-run",
+      "manifest_sha256": "5b02dd1f5c8e522b8d64442b0cdadba2214844a66ec15680125ffd3267bc6383",
+      "files": 79,
+      "payload_bytes": 641744
+    },
+    {
+      "role": "control/root-stream-kv43-host-invocation-v2",
+      "manifest_sha256": "14cb595e3cb76ce4cfff357fd63d18e970c21ebb2edea8095282b1e1b22dd4ab",
+      "files": 12,
+      "payload_bytes": 41799
+    },
+    {
+      "role": "control/stream-kv43-normal-actual-review-v2",
+      "manifest_sha256": "d58d991753e43e0ffdec9399bdc8f3b4733ebdbd05cef50dec9e4ed9e5c528d2",
+      "files": 8,
+      "payload_bytes": 39245
+    },
+    {
+      "role": "serving/stream-kv43-collection-id-diagnostic-v1",
+      "manifest_sha256": "ba08bb9b1d4b12cd5a3f9f34cf4a27ac352c9a1f3eea58681edb543fc98d9b7b",
+      "files": 16,
+      "payload_bytes": 139384
+    },
+    {
+      "role": "control/stream-kv43-root-gates-proposal-v2",
+      "manifest_sha256": "3d95844fe5defcd8e5ef58516937bff8af93004291e08c5dec9d1bedcb7c8710",
+      "files": 31,
+      "payload_bytes": 220578
+    },
+    {
+      "role": "control/stream-kv43-root-gates-independent-review-v1",
+      "manifest_sha256": "911ec2a524a3d914310f80851a6319c2a96666052617d59437c961b4823e1ef7",
+      "files": 8,
+      "payload_bytes": 33049
+    },
+    {
+      "role": "control/stream-kv43-root-gates-independent-review-v2",
+      "manifest_sha256": "41e3267b63c07b572740c67dfd48b1cae02e7d6153bb5ede08d7a770814a0e76",
+      "files": 8,
+      "payload_bytes": 33714
+    },
+    {
+      "role": "serving/stream-kv-current-ownership-20261018T1625",
+      "manifest_sha256": "fafa187e86468dda77fe1a27b2f8c787941354a8b6ea9289fc84faacd04c3903",
+      "files": 123,
+      "payload_bytes": 2684769
+    },
+    {
+      "role": "serving/stream-kv-normal-baseline-design-v1",
+      "manifest_sha256": "fcc29dc70be01f45a3e0549d3e358677e18d124889886ed6fecd0528c8b2eb70",
+      "files": 12,
+      "payload_bytes": 35538
+    },
+    {
+      "role": "serving/stream-unstarted-disconnect-audit-v1",
+      "manifest_sha256": "21593a7a26a4548e0a4743a102ebf77ea9f13e1f981a0aa9e2ead6aa64652cd4",
+      "files": 104,
+      "payload_bytes": 1466549
+    }
+  ],
+  "byte_identical_copies": [
+    {
+      "path": "evidence/kv43-guest.stdout.raw",
+      "source_archive_path": "serving/stream-kv43-normal-v2-run/candidate/logs/stdout.raw",
+      "bytes": 98483,
+      "sha256": "da806d090c2e0acb195f4b74147aad634bca2323a1783e3424b0bb9246cf0069"
+    },
+    {
+      "path": "evidence/kv43-lifecycle.json",
+      "source_archive_path": "serving/stream-kv43-normal-v2-run/pair-lifecycle.json",
+      "bytes": 1491,
+      "sha256": "4fd140a50620306fe86eb162ae0c577db7a47bb630b3f6018d8520c489684dfe"
+    },
+    {
+      "path": "evidence/kv43-failed-completion.json",
+      "source_archive_path": "serving/stream-kv43-normal-v2-run/root-failed-controller-completion.json",
+      "bytes": 1024,
+      "sha256": "3be6329f0fe393b659edf6a16b1883843704da3d6da01880dd6f0bf69da66dff"
+    },
+    {
+      "path": "evidence/kv43-host.stderr.raw",
+      "source_archive_path": "serving/stream-kv43-normal-v2-run/root-host.stderr.raw",
+      "bytes": 1058,
+      "sha256": "a48b8c006fa961f0ff512b7bd55f128933907ea2dcad43108886bf98474c8223"
+    },
+    {
+      "path": "evidence/kv43-host-tool-receipts.json",
+      "source_archive_path": "control/root-stream-kv43-host-invocation-v2/root-host-tool-receipts.json",
+      "bytes": 728,
+      "sha256": "65adc46f47f30ab294f6091ec3390a9d7cd5c22d8a12f3893ed41303326601d6"
+    },
+    {
+      "path": "evidence/kv43-preflight-closure.json",
+      "source_archive_path": "control/root-stream-kv43-host-invocation-v2/root-stream-kv43-input-closure-v2.json",
+      "bytes": 22488,
+      "sha256": "6768ba1e5abf43f64dfb492436e01e0790403c9cdc0342964a789d8a8f56640b"
+    },
+    {
+      "path": "evidence/kv43-root-approval.json",
+      "source_archive_path": "control/root-stream-kv43-host-invocation-v2/root-stream-kv43-approval-v2.json",
+      "bytes": 4959,
+      "sha256": "a68d4e274c3bdfd7d73e78f90bed376d4d135a18434a0168d7974d61cb3688d1"
+    },
+    {
+      "path": "evidence/kv43-independent-audit.txt",
+      "source_archive_path": "control/stream-kv43-normal-actual-review-v2/REPORT.md",
+      "bytes": 6328,
+      "sha256": "d231de03252cc5bf1c9c494202055ade2c009e544ae506ec85737790f1ea97e2"
+    },
+    {
+      "path": "evidence/kv43-independent-audit.json",
+      "source_archive_path": "control/stream-kv43-normal-actual-review-v2/audit-result.json",
+      "bytes": 1103,
+      "sha256": "7a9e2e0951eeeb554b1018fa1b75f845358761f898eac16544e5f85e0d5fc122"
+    },
+    {
+      "path": "evidence/kv43-collection-diagnostic.txt",
+      "source_archive_path": "serving/stream-kv43-collection-id-diagnostic-v1/REPORT.md",
+      "bytes": 3926,
+      "sha256": "bc359825ba68d204c102a4ea24bfe2436dc05ccf91c5291754c69d408e36938b"
+    },
+    {
+      "path": "evidence/kv43-collection-diagnostic.json",
+      "source_archive_path": "serving/stream-kv43-collection-id-diagnostic-v1/RESULT.json",
+      "bytes": 19182,
+      "sha256": "883c7adec374ca19720e89a5cc0798b37ed54ba1dff277ca3c1c8af62edb5e52"
+    },
+    {
+      "path": "evidence/kv43-source-v1-rejected.txt",
+      "source_archive_path": "control/stream-kv43-root-gates-independent-review-v1/REPORT.md",
+      "bytes": 5168,
+      "sha256": "c6194269c7f67ca217ab9f56400db23abcca7c95e41b558ce52c7127ceff8031"
+    },
+    {
+      "path": "evidence/kv43-source-v2-review.txt",
+      "source_archive_path": "control/stream-kv43-root-gates-independent-review-v2/REPORT.md",
+      "bytes": 3793,
+      "sha256": "ae5c14908dfae29154c2fa494ce05781a016695fbf74f98b241b5b0d76894677"
+    },
+    {
+      "path": "evidence/kv43-source-preparation-failure.json",
+      "source_archive_path": "control/stream-kv43-root-gates-proposal-v2/PREPARATION_FAILURE.json",
+      "bytes": 523,
+      "sha256": "ec262468ecb833787f4d1c69478ab6a33364df54a8188d601e3e0605c9713d5b"
+    },
+    {
+      "path": "evidence/kv43-current-ownership.txt",
+      "source_archive_path": "serving/stream-kv-current-ownership-20261018T1625/REPORT.md",
+      "bytes": 6629,
+      "sha256": "dcfa4783c7961b5907d122e17c57a1464a0eaf9aedadb721548812816545e1cd"
+    },
+    {
+      "path": "evidence/kv43-baseline3-plan.txt",
+      "source_archive_path": "serving/stream-kv-normal-baseline-design-v1/REPORT.md",
+      "bytes": 6903,
+      "sha256": "3d2976ef2022e78342461423a6539f1d37e52bf69feecb1974d4cff4ad15e7a8"
+    },
+    {
+      "path": "evidence/kv43-unstarted-stream-limit.txt",
+      "source_archive_path": "serving/stream-unstarted-disconnect-audit-v1/REPORT.md",
+      "bytes": 7966,
+      "sha256": "311abc1eae8ffee857c6d48be6beba8cdbd8c1a47fd47215cc75ba01b1ad84ba"
+    }
+  ],
+  "decoded_original_streams": [
+    {
+      "path": "evidence/kv43-junit.xml",
+      "bytes": 8618,
+      "sha256": "006618abc94417f9633eb3a6d38754e7bbd51908b4db11ce9d2a65d4fd5ca9d4",
+      "source": "evidence/kv43-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/kv43-origin.stdout.raw",
+      "bytes": 5935,
+      "sha256": "803b514a5ff5ef2a0faaaaa9c022949da287e15abd1f179b7c8b3eced8a61ce2",
+      "source": "evidence/kv43-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/kv43-origin.stderr.raw",
+      "bytes": 552,
+      "sha256": "9b7460645c365407206e22812e7d3feaa5d9ca359a9518aa97fae77ada445308",
+      "source": "evidence/kv43-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/kv43-stream_collection.stdout.raw",
+      "bytes": 12593,
+      "sha256": "6f118a12be4f59c9fc71a232040f04dfc4f6c8d32799fa17fe7845f7f3b3ef79",
+      "source": "evidence/kv43-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/kv43-stream_collection.stderr.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "evidence/kv43-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/kv43-stream_test.stdout.raw",
+      "bytes": 1029,
+      "sha256": "463544d43f1c8f31532d9c9af5a945d16a5d067efeab353daadee0c124471713",
+      "source": "evidence/kv43-guest.stdout.raw"
+    },
+    {
+      "path": "evidence/kv43-stream_test.stderr.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "evidence/kv43-guest.stdout.raw"
+    }
+  ],
+  "complete_archive_root": "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017",
+  "complete_packets_bundled": false,
+  "scope": "Small exact evidence. Full immutable packets remain local. No model, wheel, environment or source tree copied.",
+  "normal_unit_passes": 43,
+  "host_exit": 1,
+  "strict_host_gate_passed": false,
+  "strict_root_checker_executed": false
+}

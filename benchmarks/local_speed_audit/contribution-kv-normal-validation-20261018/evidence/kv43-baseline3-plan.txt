@@ -1,0 +1,103 @@
+# Minimal normal-suite baseline design
+
+This is a source-only plan. No normal pytest row was collected or run.
+The candidate43 result is still pending.
+The proposed baseline has three rows. Each uses an existing candidate test in a normal suite.
+One Chat row is enough to show the original lazy-notice defect.
+Three rows are the smallest set with one witness for each changed endpoint.
+
+## Test design
+
+The serving modules return or consume engine result iterators.
+For a supported single normal engine input with remote prefill, an initial queue rejection must attempt the existing connector notice once.
+The failure is a rejection raised on first iterator advance after a streaming create call returned.
+The cheapest useful check is the existing normal serving unit suites with mocked engines and notice RPCs.
+No new fixture, method replacement, custom framework or test file is needed.
+
+Use these exact source-derived IDs:
+
+1. Chat: `test_late_chat_queue_rejection_notifies_remote_prefill_once[1-True-QueueOverflowError-True]`.
+2. Completion: `test_late_completion_queue_rejection_notifies_remote_prefill_once[False-QueueOverflowError-True]`.
+3. Responses: `test_responses_queue_rejection_notice_only_before_first_engine_output[False-QueueOverflowError-True]`.
+
+SELECTORS.json records the full paths and JUnit pairs.
+These IDs are members of GPU's sealed 43-row source expansion. They are not observed collection IDs.
+All parameter IDs in this subset are primitive names/booleans/integers. The list-valued pytest-ID concern is not in this set.
+
+## Predicted red and green
+
+For all three rows, the first mocked engine iterator advance raises QueueOverflowError.
+The request has remote-prefill metadata. Chat uses n=1. Completion uses one prompt and a successful notice stand-in. Responses fails its first attempt, before any output.
+
+In the original production code, the create coroutine returns a non-ErrorResponse iterator.
+The outer cleanup wrapper sets notify=false and returns.
+Chat/Completion then preserve the expected error chunk and DONE marker. Responses uses its existing mocked consumer and raises the same queue error as its test expects.
+No later endpoint guard calls the notice RPC.
+Source analysis therefore predicts that each row reaches its final assert_awaited_once_with with await_count=0.
+The expected baseline is pytest exit1, three test failures at those exact notice assertions, zero errors/skips.
+
+The candidate's scoped iterator guard attempts the notice before re-raising the same queue error.
+The expected candidate count is one attempt per row with the original request metadata.
+Source analysis predicts three passes. It is not an observed result.
+
+The complete candidate43 run already planned by Root can supply the green side, if its strict result closes these same three IDs, exact test/source bytes, cache and runtime.
+Do not rerun all43 on the baseline merely to obtain a red result.
+The other40 candidate rows remain useful controls for the second exception, n>1, nonstream once-only behavior, no-remote, notice failure and later tool turns.
+Their baseline outcomes are not part of this three-row plan.
+
+A fourth optional red row can isolate positive-output suppression:
+Responses `[True-QueueOverflowError-False]`.
+The original nonstream outer wrapper is expected to notify after the later tool-turn rejection; its assert_not_awaited would fail.
+The candidate suppresses that old-prefix notice after a real first-attempt RequestOutput.
+This row is already in candidate43. It is not needed for the minimum lazy-stream endpoint set.
+
+## Exact source separation
+
+Keep all three frozen candidate test files unchanged.
+Keep the base371 Responses context restoration unchanged.
+Replace only the four production file mounts with the sealed candidate packet's `base/` preimages.
+These four originals and all seven candidate preimages plus context match current fe8 exactly in the just-sealed ownership check.
+Do not restore the old test files: they do not contain these regression rows.
+Do not stack the background-terminal or cumulative-budget source.
+
+BASELINE_SOURCE_VIEW.json closes the exact eight mount rows.
+It also derives a full source-view digest from the existing V7 manifest as data:
+`76d1d561b25a8e8c2f1b5ef7ee02356ee6e90712486959c93df649c9b17c9c69`.
+The view has8,075 entries and165,658,721 regular bytes.
+The known candidate digest is independently reconstructed as40556336….
+Exactly four manifest entries differ from that candidate view.
+No source tree was copied or scanned. A later fresh preflight must verify the actual full source tree and all mount destinations.
+
+Reusing the cached837 native provider with these371/fe8 selected Python files is limited to the named serving-unit input closure.
+It is not general ABI/current-main/model compatibility.
+
+## Normal setup and input limits
+
+Reuse the candidate43 cached offline CPU environment, small GPT2 cache view and exact source8 closure.
+Chat and Completion use the authentic cached GPT2 tokenizer. The Responses row mocks its renderer, Harmony context, tools and consumer.
+It does not prove a real Responses SSE formatter, ASGI server or connector RPC.
+Normal ancestor conftests and pytest_asyncio.plugin remain active.
+Do not use confcutdir, noconftest, module injection, a CPUinfo stub or extracted method bodies.
+
+The inherited policy permits trusted CPU metadata helpers and local asyncio within bounded offline container limits.
+It does not permit workers, model/weights execution, external network or downloads.
+The old renderer observer holds remain unchanged.
+No success of background12 or candidate43 is inferred.
+
+The existing plan's envelope is sufficient as a proposal:1CPU,4GiB RAM,128PIDs,2GiB scratch, no network, PID1 timeout420+5, host target480, original batch1500 with120cleanup reserve.
+Keep its exact per-phase captures, full raw XML, origin/metadata/source checks, original-clock joins and owned-CID cleanup with three complete absence inventories.
+This note does not implement a host, preflight, parser or resource gate. Root must review exact future source and admit any run.
+
+## Result classification
+
+A valid red result must first pass normal collection with exactly the three unique IDs.
+Require full raw phase argv/streams and XML.
+Require exactly three direct JUnit failures at the selected test notice assertions, with AssertionError and the missing-await count.
+Import/cache/fixture/request rendering failures, unrelated assertions, errors, skips, malformed XML, timeouts or truncated captures are invalid environment/diagnostic outcomes.
+A fake engine notice is not proof of EngineCore transport or producer lease release.
+Keep real connector/model validation separate.
+
+Own60 source/data checks passed.
+They verify named hashes, exact test ASTs, selector membership and the four-entry manifest-only transform.
+No method body, import, test, target or resource ran.
+

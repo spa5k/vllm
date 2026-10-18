@@ -1,0 +1,45 @@
+# Independent review of the Stream-KV43 V2 source gates
+
+## Decision
+
+`PASS_SOURCE_DATA_RUNTIME_HELD`
+
+I found no source or fixed-data blocker in adapter V2 and gate family V2. This review does not authorize preflight or runtime work.
+
+The direct review map has exactly two rows. It binds `serving/stream-kv43-normal-adapter-v2/manifest.json` at 3,056 bytes and SHA-256 `191e7ee1bf4fde7e45afe699a0d6cb6fe4c71542753d4a560430879d55eb3a82`. It also binds `control/stream-kv43-root-gates-proposal-v2/manifest.json` at 5,594 bytes and SHA-256 `3d95844fe5defcd8e5ef58516937bff8af93004291e08c5dec9d1bedcb7c8710`.
+
+## V1 blocker correction
+
+V1 remains immutable and blocked. Its create command did not match its declared label map.
+
+V2 uses six identical create and declared labels. The owner is `vllm-scout-stream-kv43-v2-20261018`. The source label is the sealed adapter V2 SHA. The variant is `candidate`. The candidate, overlay, and seven-wheel manifest labels are unchanged.
+
+The adapter plan omits only the not-yet-known source label. The sealed family inserts exactly that one label before `--pull`. The recovery command uses the same container name and owner. The inherited Background12 V2 absence guard remains present.
+
+## Source and test closure
+
+The runtime runner, candidate, source view, selectors, cache manifest, cache receipt, Harmony data, helper identities, origin rows, and policy are byte-identical to V1. The eight overrides still bind eight actual files. The eight selectors still expand to 43 unique cases: 24 Chat, 11 Completion, and eight Responses cases.
+
+The cache still has 17 exact entries. The six files total 2,854,606 bytes. The revision and five link targets match. The seven Harmony file rows and two embedded ranges match the retained bytes.
+
+The family closes 44 fixed descriptors, 18 direct bindings, two executable files-schema packets, six trees, four providers, and 15 read-only mounts. The preflight, guest validation, saved library, root completion, and host policy functions are unchanged except for sealed identity joins where required.
+
+## Lifecycle and resources
+
+The fresh roles are `serving/stream-kv43-normal-v2-run`, `control/root-stream-kv43-input-closure-v2.json`, and `control/root-stream-kv43-host-invocation-v2`. They were absent during review.
+
+The 1,500-second original clock, 1,380-second normal allocation, 120-second cleanup reserve, 480-second target window, 420-second guest bound, one CPU, 4 GiB memory, 128 PIDs, 7 GiB peak allowance, and 20 GiB free-space floor are unchanged.
+
+## Preparation history
+
+The first source preparation attempt stopped because its 16 MiB reader rejected an existing 44,939,088-byte `image-uv.bin`. This happened after adapter seal and before family SPEC creation. The retained failure is labeled as a native-response transcription.
+
+The continuation used a 64 MiB reader for preparation data only. Runtime and preflight caps did not change. The separate provenance packet is evidence only and is not a third active review-map row.
+
+## Independent controls and limits
+
+The review performed 692 source and data checks. Three inert descriptor mutations rejected a Boolean byte count, a short hash, and an uppercase hash. No subject function, author verifier, preflight, checker, helper, target, timer, Docker command, resource command, network request, or paid action ran.
+
+The 43-case collection and JUnit result remain unobserved. The cache has no model weights or official origin proof. Mocked-engine unit tests cannot prove real KV transport, a real server, a model, native ABI, model quality, or performance.
+
+A fresh preflight must validate current input closure and resources. Root must own any launch, completion receipt, and cleanup. A successful saved result needs a separate independent data audit.

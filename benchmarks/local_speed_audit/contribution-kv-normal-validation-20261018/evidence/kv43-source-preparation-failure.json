@@ -1,0 +1,10 @@
+{
+  "kind": "TRANSCRIBED_NATIVE_TOOL_RESPONSE",
+  "chunk_id": "ecd80c",
+  "exit_code": 1,
+  "wall_time_seconds": 0.157397708,
+  "cause": "Preparation data reader16MiB cap rejected pinned image-uv.bin44939088B. Adapter already sealed; family SPEC not yet written. No target/resource operation.",
+  "failing_source": "serving/stream-kv43-normal-adapter-v2/prepare_source.py",
+  "line": 234,
+  "correction": "Only continuation reader cap is64MiB; exact descriptor size/hash checks remain. Runtime/preflight caps unchanged."
+}

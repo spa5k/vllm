@@ -1,0 +1,85 @@
+# Independent audit of the Stream43 V2 failed host gate
+
+## Decision
+
+`PASS_FAILURE_DATA_AUDIT`
+
+The saved data supports one target run in which all 43 selected normal pytest rows passed. The host acceptance gate then failed after target cleanup. This review did not execute pytest, subject code, the host checker, a helper, Docker, or a resource command.
+
+The run packet is `serving/stream-kv43-normal-v2-run/manifest.json`, 16,595 bytes, SHA-256 `5b02dd1f5c8e522b8d64442b0cdadba2214844a66ec15680125ffd3267bc6383`. It contains 79 payload files and 641,744 payload bytes.
+
+The invocation packet is `control/root-stream-kv43-host-invocation-v2/manifest.json`, 2,288 bytes, SHA-256 `14cb595e3cb76ce4cfff357fd63d18e970c21ebb2edea8095282b1e1b22dd4ab`. It contains 12 payload files and 41,799 payload bytes.
+
+Both packets have closed file and directory sets. All payload files are mode 0444. All packet roots and directories are mode 0555.
+
+## Unit-test result
+
+The guest result status is `passed`. The origin, collection, and test phases returned zero. Their saved argv arrays match the approved source plan.
+
+Collection found exactly 43 unique nodes. The collected node set matches all 43 expected selectors. It loaded the approved project conftests and `pytest-asyncio`.
+
+The JUnit data is 8,618 bytes with SHA-256 `006618abc94417f9633eb3a6d38754e7bbd51908b4db11ce9d2a65d4fd5ca9d4`. It contains exactly 43 leaf testcase rows. It reports zero failures, zero errors, and zero skipped tests. The testcase identity set matches the 43 expected identities.
+
+The raw pytest phase reports 43 passed tests and 39 warnings in about 26.73 seconds. This is saved target evidence. It is not a successful host-gate result.
+
+## Host-gate failure
+
+The guest contract first proves all 43 unique collection nodes. The later shared saved-data helper uses a fixed Responses test-file prefix. It selects only eight Responses nodes and drops 24 Chat rows plus 11 Completion rows.
+
+The helper then compares those eight nodes with the full 43-node expected list. The comparison fails. The host traceback binds `guest_contract.py` line 219 to `saved_library.py` line 163.
+
+The failure is deterministic from the saved collection data and the sealed helper source. It is not a pytest escape mismatch. The raw collection set and JUnit identity set both match all 43 expected rows, including the saved backslash spelling.
+
+The host exit code is the exact integer 1. The target exit code is the exact integer 0. The failed completion receipt states that the host gate did not pass and that the strict Root checker did not run.
+
+There is no success `root-controller-completion.json`. There is no Root checker output. This audit does not create either item.
+
+## Source and phase identity
+
+The Harmony receipt matches adapter V2. It binds seven files and two embedded tokenizer ranges. The tokenizer-cache receipt and origin receipt match the sealed adapter data.
+
+The source derivation binds the 8,075-entry base tree, the derived manifest, and eight read-only source overrides. The phase streams match their saved byte counts, hashes, bounds, and base64 data.
+
+The selected source policy uses mocked engine and RPC paths. It does not validate a real server, connector, worker, model, device, or native ABI.
+
+## Container metadata and lifecycle
+
+The call ledger has the exact approved command order. It covers version, context, image, inventory, create, prestart inspect, start, 19 polls, logs, cleanup identity, removal, and three absence inventories.
+
+Every command receipt is complete. Each return code is an exact integer zero. Each raw stream matches its saved byte count and SHA-256. The create, start, and removal outputs match the exact container ID.
+
+The full `Config`, `HostConfig`, environment, labels, image, command, 15 read-only mounts, and top-level mount representation match the approved plan. The admitted post-start representation change is `HostConfig.OomKillDisable` from false to null.
+
+The terminal state is exited with PID zero, exit code zero, and `OOMKilled=false`. The final poll and cleanup identity match the saved terminal state. Cleanup has no saved error.
+
+The ID, all-container, and name absence inventories have empty stdout and stderr. Cleanup is verified.
+
+## Clocks and Root receipts
+
+The guest elapsed time is 137.653547855 seconds. The target lifecycle is 148.25963474996388 seconds. Both times fit the 480-second target window, the 1,380-second normal allocation, and the original 1,500-second batch.
+
+The input closure and target-start observations meet their saved freshness bounds. The Root before observation precedes pair start. Pair end precedes the Root after observation. These values are conservative same-host brackets. They are not exact process birth or exit times.
+
+The final native host receipt has exit code 1 and no live session ID. The saved failed completion record reports completed and reaped host state, target exit zero, verified cleanup, failed strict host gate, and no strict Root checker.
+
+## Historical failures
+
+The V1 label mismatch is a separate source-only failure. It did not execute a target.
+
+The V2 source preparation reader-cap failure is also source-only history. It did not change the runtime caps and did not execute this target.
+
+Neither history changes the classification of this actual attempt.
+
+## Audit method
+
+The independent audit performed 1,035 saved-source and saved-data checks. It used two inert negative controls for exact integer typing and JUnit counters.
+
+The audit replayed packet closure, source and review closure, all phase streams, JUnit structure, ledger streams, complete created configuration, source derivation, typed terminal state, clocks, freshness, failed completion data, native receipts, and cleanup inventories.
+
+## Limits
+
+This result covers 43 ordinary unit-test rows with mocked engine and RPC dependencies. It does not cover a public HTTP request, a real engine, a real connector, a worker, a model, a device, trained output, model quality, native ABI compatibility, or performance.
+
+The normal CPU policy permits bounded metadata helpers and local asyncio activity for the selected tests. The evidence is not a complete process or native-syscall trace.
+
+The reviewer did not execute subject code or use runtime resources. No paid action occurred.

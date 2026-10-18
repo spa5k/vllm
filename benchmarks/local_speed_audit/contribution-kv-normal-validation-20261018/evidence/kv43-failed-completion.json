@@ -1,0 +1,27 @@
+{
+  "kind": "ROOT_STREAM_KV43_FAILED_HOST_COMPLETION",
+  "schema": 1,
+  "controller_completed": true,
+  "controller_reaped": true,
+  "host_exit_code": 1,
+  "container_exit_code": 0,
+  "before": {
+    "monotonic": 1402197.736415083,
+    "epoch_seconds": 1792341788.162792,
+    "utc": "2026-10-18T16:43:08.162809+00:00",
+    "scope": "Root observation before the reviewed host call; not process birth"
+  },
+  "after": {
+    "monotonic": 1402466.189228125,
+    "epoch_seconds": 1792342056.615294,
+    "utc": "2026-10-18T16:47:36.615296+00:00",
+    "host_completion": "Root observed final native tool receipt exit_code1 and no running session",
+    "scope": "Root same-host observation after native completion; not exact process exit timestamp"
+  },
+  "cleanup_verified": true,
+  "strict_host_gate_passed": false,
+  "strict_root_checker_executed": false,
+  "normal_unit_result_independent_audit_pending": true,
+  "failure": "Post-cleanup saved collection identity assertion. Guest results remain unmodified.",
+  "paid": false
+}

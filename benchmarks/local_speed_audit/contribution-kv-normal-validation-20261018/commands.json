@@ -1,0 +1,82 @@
+{
+  "origin": {
+    "argv": [
+      "/usr/local/bin/uv",
+      "run",
+      "--no-project",
+      "--offline",
+      "--python",
+      "/freeze/python-env/bin/python",
+      "--",
+      "/freeze/python-env/bin/python",
+      "-B",
+      "/gate-normal20/runtime/origin_probe.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 19.807959341999997
+  },
+  "stream_collection": {
+    "argv": [
+      "/usr/local/bin/uv",
+      "run",
+      "--no-project",
+      "--offline",
+      "--python",
+      "/freeze/python-env/bin/python",
+      "--",
+      "/freeze/python-env/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "--strict-markers",
+      "-o",
+      "cache_dir=/scratch/pytest-cache",
+      "--trace-config",
+      "--collect-only",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_admission_rejection_escapes_before_response_starts",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_late_chat_queue_rejection_notifies_remote_prefill_once",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_chat_engine_output_prevents_rejection_notice",
+      "tests/entrypoints/openai/completion/test_completion_error.py::test_late_completion_queue_rejection_notifies_remote_prefill_once",
+      "tests/entrypoints/openai/completion/test_completion_error.py::test_multi_prompt_completion_does_not_use_single_input_rejection_notice",
+      "tests/entrypoints/openai/responses/test_serving_responses.py::test_responses_queue_rejection_notice_only_before_first_engine_output",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_chat_kv_transfer_prompt_token_ids_rejection_notifies_kv_connector",
+      "tests/entrypoints/openai/completion/test_completion_error.py::test_completion_error_stream_first_chunk"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 26.25785905299999
+  },
+  "stream_test": {
+    "argv": [
+      "/usr/local/bin/uv",
+      "run",
+      "--no-project",
+      "--offline",
+      "--python",
+      "/freeze/python-env/bin/python",
+      "--",
+      "/freeze/python-env/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "--strict-markers",
+      "-o",
+      "cache_dir=/scratch/pytest-cache",
+      "-ra",
+      "--tb=short",
+      "--basetemp=/scratch/pytest-stream-kv43",
+      "--junitxml=/scratch/stream-kv43.xml",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_admission_rejection_escapes_before_response_starts",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_late_chat_queue_rejection_notifies_remote_prefill_once",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_chat_engine_output_prevents_rejection_notice",
+      "tests/entrypoints/openai/completion/test_completion_error.py::test_late_completion_queue_rejection_notifies_remote_prefill_once",
+      "tests/entrypoints/openai/completion/test_completion_error.py::test_multi_prompt_completion_does_not_use_single_input_rejection_notice",
+      "tests/entrypoints/openai/responses/test_serving_responses.py::test_responses_queue_rejection_notice_only_before_first_engine_output",
+      "tests/entrypoints/openai/chat_completion/test_serving_chat.py::test_chat_kv_transfer_prompt_token_ids_rejection_notifies_kv_connector",
+      "tests/entrypoints/openai/completion/test_completion_error.py::test_completion_error_stream_first_chunk"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 49.17400473100001
+  }
+}

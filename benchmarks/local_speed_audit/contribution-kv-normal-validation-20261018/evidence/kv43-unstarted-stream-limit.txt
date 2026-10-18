@@ -1,0 +1,43 @@
+# Unstarted remote-prefill stream: conditional source gap, default reachability held
+
+This audit finds no new confirmed public-server bug. It proves a conditional call-order gap in the selected code. It does not prove that the default Uvicorn path leaves a remote-prefill iterator unstarted. No patch or executable fixture is proposed.
+
+The upstream source is `fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de`. The four serving production files are read from the closed current-ownership packet. The three routers, API utilities, keep-alive wrapper, launcher, middleware registration, AsyncLLM and nearby tests are captured from this exact commit. The JSON captures retain Git object identities. `source-index.json` records the decoded bodies and SHA256 values. No shared source was changed.
+
+## The boundary
+
+Use a valid, ordinary sampling request with `stream=true` and remote-prefill metadata. Restrict Completion to one engine input. Restrict Responses to `background=false`; a background producer is a different owner and lifecycle. The presence of metadata alone does not prove that a real producer has a retained lease.
+
+1. Chat and Completion await their `create_*` method. That method constructs the engine async generator and returns the stream formatter without advancing it. Completion's merge wrapper is also lazy. Responses constructs `_generate_with_builtin_tools` and returns its formatter without starting the first engine attempt.
+2. The upstream early rejection wrapper sees a non-ErrorResponse return. It sets `notify=false` and finishes. `with_cancellation` returns the response and stops its listener. It has no KV hook for the later response lifetime.
+3. Each router returns Starlette `StreamingResponse`. None supplies a KV cleanup background task. Load tracking can add `decrement_server_load`; this is a metrics callback. The normal keep-alive value returns the original iterator. An enabled keep-alive creates its `anext` task only after its own body starts.
+4. Retained Starlette 1.8.0 `stream_response` first awaits `send(http.response.start)`. Only then does its `async for self.body_iterator` run. On its ASGI >=2.4 branch, an OSError from that first send becomes ClientDisconnect. There is no iterator or KV cleanup in that branch before re-raising.
+5. If that first send raises, the selected formatter and engine generator remain unstarted. `AsyncLLM.generate` has not reached its internal `await add_request`. There is no engine-owned request to abort on this sequence. Its cancellation/GeneratorExit handler is inside that unentered body.
+
+The ASGI HTTP specification expressly permits the relevant failure: version 2.4 introduced a server-specific OSError subclass from send on a closed connection. This includes a send of response headers. The specification permits application cleanup after that exception; it does not provide the vLLM-specific producer notice. See [the primary ASGI specification](https://asgi.readthedocs.io/en/stable/specs/www.html#disconnected-client-send-exception). `official-asgi.json` and its decoded RST retain the authoritative source. This is a vLLM remote-prefill extension question, not an OpenAI response-format violation. No terminal SSE delivery is required after the client has disconnected.
+
+The c72 candidate does not close this interval. Its new guard runs while the first engine iterator is advanced and catches two admission exceptions. It has no response-lifetime hook outside that body. This agrees with its prior explicit unstarted-stream limit. No output is not proof of no admission; only the proved absence of any generator entry establishes no admission in this conditional sequence.
+
+## Why this is not yet a default-server reproduction
+
+The exact local host installation is Uvicorn 0.54.0. Its h11 and httptools files both advertise ASGI 2.3. Both return from send if the connection is already marked disconnected. Current official primary source has the same relevant policy. These are source observations, not a running-server observation or a complete guest-server environment closure.
+
+On the retained Starlette <2.4 branch, the response starts a streaming child and concurrently listens for disconnect. Retained AnyIO 4.15.1 does not directly cancel a child whose coroutine has not started. Its cancellation delivery retries after the child starts. Therefore, an immediately available disconnect alone is not a proof that the body stays unstarted. If Uvicorn's header send returns without suspension, the streaming child can reach the formatter and engine before cancellation arrives. The already-owned cancellation-during-add_request problem must not be relabelled as an unstarted iterator.
+
+Uvicorn can await flow-control drain before a send when `write_paused` is true. Cancellation at such a suspended header send would give the same pre-iteration ordering. This packet does not establish a supported concrete connection sequence that creates that state before the first response header, nor a real transport schedule that selects it. Optional middleware can also change scheduling. No default transport, pipelining or middleware reproduction is claimed.
+
+The frozen Linux files give Starlette 1.8.0, AnyIO 4.15.1 and FastAPI 0.136.3. FastAPI awaits the returned response after the route. Its request/dependency exit stacks do not themselves call this KV notice. The selected default scaling middleware passes through to the app. Custom plugins and arbitrary middleware are outside the proof. The host Uvicorn and the frozen libraries are identified separately; they are not asserted to be one tested server deployment. Selected installed source and metadata hashes match their package RECORD rows. No full environment claim follows.
+
+## Prior coverage and ownership
+
+The embedding disconnect audit covers entered collectors and owned engine requests. Its admission-window PR #57062 and wrapper-cancellation PR #55790 remain separate. The streaming terminal audit covers an entered Chat generator waiting for another output. Neither proves this pre-iteration interval.
+
+Fresh full #55790 comments and complete diff are retained. Its fix cancels and awaits the two creation-wrapper tasks. It adds no returned-response KV hook. Fresh area searches return 25 stream/disconnect PRs and 21 KV/cancellation PRs, both below their 100-row caps. #60135 adds disconnect metrics, not producer cleanup; its complete diff is retained. #59343 remains the same-method admission-state coordination boundary in the just-sealed current ownership packet. This audit reuses that packet's full comments, linked queries and complete diff rather than repeating those requests. The broad issue search is coverage data, not proof that an owner is absent. No new defect is accepted and no exhaustive ownership claim is made.
+
+The nearby `test_streaming_response_disconnect_closes_upstream` starts from a successful header-send signal and checks entered upstream finalization on ASGI 2.3. `test_with_cancellation_disconnect_skips_response_validation` checks cancellation while the route still waits. They do not cover the failed header-send condition above. They were read, not run.
+
+## Next evidence needed
+
+A useful next check would bind the actual supported ASGI server/version and middleware stack. It would distinguish header-send failure, already-disconnected ASGI 2.3, and a suspended pre-body send. It must record formatter entry, engine add_request entry, producer notice and owned abort separately. It must not infer ownership from the first output or add a blanket abort. A real connector lease/release check is a later, separate requirement. Root has not authorized such execution here.
+
+Context7 returned its monthly quota error. The primary ASGI source and installed library files supplied the fallback. The only executed Python here parses data/AST and verifies named file hashes and RECORD rows. No imported package, method body, task, server, test, model, container or paid resource ran.

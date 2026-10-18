@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/stream-kv43-root-gates-proposal-v2/run_once.py", line 319, in <module>
+    main()
+  File "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/stream-kv43-root-gates-proposal-v2/run_once.py", line 307, in main
+    verdict = guest["validate_guest"](raw, variant)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/stream-kv43-root-gates-proposal-v2/guest_contract.py", line 219, in validate_guest
+    collection(collection_bytes, sorted(variant["expected_nodes"]), value["stream_collection"])
+  File "/Users/pacific/Developer/vllm/benchmarks/local_speed_audit/contribution-scout-20261017/control/stream-kv43-root-gates-proposal-v2/saved_library.py", line 163, in collection
+    assert sorted(nodes) == expected_nodes
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

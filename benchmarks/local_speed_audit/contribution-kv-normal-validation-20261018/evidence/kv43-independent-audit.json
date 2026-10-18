@@ -1,0 +1,32 @@
+{
+  "checks": 1035,
+  "cleanup_verified": true,
+  "decision": "PASS_FAILURE_DATA_AUDIT",
+  "engine_and_tools_mocked": true,
+  "failure": "saved validator filters 8 Responses nodes then compares to all 43 expected nodes",
+  "guest_elapsed_seconds": 137.653547855,
+  "guest_status": "passed",
+  "host_exit": 1,
+  "invocation_manifest_sha256": "14cb595e3cb76ce4cfff357fd63d18e970c21ebb2edea8095282b1e1b22dd4ab",
+  "junit": {
+    "bytes": 8618,
+    "errors": 0,
+    "failures": 0,
+    "sha256": "006618abc94417f9633eb3a6d38754e7bbd51908b4db11ce9d2a65d4fd5ca9d4",
+    "skipped": 0
+  },
+  "negative_controls": 2,
+  "oom_killed": false,
+  "pair_elapsed_seconds": 148.25963474996388,
+  "real_server_or_model": false,
+  "reviewer_executed_subject": false,
+  "reviewer_resource_actions": false,
+  "run_manifest_sha256": "5b02dd1f5c8e522b8d64442b0cdadba2214844a66ec15680125ffd3267bc6383",
+  "strict_host_gate_passed": false,
+  "strict_root_checker_executed": false,
+  "target_exit": 0,
+  "target_pid": 0,
+  "three_absence_inventories_empty": true,
+  "unit_test_rows_collected": 43,
+  "unit_test_rows_passed": 43
+}

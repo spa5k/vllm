@@ -1,0 +1,6 @@
+# Keep these exact source and Linux capability identifiers in raw evidence.
+[default]
+extend-ignore-identifiers-re = [
+  "^CapInh$",
+]
+extend-ignore-re = ['\b(?:SHA|is|Patch|revision)?[0-9a-f]{40,64}\b']

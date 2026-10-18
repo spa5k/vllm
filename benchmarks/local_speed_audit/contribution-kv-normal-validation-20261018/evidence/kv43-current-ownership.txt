@@ -1,0 +1,88 @@
+# KV admission cleanup: current ownership and source
+
+No inspected open PR implements the same lazy-iterator rejection-notice fix.
+Draft [#59343](https://github.com/vllm-project/vllm/pull/59343) remains a same-method coordination and rebase risk.
+No selected source drift was found.
+
+## Exact current source
+
+Both main reads returned `fe8f2140eeb6103e2ac01fbe2ce40dcc9dba19de`.
+Both #59343 reads returned head `a6236f03043f6cb49e72c1d87d527b426084b911`, base `642c18d64c4cb6db3ded8fbe1786718cd4005fcb`.
+The issue/comment and PR reads are a bounded sequence, not one atomic GitHub snapshot.
+
+The seven candidate preimages and original Responses context match all eight exact current files byte for byte.
+Each Contents API body was decoded. Its length, SHA256, Git blob SHA1 and Python AST were checked as data.
+`SOURCE_OWNERSHIP.json` gives every descriptor.
+`current-fe8/` retains the eight exact primary bodies.
+`preimage371/` retains the eight exact comparison bodies.
+The primary base64 replies are also retained.
+No local Git object for fe8 is required.
+
+The candidate is the seven-file source commit `c72c801883a1eb9355b9ea8863464a6b74c59482`.
+Its sealed source packet is `bfe1ecd5cd3f90299a730aaf50fcbea54a3cd95a567da7860e9a2f5e0f426250`.
+Its patch is `4053b1c3fc716728211a07e2131e6b29d7ac1dc3056a52ba1d5147cb7c6dc7d4`.
+This check transfers selected source applicability only. It does not transfer build, ABI, test or model results.
+The current main commit has two documentation paths and one example path. None is one of these eight selected paths.
+This packet does not compare every intervening repository path.
+
+## Does #59343 now close the lazy path?
+
+No. Its head is unchanged from the accepted 14:00 ownership evidence.
+The current complete 90,695-byte PR diff is retained.
+The four relevant full diff sections are in `pr-59343-selected.diff`.
+
+Its base wrapper creates a ContextVar admission state, awaits the create coroutine, and resets that state in `finally`.
+It sends a rejection notice only when that outer call fails or returns ErrorResponse and the engine admission flag is false.
+Its AsyncLLM hunk sets the flag after add_request succeeds.
+Its focused tests consume generate inside the create coroutine while the wrapper is active.
+
+The PR changes none of the Chat, Completion or Responses serving files.
+It adds no iterator guard after a streaming create call returns.
+A lazy queue admission failure on the first later advance remains outside that outer wrapper.
+The candidate instead shares one request-local guard with the endpoint iterator and catches only QueueOverflowError and MaxQueuedTokensError in the scoped first attempt.
+The same wrapper is edited by both patches. Human coordination and a rebase review remain required.
+The PR's own validation claims are author reports. This scout did not replay them.
+
+## Current ownership threads
+
+Complete issue bodies and all 13 issue-comment rows were read for #50425, #58192, #42442 and #59343.
+The REST comment counts equal each issue's declared count.
+The mandatory `gh issue view --comments` outputs are also retained.
+
+- [#50425](https://github.com/vllm-project/vllm/issues/50425): the last July 31 comment still says merged #41269 fixed the known create-time Mooncake cancellation case. Its two linked open PRs, #50565 and #57529, retain their earlier heads. They address Mooncake receive/failure handling, not these serving iterators.
+- [#42442](https://github.com/vllm-project/vllm/pull/42442): unchanged head. It aborts an engine-owned request after ValueError/VLLMValidationError. This is distinct from the candidate's two pre-admission queue errors.
+- [#58192](https://github.com/vllm-project/vllm/issues/58192): unchanged comments still point to closed #58477/#58478 preflight reservation proposals. This is a capacity-admission design/performance boundary, not proof of a producer-lease notice.
+- #51137, #56780 and #51488 retain their earlier heads. Their reviewed topology validation, LMCache missing tracker and paused-generation scopes remain adjacent. No new patch-level replay is claimed for these unchanged heads.
+
+Fresh area results with endpoint overlap received exact selected-hunk checks:
+
+- [#41834](https://github.com/vllm-project/vllm/pull/41834), head `9ad62027bc84ca0ccbcc40853179312de770220c`: the Chat and Responses hunks change template kwargs/model reasoning behavior. They do not add admission cleanup.
+- [#51505](https://github.com/vllm-project/vllm/pull/51505), head `c4a6aac8e49297615837ed004c404645ed93c067`: it rejects multi-prompt Completion requests with KV transfer metadata before generation. It also adds two Completion tests. This is an adjacent same-file/test conflict. The candidate deliberately excludes the multi-input notice case. A merge would require reassessing that control.
+- [#59901](https://github.com/vllm-project/vllm/pull/59901), the only linked open result for #59343, changes scheduler retry/queue recovery after failed async KV loads. Its two files do not overlap the serving fix.
+
+The linked-open counts are 2, 0, 0 and 1.
+The three area searches returned 3, 13 and 39 rows, all below their 100-row limits.
+Titles, bodies, available file lists and selected overlaps were screened.
+PR file lists from list/view commands can be truncated; the #41834/#51505 selected hunks used paginated REST file retrieval.
+Indexed text searches do not prove global duplicate absence.
+No new exact duplicate was found within these bounds.
+
+## Scope and retained failures
+
+The prior ownership report remains the analysis base for unchanged adjacent heads.
+This packet rehashes that manifest and the named candidate/preimage inputs; it does not claim a replay of every old packet.
+
+One own data script used a wrong prior metadata filename and failed before writing its summary.
+Its source, stdout and traceback are preserved.
+The corrected data-only script completed.
+Two selected-file commands used an unsupported gh --slurp/--jq combination. Both failed before retrieval. Their raw errors and native receipts remain.
+The corrected paginated commands completed.
+A broad screen read was truncated in tool display; the complete saved output was then read at the relevant ranges.
+
+No source was changed outside this packet.
+No project import, method body, normal pytest, server, connector, model, target, container or paid resource ran.
+No issue, PR, comment or person message was published.
+Runtime authority is false.
+The producer-side effect remains delayed lease release, not a proven permanent leak.
+The separate KV43 runner correction and pending normal test result are not accepted by this source check.
+

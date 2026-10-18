@@ -1,0 +1,17 @@
+...........................................                              [100%]
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /gate-v7/candidate/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+tests/entrypoints/openai/chat_completion/test_serving_chat.py: 20 warnings
+  /gate-v7/candidate/vllm/entrypoints/openai/chat_completion/protocol.py:676: DeprecationWarning: max_tokens is deprecated in favor of the max_completion_tokens field
+    max_output_tokens = self.max_tokens
+
+tests/entrypoints/openai/chat_completion/test_serving_chat.py: 18 warnings
+  /gate-v7/candidate/vllm/entrypoints/openai/chat_completion/serving.py:357: DeprecationWarning: max_tokens is deprecated in favor of the max_completion_tokens field
+    else request.max_tokens,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+43 passed, 39 warnings in 26.73s

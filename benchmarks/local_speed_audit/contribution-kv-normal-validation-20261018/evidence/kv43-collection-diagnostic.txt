@@ -1,0 +1,35 @@
+# KV43 collection and JUnit identity diagnostic
+
+The observed names are correct. The failed host uses a Responses-only collection filter. This is an evidence-check defect. It is not a new vLLM defect.
+
+The sealed guest stdout is 98,483 bytes, SHA256 `da806d090c2e0acb195f4b74147aad634bca2323a1783e3424b0bb9246cf0069`. Its complete collection stream contains 43 unique IDs: 24 Chat, 11 Completion, and 8 Responses. Both differences between the expected and observed 43-ID sets are empty. The saved XML contains exactly 43 direct, unique test cases, with counters 43/0/0/0 and no failure, error, or skipped element. Both differences between the expected and observed JUnit identity sets are empty. RESULT.json and actual-node-junit-map.json retain the exact names.
+
+## Exact failure
+
+In `control/stream-kv43-root-gates-proposal-v2/guest_contract.py`, lines 215–218 parse all Python test node IDs and check the exact 43-ID set. Line 219 then calls the inherited `collection()` function.
+
+That function, at `saved_library.py:158`, uses only this prefix:
+
+`tests/entrypoints/openai/responses/test_serving_responses.py::`
+
+It retains 8 Responses IDs. It drops all 24 Chat and 11 Completion IDs. Its line 163 compares the retained 8 IDs with the full expected 43 IDs and fails. RESULT.json lists all 35 dropped IDs. The guest adapter's own collection function has no such endpoint restriction and accepted the full set.
+
+## Escaping and JUnit
+
+The sealed selector derivation names pytest 9.1.0 and pins five source files. This diagnostic rehashed all five exact files. It read the ID and XML functions as data. It did not import pytest or execute these functions.
+
+`_idval_from_argname` explains `ids0` and `ids1` for the list-valued parameter. `_ascii_escaped_by_config` calls `ascii_escaped` for the string parameter. For the regex message, the original string contains one backslash before the dot. Its escaped ID contains two actual backslashes. A JSON display requires four backslash characters to represent those two. That display is not a second transformation of the node ID.
+
+`mangle_test_address` splits the module path and function, changes the module path to the JUnit classname, and retains the parameter suffix. `record_testreport` writes that name through `bin_xml_escape`. Backslash is not an XML escape. The observed collection ID and XML name retain the same two backslashes. The diagnostic independently maps every observed node to its exact observed JUnit pair. All 43 agree.
+
+## Authority and next step
+
+The original host result remains failed. The sealed actual manifest is `5b02dd1f5c8e522b8d64442b0cdadba2214844a66ec15680125ffd3267bc6383`. The invocation manifest is `14cb595e3cb76ce4cfff357fd63d18e970c21ebb2edea8095282b1e1b22dd4ab`. This packet creates no success controller receipt and does not run a revised checker.
+
+The complete saved collection and XML are sufficient to close this name/filter question without a 43-case rerun. A separate independent actual audit must close the remaining source, provider, configuration, transport, clock, completion, and cleanup evidence before it accepts the saved unit result. This narrow diagnostic does not perform that full audit. It grants no runtime authority and makes no connector, model, public-server, or native correctness claim.
+
+## Own checks and retained failures
+
+The own stdlib data/AST script passed 86 checks. These include six rejection controls for missing, duplicate, or wrong node and JUnit identities. No subject function or helper ran.
+
+The first data read used bare JSON on the prefixed terminal line and failed (`55015b`). The next read retained the exact `VLLM_GATE_RESULT=` prefix. The first full diagnostic then treated a list of source-pin rows as a dictionary and failed late (`7028ea`). Both failures remain recorded. The corrected own data script passed (`a4d377`). The failures did not change the saved run or any subject source.

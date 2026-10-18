@@ -1,0 +1,59 @@
+# Independent review of the Stream-KV43 source gates
+
+## Decision
+
+`BLOCKED_SOURCE_ONLY`
+
+I found one source blocker in the sealed gate family. This review does not authorize a preflight or target run.
+
+The direct review map has exactly two rows. It binds `serving/stream-kv43-normal-adapter-v1/manifest.json` at 3,057 bytes and SHA-256 `ed60d77e74edeb83b495005cfff910bb63600e3d8c6b1c90cf861a8a2081ec31`. It also binds `control/stream-kv43-root-gates-proposal-v1/manifest.json` at 4,917 bytes and SHA-256 `e5a71f75f05f87007c74be82d79f05351d3b8d26d743174c39aa479bc4508d80`.
+
+## Selected tests and source overrides
+
+The adapter binds eight read-only source overrides. The sources, destinations, byte counts, SHA-256 values, owner, group, mode, and link count match the retained files. The eight selectors expand to 43 unique JUnit identities: 24 Chat cases, 11 Completion cases, and eight Responses cases.
+
+The selector function AST hashes match the mounted source. The parameter ID products match the 43 expected rows. Collection and JUnit results remain unobserved.
+
+## Blocking label mismatch
+
+The fixed create command sets `vllm.scout.owner=stream-kv43-v1`. It does not set `vllm.scout.source` or `vllm.scout.variant`.
+
+The same plan's `candidate.labels` expects owner `vllm-scout-background12-v2-20261018`. It also expects source `c8edf6d9cc476fd0f1bc8c318a6529966cd8eed9b9bf9c0a39dc324829d25b66` and variant `candidate`.
+
+`run_once.identity()` requires every `candidate.labels` row in the created container. `run_once.admit()` builds the expected Docker Config from the same labels. A container created by the sealed command cannot satisfy those checks. The source generator replaced `background12-v1`, but the inherited owner label contains `background12-v2`.
+
+## Cache and Harmony inputs
+
+The exact local GPT2 cache contains 17 entries: six directories, six regular files, and five links. The six regular files total 2,854,606 bytes. The revision file contains `607a30d783dfa663caf39e06633721c8d4cfcd7e`. All cache paths, modes, hashes, link targets, and root bounds match the sealed manifest and receipt.
+
+This is a config and tokenizer cache view. It has no model weights and no official origin proof. It does not prove model loading or inference.
+
+The seven Harmony file rows match the actual retained inputs. The two embedded tokenizer ranges match their declared offsets, lengths, and hashes. The effective `real_parser_test` row binds the approved Responses test source.
+
+## Gate closure and lifecycle
+
+The gate family binds 41 fixed descriptors, 15 direct bindings, two executable files-schema packets, six tree recipes, and four provider rows. The command plan has 15 read-only mounts. All future result, closure, invocation, and container roles were absent during this review.
+
+The saved library is byte-identical to the accepted Background12 parent. The inherited host functions match after the declared role and identity substitutions. The adapter runner and guest contract use the same `derive_manifest` function AST.
+
+The source retains the 1,500-second original host clock, 1,380-second normal allocation, 120-second cleanup allocation, and 480-second target window. The phase timers are independent: 30 seconds for origin, 120 seconds for collection, and 240 seconds for tests. The enclosing PID1 timeout is 420 seconds with a five-second kill allowance. Strict saved success requires total guest elapsed time at or below 420 seconds.
+
+Success still requires exact 43-case collection and JUnit identity, complete origin and source checks, typed Docker metadata, the original completion receipt, terminal exit zero, no OOM, PID zero, owned cleanup, and three complete absence inventories.
+
+## Policy and resources
+
+The normal CPU policy permits bounded cached metadata helpers and local asyncio plumbing. It does not preload a fake `cpuinfo` module or skip normal conftests. It keeps the fixed offline container, one CPU, 4 GiB memory, 128 PIDs, a read-only root, 7 GiB conservative peak allowance, and a 20 GiB free-space floor.
+
+The policy is not a full process or native syscall trace. It does not prove that no worker can start. It does not authorize a model, device, server, network, download, native ABI, performance, or paid action.
+
+## Independent controls
+
+The review performed 587 source and data checks. Three inert mutations rejected a wrong byte count, wrong hash, and wrong type. The review did not execute subject functions or copied subject methods.
+
+The review executed no adapter, gate, preflight, author verifier, checker, helper, target, timer, Docker command, resource command, network request, or paid action.
+
+## Limits
+
+The label plan needs a sealed successor and a different-author source review before preflight. A later fresh preflight must validate the current trees, inputs, providers, and free-space conditions. Root must own any launch, completion receipt, and cleanup evidence. A successful saved result needs a separate independent data audit.
+
+The selected tests use mocked engine and tool paths. They do not prove real KV transfer, a real server, a model, native ABI compatibility, model quality, or performance.

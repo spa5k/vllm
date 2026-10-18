@@ -1,0 +1,643 @@
+{
+  "passed": true,
+  "paid": false,
+  "target_executed": false,
+  "utc": "2026-10-18T16:42:45.134493+00:00",
+  "epoch_seconds": 1792341765.134708,
+  "source_manifest_sha256": "191e7ee1bf4fde7e45afe699a0d6cb6fe4c71542753d4a560430879d55eb3a82",
+  "host_role": "control/stream-kv43-root-gates-proposal-v2",
+  "host_manifest_sha256": "3d95844fe5defcd8e5ef58516937bff8af93004291e08c5dec9d1bedcb7c8710",
+  "checker_manifest_sha256": "3d95844fe5defcd8e5ef58516937bff8af93004291e08c5dec9d1bedcb7c8710",
+  "root_gate_review_manifest_sha256": "41e3267b63c07b572740c67dfd48b1cae02e7d6153bb5ede08d7a770814a0e76",
+  "runner_override_sha256": "1f8d369a108cbc29e6425764f079ee4fb6c4dee582dd8d6121ed3a8d7583c09e",
+  "preflight_sha256": "5a2b0c81762873a797a6918784c2a13095c3e41bad3272eb5553294da2d156a2",
+  "spec_sha256": "0ec0ade61d4bc93ed4e3d5904bb69a419ccee6d405a92e29820d02799b5543b8",
+  "packet_closures": [
+    {
+      "path": "control/exact-image-metadata-admission-v1",
+      "manifest_sha256": "3251bfd0960d0c080d9ecc854533280242e0fc7f55f028cc5a509cc661522681",
+      "files": 10,
+      "directories": 0,
+      "bytes": 35078
+    },
+    {
+      "path": "serving/stream-kv43-normal-adapter-v2",
+      "manifest_sha256": "191e7ee1bf4fde7e45afe699a0d6cb6fe4c71542753d4a560430879d55eb3a82",
+      "files": 17,
+      "directories": 0,
+      "bytes": 127314
+    }
+  ],
+  "tree_closures": [
+    {
+      "root": "serving/responses-docker-managed-gate-v2",
+      "files": 9228,
+      "symlinks": 9,
+      "directories_excluding_root": 1117,
+      "regular_bytes": 174229246,
+      "ordered_identity_sha256": "a09279e27327dc58715fdfdfc913760b23091a6d8f63dacafb8f1432d4f01b68"
+    },
+    {
+      "root": "serving/responses-real-parser-gate-v7",
+      "files": 8093,
+      "symlinks": 9,
+      "directories_excluding_root": 1050,
+      "regular_bytes": 171702716,
+      "ordered_identity_sha256": "ba35b786bd67285482b11e0b74c7b94ea2f8baad9b40d926311b308bc9960824"
+    },
+    {
+      "root": "control/linux-arm-official-build/frozen-inputs",
+      "files": 56902,
+      "symlinks": 90,
+      "directories_excluding_root": 4978,
+      "regular_bytes": 2277674390,
+      "ordered_identity_sha256": "c0e184714237034b54ee5b63955b839158ee31cb30cbf268357598338fe2e0e0"
+    },
+    {
+      "root": "serving/responses-normal-suite-seven-wheel-overlay-v1",
+      "files": 778,
+      "symlinks": 0,
+      "directories_excluding_root": 380,
+      "regular_bytes": 56965434,
+      "ordered_identity_sha256": "d4d75351862315a1858f6f65f52668ef6c183a2f6ddacb07a993fbb895c8d35e"
+    },
+    {
+      "root": "serving/responses-normal-suite-seven-wheel-gate-proposal-v1",
+      "files": 19,
+      "symlinks": 0,
+      "directories_excluding_root": 1,
+      "regular_bytes": 123081,
+      "ordered_identity_sha256": "400ec34fe39a6a3ca8044afae0ca0dc9869325628eab501f1ac359e22d4b4a4a"
+    },
+    {
+      "root": "serving/stream-kv-serving43-gpt2-cache-v1/hf",
+      "files": 6,
+      "symlinks": 5,
+      "directories_excluding_root": 6,
+      "regular_bytes": 2854606,
+      "ordered_identity_sha256": "b9faaaa078e7ac3572811a4bb6f68ecf2184b814735546b9c3da41e432c0405a"
+    }
+  ],
+  "checked_files": {
+    "control/background12-root-gates-independent-review-v2/manifest.json": {
+      "bytes": 1650,
+      "sha256": "2fd52f7ac2c81f675bcaf1ed57ce30169f0cdbb794795eec549483e5bb6d3194",
+      "device": 16777234,
+      "inode": 150098366,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "control/background12-root-gates-proposal-v3/manifest.json": {
+      "bytes": 5244,
+      "sha256": "38d950999493870e5f127708d13f14acc6be3fe9d0068946f6ea3a3a5ea85aba",
+      "device": 16777234,
+      "inode": 150082865,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "control/docker-bounded-command-capture-v1/capture.py": {
+      "bytes": 8881,
+      "sha256": "65b676beaf5b49b4da4f5aaae327f5fe43a97628c4916fc22cb30a184f335434",
+      "device": 16777234,
+      "inode": 144660874,
+      "mode": 420,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "control/exact-image-metadata-admission-v1/admission.py": {
+      "bytes": 6149,
+      "sha256": "a9174c924a1320cefb01c7383f358d254eb81eeb46f672c24f4e5ada173db686",
+      "device": 16777234,
+      "inode": 145427052,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "control/exact-image-metadata-admission-v1/manifest.json": {
+      "bytes": 1977,
+      "sha256": "3251bfd0960d0c080d9ecc854533280242e0fc7f55f028cc5a509cc661522681",
+      "device": 16777234,
+      "inode": 145433554,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "control/stream-kv43-root-gates-independent-review-v1/manifest.json": {
+      "bytes": 1638,
+      "sha256": "911ec2a524a3d914310f80851a6319c2a96666052617d59437c961b4823e1ef7",
+      "device": 16777234,
+      "inode": 150190484,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "control/stream-kv43-root-gates-proposal-v1/manifest.json": {
+      "bytes": 4917,
+      "sha256": "e5a71f75f05f87007c74be82d79f05351d3b8d26d743174c39aa479bc4508d80",
+      "device": 16777234,
+      "inode": 150165378,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "core/prompt-embedding-prefix-cache-cpu-v4-run/context/stdout.raw": {
+      "bytes": 824,
+      "sha256": "685bc5fb03302f9e8e919364127b3ac9a03571a6f1ac6d628fe1856d3fea5f04",
+      "device": 16777234,
+      "inode": 145412590,
+      "mode": 420,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "core/prompt-embedding-prefix-cache-cpu-v4-run/image/stdout.raw": {
+      "bytes": 3085,
+      "sha256": "71958b655396c7a2ab3953749dbbc76cdce17d58cf7a4f0ddb38852f5b62d86b",
+      "device": 16777234,
+      "inode": 145412594,
+      "mode": 420,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "core/prompt-embedding-prefix-cache-cpu-v4-run/version/stdout.raw": {
+      "bytes": 1110,
+      "sha256": "9b37d000fe0eabc42214126921349ce96005ae39654521f28fe7e147aed17473",
+      "device": 16777234,
+      "inode": 145412584,
+      "mode": 420,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "gpu/stream-kv43-normal-validation-plan-v2/manifest.json": {
+      "bytes": 2169,
+      "sha256": "8c26b32370ee263d418b4cb1445ab870383c5af65ff6aa973e4727fb7b2eef9f",
+      "device": 16777234,
+      "inode": 150115819,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/background12-normal-adapter-v2/manifest.json": {
+      "bytes": 3505,
+      "sha256": "c8edf6d9cc476fd0f1bc8c318a6529966cd8eed9b9bf9c0a39dc324829d25b66",
+      "device": 16777234,
+      "inode": 150077848,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-docker-managed-gate-v4-run/prestart/coreutils.list": {
+      "bytes": 12777,
+      "sha256": "166d57e2dac19f5e1dac1bd93cb1439fe13711cd06a861c0587ae08b9b794789",
+      "device": 16777234,
+      "inode": 144633606,
+      "mode": 420,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-docker-managed-gate-v4-run/prestart/dpkg-status": {
+      "bytes": 90440,
+      "sha256": "3606445632814fdc8a2ee52c141e3e67fbf2fda2e37a7bad8795c55ccb0aebbf",
+      "device": 16777234,
+      "inode": 144633605,
+      "mode": 420,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-docker-managed-gate-v4-run/prestart/timeout.bin": {
+      "bytes": 69040,
+      "sha256": "3629fa180f625d4de2e3fd3b15b12c5d42315e5733ecae6d1550b306abd7d482",
+      "device": 16777234,
+      "inode": 144633602,
+      "mode": 493,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-docker-managed-profile-v3-run/image-uv.bin": {
+      "bytes": 44939088,
+      "sha256": "39d70eb83160a5ce842f8aa7a8083fbc19b09d96c8647f0b6dc9f3a4502ec8e8",
+      "device": 16777234,
+      "inode": 144572509,
+      "mode": 493,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-native-wheel-data-v2-run/image/stdout.raw": {
+      "bytes": 2884,
+      "sha256": "b33298fe3e5091562bf2df76e1027c6a29593e19a43bb7dd2d723a0219f8869e",
+      "device": 16777234,
+      "inode": 145297554,
+      "mode": 420,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-normal-suite-seven-wheel-gate-proposal-v1/runtime/gate_runner.py": {
+      "bytes": 24942,
+      "sha256": "a7094e73b96ab0fc25c10af95119fe1715c0b12bde76df38ac899d94f886f97e",
+      "device": 16777234,
+      "inode": 146778569,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-normal-suite-seven-wheel-gate-proposal-v1/runtime/network_guard_proposal.py": {
+      "bytes": 9421,
+      "sha256": "015a89d63151888555706ac1854b93fb96319e8aa5da0bc3cf1b6fdc073b9d20",
+      "device": 16777234,
+      "inode": 146778571,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-normal-suite-seven-wheel-gate-proposal-v1/runtime/origin_probe.py": {
+      "bytes": 9576,
+      "sha256": "fceed7314449965bed259e1cb8f3f17ee512f57fd24c6de9d0133ca0007fa14e",
+      "device": 16777234,
+      "inode": 146778568,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-normal-suite-seven-wheel-gate-v1-run/prestart-inspect/stdout.raw": {
+      "bytes": 13218,
+      "sha256": "7aec9429f168bc138b956c37cdf48fdf9c0462f8f03914ad986ca5f33f432275",
+      "device": 16777234,
+      "inode": 146960227,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-real-parser-gate-v7/candidate/tests/conftest.py": {
+      "bytes": 69147,
+      "sha256": "89d56be0e67e6fa04babe567ab4168d1d6dc08224569f611891b4b53a1d63149",
+      "device": 16777234,
+      "inode": 144942481,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-real-parser-gate-v7/candidate/tests/entrypoints/conftest.py": {
+      "bytes": 2684,
+      "sha256": "8bb0336c3799a3b9a1ee9b1d9467e0ca2c3cbf6dd0fc5c811a00e83160704731",
+      "device": 16777234,
+      "inode": 144943652,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/responses-real-parser-gate-v7/candidate/tests/entrypoints/openai/responses/conftest.py": {
+      "bytes": 14672,
+      "sha256": "290da5591af0dddd5b26f2842cb8ed32e06b31afec3b4872fc3df96219c72ed0",
+      "device": 16777234,
+      "inode": 144943908,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/final-candidate/tests/entrypoints/openai/chat_completion/test_serving_chat.py": {
+      "bytes": 119829,
+      "sha256": "8b1e10ea11fd356fb45f95223bf71689ab7c1d84c1f4fd2ea138a713e8570918",
+      "device": 16777234,
+      "inode": 149404349,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/final-candidate/tests/entrypoints/openai/completion/test_completion_error.py": {
+      "bytes": 39596,
+      "sha256": "f8aa2f4e93c5c2bda59f9641ffa75c676dae8862acf33d44793a5cc00d4cabaa",
+      "device": 16777234,
+      "inode": 149404351,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/final-candidate/tests/entrypoints/openai/responses/test_serving_responses.py": {
+      "bytes": 85485,
+      "sha256": "5fde703dee639d3c033b9420b22f89b4437343607938c9570e43d0d213e2ec3d",
+      "device": 16777234,
+      "inode": 149404353,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/generate/base/serving.py": {
+      "bytes": 16173,
+      "sha256": "cdb5e1de3b1242bf186aad935ddaccf75de684a010705959479359c0eb68c81e",
+      "device": 16777234,
+      "inode": 149404337,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/openai/chat_completion/serving.py": {
+      "bytes": 57993,
+      "sha256": "f04b294863fa3c1e64434da902beec88f870fc108365b05ffe6d6cda7b9667ef",
+      "device": 16777234,
+      "inode": 149404340,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/openai/completion/serving.py": {
+      "bytes": 31854,
+      "sha256": "8b2ff0511dd5f26f7243023396bf8064ee05fb819357824e079a3f6c6eb01661",
+      "device": 16777234,
+      "inode": 149404342,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/openai/responses/serving.py": {
+      "bytes": 57072,
+      "sha256": "bb4ae839cfbb627e982200d608cd1afc0d118e3348ebd680bcf190abc525b851",
+      "device": 16777234,
+      "inode": 149404344,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-cleanup-candidate-v1/manifest.json": {
+      "bytes": 8233,
+      "sha256": "bfe1ecd5cd3f90299a730aaf50fcbea54a3cd95a567da7860e9a2f5e0f426250",
+      "device": 16777234,
+      "inode": 149436430,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv-native-validation-plan-v1/base371-responses-context.py": {
+      "bytes": 37957,
+      "sha256": "463fc3283a1873756d9efd7d333e587ea7a327544e2d50f0a6c90fb27b118dbf",
+      "device": 16777234,
+      "inode": 149475935,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v1/manifest.json": {
+      "bytes": 3057,
+      "sha256": "ed60d77e74edeb83b495005cfff910bb63600e3d8c6b1c90cf861a8a2081ec31",
+      "device": 16777234,
+      "inode": 150165327,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/PLAN.json": {
+      "bytes": 18283,
+      "sha256": "57ab3b217698094bfdbcf3f52b057c69989e558f8e2460920900484a6327e17f",
+      "device": 16777234,
+      "inode": 150219503,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/POLICY.json": {
+      "bytes": 1356,
+      "sha256": "590e267ffc4a4e883ad8d4a0fa2799c1f3327597432a186f9b0c6c4505e7514f",
+      "device": 16777234,
+      "inode": 150219502,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/cache-manifest.json": {
+      "bytes": 3872,
+      "sha256": "55f7275b1336ab0f9b7ddfc7974ba68d68860f3cf80e35c3d9d08d3c83519b07",
+      "device": 16777234,
+      "inode": 150219497,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/cache-receipt.json": {
+      "bytes": 304,
+      "sha256": "0b93eec3088cf4551883262c44494fae00966826dc8843f72b9f61722bd6a69c",
+      "device": 16777234,
+      "inode": 150219498,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/candidate.json": {
+      "bytes": 22154,
+      "sha256": "a409064d3c17197046b99edf6f9eed3924149fe359339202bfd98d9474063e1d",
+      "device": 16777234,
+      "inode": 150219494,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/harmony-inputs.json": {
+      "bytes": 1941,
+      "sha256": "de1c32356475e74c5d319666c4f4fe2da0f01ed19f74fd2defcb3dd74b66bc8b",
+      "device": 16777234,
+      "inode": 150219499,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/helper-identities.json": {
+      "bytes": 476,
+      "sha256": "8f47e71ef7df380a822e951e1c64052167080a232bff3143c3546824bbf3264d",
+      "device": 16777234,
+      "inode": 150219500,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/manifest.json": {
+      "bytes": 3056,
+      "sha256": "191e7ee1bf4fde7e45afe699a0d6cb6fe4c71542753d4a560430879d55eb3a82",
+      "device": 16777234,
+      "inode": 150219509,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/origin-expected.json": {
+      "bytes": 7087,
+      "sha256": "b2003270d3fd0ae268ee433f2b312c2900f9c48eb5c76924546e34cfe299fa97",
+      "device": 16777234,
+      "inode": 150219501,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    "serving/stream-kv43-normal-adapter-v2/runner.py": {
+      "bytes": 17790,
+      "sha256": "1f8d369a108cbc29e6425764f079ee4fb6c4dee582dd8d6121ed3a8d7583c09e",
+      "device": 16777234,
+      "inode": 150219493,
+      "mode": 292,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    }
+  },
+  "source_derivations": {
+    "candidate": {
+      "base_manifest_sha256": "ba3f1f5dc0b40576f51984c009eb082303ec85faa2f506deef11189496da5a43",
+      "derived_manifest_sha256": "40556336312c4d45567113ee1409820bdbd7cb80ebeffb8973faf7cf117264cd",
+      "derived_manifest_bytes": 1434650,
+      "read_only_file_overrides": [
+        {
+          "bytes": 119829,
+          "destination": "/gate-v7/candidate/tests/entrypoints/openai/chat_completion/test_serving_chat.py",
+          "host_mode": 292,
+          "sha256": "8b1e10ea11fd356fb45f95223bf71689ab7c1d84c1f4fd2ea138a713e8570918",
+          "source": "serving/stream-kv-cleanup-candidate-v1/final-candidate/tests/entrypoints/openai/chat_completion/test_serving_chat.py"
+        },
+        {
+          "bytes": 39596,
+          "destination": "/gate-v7/candidate/tests/entrypoints/openai/completion/test_completion_error.py",
+          "host_mode": 292,
+          "sha256": "f8aa2f4e93c5c2bda59f9641ffa75c676dae8862acf33d44793a5cc00d4cabaa",
+          "source": "serving/stream-kv-cleanup-candidate-v1/final-candidate/tests/entrypoints/openai/completion/test_completion_error.py"
+        },
+        {
+          "bytes": 85485,
+          "destination": "/gate-v7/candidate/tests/entrypoints/openai/responses/test_serving_responses.py",
+          "host_mode": 292,
+          "sha256": "5fde703dee639d3c033b9420b22f89b4437343607938c9570e43d0d213e2ec3d",
+          "source": "serving/stream-kv-cleanup-candidate-v1/final-candidate/tests/entrypoints/openai/responses/test_serving_responses.py"
+        },
+        {
+          "bytes": 16173,
+          "destination": "/gate-v7/candidate/vllm/entrypoints/generate/base/serving.py",
+          "host_mode": 292,
+          "sha256": "cdb5e1de3b1242bf186aad935ddaccf75de684a010705959479359c0eb68c81e",
+          "source": "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/generate/base/serving.py"
+        },
+        {
+          "bytes": 57993,
+          "destination": "/gate-v7/candidate/vllm/entrypoints/openai/chat_completion/serving.py",
+          "host_mode": 292,
+          "sha256": "f04b294863fa3c1e64434da902beec88f870fc108365b05ffe6d6cda7b9667ef",
+          "source": "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/openai/chat_completion/serving.py"
+        },
+        {
+          "bytes": 31854,
+          "destination": "/gate-v7/candidate/vllm/entrypoints/openai/completion/serving.py",
+          "host_mode": 292,
+          "sha256": "8b2ff0511dd5f26f7243023396bf8064ee05fb819357824e079a3f6c6eb01661",
+          "source": "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/openai/completion/serving.py"
+        },
+        {
+          "bytes": 57072,
+          "destination": "/gate-v7/candidate/vllm/entrypoints/openai/responses/serving.py",
+          "host_mode": 292,
+          "sha256": "bb4ae839cfbb627e982200d608cd1afc0d118e3348ebd680bcf190abc525b851",
+          "source": "serving/stream-kv-cleanup-candidate-v1/final-candidate/vllm/entrypoints/openai/responses/serving.py"
+        },
+        {
+          "bytes": 37957,
+          "destination": "/gate-v7/candidate/vllm/entrypoints/openai/responses/context.py",
+          "host_mode": 292,
+          "sha256": "463fc3283a1873756d9efd7d333e587ea7a327544e2d50f0a6c90fb27b118dbf",
+          "source": "serving/stream-kv-native-validation-plan-v1/base371-responses-context.py"
+        }
+      ]
+    }
+  },
+  "providers": [
+    {
+      "requested": "/Users/pacific/.local/bin/uv",
+      "resolved": "/Users/pacific/.local/bin/uv",
+      "bytes": 47778352,
+      "sha256": "40a78912c850286ea5756211f1f88c0928fb15b788869d46d4355cd4ac556023",
+      "device": 16777234,
+      "inode": 2895610,
+      "mode": 493,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    {
+      "requested": "/Users/pacific/Developer/vllm/.venv/bin/python",
+      "resolved": "/Users/pacific/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+      "bytes": 49968,
+      "sha256": "36984af9f922aec72ba5b03e811ee92512268785007192e20f826cbd07cf8d04",
+      "device": 16777234,
+      "inode": 118796496,
+      "mode": 493,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    },
+    {
+      "requested": "/usr/local/bin/docker",
+      "resolved": "/Applications/Docker.app/Contents/Resources/bin/docker",
+      "bytes": 41541360,
+      "sha256": "4d2d27ffb3326eaa343a39611d0edfad629f5dc2a7ad8e655ca560e9dddf36c6",
+      "device": 16777234,
+      "inode": 9532588,
+      "mode": 493,
+      "uid": 501,
+      "gid": 80,
+      "nlink": 1
+    },
+    {
+      "requested": "/Users/pacific/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/libpython3.12.dylib",
+      "resolved": "/Users/pacific/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/libpython3.12.dylib",
+      "bytes": 18020720,
+      "sha256": "e2319d5b4efd97c41db9fbdb69f7022a1dc988a803b8baadd1a68d7a11269ff8",
+      "device": 16777234,
+      "inode": 118798562,
+      "mode": 493,
+      "uid": 501,
+      "gid": 20,
+      "nlink": 1
+    }
+  ],
+  "ledger_sha256": "4b9b4eec4c3c63c5a059d79cebe0d743634f2d48b4b45f7b46d8e6dfa11c8de4",
+  "free_bytes": 69860642816,
+  "peak_bytes": 7516192768,
+  "minimum_free_after_peak_bytes": 21474836480,
+  "scope": "Fresh stable host data/source identity. Root-only host still needs exact fresh Docker metadata, stopped configuration, lifecycle and cleanup admission. Not atomic whole-tree, ABI or runtime acceptance."
+}
