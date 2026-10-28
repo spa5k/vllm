@@ -52,6 +52,9 @@ class SingleTypeKVCacheManager(ABC):
     """
 
     supports_fine_grained_hash_lookup: ClassVar[bool] = False
+    # Whether an exclusive partial-hit tail block is written in place instead
+    # of copied. See `_can_take_over_partial_tail`.
+    takes_over_exclusive_partial_tail: ClassVar[bool] = False
 
     # Keep this group's longer prefix until external cache lookup completes.
     retains_longer_hit: bool = False
@@ -167,10 +170,35 @@ class SingleTypeKVCacheManager(ABC):
         num_local_computed_tokens: int,
     ) -> bool:
         # The local prefix-cache hit ends inside one of this manager's
-        # blocks: the shared tail block needs CoW.
+        # blocks: the shared tail block needs CoW or a take-over.
         return (
             len(new_computed_blocks) > 0
             and num_local_computed_tokens % self.block_size != 0
+        )
+
+    def _can_take_over_partial_tail(
+        self,
+        tail_block: KVCacheBlock,
+        num_local_computed_tokens: int,
+        num_external_computed_tokens: int,
+    ) -> bool:
+        """Whether a partial hit can write its tail block in place.
+
+        Must be called before the hit touches ``tail_block``. The request only
+        writes slots at or past the hit, as the producer of a partial tail
+        does. This is safe when no other request holds the block and no
+        prefix-cache entry of the block covers tokens past the hit. The
+        primary hash covers the most tokens of all entries of a block.
+        Connectors receive external tokens into unhashed blocks, so a hit
+        with external tokens keeps the CoW.
+        """
+        num_hash_tokens = tail_block.block_hash_num_tokens
+        return (
+            self.takes_over_exclusive_partial_tail
+            and num_external_computed_tokens == 0
+            and tail_block.ref_cnt == 0
+            and num_hash_tokens is not None
+            and num_hash_tokens <= num_local_computed_tokens
         )
 
     def get_num_blocks_to_allocate(
@@ -259,7 +287,13 @@ class SingleTypeKVCacheManager(ABC):
         num_evictable_blocks = self._get_num_evictable_blocks(
             new_computed_blocks[num_skipped_new_computed_blocks:]
         )
-        if self._has_partial_local_hit(new_computed_blocks, num_local_computed_tokens):
+        if self._has_partial_local_hit(
+            new_computed_blocks, num_local_computed_tokens
+        ) and not self._can_take_over_partial_tail(
+            new_computed_blocks[-1],
+            num_local_computed_tokens,
+            total_computed_tokens - num_local_computed_tokens,
+        ):
             # Reserve the extra block that allocate_new_blocks pulls for the
             # partial-hit CoW redirect.
             num_new_blocks += 1
@@ -299,6 +333,14 @@ class SingleTypeKVCacheManager(ABC):
             # It is possible that all new computed blocks are skipped when
             # num_skipped_blocks > len(new_computed_blocks).
             new_computed_blocks = new_computed_blocks[num_skipped_blocks:]
+        partial_hit = self._has_partial_local_hit(
+            new_computed_blocks, num_local_computed_tokens
+        )
+        take_over = partial_hit and self._can_take_over_partial_tail(
+            new_computed_blocks[-1],
+            num_local_computed_tokens,
+            num_external_computed_tokens,
+        )
 
         # Touch the computed blocks to make sure they won't be evicted.
         if self.enable_caching:
@@ -316,13 +358,17 @@ class SingleTypeKVCacheManager(ABC):
         # them so cache_blocks() will not try to re-cache blocks that already
         # have a block_hash set.
         self.num_cached_block[request_id] = len(req_blocks)
-        if self._has_partial_local_hit(new_computed_blocks, num_local_computed_tokens):
-            # Record the partial tail for the CoW redirect in
-            # allocate_new_blocks; cap the cached count at the full blocks so
-            # cache_blocks() re-caches the private copy once full.
+        if partial_hit:
+            # Cap the cached count at the full blocks so cache_blocks() caches
+            # the tail block once full. Unless the request takes the tail over,
+            # record it for the CoW redirect in allocate_new_blocks.
             block_idx = num_local_computed_tokens // self.block_size
-            self._partial_hit_reqs[request_id] = (block_idx, new_computed_blocks[-1])
             self.num_cached_block[request_id] = block_idx
+            if not take_over:
+                self._partial_hit_reqs[request_id] = (
+                    block_idx,
+                    new_computed_blocks[-1],
+                )
 
     def allocate_external_computed_blocks(
         self,
@@ -738,6 +784,7 @@ class SingleTypeKVCacheManager(ABC):
 
 class FullAttentionManager(SingleTypeKVCacheManager):
     supports_fine_grained_hash_lookup: ClassVar[bool] = True
+    takes_over_exclusive_partial_tail: ClassVar[bool] = True
 
     @classmethod
     def find_longest_cache_hit(
@@ -2230,6 +2277,8 @@ class HiSparseSourceManager(FullAttentionManager):
     coordinator: "HiSparseCoordinator | None" = None
     # The host tier keeps prefixes the device groups have already lost.
     retains_longer_hit = True
+    # Host blocks are written back asynchronously; keep the connector CoW.
+    takes_over_exclusive_partial_tail: ClassVar[bool] = False
 
     @property
     def records_new_block_ids(self) -> bool:

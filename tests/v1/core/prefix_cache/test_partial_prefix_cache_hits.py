@@ -12,6 +12,7 @@ import pytest
 import torch
 
 from tests.v1.core.test_prefix_caching import make_kv_cache_manager, make_request
+from vllm.distributed.kv_events import BlockRemoved, BlockStored
 from vllm.distributed.kv_transfer.kv_connector.v1.base import SupportsHMA
 from vllm.model_executor.layers.mamba.checkpoint import (
     compute_mamba_prefill_checkpoints,
@@ -22,6 +23,7 @@ from vllm.v1.core.kv_cache_utils import (
     get_block_hash,
     get_group_id,
     init_none_hash,
+    maybe_convert_block_hash,
     resolve_cache_hit_alignment_tokens,
 )
 from vllm.v1.core.sched.scheduler import Scheduler
@@ -104,6 +106,7 @@ def make_full_mamba_manager(
     num_speculative_blocks: int = 0,
     num_prefill_checkpoint_blocks: int = 0,
     num_hash_lookahead_tokens: int = 0,
+    enable_kv_cache_events: bool = False,
 ):
     mamba_group = KVCacheGroupSpec(
         ["mamba"],
@@ -149,7 +152,19 @@ def make_full_mamba_manager(
         use_eagle=use_eagle,
         num_prefill_lookahead=num_hash_lookahead_tokens,
         num_hash_lookahead_tokens=num_hash_lookahead_tokens,
+        enable_kv_cache_events=enable_kv_cache_events,
     )
+
+
+def _cache_partial_tail_and_free(manager):
+    """Run a 7-token prompt to token 6 and free it: with 2-token hashes and
+    4-token blocks, both groups keep a partial entry at 6 in their tail."""
+    req = make_request("producer", [0, 0, 1, 1, 2, 2, 3], 2, sha256)
+    computed_blocks, num_computed, _ = manager.get_computed_blocks(req)
+    assert manager.allocate_slots(req, 6, num_computed, computed_blocks) is not None
+    manager.free(req)
+    manager.new_step_starts()
+    return req
 
 
 @pytest.mark.parametrize(
@@ -1525,78 +1540,157 @@ def test_hybrid_mamba_moved_partial_entry_defers_same_step_hit():
     assert manager.allocate_slots(req1, 2, num_computed, computed_blocks) is not None
 
 
-def test_hybrid_full_attention_partial_hash_hit_uses_cow():
-    hash_block_size = 2
-    block_size = 2 * hash_block_size
-    kv_cache_config = KVCacheConfig(
-        num_blocks=24,
-        kv_cache_tensors=[],
-        kv_cache_groups=[
-            KVCacheGroupSpec(
-                ["full"],
-                FullAttentionSpec(
-                    block_size=block_size,
-                    num_kv_heads=1,
-                    head_size=1,
-                    dtype=torch.float32,
-                ),
-            ),
-            KVCacheGroupSpec(
-                ["mamba"],
-                MambaSpec(
-                    block_size=block_size,
-                    shapes=(1, 1),
-                    dtypes=(torch.float32,),
-                    mamba_cache_mode="align",
-                ),
-            ),
-        ],
-    )
-    manager = make_kv_cache_manager(
-        kv_cache_config=kv_cache_config,
-        max_model_len=8192,
-        enable_caching=True,
-        hash_block_size=hash_block_size,
-    )
+def test_hybrid_full_attention_exclusive_partial_hit_takes_over_tail():
+    """A sole holder only writes past the hit, as the producer of the partial
+    tail does, so full attention keeps the cached tail block: no extra block
+    in admission and no copy. Mamba state blocks are overwritten in place, so
+    they still copy."""
+    manager = make_full_mamba_manager(dcp_world_size=1)
+    _cache_partial_tail_and_free(manager)
 
-    req0 = make_request("0", [0, 0, 1, 1, 2, 2, 3], hash_block_size, sha256)
-    computed_blocks, num_computed, _ = manager.get_computed_blocks(req0)
-    assert num_computed == 0
-    assert manager.allocate_slots(req0, 6, num_computed, computed_blocks) is not None
-    manager.free(req0)
-    manager.new_step_starts()
-
-    partial_full_hash = req0.block_hashes[6 // hash_block_size - 1]
-    partial_full_block = manager.block_pool.get_cached_block(
-        partial_full_hash, kv_cache_group_ids=[0]
-    )
-    assert partial_full_block is not None
-
-    req1 = make_request("1", [0, 0, 1, 1, 2, 2, 3, 3], hash_block_size, sha256)
-    computed_blocks, num_computed, _ = manager.get_computed_blocks(req1)
+    req = make_request("taker", [0, 0, 1, 1, 2, 2, 3, 3], 2, sha256)
+    computed_blocks, num_computed, _ = manager.get_computed_blocks(req)
     assert num_computed == 6
-    assert [len(group) for group in computed_blocks.blocks] == [2, 2]
-
-    new_blocks = manager.allocate_slots(req1, 2, num_computed, computed_blocks)
-    assert new_blocks is not None
-    full_new_block_ids = new_blocks.get_block_ids()[0]
-    assert len(full_new_block_ids) == 1
-    assert full_new_block_ids[0] != partial_full_block[0].block_id
-    assert partial_full_block[0].block_hash is not None
-    assert get_block_hash(partial_full_block[0].block_hash) == partial_full_hash
-    assert get_group_id(partial_full_block[0].block_hash) == 0
-    assert partial_full_block[0].block_hash_num_tokens == 6
-    copies, retained = manager.take_kv_cache_block_copies()
+    full_tail, mamba_tail = (group[-1] for group in computed_blocks.blocks)
+    assert full_tail.ref_cnt == 0
+    full_manager = manager.coordinator.single_type_managers[0]
+    # Both hit blocks leave the free queue; no CoW block is reserved.
     assert (
-        KVCacheBlockCopy(
-            src_block_id=partial_full_block[0].block_id,
-            dst_block_id=full_new_block_ids[0],
+        full_manager.get_num_blocks_to_allocate(
+            "taker", 8, computed_blocks.blocks[0], 6, 6, 8
         )
-        in copies
+        == 2
     )
-    assert partial_full_block[0].ref_cnt == 1
+
+    new_blocks = manager.allocate_slots(req, 2, num_computed, computed_blocks)
+    assert new_blocks is not None
+    assert new_blocks.get_block_ids()[0] == []
+    assert manager.get_blocks("taker").blocks[0][-1] is full_tail
+    assert full_tail.ref_cnt == 1
+    copies, retained = manager.take_kv_cache_block_copies()
+    assert [copy.src_block_id for copy in copies] == [mamba_tail.block_id]
     manager.block_pool.free_blocks(retained)
-    assert partial_full_block[0].ref_cnt == 0
+
+
+@pytest.mark.parametrize(
+    "num_holders,num_hit_tokens,num_external_tokens,takes_over",
+    [
+        pytest.param(0, 6, 0, True, id="exclusive"),
+        pytest.param(1, 6, 0, False, id="shared"),
+        pytest.param(0, 4, 0, False, id="entry-past-hit"),
+        pytest.param(0, 6, 2, False, id="external-tokens"),
+    ],
+)
+def test_full_attention_partial_tail_take_over_conditions(
+    num_holders: int,
+    num_hit_tokens: int,
+    num_external_tokens: int,
+    takes_over: bool,
+):
+    """The tail block is written in place only if no other request holds it,
+    no prefix-cache entry of the block covers tokens past the hit, and no
+    connector loads into it. Otherwise admission reserves a CoW block."""
+    from vllm.v1.core.block_pool import BlockPool
+    from vllm.v1.core.single_type_kv_cache_manager import FullAttentionManager
+
+    pool = BlockPool(num_gpu_blocks=8, enable_caching=True, hash_block_size=2)
+    manager = FullAttentionManager(
+        FullAttentionSpec(
+            block_size=8, num_kv_heads=1, head_size=1, dtype=torch.float32
+        ),
+        block_pool=pool,
+        enable_caching=True,
+        kv_cache_group_id=0,
+        scheduler_block_size=8,
+    )
+    producer = make_request("producer", list(range(7)), 2, sha256)
+    tail = pool.get_new_blocks(1)[0]
+    pool.cache_partial_block(
+        request=producer, block=tail, num_tokens=6, kv_cache_group_id=0, block_size=8
+    )
+    pool.free_blocks([tail])
+    pool.touch([tail] * num_holders)
+
+    num_computed_tokens = num_hit_tokens + num_external_tokens
+    num_blocks = manager.get_num_blocks_to_allocate(
+        "req", 16, [tail], num_computed_tokens, num_hit_tokens, 16
+    )
+    # One block for tokens 8-15, plus the tail if it leaves the free queue.
+    assert num_blocks == 1 + (num_holders == 0) + (not takes_over)
+
+    manager.add_local_computed_blocks(
+        "req", [tail], num_hit_tokens, num_external_tokens
+    )
+    manager.allocate_new_blocks("req", 16, 16)
+    req_tail = manager.req_to_blocks["req"][0]
+    assert (req_tail is tail) == takes_over
+    expected_copies = [] if takes_over else [(tail, req_tail)]
+    assert manager.take_pending_cow_copies() == expected_copies
+    assert tail.ref_cnt == num_holders + 1
+
+
+def test_same_step_hit_on_taken_over_tail_copies():
+    """The second request sees the first request's hit-ref at admission, so it
+    reserves and copies the block. The copy runs before the step's forward,
+    so it reads the tail before the first request writes past the hit."""
+    manager = make_full_mamba_manager(dcp_world_size=1)
+    _cache_partial_tail_and_free(manager)
+    req1 = make_request("taker", [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6], 2, sha256)
+    req2 = make_request("sharer", [0, 0, 1, 1, 2, 2, 3, 3], 2, sha256)
+    blocks1, num_computed1, _ = manager.get_computed_blocks(req1)
+    blocks2, num_computed2, _ = manager.get_computed_blocks(req2)
+    assert num_computed1 == num_computed2 == 6
+    tail = blocks1.blocks[0][-1]
+    assert blocks2.blocks[0][-1] is tail
+
+    # The first request computes one token, so the tail is not full yet.
+    assert manager.allocate_slots(req1, 1, num_computed1, blocks1) is not None
+    assert manager.get_blocks("taker").blocks[0][-1] is tail
+    full_manager = manager.coordinator.single_type_managers[0]
+    # Both hit blocks are held, so only the CoW block is new.
+    assert (
+        full_manager.get_num_blocks_to_allocate("sharer", 8, blocks2.blocks[0], 6, 6, 8)
+        == 1
+    )
+
+    assert manager.allocate_slots(req2, 2, num_computed2, blocks2) is not None
+    sharer_tail = manager.get_blocks("sharer").blocks[0][-1]
+    assert sharer_tail is not tail
+    assert manager.get_blocks("taker").blocks[0][-1] is tail
+    copies, retained = manager.take_kv_cache_block_copies()
+    assert KVCacheBlockCopy(tail.block_id, sharer_tail.block_id) in copies
+    manager.block_pool.free_blocks(retained)
+
+
+def test_taken_over_tail_promotes_to_full_block_hash():
+    """When the taken-over tail fills, the full-block hash replaces the
+    partial entry on the same block, with one remove and one store event."""
+    manager = make_full_mamba_manager(dcp_world_size=1, enable_kv_cache_events=True)
+    _cache_partial_tail_and_free(manager)
+    req = make_request("taker", [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6], 2, sha256)
+    computed_blocks, num_computed, _ = manager.get_computed_blocks(req)
+    assert num_computed == 6
+    tail = computed_blocks.blocks[0][-1]
+    partial_hash = tail.block_hash
+    assert partial_hash is not None
+    manager.take_events()
+
+    assert manager.allocate_slots(req, 7, num_computed, computed_blocks) is not None
+    assert manager.get_blocks("taker").blocks[0][1] is tail
+    assert tail.block_hash_num_tokens == 8
+    full_hash = tail.block_hash
+    assert manager.block_pool.get_cached_block(get_block_hash(full_hash), [0]) == [tail]
+    assert not manager.block_pool.get_cached_block(get_block_hash(partial_hash), [0])
+
+    events = [e for e in manager.take_events() if e.group_idx == 0]
+    assert [type(e) for e in events] == [BlockRemoved, BlockStored]
+    removed, stored = events
+    assert removed.block_hashes == [
+        maybe_convert_block_hash(get_block_hash(partial_hash))
+    ]
+    # The event also stores the next block, which the same step filled.
+    assert stored.block_hashes[0] == maybe_convert_block_hash(get_block_hash(full_hash))
+    assert stored.token_ids == req.all_token_ids[4:12]
 
 
 def test_hybrid_partial_hit_cow_target_starts_uncached():
@@ -1649,6 +1743,8 @@ def test_hybrid_partial_hit_cow_target_starts_uncached():
     )
     assert partial_full_block is not None
     assert partial_mamba_block is not None
+    # Another holder keeps the full-attention tail shared, so it is copied.
+    manager.block_pool.touch(partial_full_block)
 
     req1 = make_request("1", [0, 0, 1, 1, 2, 2, 3, 3], hash_block_size, sha256)
     computed_blocks, num_computed, _ = manager.get_computed_blocks(req1)
@@ -2409,7 +2505,7 @@ def test_kpool_tail_supports_128_token_partial_hash_hits():
 
 
 @pytest.mark.parametrize("dcp_world_size", [1, 2, 4])
-def test_hybrid_partial_hash_hit_uses_cow_under_dcp(dcp_world_size: int):
+def test_hybrid_partial_hash_hit_under_dcp(dcp_world_size: int):
     hash_block_size = 2
     physical_block_size = 4
     manager = make_full_mamba_manager(
@@ -2443,13 +2539,14 @@ def test_hybrid_partial_hash_hit_uses_cow_under_dcp(dcp_world_size: int):
 
     new_blocks = manager.allocate_slots(req1, 2, num_computed, computed_blocks)
     assert new_blocks is not None
-    full_new_block_id = new_blocks.get_block_ids()[0][0]
+    # The sole holder takes over the full-attention tail; Mamba copies.
+    assert new_blocks.get_block_ids()[0] == []
+    assert manager.get_blocks("dcp-replay").blocks[0][-1] is partial_full_block[0]
     mamba_new_block_id = new_blocks.get_block_ids()[1][0]
     copies, retained = manager.take_kv_cache_block_copies()
-    assert KVCacheBlockCopy(partial_full_block[0].block_id, full_new_block_id) in copies
-    assert (
-        KVCacheBlockCopy(partial_mamba_block[0].block_id, mamba_new_block_id) in copies
-    )
+    assert copies == [
+        KVCacheBlockCopy(partial_mamba_block[0].block_id, mamba_new_block_id)
+    ]
     manager.block_pool.free_blocks(retained)
 
 
@@ -2491,11 +2588,14 @@ def test_dcp_partial_hit_resumes_on_replicated_mamba_snapshot(
     partial_full_block = computed_blocks.blocks[0][-1]
     new_blocks = manager.allocate_slots(req1, 4, num_computed, computed_blocks)
     assert new_blocks is not None
-    full_new_block_id = new_blocks.get_block_ids()[0][0]
+    # The sole holder takes over the full-attention tail.
+    assert new_blocks.get_block_ids()[0] == []
+    assert manager.get_blocks("snapshot-replay").blocks[0][-1] is partial_full_block
     copies, retained = manager.take_kv_cache_block_copies()
-    assert KVCacheBlockCopy(partial_full_block.block_id, full_new_block_id) in copies
     assert all(
-        copy.src_block_id != computed_blocks.blocks[1][-1].block_id for copy in copies
+        copy.src_block_id
+        not in (partial_full_block.block_id, computed_blocks.blocks[1][-1].block_id)
+        for copy in copies
     )
     manager.block_pool.free_blocks(retained)
 
