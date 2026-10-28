@@ -3384,10 +3384,7 @@ class Scheduler(SchedulerInterface):
         reserved_blocks = sum(
             self._request_remaining_blocks(req) for req in self._inflight_prefills
         )
-        if any(
-            manager.reservation_reads_shared_state
-            for manager in self.kv_cache_manager.coordinator.single_type_managers
-        ):
+        if self.kv_cache_manager.coordinator.reservation_reads_shared_state:
             # Stored async-load reservations can be stale: compute them again.
             return reserved_blocks + sum(
                 self._request_remaining_blocks(req)

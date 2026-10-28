@@ -174,6 +174,10 @@ class KVCacheCoordinator(ABC):
             )
             for i, kv_cache_group in enumerate(self.kv_cache_config.kv_cache_groups)
         )
+        self.reservation_reads_shared_state = any(
+            manager.reservation_reads_shared_state
+            for manager in self.single_type_managers
+        )
         # Match Mamba checkpoints to Eagle's attention replay boundary.
         if use_eagle:
             for manager in self.single_type_managers:
