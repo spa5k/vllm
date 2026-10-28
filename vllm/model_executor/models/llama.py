@@ -556,6 +556,19 @@ class LlamaForCausalLM(
     ) -> torch.Tensor:
         return self.logits_processor(self.lm_head, hidden_states, skip_gather=True)
 
+    def compute_logits_sparse(
+        self, hidden_states: torch.Tensor, allowed_token_ids: torch.Tensor
+    ) -> torch.Tensor | None:
+        if (
+            getattr(self.compute_logits, "__func__", None)
+            is not LlamaForCausalLM.compute_logits
+            or type(self.logits_processor) is not LogitsProcessor
+        ):
+            return self.compute_logits(hidden_states)
+        return self.logits_processor(
+            self.lm_head, hidden_states, allowed_token_ids=allowed_token_ids
+        )
+
     def load_weights(self, weights: Iterable[tuple[str, torch.Tensor]]) -> set[str]:
         loader = AutoWeightsLoader(self)
         return loader.load_weights(weights)

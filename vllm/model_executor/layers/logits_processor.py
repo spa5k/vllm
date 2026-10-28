@@ -2,12 +2,14 @@
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
 """A layer that compute logits from hidden_stats."""
 
+import os
 from collections.abc import Callable
 from functools import cache
 
 import torch
 import torch.nn.functional as F
 
+import vllm.envs as envs
 from vllm.config import get_current_vllm_config
 from vllm.distributed import (
     tensor_model_parallel_all_gather,
@@ -101,14 +103,24 @@ class LogitsProcessor(PluggableLayer):
         hidden_states: torch.Tensor,
         embedding_bias: torch.Tensor | None = None,
         skip_gather: bool = False,
+        allowed_token_ids: torch.Tensor | None = None,
     ) -> torch.Tensor | None:
         if self.logits_as_input:
             logits = hidden_states
         else:
             # Get the logits for the next tokens.
-            logits = self._get_logits(
-                hidden_states, lm_head, embedding_bias, skip_gather
-            )
+            if allowed_token_ids is None:
+                logits = self._get_logits(
+                    hidden_states, lm_head, embedding_bias, skip_gather
+                )
+            else:
+                logits = self._get_sparse_logits(
+                    hidden_states,
+                    lm_head,
+                    embedding_bias,
+                    allowed_token_ids,
+                    skip_gather,
+                )
         if logits is not None:
             if self.soft_cap is not None:
                 logits = logits / self.soft_cap
@@ -118,6 +130,51 @@ class LogitsProcessor(PluggableLayer):
             if self.scale != 1.0:
                 logits *= self.scale
         return logits
+
+    def _get_sparse_logits(
+        self,
+        hidden_states: torch.Tensor,
+        lm_head: VocabParallelEmbedding,
+        embedding_bias: torch.Tensor | None,
+        allowed_token_ids: torch.Tensor,
+        skip_gather: bool,
+    ) -> torch.Tensor | None:
+        try:
+            use_ieee = torch.get_float32_matmul_precision() == "highest"
+        except RuntimeError:
+            use_ieee = False
+        if (
+            type(self) is not LogitsProcessor
+            or type(lm_head.quant_method) is not UnquantizedEmbeddingMethod
+            or lm_head.tp_size != 1
+            or not current_platform.is_cuda()
+            or envs.VLLM_BATCH_INVARIANT
+            or hidden_states.dtype not in (torch.float16, torch.bfloat16)
+            or lm_head.weight.dtype != hidden_states.dtype
+            or self.head_dtype not in (None, hidden_states.dtype)
+            or not use_ieee
+            or torch.is_autocast_enabled("cuda")
+            or os.environ.get("TORCH_ALLOW_TF32_CUBLAS_OVERRIDE") == "1"
+        ):
+            return self._get_logits(hidden_states, lm_head, embedding_bias, skip_gather)
+        logits = hidden_states.new_full(
+            (*hidden_states.shape[:-1], lm_head.weight.shape[0]), -float("inf")
+        )
+        if allowed_token_ids.numel():
+            weight = lm_head.weight.index_select(0, allowed_token_ids)
+            bias = (
+                embedding_bias.index_select(0, allowed_token_ids)
+                if embedding_bias is not None
+                else None
+            )
+            # Small BF16 projections can select reduced-precision reductions.
+            values = F.linear(
+                hidden_states.float(),
+                weight.float(),
+                bias.float() if bias is not None else None,
+            ).to(hidden_states.dtype)
+            logits.index_copy_(-1, allowed_token_ids, values)
+        return logits if skip_gather else logits[..., : self.org_vocab_size]
 
     def _gather_logits(self, logits: torch.Tensor) -> torch.Tensor:
         """gather/all-gather the logits tensor across model parallel group."""

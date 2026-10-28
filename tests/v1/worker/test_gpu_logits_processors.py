@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
 
-from types import SimpleNamespace
+from types import MethodType, SimpleNamespace
 from typing import Any
 
 import numpy as np
@@ -15,6 +15,12 @@ if not torch.cuda.is_available():
         allow_module_level=True,
     )
 
+from vllm.config import VllmConfig, set_current_vllm_config
+from vllm.model_executor.layers.logits_processor import LogitsProcessor as HeadProcessor
+from vllm.model_executor.layers.vocab_parallel_embedding import (
+    UnquantizedEmbeddingMethod,
+)
+from vllm.platforms import current_platform
 from vllm.sampling_params import SamplingParams
 from vllm.v1.worker.gpu.sample.logits_processor import (
     LogitsContext,
@@ -112,3 +118,176 @@ def test_custom_processor_lifecycle_and_pipeline_position():
     assert proc.seen_logits[0, TARGET_TOKEN].item() == BIAS
     # Its own modification is then temperature-scaled by the sampler.
     assert out[0, TARGET_TOKEN].item() == (BIAS + BOOST) / TEMPERATURE
+
+
+@pytest.mark.skipif(not current_platform.is_cuda(), reason="Sparse head requires CUDA")
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16])
+@pytest.mark.parametrize("batch_size", [1, 4, 16])
+@pytest.mark.parametrize("soft_cap,scale", [(None, 1.0), (30.0, -0.3), (30.0, 0.0)])
+def test_sparse_head_preserves_legal_scores_after_grammar(
+    dtype, batch_size, soft_cap, scale
+):
+    with set_current_vllm_config(VllmConfig()):
+        processor = HeadProcessor(257, soft_cap=soft_cap, scale=scale)
+    generator = torch.Generator(device=DEVICE).manual_seed(17853)
+    hidden = torch.randn(
+        (batch_size, 65), device=DEVICE, dtype=dtype, generator=generator
+    )
+    head = SimpleNamespace(
+        weight=torch.randn((264, 65), device=DEVICE, dtype=dtype, generator=generator),
+        quant_method=UnquantizedEmbeddingMethod(),
+        tp_size=1,
+    )
+    bias = torch.randn((264,), device=DEVICE, dtype=dtype, generator=generator)
+    ids = torch.tensor([0, 1, 31, 32, 64, 256], device=DEVICE)
+    forbidden = torch.ones(257, device=DEVICE, dtype=torch.bool)
+    forbidden[ids] = False
+    previous_precision = torch.get_float32_matmul_precision()
+    try:
+        torch.set_float32_matmul_precision("highest")
+        for _ in range(2):
+            dense = processor(head, hidden, bias)
+            sparse = processor(head, hidden, bias, allowed_token_ids=ids)
+            if soft_cap is None:
+                assert torch.isneginf(sparse[:, forbidden]).all()
+            # The ordinary grammar mask runs after softcap and scale.
+            dense[:, forbidden] = -float("inf")
+            sparse[:, forbidden] = -float("inf")
+            torch.testing.assert_close(sparse, dense, rtol=0.01, atol=0.03)
+            assert torch.equal(sparse.argmax(-1), dense.argmax(-1))
+            head.weight[ids] += 0.5
+    finally:
+        torch.set_float32_matmul_precision(previous_precision)
+
+
+@pytest.mark.skipif(not current_platform.is_cuda(), reason="Sparse head requires CUDA")
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16])
+@pytest.mark.parametrize("with_bias", [False, True])
+def test_sparse_head_keeps_precision_when_large_terms_cancel(dtype, with_bias):
+    with set_current_vllm_config(VllmConfig()):
+        processor = HeadProcessor(257)
+    generator = torch.Generator(device=DEVICE).manual_seed(17853)
+    hidden = (
+        torch.randint(-8, 9, (4, 2560), device=DEVICE, generator=generator).to(dtype)
+        / 8
+    )
+    weight = (
+        torch.randint(-8, 9, (264, 2560), device=DEVICE, generator=generator).to(dtype)
+        / 8
+    )
+    ids = torch.arange(0, 256, 8, device=DEVICE)
+    ids[-1] = 256
+    expected = hidden.double() @ weight[ids].double().T
+    bias = None
+    if with_bias:
+        bias = torch.zeros(264, device=DEVICE, dtype=dtype)
+        bias[ids] = -expected[0].to(dtype)
+        bias[ids[-1]] += 32
+        expected += bias[ids].double()
+    head = SimpleNamespace(
+        weight=weight, quant_method=UnquantizedEmbeddingMethod(), tp_size=1
+    )
+    previous_precision = torch.get_float32_matmul_precision()
+    try:
+        torch.set_float32_matmul_precision("highest")
+        actual = processor(head, hidden, bias, allowed_token_ids=ids)
+    finally:
+        torch.set_float32_matmul_precision(previous_precision)
+    # Binary fractions keep this reference sum exactly representable in FP32.
+    torch.testing.assert_close(actual[:, ids], expected.to(dtype), rtol=0, atol=0)
+    assert actual.dtype == dtype
+    assert torch.equal(actual[:, ids].argmax(-1), expected.to(dtype).argmax(-1))
+    if with_bias:
+        assert actual[0].argmax() == ids[-1]
+
+
+@pytest.mark.skipif(not current_platform.is_cuda(), reason="Sparse head requires CUDA")
+@pytest.mark.parametrize(
+    "unsupported",
+    [
+        "fp32_head",
+        "custom_processor",
+        "invariant",
+        "high",
+        "medium",
+        "precision_conflict",
+        "tf32_override",
+        "autocast",
+    ],
+)
+def test_sparse_head_keeps_the_dense_path_when_unsupported(unsupported, monkeypatch):
+    class CustomProcessor(HeadProcessor):
+        pass
+
+    with set_current_vllm_config(VllmConfig()):
+        processor_cls = (
+            CustomProcessor if unsupported == "custom_processor" else HeadProcessor
+        )
+        processor = processor_cls(65)
+    head = SimpleNamespace(
+        weight=torch.zeros((65, 17), device=DEVICE, dtype=torch.bfloat16),
+        quant_method=UnquantizedEmbeddingMethod(),
+        tp_size=1,
+    )
+    if unsupported == "fp32_head":
+        processor.head_dtype = torch.float32
+    elif unsupported == "invariant":
+        monkeypatch.setattr("vllm.envs.VLLM_BATCH_INVARIANT", True)
+    elif unsupported in ("high", "medium"):
+        monkeypatch.setattr(torch, "get_float32_matmul_precision", lambda: unsupported)
+    elif unsupported == "precision_conflict":
+
+        def conflicting_precision():
+            raise RuntimeError("Incompatible precision settings")
+
+        monkeypatch.setattr(
+            torch, "get_float32_matmul_precision", conflicting_precision
+        )
+    elif unsupported == "tf32_override":
+        monkeypatch.setenv("TORCH_ALLOW_TF32_CUBLAS_OVERRIDE", "1")
+    elif unsupported == "autocast":
+        monkeypatch.setattr(torch, "is_autocast_enabled", lambda device: True)
+    expected = torch.full((1, 65), 3.0, device=DEVICE)
+    monkeypatch.setattr(processor, "_get_logits", lambda *args: expected)
+    result = processor(
+        head, head.weight[:1], allowed_token_ids=torch.tensor([1], device=DEVICE)
+    )
+    assert result is expected
+
+
+@pytest.mark.skipif(not current_platform.is_cuda(), reason="Sparse head requires CUDA")
+@pytest.mark.parametrize("family", ["llama", "qwen3"])
+@pytest.mark.parametrize("override", [None, "compute_logits", "processor"])
+def test_sparse_model_capability_preserves_custom_logits(family, override):
+    from vllm.model_executor.models.llama import LlamaForCausalLM
+    from vllm.model_executor.models.qwen3 import Qwen3ForCausalLM
+
+    model_class = LlamaForCausalLM if family == "llama" else Qwen3ForCausalLM
+    with set_current_vllm_config(VllmConfig()):
+        processor = HeadProcessor(65)
+    expected = torch.full((1, 65), 3.0, device=DEVICE)
+    model = SimpleNamespace(
+        logits_processor=processor,
+        lm_head=SimpleNamespace(
+            weight=torch.ones((128, 17), device=DEVICE, dtype=torch.bfloat16),
+            quant_method=UnquantizedEmbeddingMethod(),
+            tp_size=1,
+        ),
+    )
+    method = model_class.compute_logits
+    if override == "compute_logits":
+        method = lambda self, hidden: expected
+    elif override == "processor":
+        model.logits_processor = lambda head, hidden: expected
+    model.compute_logits = MethodType(method, model)
+    hidden = torch.ones((1, 17), device=DEVICE, dtype=torch.bfloat16)
+    ids = torch.tensor([1], device=DEVICE)
+    result = model_class.compute_logits_sparse(model, hidden, ids)
+    assert result is not None
+    if override is not None:
+        assert result is expected
+    else:
+        assert result.shape == model.compute_logits(hidden).shape
+        assert result[0, 1] == 17
+        result[:, ids] = -float("inf")
+        assert torch.isneginf(result).all()

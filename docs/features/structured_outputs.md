@@ -409,3 +409,31 @@ shown below:
     ```
 
 See also: [full example](../../examples/features/structured_outputs/structured_outputs_offline.py)
+
+## Experimental sparse output projection
+
+Model Runner V2 can project only the vocabulary rows allowed by the current
+grammar. This option is disabled by default. Enable it with
+`--structured-outputs-config.enable_sparse_lm_head=True`. For the offline API,
+set `structured_outputs_config={"enable_sparse_lm_head": True}` in `LLM`.
+
+The initial implementation supports CUDA Qwen3 and Llama models with standard
+unquantized FP16 or BF16 output heads, tensor parallel size 1, and no LoRA or
+speculative decoding. It uses the ordinary projection for other models,
+batch-invariant mode, mixed batches that contain unconstrained requests, and
+wide grammar masks. The union of allowed tokens across the batch must contain
+at most 4,096 tokens and at most one eighth of the vocabulary.
+Float32 matrix multiplication must use `highest` precision. Other precision
+modes and `TORCH_ALLOW_TF32_CUBLAS_OVERRIDE=1` use the ordinary projection.
+
+Startup profiles the largest supported sparse projection as well as the ordinary
+projection when this option is enabled. This reserves its temporary memory before
+automatic KV cache sizing. Explicit `kv_cache_memory_bytes` budgets and
+`VLLM_ENABLE_STARTUP_PLAN=1` use the ordinary projection because they bypass
+automatic memory sizing.
+
+Restrictive grammars can reduce output projection work. Open text fields may
+allow most of the vocabulary and provide little benefit. The ordinary grammar
+mask, sampling rules, and prompt log probabilities still apply. Different matrix
+shapes can produce small floating-point differences, so this option does not
+guarantee identical generated tokens for every input.

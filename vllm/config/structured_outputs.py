@@ -44,6 +44,11 @@ class StructuredOutputsConfig:
     loaded and registered."""
     enable_in_reasoning: bool = False
     """Whether to use structured input for reasoning."""
+    enable_sparse_lm_head: bool = False
+    """Experimentally project only grammar-allowed vocabulary rows for supported
+    Qwen3 and Llama unquantized heads. Narrow, fully constrained batches can
+    benefit. Unsupported heads and permissive masks use the normal projection.
+    Requires MRV2, TP=1, and no LoRA or speculative decoding."""
 
     def compute_hash(self) -> str:
         """WARNING: Whenever a new field is added to this config,

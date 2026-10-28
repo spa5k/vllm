@@ -180,6 +180,7 @@ from vllm.v1.worker.gpu.spec_decode.utils import (
 from vllm.v1.worker.gpu.states import RequestState
 from vllm.v1.worker.gpu.structured_outputs import (
     StructuredOutputsWorker,
+    get_sparse_logits_callback,
     grammar_invalid_drafts,
 )
 from vllm.v1.worker.gpu.ubatch_utils import (
@@ -552,6 +553,10 @@ class GPUModelRunner(LoRAModelRunnerMixin):
                 vocab_size=self.vocab_size,
                 device=self.device,
                 mask_stride=self.decode_query_len,
+                compute_logits=self.model.compute_logits,
+                compute_sparse_logits=get_sparse_logits_callback(
+                    self.model, self.vllm_config
+                ),
             )
 
         if self.is_pooling_model and self.is_last_pp_rank:
@@ -1016,6 +1021,8 @@ class GPUModelRunner(LoRAModelRunnerMixin):
     @torch.inference_mode()
     def _dummy_sampler_run(self, hidden_states: torch.Tensor) -> None:
         num_reqs = hidden_states.shape[0]
+        assert self.structured_outputs_worker is not None
+        self.structured_outputs_worker.profile_sparse_logits(hidden_states)
         logits = self.model.compute_logits(hidden_states)
         dummy_input_batch = InputBatch.make_dummy(
             num_reqs, num_reqs, self.input_buffers
@@ -1687,7 +1694,10 @@ class GPUModelRunner(LoRAModelRunnerMixin):
             logits = logits[:, : self.vocab_size]
         else:
             sample_hidden_states = hidden_states[input_batch.logits_indices]
-            logits = self.model.compute_logits(sample_hidden_states)
+            assert self.structured_outputs_worker is not None
+            logits = self.structured_outputs_worker.compute_logits(
+                sample_hidden_states, input_batch, grammar_output
+            )
 
         invalid_drafts = None
         # A diffusion prefill has no logit rows even when a bitmask row

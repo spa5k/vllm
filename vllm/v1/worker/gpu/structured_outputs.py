@@ -1,15 +1,71 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+from collections.abc import Callable
+
 import numpy as np
 import torch
 
+import vllm.envs as envs
+from vllm.config import VllmConfig
 from vllm.triton_utils import tl, triton
 from vllm.utils.math_utils import cdiv
 from vllm.utils.torch_utils import PIN_MEMORY, async_tensor_h2d
+from vllm.v1.core.sched.output import GrammarOutput
 from vllm.v1.worker.gpu.input_batch import InputBatch
 
 # Overridden on CPU in vllm/v1/worker/cpu/shm.py.
 GRAMMAR_BITMASK_BLOCK_SIZE = 8192
+
+
+def get_sparse_logits_callback(
+    model: torch.nn.Module, config: VllmConfig
+) -> Callable[[torch.Tensor, torch.Tensor], torch.Tensor | None] | None:
+    if (
+        config.structured_outputs_config.enable_sparse_lm_head
+        and config.parallel_config.tensor_parallel_size == 1
+        and config.lora_config is None
+        and config.speculative_config is None
+        and config.cache_config.kv_cache_memory_bytes is None
+        and not envs.VLLM_ENABLE_STARTUP_PLAN
+        and not envs.VLLM_BATCH_INVARIANT
+    ):
+        return getattr(model, "compute_logits_sparse", None)
+    return None
+
+
+def _projection_token_ids(
+    input_batch: InputBatch, grammar_output: GrammarOutput, vocab_size: int
+) -> np.ndarray | None:
+    req_ids = input_batch.req_ids
+    grammar_ids = grammar_output.structured_output_request_ids
+    if (
+        input_batch.num_draft_tokens != 0
+        or not req_ids
+        or len(grammar_ids) != len(req_ids)
+        or set(grammar_ids) != set(req_ids)
+        or not np.all(np.diff(input_batch.cu_num_logits_np) == 1)
+    ):
+        return None
+    bitmask = grammar_output.grammar_bitmask
+    if bitmask.dtype != np.int32 or bitmask.shape != (
+        len(req_ids),
+        cdiv(vocab_size, 32),
+    ):
+        return None
+    limit = min(4096, vocab_size // 8)
+    words = np.bitwise_or.reduce(bitmask, axis=0).astype("<u4", copy=False)
+    if vocab_size % 32:
+        words[-1] &= np.uint32((1 << (vocab_size % 32)) - 1)
+    live_words = np.flatnonzero(words)
+    if live_words.size > limit:
+        return None
+    unpacked = np.unpackbits(words[live_words].view(np.uint8), bitorder="little")
+    if np.count_nonzero(unpacked) > limit:
+        return None
+    bits = np.flatnonzero(unpacked)
+    token_ids = live_words[bits // 32] * 32 + bits % 32
+    token_ids = token_ids[token_ids < vocab_size]
+    return token_ids if token_ids.size <= limit else None
 
 
 def grammar_invalid_drafts(
@@ -56,6 +112,11 @@ class StructuredOutputsWorker:
         vocab_size: int,
         device: torch.device,
         mask_stride: int,
+        compute_logits: Callable[[torch.Tensor], torch.Tensor | None],
+        compute_sparse_logits: Callable[
+            [torch.Tensor, torch.Tensor], torch.Tensor | None
+        ]
+        | None = None,
     ):
         self.logits_indices = torch.zeros(
             max_num_logits, dtype=torch.int32, device=device
@@ -66,6 +127,35 @@ class StructuredOutputsWorker:
         self.device = device
         self.copy_stream = torch.cuda.Stream()
         self.mask_stride = mask_stride
+        self.vocab_size = vocab_size
+        self._compute_logits = compute_logits
+        self._compute_sparse_logits = compute_sparse_logits
+
+    def profile_sparse_logits(self, hidden_states: torch.Tensor) -> None:
+        if self._compute_sparse_logits is not None:
+            token_ids = torch.arange(
+                min(4096, self.vocab_size // 8),
+                device=hidden_states.device,
+                dtype=torch.int64,
+            )
+            self._compute_sparse_logits(hidden_states, token_ids)
+
+    def compute_logits(
+        self,
+        hidden_states: torch.Tensor,
+        input_batch: InputBatch,
+        grammar_output: GrammarOutput | None,
+    ) -> torch.Tensor | None:
+        if self._compute_sparse_logits is not None and grammar_output is not None:
+            token_ids = _projection_token_ids(
+                input_batch, grammar_output, self.vocab_size
+            )
+            if token_ids is not None:
+                ids = async_tensor_h2d(
+                    token_ids, device=hidden_states.device, dtype=torch.int64
+                )
+                return self._compute_sparse_logits(hidden_states, ids)
+        return self._compute_logits(hidden_states)
 
     def apply_grammar_bitmask(
         self,
