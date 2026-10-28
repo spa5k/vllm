@@ -3269,6 +3269,11 @@ class MLACommonBaseImpl(MLAAttentionImpl[A], Generic[A]):
             k = k.to(prefill_metadata.q_data_type)
             v = v.to(prefill_metadata.q_data_type)
 
+        writes_output = output_scale is not None or (
+            not has_context
+            and prefill_metadata.prefill_backend.supports_out()
+            and (not use_fp8_prefill or output.dtype == torch.bfloat16)
+        )
         output_prefill = prefill_metadata.prefill_backend.run_prefill_new_tokens(
             q=q,
             k=k,
@@ -3276,7 +3281,7 @@ class MLACommonBaseImpl(MLAAttentionImpl[A], Generic[A]):
             return_softmax_lse=has_context,
             out=(
                 output.view(-1, self.num_heads, self.v_head_dim)
-                if output_scale is not None
+                if writes_output
                 else None
             ),
             output_scale=output_scale,
@@ -3311,8 +3316,7 @@ class MLACommonBaseImpl(MLAAttentionImpl[A], Generic[A]):
                 suffix_output=suffix_output,
                 suffix_lse=suffix_lse,
             )
-        elif output_scale is None:
-            # With output_scale set, backend already wrote into `output` in place.
+        elif not writes_output:
             assert isinstance(output_prefill, torch.Tensor)
             output_prefill = output_prefill[..., : self.v_head_dim]
             output_prefill = output_prefill.flatten(start_dim=-2)

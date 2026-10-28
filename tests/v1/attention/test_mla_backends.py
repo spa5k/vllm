@@ -45,7 +45,10 @@ from vllm.v1.attention.backends.mla.prefill import (
     MLAPrefillBackendEnum,
     get_mla_prefill_backend,
 )
-from vllm.v1.attention.backends.mla.prefill.base import MLADimensions
+from vllm.v1.attention.backends.mla.prefill.base import (
+    MLADimensions,
+    MLAPrefillBackend,
+)
 from vllm.v1.attention.backends.mla.prefill.selector import (
     MLAPrefillSelectorConfig,
 )
@@ -519,6 +522,10 @@ BATCH_SPECS = {
     "chunked_context_prefill": BatchSpec(
         seq_lens=[1568, 520, 8, 80, 96, 8],
         query_lens=[32, 8, 8, 16, 16, 8],
+    ),
+    # Decodes first, so the context-free prefill output starts at a row offset.
+    "decode_and_context_free_prefill": BatchSpec(
+        seq_lens=[32, 40, 16, 8], query_lens=[1, 1, 16, 8]
     ),
 }
 
@@ -2245,6 +2252,9 @@ def test_backend_correctness(
 @pytest.mark.parametrize("kv_cache_dtype", ["auto", "fp8"])
 @pytest.mark.parametrize("trtllm_ragged_backend", ["trtllm-gen", "cute-dsl"])
 @pytest.mark.parametrize("use_prefill_query_quantization", [False, True])
+@pytest.mark.parametrize(
+    "batch_spec_name", ["chunked_context_prefill", "decode_and_context_free_prefill"]
+)
 def test_chunked_context_backend_correctness(
     default_vllm_config,
     dist_init,
@@ -2255,6 +2265,7 @@ def test_chunked_context_backend_correctness(
     kv_cache_dtype: str,
     trtllm_ragged_backend: Literal["trtllm-gen", "cute-dsl"],
     use_prefill_query_quantization: bool,
+    batch_spec_name: str,
 ):
     """Split, packed, and context-free requests match the SDPA reference."""
     if prefill_backend != MLAPrefillBackendEnum.TRTLLM_RAGGED and (
@@ -2263,6 +2274,11 @@ def test_chunked_context_backend_correctness(
         pytest.skip("TRTLLM ragged-specific test configuration")
     if use_prefill_query_quantization and kv_cache_dtype == "auto":
         pytest.skip("FP8 prefill queries require an FP8 KV cache")
+    if (
+        batch_spec_name == "decode_and_context_free_prefill"
+        and prefill_backend.get_class().supports_out is MLAPrefillBackend.supports_out
+    ):
+        pytest.skip("The prefill backend never writes into `out`")
     if trtllm_ragged_backend == "cute-dsl":
         query_dtype = (
             current_platform.fp8_dtype()
@@ -2277,7 +2293,7 @@ def test_chunked_context_backend_correctness(
         default_vllm_config,
         dist_init,
         workspace_init,
-        batch_spec_name="chunked_context_prefill",
+        batch_spec_name=batch_spec_name,
         model="deepseek-ai/DeepSeek-R1",
         tensor_parallel_size=16,
         kv_cache_dtype=kv_cache_dtype,
