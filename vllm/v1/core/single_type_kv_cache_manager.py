@@ -56,6 +56,11 @@ class SingleTypeKVCacheManager(ABC):
     # Keep this group's longer prefix until external cache lookup completes.
     retains_longer_hit: bool = False
 
+    # Whether `get_num_blocks_to_allocate` also reads state that other requests
+    # change. If False, the value for a request that holds its blocks and makes
+    # no progress (an async KV load) does not change, so the scheduler stores it.
+    reservation_reads_shared_state: ClassVar[bool] = False
+
     @property
     def has_positionally_stable_blocks(self) -> bool:
         """Whether positional offload scans can follow this block table.
@@ -2230,6 +2235,8 @@ class HiSparseSourceManager(FullAttentionManager):
     coordinator: "HiSparseCoordinator | None" = None
     # The host tier keeps prefixes the device groups have already lost.
     retains_longer_hit = True
+    # Admission compares against the free blocks of the shared host pool.
+    reservation_reads_shared_state = True
 
     @property
     def records_new_block_ids(self) -> bool:
@@ -2357,6 +2364,8 @@ class _HiSparseAuxiliaryManager(SingleTypeKVCacheManager):
     """Base for ephemeral groups whose host source owns prefix caching."""
 
     coordinator: "HiSparseCoordinator | None" = None
+    # The HiSparse coordinator changes residency with shared pool pressure.
+    reservation_reads_shared_state = True
 
     def cache_blocks(
         self,

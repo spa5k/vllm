@@ -477,9 +477,14 @@ class Scheduler(SchedulerInterface):
 
         self._pause_state: PauseState = PauseState.UNPAUSED
 
-        # In-flight requests still prefilling (prefill chunks + in-progress
-        # async KV loads). Their remaining-block reservation gates async loads.
+        # In-flight requests still prefilling. Their remaining-block reservation
+        # gates async loads. Prefill chunks progress every step, so their
+        # reservation is computed on use. A request waiting for an async KV load
+        # holds its blocks and makes no progress, so its reservation is stored
+        # when the load starts: a burst of N async loads costs O(N), not O(N^2).
         self._inflight_prefills: set[Request] = set()
+        self._async_load_reservations: dict[Request, int] = {}
+        self._num_async_load_reserved_blocks = 0
 
         # Requests with an async KV load, by stage (KV_FETCH_STAGES).
         # None when not tracked (stats disabled or no KV connector).
@@ -1513,7 +1518,8 @@ class Scheduler(SchedulerInterface):
                         self.aux_output_connector.request_loading(
                             request, num_computed_tokens
                         )
-                    self._inflight_prefills.add(request)
+                    self._inflight_prefills.discard(request)
+                    self._store_async_load_reservation(request)
                     self._set_kv_fetch_stage(request, KV_FETCH_IN_PROGRESS)
                     skip_request(request_queue)
                     continue
@@ -3005,6 +3011,7 @@ class Scheduler(SchedulerInterface):
         if self.aux_output_connector is not None:
             self.aux_output_connector.request_finished(request)
         self._inflight_prefills.discard(request)
+        self._release_async_load_reservation(request)
         self._set_kv_fetch_stage(request, None)
         connector_delay_free_blocks, kv_xfer_params = self._connector_finished(request)
 
@@ -3374,9 +3381,32 @@ class Scheduler(SchedulerInterface):
 
     def _inflight_prefill_reserved_blocks(self) -> int:
         """Num blocks in-flight prefills still need to finish (their reservation)."""
-        return sum(
+        reserved_blocks = sum(
             self._request_remaining_blocks(req) for req in self._inflight_prefills
         )
+        if any(
+            manager.reservation_reads_shared_state
+            for manager in self.kv_cache_manager.coordinator.single_type_managers
+        ):
+            # Stored async-load reservations can be stale: compute them again.
+            return reserved_blocks + sum(
+                self._request_remaining_blocks(req)
+                for req in self._async_load_reservations
+            )
+        return reserved_blocks + self._num_async_load_reserved_blocks
+
+    def _store_async_load_reservation(self, request: Request) -> None:
+        """Store (or update) the reservation of a request waiting for an async
+        KV load. Call it again when its num_computed_tokens changes."""
+        num_blocks = self._request_remaining_blocks(request)
+        old_num_blocks = self._async_load_reservations.get(request, 0)
+        self._async_load_reservations[request] = num_blocks
+        self._num_async_load_reserved_blocks += num_blocks - old_num_blocks
+
+    def _release_async_load_reservation(self, request: Request) -> None:
+        num_blocks = self._async_load_reservations.pop(request, None)
+        if num_blocks is not None:
+            self._num_async_load_reserved_blocks -= num_blocks
 
     def _load_restores_replay_window(self, request: Request) -> bool:
         """Whether the KV connector's load for ``request`` restores every DSV41
@@ -3468,7 +3498,10 @@ class Scheduler(SchedulerInterface):
             if request_id not in self.finished_recving_kv_req_ids:
                 logger.debug("%s is still in WAITING_FOR_REMOTE_KVS state.", request_id)
                 return False
-            # Promote request to waiting or preempted.
+            # Promote request to waiting or preempted. Its reservation is no
+            # longer fixed: compute it on use, like any other in-flight prefill.
+            self._release_async_load_reservation(request)
+            self._inflight_prefills.add(request)
             self._update_waiting_for_remote_kv(request)
             if request.num_preemptions:
                 request.status = RequestStatus.PREEMPTED
@@ -3640,6 +3673,7 @@ class Scheduler(SchedulerInterface):
                 affected_req_ids.add(req_id)
                 if self.recompute_kv_load_failures:
                     request.num_computed_tokens = 0
+                    self._store_async_load_reservation(request)
                     self.failed_recving_kv_req_ids.add(req_id)
         return set() if self.recompute_kv_load_failures else affected_req_ids
 
@@ -3679,6 +3713,10 @@ class Scheduler(SchedulerInterface):
                 evict_blocks=False,
             )
         )
+
+        # num_computed_tokens of these loads changed: update their reservation.
+        for req_id in async_failed_req_ids:
+            self._store_async_load_reservation(self.requests[req_id])
 
         total_failed_requests = len(async_failed_req_ids)
         total_failed_tokens = num_failed_tokens

@@ -950,7 +950,7 @@ def test_hisparse_async_admission_requires_full_prompt_host_pages(
     )
     scheduler.add_request(inflight)
     scheduler.schedule()
-    assert inflight in scheduler._inflight_prefills
+    assert inflight in scheduler._async_load_reservations
 
     request = make_request(
         "waiting", list(range(4 * HISPARSE_BLOCK_SIZE)), HISPARSE_BLOCK_SIZE, sha256
@@ -958,7 +958,7 @@ def test_hisparse_async_admission_requires_full_prompt_host_pages(
     scheduler.add_request(request)
     scheduler.schedule()
 
-    assert (request in scheduler._inflight_prefills) == admitted
+    assert (request in scheduler._async_load_reservations) == admitted
     assert bool(manager.get_blocks(request.request_id).blocks[0]) == admitted
 
 
@@ -999,7 +999,7 @@ def test_hisparse_admitted_async_loads_can_finish_with_nothing_running(tmp_path)
     for request in (first, second):
         scheduler.add_request(request)
         scheduler.schedule()
-    admitted = {r.request_id for r in scheduler._inflight_prefills}
+    admitted = {r.request_id for r in scheduler._async_load_reservations}
 
     scheduler.finished_recving_kv_req_ids.update(admitted)
     num_scheduled_tokens = 0

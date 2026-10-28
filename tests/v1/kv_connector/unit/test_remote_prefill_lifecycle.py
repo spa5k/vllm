@@ -5,6 +5,7 @@ from dataclasses import replace
 from unittest.mock import patch
 
 import pytest
+import torch
 
 from vllm.v1.kv_cache_interface import MambaSpec, SlidingWindowSpec
 from vllm.v1.metrics.stats import KV_FETCH_STAGES
@@ -914,6 +915,111 @@ def test_async_load_does_not_double_reserve_mamba_spec_blocks(
     for req in reqs:
         assert req.status == RequestStatus.RUNNING
         assert output.num_scheduled_tokens[req.request_id] > 0
+
+
+@pytest.mark.parametrize("sliding_window", [False, True])
+@pytest.mark.parametrize("policy", ["recompute", "fail"])
+def test_async_load_reservations_match_recomputed_sum(sliding_window, policy):
+    """Async loads store their reservation at admission instead of recomputing
+    it per admission. Through completion, failed loads, invalid blocks, a retry
+    and an abort, the stored sum must equal the sum recomputed from scratch."""
+    vllm_config = create_vllm_config(kv_load_failure_policy=policy)
+    BLOCK_SIZE = vllm_config.cache_config.block_size
+    kv_cache_config = make_kv_cache_config(BLOCK_SIZE, num_blocks=1000)
+    if sliding_window:
+        group = kv_cache_config.kv_cache_groups[0]
+        group.kv_cache_spec = SlidingWindowSpec(
+            block_size=BLOCK_SIZE,
+            num_kv_heads=4,
+            head_size=16,
+            dtype=torch.float16,
+            sliding_window=2 * BLOCK_SIZE,
+        )
+    scheduler = create_scheduler(
+        vllm_config, num_blocks=1000, kv_cache_config=kv_cache_config
+    )
+
+    def assert_reservation_matches():
+        loading = {
+            req
+            for req in scheduler.requests.values()
+            if req.status == RequestStatus.WAITING_FOR_REMOTE_KVS
+        }
+        assert scheduler._async_load_reservations.keys() == loading
+        assert scheduler._inflight_prefill_reserved_blocks() == sum(
+            scheduler._request_remaining_blocks(req)
+            for req in loading | scheduler._inflight_prefills
+        )
+
+    reqs = [
+        create_request(
+            request_id=i,
+            block_size=BLOCK_SIZE,
+            num_tokens=BLOCK_SIZE * 7,
+            do_remote_prefill=True,
+            max_tokens=1,
+        )
+        for i in range(1, 6)
+    ]
+    loaded, failed, invalid, aborted, last = reqs
+    num_lookups = dict.fromkeys(reqs, 0)
+
+    def lookup(request, num_computed_tokens):
+        # Partial hits. The failed load is offered once more; no other retries.
+        num_lookups[request] += 1
+        if num_lookups[request] == 1 or (
+            request is failed and num_lookups[request] == 2
+        ):
+            return 4 * BLOCK_SIZE, True
+        return 0, False
+
+    def step(finished_recving=None, invalid_block_ids=None, failed_recving=None):
+        scheduler_output = scheduler.schedule()
+        assert_reservation_matches()
+        scheduled = scheduler_output.num_scheduled_tokens
+        output = create_model_runner_output(
+            [req for req in reqs if req.request_id in scheduled],
+            finished_recving=finished_recving,
+            invalid_block_ids=invalid_block_ids,
+        )
+        if failed_recving:
+            output.kv_connector_output.failed_recving = failed_recving
+        scheduler.update_from_output(scheduler_output, output)
+        assert_reservation_matches()
+
+    for req in reqs:
+        scheduler.add_request(req)
+    with patch.object(
+        scheduler.connector, "get_num_new_matched_tokens", side_effect=lookup
+    ):
+        step()
+        assert all(req.status == RequestStatus.WAITING_FOR_REMOTE_KVS for req in reqs)
+        scheduler.finish_requests(aborted.request_id, RequestStatus.FINISHED_ABORTED)
+        assert_reservation_matches()
+        # Blocks 0-1 can be the null block outside the sliding window.
+        (block_ids,) = scheduler.kv_cache_manager.get_block_ids(invalid.request_id)
+        step(
+            finished_recving={loaded.request_id, failed.request_id},
+            invalid_block_ids={block_ids[2]},
+            failed_recving={failed.request_id},
+        )
+        # Promote the finished loads. With "recompute", the failed load freed
+        # its blocks and is admitted again as a new async load.
+        step(
+            finished_recving={
+                req.request_id
+                for req in (invalid, aborted, last)
+                if req.request_id in scheduler.requests
+            }
+        )
+        assert loaded.status == RequestStatus.FINISHED_LENGTH_CAPPED
+        if policy == "recompute":
+            assert failed.status == RequestStatus.WAITING_FOR_REMOTE_KVS
+            step(finished_recving={failed.request_id})
+        for _ in range(5):
+            step()
+    _ = scheduler.schedule()
+    assert_scheduler_empty(scheduler)
 
 
 def test_deferred_lookup_does_not_block_parked_load():

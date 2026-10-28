@@ -76,6 +76,8 @@ def assert_scheduler_empty(scheduler: Scheduler):
     assert len(scheduler.finished_req_ids) == 0
     assert len(scheduler.finished_recving_kv_req_ids) == 0
     assert len(scheduler._inflight_prefills) == 0
+    assert not scheduler._async_load_reservations
+    assert scheduler._num_async_load_reserved_blocks == 0
     assert not scheduler._kv_fetch_stages
     assert not any(scheduler._kv_fetch_counts.values())
 
