@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+# _LoRACountingQueue calls the concrete queue methods via super().
+# mypy: disable-error-code="safe-super"
 
 import heapq
 from abc import ABC, abstractmethod
-from collections import deque
+from collections import Counter, deque
 from collections.abc import Iterable, Iterator
 from enum import Enum
 
@@ -70,6 +72,15 @@ class RequestQueue(ABC):
     def __iter__(self) -> Iterator[Request]:
         """Iterate over the queue according to the policy."""
         pass
+
+    def unordered(self) -> Iterable[Request]:
+        """Iterate over the queue in no particular order."""
+        return self
+
+    def num_lora_admissible(self, lora_ids: Iterable[int]) -> int:
+        """Upper bound on the queued requests that the max_loras check does
+        not skip when the LoRA slots are full with `lora_ids`."""
+        return len(self)
 
 
 class FCFSRequestQueue(deque[Request], RequestQueue):
@@ -161,7 +172,7 @@ class PriorityRequestQueue(RequestQueue):
 
         Note: In a priority queue, there is no concept of prepending to the
         front. Requests are ordered by (priority, arrival_time)."""
-        self.add_request(request)
+        heapq.heappush(self._heap, request)
 
     def prepend_requests(self, requests: Iterable[Request]) -> None:
         """Add all requests from another queue according to priority policy.
@@ -169,7 +180,7 @@ class PriorityRequestQueue(RequestQueue):
         Note: In a priority queue, there is no concept of prepending to the
         front. Requests are ordered by (priority, arrival_time)."""
         for request in requests:
-            self.add_request(request)
+            heapq.heappush(self._heap, request)
 
     def remove_request(self, request: Request) -> None:
         """Remove a specific request from the queue."""
@@ -196,12 +207,72 @@ class PriorityRequestQueue(RequestQueue):
         while heap_copy:
             yield heapq.heappop(heap_copy)
 
+    def unordered(self) -> Iterable[Request]:
+        return self._heap
 
-def create_request_queue(policy: SchedulingPolicy) -> RequestQueue:
+
+def _lora_key(request: Request) -> int:
+    """The LoRA ID if the max_loras check alone can skip the request, else 0.
+    Structured output requests get 0: a visit reports their grammar errors."""
+    lora = request.lora_request
+    if lora is None or request.structured_output_request is not None:
+        return 0
+    return lora.lora_int_id
+
+
+class _LoRACountingQueue(RequestQueue):
+    """Counts the queued requests per `_lora_key`. Used only with LoRA."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.lora_counts: Counter[int] = Counter()
+
+    def num_lora_admissible(self, lora_ids: Iterable[int]) -> int:
+        return self.lora_counts[0] + sum(self.lora_counts[i] for i in lora_ids)
+
+    def add_request(self, request: Request) -> None:
+        super().add_request(request)
+        self.lora_counts[_lora_key(request)] += 1
+
+    def pop_request(self) -> Request:
+        request = super().pop_request()
+        self.lora_counts[_lora_key(request)] -= 1
+        return request
+
+    def prepend_request(self, request: Request) -> None:
+        super().prepend_request(request)
+        self.lora_counts[_lora_key(request)] += 1
+
+    def prepend_requests(self, requests: Iterable[Request]) -> None:
+        requests = list(requests)
+        super().prepend_requests(requests)
+        self.lora_counts.update(map(_lora_key, requests))
+
+    def remove_request(self, request: Request) -> None:
+        super().remove_request(request)
+        self.lora_counts[_lora_key(request)] -= 1
+
+    def remove_requests(self, requests: Iterable[Request]) -> None:
+        removed = set(requests).intersection(self.unordered())
+        super().remove_requests(removed)
+        self.lora_counts.subtract(map(_lora_key, removed))
+
+
+class _LoRAFCFSRequestQueue(_LoRACountingQueue, FCFSRequestQueue):
+    pass
+
+
+class _LoRAPriorityRequestQueue(_LoRACountingQueue, PriorityRequestQueue):
+    pass
+
+
+def create_request_queue(
+    policy: SchedulingPolicy, count_loras: bool = False
+) -> RequestQueue:
     """Create request queue based on scheduling policy."""
     if policy == SchedulingPolicy.PRIORITY:
-        return PriorityRequestQueue()
+        return _LoRAPriorityRequestQueue() if count_loras else PriorityRequestQueue()
     elif policy == SchedulingPolicy.FCFS:
-        return FCFSRequestQueue()
+        return _LoRAFCFSRequestQueue() if count_loras else FCFSRequestQueue()
     else:
         raise ValueError(f"Unknown scheduling policy: {policy}")

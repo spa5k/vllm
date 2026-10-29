@@ -806,6 +806,103 @@ def test_max_loras_counts_running_request_skipped_for_encoder_budget():
     assert req_c.status == RequestStatus.WAITING
 
 
+@pytest.mark.parametrize("policy", ["fcfs", "priority"])
+def test_max_loras_full_slots_stop_waiting_scan(policy, monkeypatch):
+    """With all LoRA slots held, the waiting scan stops once only requests for
+    other adapters are left, instead of visiting each one every step. A request
+    for a held adapter behind them is still scheduled, and the waiting order
+    and the skipped-request count are the same as with a full scan."""
+    scheduler = create_scheduler(
+        lora_config=LoRAConfig(max_loras=2), scheduling_policy=policy
+    )
+    lora = {i: LoRARequest(f"lora-{i}", i, f"/path/{i}") for i in range(1, 5)}
+    order = [f"w{i:02}" for i in range(20)]
+    ids = ["r1", "r2", *order[:10], "x", *order[10:], "y"]
+    # Created in queue order, so arrival times give the same priority order.
+    reqs = {r.request_id: r for r in create_requests(len(ids), 8, req_ids=ids)}
+    for i, req in enumerate(reqs.values()):
+        req.lora_request = lora[3 + i % 2]
+    reqs["r1"].lora_request = reqs["x"].lora_request = lora[1]
+    reqs["r2"].lora_request = reqs["y"].lora_request = lora[2]
+
+    scheduler.add_request(reqs["r1"])
+    scheduler.add_request(reqs["r2"])
+    assert scheduler.schedule().num_scheduled_tokens.keys() == {"r1", "r2"}
+    for req_id in ids[2:-1]:
+        scheduler.add_request(reqs[req_id])
+
+    visited: list[str] = []
+    peek_request = scheduler.waiting.peek_request
+
+    def recording_peek_request() -> Request:
+        request = peek_request()
+        visited.append(request.request_id)
+        return request
+
+    monkeypatch.setattr(scheduler.waiting, "peek_request", recording_peek_request)
+
+    assert "x" in scheduler.schedule().num_scheduled_tokens
+    assert visited == order[:10] + ["x", order[10]]
+    assert [req.request_id for req in scheduler.waiting] == order
+    assert scheduler.make_stats().num_skipped_waiting_reqs == len(order)
+    assert not scheduler.prefill_capacity_bound
+    assert scheduler.waiting.num_lora_admissible({3}) == len(order) // 2
+
+    # An aborted request for a held adapter no longer extends the scan.
+    scheduler.add_request(reqs["y"])
+    scheduler.finish_requests("y", RequestStatus.FINISHED_ABORTED)
+    visited.clear()
+    scheduler.schedule()
+    assert visited == order[:1]
+    assert [req.request_id for req in scheduler.waiting] == order
+    assert scheduler.make_stats().num_skipped_waiting_reqs == len(order)
+
+
+def test_max_loras_full_slots_still_report_grammar_errors():
+    """The early stop of the waiting scan still visits requests with
+    structured outputs, so a grammar error is reported while the request
+    waits for a LoRA slot."""
+    scheduler = create_scheduler(lora_config=LoRAConfig(max_loras=1))
+    manager = scheduler.structured_output_manager
+    manager.backend = Mock()
+    manager.backend_name = "xgrammar"
+    manager.backend.compile_grammar.side_effect = RuntimeError("forced error")
+
+    running, blocked = create_requests(2, 8, req_ids=["running", "blocked"])
+    structured_outputs = StructuredOutputsParams(json='{"type": "object"}')
+    structured_outputs._backend = "xgrammar"
+    sampling_params = SamplingParams(
+        max_tokens=16, structured_outputs=structured_outputs
+    )
+    sampling_params.update_from_generation_config({}, EOS_TOKEN_ID)
+    grammar_error = Request(
+        request_id="grammar-error",
+        prompt_token_ids=[0, 1],
+        sampling_params=sampling_params,
+        pooling_params=None,
+        lora_request=LoRARequest("lora-2", 2, "/path/2"),
+    )
+    manager.grammar_init(grammar_error)
+    assert grammar_error.structured_output_request is not None
+    grammar_future = grammar_error.structured_output_request._grammar
+    assert isinstance(grammar_future, Future)
+    assert isinstance(grammar_future.exception(timeout=5), RuntimeError)
+    running.lora_request = LoRARequest("lora-1", 1, "/path/1")
+    blocked.lora_request = LoRARequest("lora-2", 2, "/path/2")
+
+    scheduler.add_request(running)
+    scheduler.schedule()
+    scheduler.add_request(blocked)
+    scheduler.add_request(grammar_error)
+    output = scheduler.schedule()
+    assert not output.num_scheduled_tokens
+    scheduler.update_from_output(
+        output, ModelRunnerOutput(req_ids=[], req_id_to_index={})
+    )
+    assert grammar_error.status == RequestStatus.FINISHED_ERROR
+    assert blocked.status == RequestStatus.WAITING
+
+
 def test_cached_request_data_resumed_all_token_ids_mrv1_only():
     """all_token_ids carries a resumed request's token ids to the connector
     for the V1 model runner, but is skipped entirely for the V2 model runner.

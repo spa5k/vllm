@@ -229,7 +229,9 @@ class Scheduler(SchedulerInterface):
                 f"Unknown scheduling policy: {self.scheduler_config.policy}"
             ) from e
         # Priority queues for requests.
-        self.waiting = create_request_queue(self.policy)
+        self.waiting = create_request_queue(
+            self.policy, count_loras=self.lora_config is not None
+        )
         # Waiting requests that hold KV blocks are always drained before
         # self.waiting: a block-holder must never sit behind a request whose
         # failed allocation would stop the scheduling scan.
@@ -1050,6 +1052,9 @@ class Scheduler(SchedulerInterface):
         if not preempted_reqs and self._pause_state != PauseState.PAUSED_ALL:
             step_skipped_waiting: deque[Request] = deque()
             step_skipped_kv_holding: deque[Request] = deque()
+            # Each pop removes at most one request that the max_loras check
+            # admits, so a count of n needs no new check for n max_loras skips.
+            lora_skips_to_check = 0
 
             def skip_request(from_queue: RequestQueue) -> None:
                 request_to_skip = from_queue.pop_request()
@@ -1099,6 +1104,17 @@ class Scheduler(SchedulerInterface):
                 ):
                     # Scheduling would exceed max_loras, skip.
                     skip_request(request_queue)
+                    # Full slots stay full in this loop. Stop once only
+                    # requests for other adapters are left, and defer them.
+                    if request_queue is self.waiting:
+                        if not lora_skips_to_check:
+                            lora_skips_to_check = self.waiting.num_lora_admissible(
+                                scheduled_loras
+                            )
+                            if not lora_skips_to_check:
+                                self.deferred_waiting.update(self.waiting.unordered())
+                                break
+                        lora_skips_to_check -= 1
                     continue
 
                 num_external_computed_tokens = 0
